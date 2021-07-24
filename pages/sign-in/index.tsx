@@ -1,11 +1,17 @@
 import { useCallback } from "react";
+import qs from "query-string";
+import ROUTES from "../../paths";
 
-export interface SignInViewProps {}
+export interface SignInPageProps {}
 
-const SignInView = ({}: SignInViewProps) => {
+const SignInPage = ({}: SignInPageProps) => {
   const signIn = useCallback(() => {
-    window.location.assign(
-      `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
+    const query = {
+      client_id: process.env.GITHUB_CLIENT_ID,
+      redirect_uri: `${window.origin}${ROUTES.EXCHANGE_CODE}`,
+    };
+    window.location.replace(
+      `https://github.com/login/oauth/authorize?${qs.stringify(query)}`
     );
   }, []);
 
@@ -16,4 +22,4 @@ const SignInView = ({}: SignInViewProps) => {
   );
 };
 
-export default SignInView;
+export default SignInPage;

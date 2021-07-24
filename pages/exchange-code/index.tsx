@@ -22,7 +22,8 @@ const ExchangeCodePage: React.FC<ExchangeCodePageProps> = ({}) => {
         router.replace("/");
       }
     })();
-  }, [router]);
+    // eslint-disable-next-line
+  }, []);
 
   return <></>;
 };

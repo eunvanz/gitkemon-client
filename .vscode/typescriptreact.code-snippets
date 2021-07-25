@@ -114,7 +114,7 @@
       "  return <>$2</>",
       "}",
       "",
-      "export 기본 ${TM_FILENAME_BASE}"
+      "export default ${TM_FILENAME_BASE}"
     ],
     "description": "Component Template"
   },
@@ -170,7 +170,7 @@
       "  <${TM_FILENAME_BASE/\\.stories//} {...args} />",
       ");",
       "",
-      "export const Default = createStoryComponent(Template);",
+      "export const 기본 = createStoryComponent(Template);",
       ""
     ],
     "description": "Storybook Template"

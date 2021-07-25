@@ -13,6 +13,10 @@ module.exports = (phase) => {
 
   return {
     env,
-    reactStrictMode: true
+    reactStrictMode: true,
+    images: {
+      // TODO: 나중에 삭제
+      domains: ['tailwindui.com', 'images.unsplash.com']
+    }
   }
 }

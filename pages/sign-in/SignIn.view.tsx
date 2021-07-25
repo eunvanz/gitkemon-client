@@ -10,10 +10,11 @@ const SignIn = ({ onSignIn }: SignInProps) => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-600">
-            GITHUB <span className="text-green-600">컨트리뷰션</span>을
-            <br /> <span className="text-blue-500">귀여운 포켓몬</span>으로
-            보상받으세요
+          <h2 className="mt-6 text-center text-3xl text-gray-600">
+            Get <span className="text-blue-500 font-extrabold">Pokemons</span>
+            <br />
+            as reward for{" "}
+            <span className="text-green-600 font-extrabold">Contribution</span>
           </h2>
         </div>
         <div className="mt-8 space-y-6">
@@ -27,7 +28,7 @@ const SignIn = ({ onSignIn }: SignInProps) => {
                 icon={faGithub}
               />
             </span>
-            GITHUB 계정으로 로그인
+            Sign in with Github
           </button>
         </div>
       </div>

@@ -2,7 +2,7 @@ const ROUTES = {
   HOME: "/",
   SIGN_IN: "/sign-in",
   EXCHANGE_CODE: "/exchange-code",
-  COLLECT: "/collect",
+  HUNT: "/hunt",
   COLLECTION: "/collection",
   RANKING: "/ranking",
   WORKSHOP: "/workshop",

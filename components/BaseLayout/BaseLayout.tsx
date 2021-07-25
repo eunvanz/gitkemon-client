@@ -251,9 +251,12 @@ const BaseLayout = ({ children, user }: BaseLayoutProps) => {
               </div>
             ) : (
               <div className="ml-4 flex items-right md:ml-6">
-                <button className="bg-gray-800 p-1 rounded-full text-gray-200 hover:text-gray-400">
-                  <FontAwesomeIcon className="mr-1" icon={faGithub} />
-                  로그인
+                <button
+                  className="bg-gray-800 p-1 rounded-full text-gray-200 hover:text-gray-400"
+                  onClick={() => router.push(ROUTES.SIGN_IN)}
+                >
+                  <FontAwesomeIcon className="mr-2" icon={faGithub} />
+                  <span className="text-sm">Sign In</span>
                 </button>
               </div>
             )}

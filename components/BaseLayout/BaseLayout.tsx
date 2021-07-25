@@ -2,7 +2,6 @@ import { Fragment, ReactNode, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   BellIcon,
-  CollectionIcon,
   GlobeIcon,
   HomeIcon,
   MenuAlt2Icon,
@@ -25,12 +24,6 @@ const navigation = [
     name: "Pokemon Hunt",
     href: ROUTES.HUNT,
     icon: GlobeIcon,
-    current: false,
-  },
-  {
-    name: "My Collection",
-    href: ROUTES.COLLECTION,
-    icon: CollectionIcon,
     current: false,
   },
   {
@@ -62,7 +55,7 @@ const BaseLayout = ({ children, user }: BaseLayoutProps) => {
   const router = useRouter();
 
   return (
-    <div className="h-screen flex overflow-hidden bg-gray-100">
+    <div className="h-screen flex overflow-hidden bg-white">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -224,7 +217,7 @@ const BaseLayout = ({ children, user }: BaseLayoutProps) => {
                   header={
                     <>
                       Signed in as{" "}
-                      <span className="text-gray-900 font-medium">
+                      <span className="text-gray-900 font-bold">
                         {user.githubUser.login}
                       </span>
                     </>
@@ -232,8 +225,12 @@ const BaseLayout = ({ children, user }: BaseLayoutProps) => {
                   menuItems={[
                     [
                       {
-                        title: "Profile",
+                        title: "Your profile",
                         onClick: () => router.push(ROUTES.PROFILE),
+                      },
+                      {
+                        title: "Your collection",
+                        onClick: () => router.push(ROUTES.COLLECTION),
                       },
                     ],
                     [

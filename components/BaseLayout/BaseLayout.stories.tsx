@@ -5,7 +5,9 @@ import BaseLayout from "./BaseLayout";
 export default {
   title: "components/BaseLayout",
   component: BaseLayout,
-  args: {},
+  args: {
+    children: "content",
+  },
 } as ComponentMeta<typeof BaseLayout>;
 
 const Template: ComponentStory<typeof BaseLayout> = (args) => (

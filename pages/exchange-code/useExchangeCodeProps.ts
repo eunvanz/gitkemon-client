@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil";
 import qs from "query-string";
 import { userState } from "../../state/user";
 import api from "../../api";
+import ROUTES from "../../paths";
 
 const useExchangeCodeProps: () => void = () => {
   const router = useRouter();
@@ -14,16 +15,12 @@ const useExchangeCodeProps: () => void = () => {
     (async () => {
       const { code } = qs.parse(window.location.search);
       if (!code) {
-        router.replace("/");
+        router.replace(ROUTES.HOME);
         return;
       }
       const user = await api.exchangeGithubCode(code as string);
       setUser(user);
-      if (document.referrer.startsWith(window.origin)) {
-        router.back();
-      } else {
-        router.replace("/");
-      }
+      router.replace(ROUTES.HOME);
     })();
     // eslint-disable-next-line
   }, []);

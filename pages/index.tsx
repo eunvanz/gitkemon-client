@@ -1,13 +1,7 @@
 import Head from "next/head";
-import { useRecoilValue } from "recoil";
 import BaseLayoutContainer from "../components/BaseLayout";
-import { userState } from "../state/user";
 
 export default function Home() {
-  const user = useRecoilValue(userState);
-
-  console.log("===== user", user);
-
   return (
     <>
       <Head>

@@ -10,7 +10,6 @@ const useBaseLayoutProps: ({
 }) => BaseLayoutProps = ({ children }) => {
   const user = useRecoilValue(userState);
 
-  console.log("===== user", user);
   return {
     user,
     children,

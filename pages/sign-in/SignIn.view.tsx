@@ -40,8 +40,8 @@ const SignIn = ({ onSignIn }: SignInProps) => {
             onClick={router.back}
             className="text-gray-400 hover:text-gray-600 cursor-pointer text-sm"
           >
-            <ArrowLeftIcon className="h-3 w-3 inline" />
-            Back
+            <ArrowLeftIcon className="h-3 w-3 inline mr-1" />
+            Give up rewards
           </a>
         </div>
       </div>

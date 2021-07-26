@@ -2,6 +2,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import ROUTES from "../../paths";
 
 export interface SignInProps {
   onSignIn: VoidFunction;
@@ -9,6 +10,8 @@ export interface SignInProps {
 
 const SignIn = ({ onSignIn }: SignInProps) => {
   const router = useRouter();
+
+  const isBackAvailable = document.referrer.startsWith(window.origin);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
@@ -37,7 +40,9 @@ const SignIn = ({ onSignIn }: SignInProps) => {
         </div>
         <div className="text-center">
           <a
-            onClick={router.back}
+            onClick={
+              isBackAvailable ? router.back : () => router.replace(ROUTES.HOME)
+            }
             className="text-gray-400 hover:text-gray-600 cursor-pointer text-sm"
           >
             <ArrowLeftIcon className="h-3 w-3 inline mr-1" />

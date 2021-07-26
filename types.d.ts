@@ -44,3 +44,7 @@ export interface GithubUser {
   created_at: string;
   updated_at: string;
 }
+
+export enum STATE_KEY {
+  USER = "USER",
+}

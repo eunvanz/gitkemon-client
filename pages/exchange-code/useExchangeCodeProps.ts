@@ -2,13 +2,13 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import qs from "query-string";
-import { userState } from "../../store/atoms";
+import { userState } from "../../state/user";
 import api from "../../api";
 
 const useExchangeCodeProps: () => void = () => {
   const router = useRouter();
 
-  const setUserState = useSetRecoilState(userState);
+  const setUser = useSetRecoilState(userState);
 
   useEffect(() => {
     (async () => {
@@ -18,7 +18,7 @@ const useExchangeCodeProps: () => void = () => {
         return;
       }
       const user = await api.exchangeGithubCode(code as string);
-      setUserState(user);
+      setUser(user);
       if (document.referrer.startsWith(window.origin)) {
         router.back();
       } else {

@@ -274,7 +274,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
               className={classNames(
                 router.asPath === item.href
                   ? "bg-blue-700 text-white"
-                  : "text-blue-100 hover:bg-blue-600",
+                  : "text-blue-100 hover:bg-blue-600 hover:text-white",
                 "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
               )}
               onClick={onClickItem}
@@ -301,7 +301,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
                   className={classNames(
                     router.asPath === item.href
                       ? "bg-blue-700 text-white"
-                      : "text-blue-100 hover:bg-blue-600",
+                      : "text-blue-100 hover:bg-blue-600 hover:text-white",
                     "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md"
                   )}
                 >
@@ -312,7 +312,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
                   <span className="flex-1">{item.name}</span>
                   <svg
                     className={classNames(
-                      open ? "text-blue-100 rotate-90" : "text-blue-100",
+                      open ? "text-white rotate-90" : "text-blue-100",
                       "ml-3 flex-shrink-0 h-5 w-5 transform"
                     )}
                     viewBox="0 0 20 20"
@@ -328,7 +328,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
                         className={classNames(
                           router.asPath === subItem.href
                             ? "bg-blue-700 text-white"
-                            : "text-blue-100 hover:bg-blue-600",
+                            : "text-blue-100 hover:bg-blue-600 hover:text-white",
                           "group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11"
                         )}
                         onClick={onClickItem}

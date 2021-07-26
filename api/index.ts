@@ -11,8 +11,28 @@ const exchangeGithubCode = async (code: string) => {
   return data;
 };
 
+/**
+ * 쿠키에 존재하는 토큰으로 로그인 시도
+ * @returns User
+ */
+const loginWithToken = async () => {
+  const { data } = await requester.post<User | undefined>(
+    "users/login-with-token"
+  );
+  return data;
+};
+
+/**
+ * 로그아웃 수행
+ */
+const logout = async () => {
+  return await requester.post<void>("users/logout");
+};
+
 const api = {
   exchangeGithubCode,
+  loginWithToken,
+  logout,
 };
 
 export default api;

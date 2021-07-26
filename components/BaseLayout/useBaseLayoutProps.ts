@@ -1,5 +1,6 @@
-import { ReactNode } from "react";
-import { useRecoilValue } from "recoil";
+import { ReactNode, useCallback, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import api from "../../api";
 import { userState } from "../../state/user";
 import { BaseLayoutProps } from "./BaseLayout";
 
@@ -8,11 +9,29 @@ const useBaseLayoutProps: ({
 }: {
   children: ReactNode;
 }) => BaseLayoutProps = ({ children }) => {
-  const user = useRecoilValue(userState);
+  const [user, setUser] = useRecoilState(userState);
+
+  const onSignOut = useCallback(async () => {
+    await api.logout();
+    setUser(undefined);
+  }, [setUser]);
+
+  const loginWithToken = useCallback(async () => {
+    const user = await api.loginWithToken();
+    setUser(user);
+  }, [setUser]);
+
+  useEffect(() => {
+    if (!user) {
+      loginWithToken();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return {
     user,
     children,
+    onSignOut,
   };
 };
 

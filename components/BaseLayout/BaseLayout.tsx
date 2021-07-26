@@ -67,9 +67,10 @@ function classNames(...classes: string[]) {
 export interface BaseLayoutProps {
   children: ReactNode;
   user?: User;
+  onSignOut: VoidFunction;
 }
 
-const BaseLayout = ({ children, user }: BaseLayoutProps) => {
+const BaseLayout = ({ children, user, onSignOut }: BaseLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const router = useRouter();
@@ -227,9 +228,7 @@ const BaseLayout = ({ children, user }: BaseLayoutProps) => {
                     [
                       {
                         title: "Sign out",
-                        onClick: () => {
-                          // TODO: 로그아웃 로직
-                        },
+                        onClick: onSignOut,
                       },
                     ],
                   ]}

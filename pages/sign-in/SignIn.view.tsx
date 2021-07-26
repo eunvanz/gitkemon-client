@@ -1,20 +1,24 @@
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ArrowLeftIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 
 export interface SignInProps {
   onSignIn: VoidFunction;
 }
 
 const SignIn = ({ onSignIn }: SignInProps) => {
+  const router = useRouter();
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl text-gray-600">
             Get <span className="text-blue-500 font-extrabold">Pokemons</span>
             <br />
             as reward for{" "}
-            <span className="text-green-600 font-extrabold">Contribution</span>
+            <span className="text-green-600 font-extrabold">Contributions</span>
           </h2>
         </div>
         <div className="mt-8 space-y-6">
@@ -30,6 +34,15 @@ const SignIn = ({ onSignIn }: SignInProps) => {
             </span>
             Sign in with Github
           </button>
+        </div>
+        <div className="text-center">
+          <a
+            onClick={router.back}
+            className="text-gray-400 hover:text-gray-600 cursor-pointer text-sm"
+          >
+            <ArrowLeftIcon className="h-3 w-3 inline" />
+            Back
+          </a>
         </div>
       </div>
     </div>

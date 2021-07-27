@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect } from "react";
+import { ReactNode, useCallback } from "react";
 import { useRecoilState } from "recoil";
 import api from "../../api";
 import { userState } from "../../state/user";
@@ -15,18 +15,6 @@ const useBaseLayoutProps: ({
     await api.logout();
     setUser(undefined);
   }, [setUser]);
-
-  const loginWithToken = useCallback(async () => {
-    const user = await api.loginWithToken();
-    setUser(user);
-  }, [setUser]);
-
-  useEffect(() => {
-    if (!user) {
-      loginWithToken();
-    }
-    // eslint-disable-next-line
-  }, []);
 
   return {
     user,

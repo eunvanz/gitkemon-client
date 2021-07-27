@@ -16,9 +16,10 @@ const exchangeGithubCode = async (code: string) => {
  * 쿠키에 존재하는 토큰으로 로그인 시도
  * @returns User
  */
-const loginWithToken = async () => {
+const loginWithToken = async (token?: string) => {
   const { data } = await requester.post<User | undefined>(
-    API_URL.USERS__LOGIN_WITH_TOKEN
+    API_URL.USERS__LOGIN_WITH_TOKEN,
+    { token }
   );
   return data;
 };

@@ -1,7 +1,10 @@
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import BaseLayout from "../components/BaseLayout";
+import withAuth from "../hocs/withAuth";
+import withAuthServerSideProps from "../hocs/withAuthServerSideProps";
 
-export default function Home() {
+const Home: NextPage<{}> = () => {
   return (
     <>
       <Head>
@@ -12,4 +15,8 @@ export default function Home() {
       <BaseLayout>메인화면</BaseLayout>
     </>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps<{}>();
+
+export default withAuth(Home);

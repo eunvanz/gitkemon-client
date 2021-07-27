@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import DropDownMenu from "../DropDownMenu";
 import { useRouter } from "next/router";
+import { NextPage } from "next";
 
 interface NavigationItem {
   name: string;
@@ -70,7 +71,11 @@ export interface BaseLayoutProps {
   onSignOut: VoidFunction;
 }
 
-const BaseLayout = ({ children, user, onSignOut }: BaseLayoutProps) => {
+const BaseLayout: NextPage<BaseLayoutProps> = ({
+  children,
+  user,
+  onSignOut,
+}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const router = useRouter();

@@ -1,7 +1,7 @@
-import BaseLayout, { BaseLayoutProps } from "./BaseLayout";
+import BaseLayout from "./BaseLayout";
 import useBaseLayoutProps from "./useBaseLayoutProps";
 
-const BaseLayoutContainer: React.FC<BaseLayoutProps> = ({ children }) => {
+const BaseLayoutContainer: React.FC<{}> = ({ children }) => {
   const props = useBaseLayoutProps({ children });
 
   return <BaseLayout {...props} />;

@@ -18,6 +18,7 @@ const withAuthServerSideProps = <T>({
   return async (ctx: GetServerSidePropsContext) => {
     const user = await api.loginWithToken(ctx.req.cookies.gkmat);
     if (!user && isAuthRequired) {
+      // TODO: 정상동작 할 경우 지워야 함
       // ctx.res.writeHead(302, {
       //   Location: ROUTES.SIGN_IN,
       // });

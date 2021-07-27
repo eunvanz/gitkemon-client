@@ -28,7 +28,7 @@ const withAuth = (WrappedComponent: React.FC<any>) => {
         return;
       }
       if (userProp) {
-        setUser(user);
+        setUser(userProp);
       } else {
         login();
       }

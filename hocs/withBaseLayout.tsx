@@ -20,4 +20,4 @@ const withBaseLayout = (WrappedComponent: React.FC<any>) => {
   return Wrapper;
 };
 
-export default compose(withAuth, withBaseLayout);
+export default compose(withBaseLayout, withAuth);

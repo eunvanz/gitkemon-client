@@ -1,5 +1,6 @@
+import { useRouter } from "next/router";
 import { ReactNode, useCallback } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import api from "../../api";
 import { userState } from "../../state/user";
 import { User } from "../../types";
@@ -12,12 +13,14 @@ const useBaseLayoutProps: ({
   children: ReactNode;
   user?: User;
 }) => BaseLayoutProps = ({ children, user: userProp }) => {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
+
+  const router = useRouter();
 
   const onSignOut = useCallback(async () => {
     await api.logout();
-    setUser(undefined);
-  }, [setUser]);
+    router.reload();
+  }, [router]);
 
   return {
     user: user || userProp,

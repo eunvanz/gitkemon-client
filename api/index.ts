@@ -1,5 +1,6 @@
 import { User } from "../types";
 import requester from "./requester";
+import API_URL from "./urls";
 
 /**
  * github 로그인 후 발급받은 코드로 로그인 처리를 하고 유저객체를 얻어온다.
@@ -7,7 +8,7 @@ import requester from "./requester";
  * @returns 유저객체
  */
 const exchangeGithubCode = async (code: string) => {
-  const { data } = await requester.post<User>("users/login", { code });
+  const { data } = await requester.post<User>(API_URL.USERS__LOGIN, { code });
   return data;
 };
 
@@ -17,7 +18,7 @@ const exchangeGithubCode = async (code: string) => {
  */
 const loginWithToken = async () => {
   const { data } = await requester.post<User | undefined>(
-    "users/login-with-token"
+    API_URL.USERS__LOGIN_WITH_TOKEN
   );
   return data;
 };
@@ -26,7 +27,7 @@ const loginWithToken = async () => {
  * 로그아웃 수행
  */
 const logout = async () => {
-  return await requester.post<void>("users/logout");
+  return await requester.post<void>(API_URL.USERS__LOGOUT);
 };
 
 const api = {

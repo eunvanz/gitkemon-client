@@ -135,7 +135,8 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                 <Image
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                  layout="fill"
+                  width={143}
+                  height={32}
                   alt="Workflow"
                 />
               </div>

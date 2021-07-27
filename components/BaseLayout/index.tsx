@@ -1,8 +1,16 @@
+import { User } from "../../types";
 import BaseLayout from "./BaseLayout";
 import useBaseLayoutProps from "./useBaseLayoutProps";
 
-const BaseLayoutContainer: React.FC<{}> = ({ children }) => {
-  const props = useBaseLayoutProps({ children });
+export interface BaseLayoutContainerProps {
+  user?: User;
+}
+
+const BaseLayoutContainer: React.FC<BaseLayoutContainerProps> = ({
+  children,
+  user,
+}) => {
+  const props = useBaseLayoutProps({ children, user });
 
   return <BaseLayout {...props} />;
 };

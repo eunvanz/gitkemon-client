@@ -4,7 +4,12 @@ import { useSetRecoilState } from "recoil";
 import { userState } from "../state/user";
 import { User } from "../types";
 
-const withUser = (WrappedComponent: React.FC<any>) => {
+/**
+ * withAuthServerSideProps와 같이 쓰여야 함
+ * @param WrappedComponent
+ * @returns
+ */
+const withAuth = (WrappedComponent: React.FC<any>) => {
   const Wrapper = ({ user, data }: { user: User; data: any }) => {
     const setUser = useSetRecoilState(userState);
 
@@ -20,4 +25,4 @@ const withUser = (WrappedComponent: React.FC<any>) => {
   return Wrapper;
 };
 
-export default withUser;
+export default withAuth;

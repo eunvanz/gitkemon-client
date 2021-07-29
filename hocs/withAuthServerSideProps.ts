@@ -12,8 +12,8 @@ const withAuthServerSideProps = <T>({
 }: WithAuthServerSidePropsOptions) => (
   getServerSidePropsFunc?: (
     ctx: GetServerSidePropsContext,
-    user?: User
-  ) => Promise<{ props: T }>
+    user?: User,
+  ) => Promise<{ props: T }>,
 ) => {
   return async (ctx: GetServerSidePropsContext) => {
     const user = await api.loginWithToken(ctx.req.cookies.gkmat);

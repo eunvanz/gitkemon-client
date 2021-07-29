@@ -15,9 +15,7 @@ export default {
   },
 } as ComponentMeta<typeof BaseModal>;
 
-const Template: ComponentStory<typeof BaseModal> = (args) => (
-  <BaseModal {...args} />
-);
+const Template: ComponentStory<typeof BaseModal> = (args) => <BaseModal {...args} />;
 
 export const 기본 = createStoryComponent(Template);
 

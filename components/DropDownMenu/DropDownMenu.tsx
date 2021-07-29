@@ -1,5 +1,5 @@
-import { Menu, Transition } from "@headlessui/react";
 import { Fragment, HTMLAttributes, ReactNode, useMemo } from "react";
+import { Menu, Transition } from "@headlessui/react";
 import classNames from "classnames";
 
 export interface MenuItem {
@@ -52,7 +52,7 @@ const DropDownMenu = ({
                 `origin-top-${origin} origin-to absolute ${
                   origin.endsWith("right") ? "right" : "left"
                 }-0 mt-2 w-${width} rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`,
-                { "divide-y divide-gray": hasGroup || header }
+                { "divide-y divide-gray": hasGroup || header },
               )}
             >
               {header && <div className="px-4 py-3 text-sm">{header}</div>}
@@ -65,7 +65,7 @@ const DropDownMenu = ({
                           <a
                             className={classNames(
                               active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-800 cursor-pointer"
+                              "block px-4 py-2 text-sm text-gray-800 cursor-pointer",
                             )}
                             onClick={item.onClick}
                           >

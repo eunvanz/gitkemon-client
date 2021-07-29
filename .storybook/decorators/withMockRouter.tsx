@@ -1,11 +1,9 @@
-import { RouterContext } from "next/dist/next-server/lib/router-context";
-import { NextRouter } from "next/dist/next-server/lib/router/router";
 import { useState } from "react";
 import { action } from "@storybook/addon-actions";
+import { RouterContext } from "next/dist/next-server/lib/router-context";
+import { NextRouter } from "next/dist/next-server/lib/router/router";
 
-const withMockRouter = (partialBaseRouter?: Partial<NextRouter>) => (
-  Story: any
-) => {
+const withMockRouter = (partialBaseRouter?: Partial<NextRouter>) => (Story: any) => {
   const [pathname, setPathname] = useState("/");
 
   // @ts-ignore

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
+import qs from "query-string";
 import ROUTES from "../../paths";
 import { SignInProps } from "./SignIn.view";
-import qs from "query-string";
 
 const useSignInProps: () => SignInProps = () => {
   const onSignIn = useCallback(() => {
@@ -10,7 +10,7 @@ const useSignInProps: () => SignInProps = () => {
       redirect_uri: `${window.origin}${ROUTES.EXCHANGE_CODE}`,
     };
     window.location.replace(
-      `https://github.com/login/oauth/authorize?${qs.stringify(query)}`
+      `https://github.com/login/oauth/authorize?${qs.stringify(query)}`,
     );
   }, []);
 

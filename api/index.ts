@@ -19,7 +19,7 @@ const exchangeGithubCode = async (code: string) => {
 const loginWithToken = async (token?: string) => {
   const { data } = await requester.post<User | undefined>(
     API_URL.USERS__LOGIN_WITH_TOKEN,
-    { token }
+    { token },
   );
   return data;
 };

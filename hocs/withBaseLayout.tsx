@@ -1,5 +1,5 @@
-import BaseLayoutContainer from "../components/BaseLayout";
 import compose from "compose-function";
+import BaseLayoutContainer from "../components/BaseLayout";
 import withAuth from "./withAuth";
 
 /**

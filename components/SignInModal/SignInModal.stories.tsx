@@ -10,8 +10,6 @@ export default {
   },
 } as ComponentMeta<typeof SignInModal>;
 
-const Template: ComponentStory<typeof SignInModal> = (args) => (
-  <SignInModal {...args} />
-);
+const Template: ComponentStory<typeof SignInModal> = (args) => <SignInModal {...args} />;
 
 export const 기본 = createStoryComponent(Template);

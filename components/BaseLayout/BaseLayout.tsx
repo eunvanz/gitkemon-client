@@ -1,4 +1,6 @@
 import { Fragment, ReactNode, SVGProps, useState } from "react";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import {
   BellIcon,
@@ -9,15 +11,13 @@ import {
   SortAscendingIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import Image from "next/image";
-import { User } from "../../types";
-import ROUTES from "../../paths";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import DropDownMenu from "../DropDownMenu";
-import { useRouter } from "next/router";
 import { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import ROUTES from "../../paths";
+import { User } from "../../types";
+import DropDownMenu from "../DropDownMenu";
 
 interface NavigationItem {
   name: string;
@@ -71,11 +71,7 @@ export interface BaseLayoutProps {
   onSignOut: VoidFunction;
 }
 
-const BaseLayout: NextPage<BaseLayoutProps> = ({
-  children,
-  user,
-  onSignOut,
-}) => {
+const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const router = useRouter();
@@ -282,7 +278,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
                 router.asPath === item.href
                   ? "bg-blue-700 text-white"
                   : "text-blue-100 hover:bg-blue-600 hover:text-white",
-                "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
               )}
               onClick={onClickItem}
             >
@@ -296,9 +292,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
         ) : (
           <Disclosure
             as="div"
-            defaultOpen={item.children
-              .map((child) => child.href)
-              .includes(router.asPath)}
+            defaultOpen={item.children.map((child) => child.href).includes(router.asPath)}
             key={item.name}
             className="space-y-1"
           >
@@ -309,7 +303,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
                     router.asPath === item.href
                       ? "bg-blue-700 text-white"
                       : "text-blue-100 hover:bg-blue-600 hover:text-white",
-                    "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md"
+                    "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md",
                   )}
                 >
                   <item.icon
@@ -320,7 +314,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
                   <svg
                     className={classNames(
                       open ? "text-white rotate-90" : "text-blue-100",
-                      "ml-3 flex-shrink-0 h-5 w-5 transform"
+                      "ml-3 flex-shrink-0 h-5 w-5 transform",
                     )}
                     viewBox="0 0 20 20"
                     aria-hidden="true"
@@ -336,7 +330,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
                           router.asPath === subItem.href
                             ? "bg-blue-700 text-white"
                             : "text-blue-100 hover:bg-blue-600 hover:text-white",
-                          "group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11"
+                          "group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11",
                         )}
                         onClick={onClickItem}
                       >
@@ -348,7 +342,7 @@ const SidebarItems = ({ items, onClickItem }: SidebarItemsProps) => {
               </>
             )}
           </Disclosure>
-        )
+        ),
       )}
     </>
   );

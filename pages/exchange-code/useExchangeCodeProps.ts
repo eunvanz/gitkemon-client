@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRouter } from "next/router";
 import qs from "query-string";
-import { userState } from "../../state/user";
+import { useSetRecoilState } from "recoil";
 import api from "../../api";
 import ROUTES from "../../paths";
+import { userState } from "../../state/user";
 
 const useExchangeCodeProps: () => void = () => {
   const router = useRouter();

@@ -1,8 +1,8 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import withMockRouter from "../../.storybook/decorators/withMockRouter";
 import mockUsers from "../../api/mocks/user";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
 import BaseLayout from "./BaseLayout";
-import withMockRouter from "../../.storybook/decorators/withMockRouter";
 
 export default {
   title: "components/BaseLayout",
@@ -13,9 +13,7 @@ export default {
   decorators: [withMockRouter()],
 } as ComponentMeta<typeof BaseLayout>;
 
-const Template: ComponentStory<typeof BaseLayout> = (args) => (
-  <BaseLayout {...args} />
-);
+const Template: ComponentStory<typeof BaseLayout> = (args) => <BaseLayout {...args} />;
 
 export const 로그아웃 = createStoryComponent(Template);
 

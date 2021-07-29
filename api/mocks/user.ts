@@ -18,8 +18,7 @@ const user: User = {
     url: "https://api.github.com/users/eunvanz",
     html_url: "https://github.com/eunvanz",
     followers_url: "https://api.github.com/users/eunvanz/followers",
-    following_url:
-      "https://api.github.com/users/eunvanz/following{/other_user}",
+    following_url: "https://api.github.com/users/eunvanz/following{/other_user}",
     gists_url: "https://api.github.com/users/eunvanz/gists{/gist_id}",
     starred_url: "https://api.github.com/users/eunvanz/starred{/owner}{/repo}",
     subscriptions_url: "https://api.github.com/users/eunvanz/subscriptions",

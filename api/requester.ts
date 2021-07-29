@@ -20,7 +20,7 @@ instance.interceptors.response.use(
           router.push("sign-in");
       }
     }
-  }
+  },
 );
 
 export default instance;

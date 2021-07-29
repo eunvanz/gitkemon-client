@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cx from "classnames";
 import Image from "next/image";
 import { CardMon } from "../../types";
-import Badge from "../Badge";
+import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
 
 export interface MonCardProps
@@ -31,7 +31,11 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
         <FontAwesomeIcon className="text-gray-200 w-4" icon={faStar} />
       </div>
       <div className="flex flex-row flex-1 m-1">
-        <Badge label="SR" color="purple" className="mr-0.5" isSquare size="sm" />
+        <MonTierBadge
+          tier={mon.tier}
+          isShorten={window.screen.width < 320}
+          className="mr-0.5"
+        />
         <MonTypeBadge
           type={mon.firstType}
           className={mon.secondType ? "mr-0.5" : undefined}

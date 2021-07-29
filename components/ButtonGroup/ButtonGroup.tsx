@@ -1,11 +1,19 @@
 import { Children, cloneElement, useMemo } from "react";
 import cx from "classnames";
 
-export interface ButtonGroupProps {
+export interface ButtonGroupProps
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLSpanElement>,
+    HTMLSpanElement
+  > {
   children: React.ReactElement<HTMLButtonElement>[];
 }
 
-const ButtonGroup: React.FC<ButtonGroupProps> = ({ children }) => {
+const ButtonGroup: React.FC<ButtonGroupProps> = ({
+  children,
+  className,
+  ...restProps
+}) => {
   const enhancedChildren = useMemo(() => {
     return Children.map(children, (child, index) => {
       return cloneElement(child, {
@@ -23,7 +31,10 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ children }) => {
   }, [children]);
 
   return (
-    <span className="relative z-0 inline-flex shadow-sm rounded-md">
+    <span
+      className={cx("relative z-0 inline-flex shadow-sm rounded-md", className)}
+      {...restProps}
+    >
       {enhancedChildren}
     </span>
   );

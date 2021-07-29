@@ -91,3 +91,46 @@ export interface MonImage {
 }
 
 export type MonPotential = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+
+export interface CardMon {
+  name: string;
+  description: string;
+  firstType: MonType;
+  secondType?: MonType;
+  height: number;
+  weight: number;
+  tier: MonTier;
+  evolutionLevel?: number;
+  hp: number;
+  attack: number;
+  defense: number;
+  specialAttack: number;
+  specialDefense: number;
+  speed: number;
+  total: number;
+  stars: number;
+  colPoint: number;
+  level?: number;
+  potential?: MonPotential;
+  image?: MonImage;
+}
+
+export type MonType =
+  | "grass"
+  | "water"
+  | "psychic"
+  | "normal"
+  | "bug"
+  | "ice"
+  | "fairy"
+  | "dark"
+  | "electric"
+  | "poison"
+  | "ground"
+  | "fighting"
+  | "fire"
+  | "flying"
+  | "rock"
+  | "ghost"
+  | "dragon"
+  | "steel";

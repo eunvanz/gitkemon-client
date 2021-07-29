@@ -15,7 +15,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
   return (
     <div
       className={cx(
-        "flex flex-col shadow-lg max-w-full items-center border rounded p-1",
+        "flex flex-col shadow-lg max-w-full items-center border rounded p-1 transform transition-transform hover:-translate-y-1",
         className,
       )}
       {...restProps}

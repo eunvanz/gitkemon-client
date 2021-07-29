@@ -23,7 +23,7 @@ const Badge: React.FC<BadgeProps> = ({
   const classNameBySize = useMemo(() => {
     switch (size) {
       case "sm":
-        return "px-1.5 text-xs";
+        return "px-1.5 text-xxs";
       case "md":
         return "px-2.5 text-xs";
       case "lg":

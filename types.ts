@@ -48,3 +48,46 @@ export interface GithubUser {
 export enum STATE_KEY {
   USER = "USER",
 }
+
+export interface Mon {
+  id: number;
+  order: number;
+  name: string;
+  nameKo?: string;
+  nameJa?: string;
+  nameZh?: string;
+  description: string;
+  descriptionKo?: string;
+  descriptionJa?: string;
+  descriptionZh?: string;
+  firstType: string;
+  secondType?: string;
+  height: number;
+  weight: number;
+  tier: MonTier;
+  evolutionLevel?: number;
+  hp: number;
+  attack: number;
+  defense: number;
+  specialAttack: number;
+  specialDefense: number;
+  speed: number;
+  total: number;
+  stars: number;
+  colPoint: number;
+  evolveFromId?: number;
+  nextMon?: Mon[];
+  monImages?: MonImage[];
+}
+
+export type MonTier = "basic" | "special" | "rare" | "s.rare" | "elite" | "legend";
+
+export interface MonImage {
+  id: number;
+  designerId?: string;
+  designerName: string;
+  imageUrl: string;
+  mon?: Mon;
+}
+
+export type MonPotential = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F";

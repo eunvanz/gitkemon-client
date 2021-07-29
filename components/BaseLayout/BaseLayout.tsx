@@ -37,7 +37,7 @@ const navigation: NavigationItem[] = [
     icon: GlobeIcon,
   },
   {
-    name: "Ranking",
+    name: "Rankings",
     icon: SortAscendingIcon,
     children: [
       {

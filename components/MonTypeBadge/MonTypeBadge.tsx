@@ -43,7 +43,7 @@ const MonTypeBadge: React.FC<MonTypeBadgeProps> = ({ type, className, ...restPro
       case "rock":
         return "bg-green-800 text-white";
       case "steel":
-        return "bg-gray-600 text-white";
+        return "bg-teal-600 text-white";
       case "water":
         return "bg-blue-400 text-white";
     }

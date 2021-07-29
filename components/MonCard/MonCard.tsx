@@ -33,7 +33,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
       <div className="flex flex-row flex-1 m-1">
         <MonTierBadge
           tier={mon.tier}
-          isShorten={window.screen.width < 320}
+          isShorten={window.screen.width < 400}
           className="mr-0.5"
         />
         <MonTypeBadge

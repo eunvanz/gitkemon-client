@@ -48,7 +48,7 @@ const Input: React.FC<InputProps> = ({
             "p-2 shadow-sm block w-full sm:text-sm rounded-md",
             borderClassName,
             {
-              ["text-red-900 placeholder-red-300"]: hasError,
+              "text-red-900 placeholder-red-300": hasError,
             },
             className,
           )}

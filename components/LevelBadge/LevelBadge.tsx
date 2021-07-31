@@ -18,7 +18,7 @@ const LevelBadge: React.FC<LevelBadgeProps> = ({
   return (
     <Badge
       isWithDot={isEvolvable}
-      color="yellow"
+      color="blue"
       label={`LV. ${level}`}
       size="sm"
       {...restProps}

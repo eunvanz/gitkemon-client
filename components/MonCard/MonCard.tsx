@@ -1,6 +1,7 @@
 import cx from "classnames";
 import Image from "next/image";
 import { CardMon } from "../../types";
+import LevelBadge from "../LevelBadge";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
@@ -20,6 +21,11 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
       {...restProps}
     >
       <div className="flex-1 border border-dotted">
+        {mon.level && (
+          <div className="absolute left-2">
+            <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
+          </div>
+        )}
         <Image src={mon.image ? mon.image.imageUrl : ""} alt={mon.name} layout="fill" />
       </div>
       <div className="flex flex-row flex-1 m-1.5">

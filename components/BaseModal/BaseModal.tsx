@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
@@ -9,7 +9,7 @@ export interface BaseModalProps extends ExtendableHTMLProps<HTMLDivElement> {
   onClose: VoidFunction;
   children: React.ReactNode;
   title?: string;
-  isCloseButtonVisible: boolean;
+  isCloseButtonVisible?: boolean;
   footer?: React.ReactNode;
 }
 
@@ -23,12 +23,14 @@ const BaseModal = ({
   footer,
   ...restProps
 }: BaseModalProps) => {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         // @ts-ignore
         as="div"
-        initialFocus={undefined}
+        initialFocus={closeButtonRef}
         static
         className="fixed z-10 inset-0 overflow-y-auto"
         open={isOpen}
@@ -80,6 +82,7 @@ const BaseModal = ({
                   className={cx("bg-white rounded-md text-gray-400 hover:text-gray-500", {
                     "cursor-default": !isCloseButtonVisible,
                   })}
+                  ref={closeButtonRef}
                   onClick={isCloseButtonVisible ? undefined : onClose}
                 >
                   <span className="sr-only">Close</span>

@@ -11,7 +11,7 @@ import MonTypeBadge from "../MonTypeBadge";
 import PotentialBadge from "../PotentialBadge";
 import Typography from "../Typography";
 
-export interface MonModalProps extends BaseModalProps {
+export interface MonModalProps extends Omit<BaseModalProps, "children"> {
   mon: CardMon;
 }
 
@@ -55,19 +55,16 @@ const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
       }
       {...restProps}
     >
-      {isFlipped ? (
-        <div className="md:flex w-full">
-          {renderImageSection()}
+      <div className="md:flex w-full">
+        {renderImageSection()}
+        {isFlipped ? (
           <div className="flex flex-col mb-2">
             <div className="flex-1">체력:</div>
             <div className="flex-1">
               <Typography>{mon.name}</Typography>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="md:flex w-full">
-          {renderImageSection()}
+        ) : (
           <div className="flex flex-col">
             <div className="flex mb-2">
               <div className="flex-shrink-0 w-32">
@@ -161,8 +158,8 @@ const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
               <Typography>{mon.description}</Typography>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </BaseModal>
   );
 };

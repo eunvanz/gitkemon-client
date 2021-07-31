@@ -26,6 +26,7 @@ const BaseModal = ({
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
+        // @ts-ignore
         as="div"
         initialFocus={undefined}
         static

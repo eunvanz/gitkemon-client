@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cx from "classnames";
 import { colors } from "../../constants/styles";
+import { getCalculatedClassName } from "../../helpers/tailwindHelpers";
 import { ExtendableHTMLProps } from "../../types";
 
 export interface ButtonProps
@@ -62,7 +62,9 @@ const Button: React.FC<ButtonProps> = ({
     switch (color) {
       case "primary":
         return `bg-${colors.PRIMARY_COLOR} ${
-          isDisabled ? "hover:bg-blue-600 " : ""
+          !isDisabled
+            ? getCalculatedClassName(`hover:bg-${colors.PRIMARY_COLOR} `, 100)
+            : ""
         }text-white shadow-sm`;
       case "secondary":
         return `bg-blue-100 hover:bg-blue-200 text-blue-600`;
@@ -82,11 +84,19 @@ const Button: React.FC<ButtonProps> = ({
     }
   }, [isRound]);
 
+  const classNameByDisabled = useMemo(() => {
+    return isDisabled ? "opacity-50 cursor-default" : undefined;
+  }, [isDisabled]);
+
   return (
     <button
       disabled={isDisabled}
       className={cx(
-        `${classNameBySize} ${classNameByColor} ${classNameByRound} align-middle inline-flex items-center font-medium`,
+        "align-middle inline-flex items-center font-medium",
+        classNameBySize,
+        classNameByColor,
+        classNameByRound,
+        classNameByDisabled,
         className,
       )}
       {...restProps}

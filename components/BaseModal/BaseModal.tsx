@@ -1,4 +1,4 @@
-import React, { Fragment, ReactNode } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
@@ -7,9 +7,10 @@ import { ExtendableHTMLProps } from "../../types";
 export interface BaseModalProps extends ExtendableHTMLProps<HTMLDivElement> {
   isOpen: boolean;
   onClose: VoidFunction;
-  children: ReactNode;
+  children: React.ReactNode;
   title?: string;
   isCloseButtonVisible: boolean;
+  footer?: React.ReactNode;
 }
 
 const BaseModal = ({
@@ -19,6 +20,7 @@ const BaseModal = ({
   children,
   className,
   isCloseButtonVisible,
+  footer,
   ...restProps
 }: BaseModalProps) => {
   return (
@@ -87,6 +89,11 @@ const BaseModal = ({
                 {title && <Dialog.Title>{title}</Dialog.Title>}
                 <Dialog.Description>{children}</Dialog.Description>
               </div>
+              {footer && (
+                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                  {footer}
+                </div>
+              )}
             </div>
           </Transition.Child>
         </div>

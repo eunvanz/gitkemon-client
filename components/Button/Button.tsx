@@ -1,24 +1,33 @@
 import { useMemo } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import cx from "classnames";
+import { colors } from "../../constants/styles";
+import { ExtendableHTMLProps } from "../../types";
 
 export interface ButtonProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
-  color?: "primary" | "secondary" | "white";
+  extends Omit<ExtendableHTMLProps<HTMLButtonElement>, "size" | "type"> {
+  color?: "primary" | "secondary" | "white" | "transparent";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   isRound?: boolean;
-  icon?: React.FC<any>;
+  icon?: React.FC<any> | React.ReactNode;
+  isLoading?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   color = "primary",
-  size = "m",
+  size = "md",
   children,
   isRound,
   icon: Icon,
+  className,
+  isLoading = false,
+  disabled = false,
   ...restProps
 }) => {
+  const isDisabled = useMemo(() => {
+    return disabled || isLoading;
+  }, [disabled, isLoading]);
+
   const classNameBySize = useMemo(() => {
     switch (size) {
       case "xs":
@@ -52,29 +61,65 @@ const Button: React.FC<ButtonProps> = ({
   const classNameByColor = useMemo(() => {
     switch (color) {
       case "primary":
-        return "bg-blue-500 hover:bg-blue-600 text-white shadow-sm";
+        return `bg-${colors.PRIMARY_COLOR} ${
+          isDisabled ? "hover:bg-blue-600 " : ""
+        }text-white shadow-sm`;
       case "secondary":
-        return "bg-blue-100 hover:bg-blue-200 text-blue-600";
+        return `bg-blue-100 hover:bg-blue-200 text-blue-600`;
       case "white":
         return "bg-white hover:bg-gray-50 text-gray-700 border-gray-300 shadow-sm";
+      case "transparent":
+        return "hover:bg-gray-100 text-gray-700";
     }
-  }, [color]);
+  }, [color, isDisabled]);
 
   const classNameByRound = useMemo(() => {
     switch (isRound) {
       case true:
         return "rounded-full";
-      case false:
+      default:
         return "rounded";
     }
   }, [isRound]);
 
   return (
     <button
-      className={`${classNameBySize} ${classNameByColor} ${classNameByRound} inline-flex items-center border border-transparent font-medium`}
+      disabled={isDisabled}
+      className={cx(
+        `${classNameBySize} ${classNameByColor} ${classNameByRound} align-middle inline-flex items-center font-medium`,
+        className,
+      )}
       {...restProps}
     >
-      {Icon && <Icon className={iconClassName} aria-hidden="true" />}
+      {Icon &&
+        !isLoading &&
+        (typeof Icon === "function" ? (
+          <Icon className={iconClassName} aria-hidden="true" />
+        ) : (
+          Icon
+        ))}
+      {isLoading && (
+        <svg
+          className={`animate-spin ${iconClassName} text-white`}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+      )}
       {children}
     </button>
   );

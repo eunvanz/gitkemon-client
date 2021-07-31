@@ -1,10 +1,13 @@
+import { RefreshIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import { CardMon } from "../../types";
-import Badge from "../Badge";
 import BaseModal, { BaseModalProps } from "../BaseModal";
+import Button from "../Button";
+import LevelBadge from "../LevelBadge";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
+import PotentialBadge from "../PotentialBadge";
 import Typography from "../Typography";
 
 export interface MonModalProps extends BaseModalProps {
@@ -13,17 +16,28 @@ export interface MonModalProps extends BaseModalProps {
 
 const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
   return (
-    <BaseModal className="w-full md:max-w-2xl" {...restProps}>
+    <BaseModal
+      className="w-full md:max-w-2xl"
+      footer={
+        <div>
+          <Button className="mr-1" icon={RefreshIcon}>
+            Flip
+          </Button>
+          <Button color="transparent">Close</Button>
+        </div>
+      }
+      {...restProps}
+    >
       <div className="md:flex w-full">
-        <div className="flex flex-col mb-6 md:mx-0 md:mb-0 md:mr-8">
-          <div className="w-48 border border-dotted mb-2 mx-auto flex-shrink-0">
+        <div className="flex flex-col mb-4 md:mx-0 md:mb-0 md:mr-8">
+          <div className="w-48 border border-dotted mb-1 mx-auto flex-shrink-0">
             <Image
               src={mon.image ? mon.image.imageUrl : ""}
               alt={mon.name}
               layout="fill"
             />
           </div>
-          <div className="text-center">
+          <div className="text-center mb-1">
             <Typography size="sm" color="hint">
               Painting by{" "}
               <Typography color="primary" weight="bold">
@@ -41,13 +55,23 @@ const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
               <Typography>{mon.name}</Typography>
             </div>
           </div>
+          {mon.level && (
+            <div className="flex mb-2">
+              <div className="flex-shrink-0 w-32">
+                <Typography weight="bold">Level</Typography>
+              </div>
+              <div className="flex-1">
+                <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
+              </div>
+            </div>
+          )}
           {mon.potential && (
             <div className="flex mb-2">
               <div className="flex-shrink-0 w-32">
                 <Typography weight="bold">Potential</Typography>
               </div>
               <div className="flex-1">
-                <Badge label={mon.potential} color="blue" size="sm" />
+                <PotentialBadge potential={mon.potential} />
               </div>
             </div>
           )}

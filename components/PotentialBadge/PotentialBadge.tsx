@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import cx from "classnames";
 import { MonPotential } from "../../types";
 import Badge, { BadgeProps } from "../Badge";
 
@@ -32,7 +33,25 @@ const PotentialBadge: React.FC<PotentialBadgeProps> = ({
     }
   }, [potential]);
 
-  return <Badge color={colorByPotential} label={potential} size="sm" {...restProps} />;
+  const classNameByPotential = useMemo(() => {
+    switch (potential) {
+      case "SS":
+      case "S":
+        return "animate-pulse";
+      default:
+        return undefined;
+    }
+  }, [potential]);
+
+  return (
+    <Badge
+      className={cx(classNameByPotential, className)}
+      color={colorByPotential}
+      label={potential}
+      size="sm"
+      {...restProps}
+    />
+  );
 };
 
 export default PotentialBadge;

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import cx from "classnames";
+import { colors } from "../../constants/styles";
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
@@ -28,7 +29,7 @@ const Typography: React.FC<TypographyProps> = ({
   const classNameByColor = useMemo(() => {
     switch (color) {
       case "primary":
-        return "text-blue-500";
+        return `text-${colors.PRIMARY_COLOR}`;
       case "black":
         return "text-black";
       case "hint":

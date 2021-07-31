@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test": "jest --watch"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -30,18 +31,23 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-typescript": "^7.14.5",
     "@storybook/addon-actions": "^6.3.4",
     "@storybook/addon-essentials": "^6.3.4",
     "@storybook/addon-links": "^6.3.4",
     "@storybook/react": "^6.3.4",
     "@trivago/prettier-plugin-sort-imports": "^2.0.2",
     "@types/compose-function": "0.0.30",
+    "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.171",
     "@types/react": "17.0.14",
     "autoprefixer": "^10.3.1",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
+    "jest": "^27.0.6",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.5",
     "typescript": "4.3.5"

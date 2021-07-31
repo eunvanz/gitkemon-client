@@ -21,3 +21,11 @@ export const 아이콘없음 = createStoryComponent(Template);
 export const 아이콘있음 = createStoryComponent(Template, {
   icon: GiftIcon,
 });
+
+export const 로딩 = createStoryComponent(Template, {
+  isLoading: true,
+});
+
+export const 비활성화 = createStoryComponent(Template, {
+  disabled: true,
+});

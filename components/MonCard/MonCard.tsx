@@ -5,6 +5,7 @@ import LevelBadge from "../LevelBadge";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
+import PotentialBadge from "../PotentialBadge";
 
 export interface MonCardProps
   extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -24,6 +25,11 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
         {mon.level && (
           <div className="absolute left-2">
             <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
+          </div>
+        )}
+        {mon.potential && (
+          <div className="absolute right-2">
+            <PotentialBadge potential={mon.potential} />
           </div>
         )}
         <Image src={mon.image ? mon.image.imageUrl : ""} alt={mon.name} layout="fill" />

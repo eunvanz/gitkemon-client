@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface User {
   id: string;
   nickname: string;
@@ -135,7 +137,4 @@ export type MonType =
   | "dragon"
   | "steel";
 
-export type ExtendableHTMLProps<T extends HTMLElement> = React.DetailedHTMLProps<
-  React.HTMLAttributes<T>,
-  T
->;
+export type ExtendableHTMLProps<T extends HTMLElement> = React.HTMLProps<T>;

@@ -59,8 +59,12 @@ const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
         {renderImageSection()}
         {isFlipped ? (
           <div className="flex flex-col mb-2">
-            <div className="flex-1">체력:</div>
-            <div className="flex-1">
+            <div className="flex-shrink-0">
+              <Typography weight="bold">
+                체력: <Typography color="hint">{mon.hp}</Typography>
+              </Typography>
+            </div>
+            <div>
               <Typography>{mon.name}</Typography>
             </div>
           </div>

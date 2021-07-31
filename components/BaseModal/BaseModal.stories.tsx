@@ -1,5 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
+import Button from "../Button";
 import BaseModal from "./BaseModal";
 
 export default {
@@ -9,7 +10,7 @@ export default {
     isOpen: true,
     children: (
       <>
-        <button>test</button>
+        <Button>test</Button>
       </>
     ),
   },

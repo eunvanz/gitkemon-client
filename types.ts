@@ -134,3 +134,8 @@ export type MonType =
   | "ghost"
   | "dragon"
   | "steel";
+
+export type ExtendableHTMLProps<T extends HTMLElement> = React.DetailedHTMLProps<
+  React.HTMLAttributes<T>,
+  T
+>;

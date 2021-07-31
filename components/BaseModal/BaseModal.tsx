@@ -1,14 +1,26 @@
 import React, { Fragment, ReactNode } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { XIcon } from "@heroicons/react/outline";
+import cx from "classnames";
+import { ExtendableHTMLProps } from "../../types";
 
-export interface BaseModalProps {
+export interface BaseModalProps extends ExtendableHTMLProps<HTMLDivElement> {
   isOpen: boolean;
   onClose: VoidFunction;
   children: ReactNode;
   title?: string;
+  isCloseButtonVisible: boolean;
 }
 
-const BaseModal = ({ isOpen, onClose, title, children }: BaseModalProps) => {
+const BaseModal = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  className,
+  isCloseButtonVisible,
+  ...restProps
+}: BaseModalProps) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -18,6 +30,7 @@ const BaseModal = ({ isOpen, onClose, title, children }: BaseModalProps) => {
         className="fixed z-10 inset-0 overflow-y-auto"
         open={isOpen}
         onClose={onClose}
+        {...restProps}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -48,7 +61,28 @@ const BaseModal = ({ isOpen, onClose, title, children }: BaseModalProps) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div
+              className={cx(
+                "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                className,
+              )}
+            >
+              <div
+                className={cx("absolute top-0 right-0 pt-4 pr-4", {
+                  "opacity-0": !isCloseButtonVisible,
+                })}
+              >
+                <button
+                  type="button"
+                  className={cx("bg-white rounded-md text-gray-400 hover:text-gray-500", {
+                    "cursor-default": !isCloseButtonVisible,
+                  })}
+                  onClick={isCloseButtonVisible ? undefined : onClose}
+                >
+                  <span className="sr-only">Close</span>
+                  <XIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              </div>
               <div className="bg-white p-4 sm:p-6">
                 {title && <Dialog.Title>{title}</Dialog.Title>}
                 <Dialog.Description>{children}</Dialog.Description>

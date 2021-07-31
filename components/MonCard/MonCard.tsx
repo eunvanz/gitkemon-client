@@ -1,5 +1,3 @@
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cx from "classnames";
 import Image from "next/image";
 import { CardMon } from "../../types";
@@ -16,12 +14,12 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
   return (
     <div
       className={cx(
-        "flex flex-col shadow-lg max-w-full items-center border rounded p-1 transform transition-transform hover:-translate-y-1",
+        "flex flex-col shadow-lg max-w-full items-center border rounded p-1 transform transition-transform hover:-translate-y-0.5 cursor-pointer",
         className,
       )}
       {...restProps}
     >
-      <div className="flex-1 border border-dashed">
+      <div className="flex-1 border border-dotted">
         <Image src={mon.image ? mon.image.imageUrl : ""} alt={mon.name} layout="fill" />
       </div>
       <div className="flex flex-row flex-1 m-1.5">

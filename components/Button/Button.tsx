@@ -8,7 +8,7 @@ export interface ButtonProps
   color?: "primary" | "secondary" | "white";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   isRound?: boolean;
-  icon: React.FC<any>;
+  icon?: React.FC<any>;
 }
 
 const Button: React.FC<ButtonProps> = ({

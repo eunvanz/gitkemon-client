@@ -13,7 +13,11 @@ export default {
 
 const Template: ComponentStory<typeof Badge> = (args) => <Badge {...args} />;
 
-export const 기본 = createStoryComponent(Template);
+export const 중간 = createStoryComponent(Template);
+
+export const 작은사이즈 = createStoryComponent(Template, {
+  size: "sm",
+});
 
 export const 큰사이즈 = createStoryComponent(Template, {
   size: "lg",

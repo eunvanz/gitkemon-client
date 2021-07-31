@@ -5,6 +5,7 @@ import { CardMon } from "../../types";
 import BaseModal, { BaseModalProps } from "../BaseModal";
 import Button from "../Button";
 import LevelBadge from "../LevelBadge";
+import LineGauge from "../LineGauge";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
@@ -13,10 +14,15 @@ import Typography from "../Typography";
 
 export interface MonModalProps extends Omit<BaseModalProps, "children"> {
   mon: CardMon;
+  isInitialBack?: boolean;
 }
 
-const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+const MonModal: React.FC<MonModalProps> = ({
+  mon,
+  isInitialBack = false,
+  ...restProps
+}) => {
+  const [isFlipped, setIsFlipped] = useState(isInitialBack);
 
   const renderImageSection = useCallback(() => {
     return (
@@ -36,9 +42,57 @@ const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
     );
   }, [mon.image, mon.name]);
 
+  const renderStat = useCallback(
+    (props: { title: string; baseValue: number; addedValue?: number }) => {
+      return (
+        <div className="mb-4">
+          <div className="flex-shrink-0 mb-1">
+            <Typography weight="bold" className="mr-2">
+              {props.title}
+            </Typography>
+            <Typography color="hint" weight="bold">
+              {props.baseValue}
+            </Typography>
+          </div>
+          <div className="flex">
+            <LineGauge
+              className="flex-grow mr-2 pt-2"
+              values={[
+                {
+                  color: "yellow-400",
+                  value: (props.baseValue * 100) / 400,
+                },
+              ]}
+            />
+            <div className="flex-shrink-0 w-10 text-right">
+              <Typography color="primary" weight="bold">
+                {props.baseValue}
+              </Typography>
+            </div>
+          </div>
+        </div>
+      );
+    },
+    [],
+  );
+
+  const renderProfile = useCallback(
+    (props: { title: string; content: React.ReactNode }) => {
+      return (
+        <div className="flex mb-4">
+          <div className="flex-shrink-0 w-32">
+            <Typography weight="bold">{props.title}</Typography>
+          </div>
+          <div className="flex-1">{props.content}</div>
+        </div>
+      );
+    },
+    [],
+  );
+
   return (
     <BaseModal
-      className="w-full md:max-w-2xl"
+      className="w-full md:max-w-xl"
       footer={
         <div className="text-right">
           <Button
@@ -58,86 +112,78 @@ const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
       <div className="md:flex w-full">
         {renderImageSection()}
         {isFlipped ? (
-          <div className="flex flex-col mb-2">
-            <div className="flex-shrink-0">
-              <Typography weight="bold">
-                체력: <Typography color="hint">{mon.hp}</Typography>
-              </Typography>
-            </div>
-            <div>
-              <Typography>{mon.name}</Typography>
-            </div>
+          <div className="flex flex-col w-full">
+            {renderStat({
+              title: "HP",
+              baseValue: mon.hp,
+            })}
+            {renderStat({
+              title: "Attack",
+              baseValue: mon.attack,
+            })}
+            {renderStat({
+              title: "Defense",
+              baseValue: mon.defense,
+            })}
+            {renderStat({
+              title: "Special attack",
+              baseValue: mon.specialAttack,
+            })}
+            {renderStat({
+              title: "Special defense",
+              baseValue: mon.specialDefense,
+            })}
+            {renderStat({
+              title: "Speed",
+              baseValue: mon.speed,
+            })}
           </div>
         ) : (
           <div className="flex flex-col">
-            <div className="flex mb-2">
-              <div className="flex-shrink-0 w-32">
-                <Typography weight="bold">Name</Typography>
-              </div>
-              <div className="flex-1">
-                <Typography>{mon.name}</Typography>
-              </div>
-            </div>
-            {mon.level && (
-              <div className="flex mb-2">
-                <div className="flex-shrink-0 w-32">
-                  <Typography weight="bold">Level</Typography>
-                </div>
-                <div className="flex-1">
+            {renderProfile({
+              title: "Name",
+              content: <Typography>{mon.name}</Typography>,
+            })}
+            {mon.level &&
+              renderProfile({
+                title: "Level",
+                content: (
                   <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
-                </div>
-              </div>
-            )}
-            {mon.potential && (
-              <div className="flex mb-2">
-                <div className="flex-shrink-0 w-32">
-                  <Typography weight="bold">Potential</Typography>
-                </div>
-                <div className="flex-1">
-                  <PotentialBadge potential={mon.potential} />
-                </div>
-              </div>
-            )}
-            <div className="flex mb-2">
-              <div className="flex-shrink-0 w-32">
-                <Typography weight="bold">Tier</Typography>
-              </div>
-              <div className="flex-1">
-                <MonTierBadge tier={mon.tier} />
-              </div>
-            </div>
-            <div className="flex mb-2">
-              <div className="flex-shrink-0 w-32">
-                <Typography weight="bold">Types</Typography>
-              </div>
-              <div className="flex-1">
-                <MonTypeBadge className="mr-0.5" type={mon.firstType} />
-                {mon.secondType && <MonTypeBadge type={mon.secondType} />}
-              </div>
-            </div>
-            <div className="flex mb-2">
-              <div className="flex-shrink-0 w-32">
-                <Typography weight="bold">Stars</Typography>
-              </div>
-              <div className="flex-1">
-                <MonStars stars={mon.stars} />
-              </div>
-            </div>
-            <div className="flex mb-2">
-              <div className="flex-shrink-0 w-32">
-                <Typography weight="bold">Total Stats</Typography>
-              </div>
-              <div className="flex-1">
+                ),
+              })}
+            {mon.potential &&
+              renderProfile({
+                title: "Potential",
+                content: <PotentialBadge potential={mon.potential} />,
+              })}
+            {renderProfile({
+              title: "Tier",
+              content: <MonTierBadge tier={mon.tier} />,
+            })}
+            {renderProfile({
+              title: "Types",
+              content: (
+                <>
+                  <MonTypeBadge className="mr-0.5" type={mon.firstType} />
+                  {mon.secondType && <MonTypeBadge type={mon.secondType} />}
+                </>
+              ),
+            })}
+            {renderProfile({
+              title: "Stars",
+              content: <MonStars stars={mon.stars} />,
+            })}
+            {renderProfile({
+              title: "Total stats",
+              content: (
                 <Typography color="primary" weight="bold">
                   {mon.total}
                 </Typography>
-              </div>
-            </div>
-            <div className="flex mb-2">
-              <div className="flex-shrink-0 w-32">
-                <Typography weight="bold">Physical</Typography>
-              </div>
-              <div className="flex-1">
+              ),
+            })}
+            {renderProfile({
+              title: "Physical",
+              content: (
                 <Typography>
                   <Typography color="primary" weight="bold">
                     {mon.height}
@@ -148,16 +194,22 @@ const MonModal: React.FC<MonModalProps> = ({ mon, ...restProps }) => {
                   </Typography>
                   kg
                 </Typography>
-              </div>
-            </div>
-            <div className="flex mb-2">
-              <div className="flex-shrink-0 w-32">
-                <Typography weight="bold">Evolution</Typography>
-              </div>
-              <div className="flex-1">
-                {mon.evolutionLevel ? `Available from ${mon.evolutionLevel}` : "-"}
-              </div>
-            </div>
+              ),
+            })}
+            {renderProfile({
+              title: "Evolution",
+              content: (
+                <Typography>
+                  {mon.evolutionLevel ? (
+                    <>
+                      Available from <LevelBadge level={mon.evolutionLevel} />
+                    </>
+                  ) : (
+                    "-"
+                  )}
+                </Typography>
+              ),
+            })}
             <div className="flex mb-2">
               <Typography>{mon.description}</Typography>
             </div>

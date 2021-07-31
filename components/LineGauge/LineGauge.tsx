@@ -11,26 +11,34 @@ export interface LineGaugeProps extends ExtendableHTMLProps<HTMLDivElement> {
 
 const LineGauge: React.FC<LineGaugeProps> = ({
   values,
-  height = 3,
+  height = 2,
   className,
   ...restProps
 }) => {
   return (
-    <div className={cx("relative", className)} {...restProps}>
-      <div className={cx(`h-${height} bg-gray-200 w-full rounded-sm flex`)}>
-        {values.map(({ color, value }, index) => (
-          <div
-            key={index}
-            className={cx(`h-${height} bg-${color}`, {
-              ["rounded-l-sm"]: index === 0,
-              ["rounded-r-sm"]: index === values.length - 1,
-            })}
-            style={{
-              width: `${value}%`,
-              left: index > 0 ? `${values[index - 1].value}%` : undefined,
-            }}
-          />
-        ))}
+    <div className={className} {...restProps}>
+      <div className={cx(`h-${height} bg-gray-200 w-full rounded-md flex`)}>
+        {values.map(({ color, value }, index) => {
+          const restValue =
+            Array.from({ length: index }).reduce(
+              (prevValue: number, _, currentIndex) =>
+                prevValue - values[index - currentIndex - 1].value,
+              100,
+            ) || 100;
+
+          return (
+            <div
+              key={index}
+              className={cx(`h-${height} bg-${color}`, {
+                ["rounded-l-md"]: index === 0,
+                ["rounded-r-md"]: index === values.length - 1,
+              })}
+              style={{
+                width: `${Math.min(value, restValue)}%`,
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );

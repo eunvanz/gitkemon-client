@@ -15,3 +15,7 @@ export default {
 const Template: ComponentStory<typeof MonModal> = (args) => <MonModal {...args} />;
 
 export const 기본 = createStoryComponent(Template);
+
+export const 뒷면 = createStoryComponent(Template, {
+  isInitialBack: true,
+});

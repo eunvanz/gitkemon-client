@@ -3,7 +3,7 @@ import cx from "classnames";
 import Image from "next/image";
 import { CardMon } from "../../types";
 import LevelBadge from "../LevelBadge";
-import MonModal from "../MonModal/MonModal";
+import MonModal from "../MonModal";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";

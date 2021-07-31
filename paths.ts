@@ -7,6 +7,8 @@ const ROUTES = {
   RANKING: "/ranking",
   WORKSHOP: "/workshop",
   PROFILE: "/profile",
+  ADMIN: "/admin",
+  ADMIN__MON_IMAGES: "/admin/mon-images",
 };
 
 export default ROUTES;

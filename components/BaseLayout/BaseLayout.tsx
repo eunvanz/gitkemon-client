@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, SVGProps, useState } from "react";
+import { Fragment, ReactNode, SVGProps, useMemo, useState } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
@@ -6,6 +6,7 @@ import {
   BellIcon,
   GlobeIcon,
   HomeIcon,
+  KeyIcon,
   MenuAlt2Icon,
   PhotographIcon,
   SortAscendingIcon,
@@ -29,38 +30,6 @@ interface NavigationItem {
   }[];
 }
 
-const navigation: NavigationItem[] = [
-  { name: "Home", href: ROUTES.HOME, icon: HomeIcon },
-  {
-    name: "Pokemon Hunt",
-    href: ROUTES.HUNT,
-    icon: GlobeIcon,
-  },
-  {
-    name: "Rankings",
-    icon: SortAscendingIcon,
-    children: [
-      {
-        name: "Collection Ranking",
-        href: `${ROUTES.RANKING}?tab=collection`,
-      },
-      {
-        name: "Pokemon Ranking",
-        href: `${ROUTES.RANKING}?tab=pokemon`,
-      },
-      {
-        name: "Contribution Ranking",
-        href: `${ROUTES.RANKING}?tab=contribution`,
-      },
-    ],
-  },
-  {
-    name: "Pokemon Workshop",
-    href: ROUTES.WORKSHOP,
-    icon: PhotographIcon,
-  },
-];
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -75,6 +44,50 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const router = useRouter();
+
+  const navigation: NavigationItem[] = useMemo(() => {
+    return [
+      { name: "Home", href: ROUTES.HOME, icon: HomeIcon },
+      {
+        name: "Pokemon Hunt",
+        href: ROUTES.HUNT,
+        icon: GlobeIcon,
+      },
+      {
+        name: "Rankings",
+        icon: SortAscendingIcon,
+        children: [
+          {
+            name: "Collection Ranking",
+            href: `${ROUTES.RANKING}?tab=collection`,
+          },
+          {
+            name: "Pokemon Ranking",
+            href: `${ROUTES.RANKING}?tab=pokemon`,
+          },
+          {
+            name: "Contribution Ranking",
+            href: `${ROUTES.RANKING}?tab=contribution`,
+          },
+        ],
+      },
+      {
+        name: "Pokemon Workshop",
+        href: ROUTES.WORKSHOP,
+        icon: PhotographIcon,
+      },
+      {
+        name: "Admin",
+        icon: KeyIcon,
+        children: [
+          {
+            name: "Mon Image Registration",
+            href: `${ROUTES.ADMIN__MON_IMAGES}/new`,
+          },
+        ],
+      },
+    ];
+  }, []);
 
   return (
     <div className="h-screen flex overflow-hidden bg-white">

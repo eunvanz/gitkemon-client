@@ -15,6 +15,10 @@ const Template: ComponentStory<typeof Badge> = (args) => <Badge {...args} />;
 
 export const 중간 = createStoryComponent(Template);
 
+export const 점이랑 = createStoryComponent(Template, {
+  isWithDot: true,
+});
+
 export const 작은사이즈 = createStoryComponent(Template, {
   size: "sm",
 });

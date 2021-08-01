@@ -33,6 +33,7 @@ const MonImages: React.FC<MonImagesProps> = ({
 }) => {
   const { control, watch, handleSubmit } = useForm<MonImagesFormValue>({
     defaultValues: defaultFormValues,
+    mode: "onChange",
   });
 
   const { monId } = watch();
@@ -58,11 +59,11 @@ const MonImages: React.FC<MonImagesProps> = ({
               label: "Mon",
               items: mons.map((mon) => ({
                 value: mon.id,
-                displayValue: `${mon.id} - ${mon.nameKo || mon.name}`,
+                displayValue: `${mon.id}-${mon.nameKo || mon.name}`,
               })),
               placeholder: "Select a mon",
             }}
-            className="w-full sm:w-48"
+            className="w-full sm:w-60"
             rules={{ required: "A mon should be selected" }}
           />
         </div>
@@ -85,22 +86,85 @@ const MonImages: React.FC<MonImagesProps> = ({
               label: "Designer name",
             }}
             rules={{ required: "Designer name is required" }}
-            className="w-full sm:w-48"
+            className="w-full sm:w-60"
           />
         </div>
         {monId && !isRegisteredMon && (
-          <div className="flex-shrink-1 mt-3">
-            <ControlledInput
-              control={control}
-              name="designerName"
-              input={Input}
-              inputProps={{
-                label: "Designer name",
-              }}
-              rules={{ required: "Designer name is required" }}
-              className="w-full sm:w-48"
-            />
-          </div>
+          <>
+            <div className="flex-shrink-1 mt-3">
+              <ControlledInput
+                control={control}
+                name="colPoint"
+                input={Input}
+                inputProps={{
+                  label: "Collection point",
+                  type: "number",
+                }}
+                rules={{
+                  required: "Collection point is required",
+                  min: { value: 1, message: "Collection point should be over 0" },
+                }}
+                className="w-full sm:w-60"
+              />
+            </div>
+            <div className="flex-shrink-1 mt-3">
+              <ControlledInput
+                control={control}
+                name="tier"
+                input={Select}
+                inputProps={{
+                  label: "Tier",
+                  items: [
+                    {
+                      value: "basic",
+                      displayValue: "Basic",
+                    },
+                    {
+                      value: "special",
+                      displayValue: "Special",
+                    },
+                    {
+                      value: "rare",
+                      displayValue: "Rare",
+                    },
+                    {
+                      value: "s.rare",
+                      displayValue: "S.Rare",
+                    },
+                    {
+                      value: "elite",
+                      displayValue: "Elite",
+                    },
+                    {
+                      value: "legend",
+                      displayValue: "Legend",
+                    },
+                  ],
+                }}
+                rules={{
+                  required: "Tier is required",
+                }}
+                className="w-full sm:w-60"
+              />
+            </div>
+            <div className="flex-shrink-1 mt-3">
+              <ControlledInput
+                control={control}
+                name="evolveFromId"
+                input={SearchableSelect}
+                inputProps={{
+                  label: "Evolve from",
+                  items: mons
+                    .filter((item) => item.id !== monId)
+                    .map((item) => ({
+                      value: item.id,
+                      displayValue: `${item.id}-${item.nameKo || item.name}`,
+                    })),
+                }}
+                className="w-full sm:w-60"
+              />
+            </div>
+          </>
         )}
       </div>
     </>

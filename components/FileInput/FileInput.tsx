@@ -116,7 +116,7 @@ const FileInput: React.FC<FileInputProps> = ({
               <div
                 key={index}
                 className={cx(
-                  "inline-block relative w-24 h-24 p-1 border border-gray-300 text-right",
+                  "inline-block relative w-24 h-24 p-1 border border-gray-300 rounded-md text-right",
                   {
                     "mr-1": index < selectedFiles.length,
                   },

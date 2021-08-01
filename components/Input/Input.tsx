@@ -57,7 +57,11 @@ const Input: React.FC<InputProps> = ({
           {...restProps}
         />
         {hasError && (
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+          <div
+            className={`absolute inset-y-0 right-0 flex items-center pointer-events-none ${
+              type === "number" ? "pr-8" : "pr-3"
+            }`}
+          >
             <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
           </div>
         )}

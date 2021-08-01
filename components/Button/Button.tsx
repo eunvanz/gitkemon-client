@@ -11,6 +11,7 @@ export interface ButtonProps
   isRound?: boolean;
   icon?: React.FC<any> | React.ReactNode;
   isLoading?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -65,11 +66,11 @@ const Button: React.FC<ButtonProps> = ({
           !isDisabled
             ? getCalculatedClassName(`hover:bg-${colors.PRIMARY_COLOR} `, 100)
             : ""
-        }text-white shadow-sm`;
+        }text-white shadow-sm border border-${colors.PRIMARY_COLOR}`;
       case "secondary":
-        return `bg-blue-100 hover:bg-blue-200 text-blue-600`;
+        return `bg-blue-100 hover:bg-blue-200 text-blue-600 border border-blue-100`;
       case "white":
-        return "bg-white hover:bg-gray-50 text-gray-700 border-gray-300 shadow-sm";
+        return "bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 shadow-sm";
       case "transparent":
         return "hover:bg-gray-100 text-gray-700";
     }

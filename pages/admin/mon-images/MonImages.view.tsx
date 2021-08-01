@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
+import Button from "../../../components/Button";
 import ControlledInput from "../../../components/ControlledInput";
 import FileInput from "../../../components/FileInput";
 import Input from "../../../components/Input";
@@ -22,6 +23,7 @@ export interface MonImagesProps {
   imageFile?: File;
   onSelectImageFile: (file: File) => void;
   onDeleteImageFile: () => void;
+  isSubmitting: boolean;
 }
 
 const MonImages: React.FC<MonImagesProps> = ({
@@ -30,6 +32,7 @@ const MonImages: React.FC<MonImagesProps> = ({
   imageFile,
   onSelectImageFile,
   onDeleteImageFile,
+  isSubmitting,
 }) => {
   const { control, watch, setValue, handleSubmit } = useForm<MonImagesFormValue>({
     defaultValues: defaultFormValues,
@@ -43,13 +46,13 @@ const MonImages: React.FC<MonImagesProps> = ({
   }, [monId, mons]);
 
   return mons ? (
-    <>
-      <div className="p-4 border-gray-200 border-b">
+    <form className="max-w-3xl mx-auto">
+      <div className="p-4 border-gray-200 border-b sm:px-0">
         <Typography as="h1" weight="bold" size="xl">
           Mon Image Registration
         </Typography>
       </div>
-      <div className="flex-col p-4">
+      <div className="flex-col px-4 py-8 sm:px-0">
         <div className="flex-shrink-1">
           <ControlledInput
             control={control}
@@ -62,6 +65,7 @@ const MonImages: React.FC<MonImagesProps> = ({
                 displayValue: `${mon.id}-${mon.nameKo || mon.name}`,
               })),
               placeholder: "Select a mon",
+              disabled: isSubmitting,
             }}
             className="w-full sm:w-60"
             rules={{ required: "A mon should be selected" }}
@@ -75,6 +79,7 @@ const MonImages: React.FC<MonImagesProps> = ({
             onSelectFiles={(files) => onSelectImageFile(files[0])}
             onDeleteFile={onDeleteImageFile}
             label="Image"
+            disabled={isSubmitting}
           />
         </div>
         <div className="flex-shrink-1 mt-4">
@@ -84,6 +89,7 @@ const MonImages: React.FC<MonImagesProps> = ({
             input={Input}
             inputProps={{
               label: "Designer name",
+              disabled: isSubmitting,
             }}
             rules={{ required: "Designer name is required" }}
             className="w-full sm:w-60"
@@ -99,6 +105,7 @@ const MonImages: React.FC<MonImagesProps> = ({
                 inputProps={{
                   label: "Collection point",
                   type: "number",
+                  disabled: isSubmitting,
                 }}
                 rules={{
                   required: "Collection point is required",
@@ -140,6 +147,7 @@ const MonImages: React.FC<MonImagesProps> = ({
                       displayValue: "Legend",
                     },
                   ],
+                  disabled: isSubmitting,
                 }}
                 rules={{
                   required: "Tier is required",
@@ -168,7 +176,15 @@ const MonImages: React.FC<MonImagesProps> = ({
           </>
         )}
       </div>
-    </>
+      <div className="border-t border-gray-200 py-4 text-right">
+        <Button color="white" className="mr-1">
+          Back
+        </Button>
+        <Button color="primary" type="submit">
+          Save
+        </Button>
+      </div>
+    </form>
   ) : null;
 };
 

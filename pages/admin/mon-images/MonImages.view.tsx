@@ -46,7 +46,7 @@ const MonImages: React.FC<MonImagesProps> = ({
   }, [monId, mons]);
 
   return mons ? (
-    <form className="max-w-3xl mx-auto">
+    <form className="max-w-xl mx-auto">
       <div className="p-4 border-gray-200 border-b sm:px-0">
         <Typography as="h1" weight="bold" size="xl">
           Mon Image Registration
@@ -176,7 +176,7 @@ const MonImages: React.FC<MonImagesProps> = ({
           </>
         )}
       </div>
-      <div className="border-t border-gray-200 py-4 text-right">
+      <div className="border-t border-gray-200 py-4 px-4 sm:px-0 text-right">
         <Button color="white" className="mr-1">
           Back
         </Button>

@@ -51,9 +51,11 @@ function SearchableSelect<T>({
           setIsFocused(true);
         }}
         onBlur={() => {
-          setIsDropdownOpen(false);
-          setInputValue("");
-          setIsFocused(false);
+          setTimeout(() => {
+            setIsDropdownOpen(false);
+            setInputValue("");
+            setIsFocused(false);
+          }, 200);
         }}
         value={
           isFocused

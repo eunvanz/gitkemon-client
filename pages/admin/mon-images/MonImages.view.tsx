@@ -38,7 +38,7 @@ const MonImages: React.FC<MonImagesProps> = ({
   const { monId } = watch();
 
   const isRegisteredMon = useMemo(() => {
-    return mons?.find((item) => item.id === monId)?.__has_monImages__;
+    return mons?.find((item) => item.id === monId)?.__monImages__?.length;
   }, [monId, mons]);
 
   return mons ? (
@@ -76,7 +76,7 @@ const MonImages: React.FC<MonImagesProps> = ({
             label="Image"
           />
         </div>
-        <div className="flex-shrink-1 mt-3">
+        <div className="flex-shrink-1 mt-4">
           <ControlledInput
             control={control}
             name="designerName"

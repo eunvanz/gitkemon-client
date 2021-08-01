@@ -63,7 +63,7 @@ export interface Mon {
   descriptionJa?: string;
   descriptionZh?: string;
   firstType: string;
-  secondType?: string;
+  secondType?: string | null;
   height: number;
   weight: number;
   tier: MonTier;
@@ -79,8 +79,8 @@ export interface Mon {
   colPoint: number;
   evolveFromId?: number | null;
   nextMon?: Mon[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   __monImages__?: MonImage[];
   __has_monImages__?: boolean;
 }
@@ -93,8 +93,8 @@ export interface MonImage {
   designerName: string;
   imageUrl: string;
   mon?: Mon;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export type MonPotential = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F";

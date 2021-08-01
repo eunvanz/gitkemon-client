@@ -46,7 +46,7 @@ const Input: React.FC<InputProps> = ({
       <div className={cx(label ? "mt-1 relative" : undefined)}>
         <input
           className={cx(
-            "p-2 shadow-sm block w-full sm:text-sm rounded-md",
+            "py-2 px-3 shadow-sm block w-full sm:text-sm rounded-md",
             borderClassName,
             {
               "text-red-900 placeholder-red-300": hasError,

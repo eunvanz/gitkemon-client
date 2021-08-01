@@ -1,6 +1,7 @@
 import { Fragment, useMemo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { XIcon } from "@heroicons/react/outline";
+import { CheckIcon, SelectorIcon, XCircleIcon } from "@heroicons/react/solid";
 import cx from "classnames";
 import { colors } from "../../constants/styles";
 import { ExtendableHTMLProps } from "../../types";
@@ -14,13 +15,14 @@ export interface SelectItem<T> {
 export interface SelectProps<T>
   extends Omit<ExtendableHTMLProps<HTMLDivElement>, "onChange" | "value"> {
   value?: T;
-  onChange: (value: T) => void;
+  onChange: (value?: T) => void;
   label?: string;
   items: SelectItem<T>[];
   placeholder?: string;
   hasError?: boolean;
   errorMessage?: string;
   hint?: string;
+  onClear?: VoidFunction;
 }
 
 function Select<T>({
@@ -32,6 +34,7 @@ function Select<T>({
   hasError,
   errorMessage,
   hint,
+  onClear,
   ...restProps
 }: SelectProps<T>) {
   const borderClassName = useMemo(() => {
@@ -66,6 +69,15 @@ function Select<T>({
                     </Typography>
                   )}
                 </span>
+                {value && onClear && (
+                  <span
+                    role="button"
+                    onClick={onClear}
+                    className="absolute inset-y-0 right-7 flex items-center text-gray-200 hover:text-gray-400"
+                  >
+                    <XCircleIcon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                )}
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                 </span>

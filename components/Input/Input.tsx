@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { ExclamationCircleIcon } from "@heroicons/react/solid";
+import React, { useMemo } from "react";
+import { ExclamationCircleIcon, XCircleIcon } from "@heroicons/react/solid";
 import cx from "classnames";
 import { colors } from "../../constants/styles";
 import { ExtendableHTMLProps } from "../../types";
@@ -10,6 +10,7 @@ export interface InputProps extends ExtendableHTMLProps<HTMLInputElement> {
   hint?: string;
   hasError?: boolean;
   errorMessage?: string;
+  onClear?: VoidFunction;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -22,6 +23,7 @@ const Input: React.FC<InputProps> = ({
   hint,
   hasError,
   errorMessage,
+  onClear,
   ...restProps
 }) => {
   const innerId = useMemo(() => {
@@ -56,6 +58,17 @@ const Input: React.FC<InputProps> = ({
           type={type}
           {...restProps}
         />
+        {restProps.value && onClear && (
+          <span
+            role="button"
+            onClick={onClear}
+            className={`absolute inset-y-0 right-${
+              hasError ? 7 : 3
+            } flex items-center text-gray-200 hover:text-gray-400`}
+          >
+            <XCircleIcon className="h-5 w-5" aria-hidden="true" />
+          </span>
+        )}
         {hasError && (
           <div
             className={`absolute inset-y-0 right-0 flex items-center pointer-events-none ${

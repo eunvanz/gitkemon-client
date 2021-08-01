@@ -11,7 +11,7 @@ export default {
 } as ComponentMeta<typeof ControlledInput>;
 
 export const 컨테이너 = () => {
-  const { control } = useForm({
+  const { control, reset } = useForm({
     defaultValues: {
       name: "",
       mon: undefined,
@@ -26,6 +26,7 @@ export const 컨테이너 = () => {
         name="name"
         inputProps={{
           label: "Name",
+          onClear: () => reset({ name: "" }),
         }}
         rules={{ required: "Name is required" }}
         input={Input}

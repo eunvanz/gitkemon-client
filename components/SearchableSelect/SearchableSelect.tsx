@@ -7,19 +7,19 @@ import { ExtendableHTMLProps } from "../../types";
 import Input from "../Input";
 import { SelectItem } from "../Select";
 
-export interface SearchableSelectProps<TItem extends SelectItem>
+export interface SearchableSelectProps<T>
   extends Omit<ExtendableHTMLProps<HTMLDivElement>, "onChange" | "value"> {
-  value?: TItem;
-  onChange: (item: TItem) => void;
+  value?: T;
+  onChange: (value: T) => void;
   label?: string;
-  items: TItem[];
+  items: SelectItem<T>[];
   placeholder?: string;
   hasError?: boolean;
   errorMessage?: string;
   hint?: string;
 }
 
-function SearchableSelect<TItem extends SelectItem>({
+function SearchableSelect<T>({
   value,
   onChange,
   label,
@@ -28,11 +28,14 @@ function SearchableSelect<TItem extends SelectItem>({
   hasError,
   errorMessage,
   hint,
+  className,
   ...restProps
-}: SearchableSelectProps<TItem>) {
+}: SearchableSelectProps<T>) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const [inputValue, setInputValue] = useState("");
+
+  const [isFocused, setIsFocused] = useState(false);
 
   const filteredItems = useMemo(() => {
     return items.filter((item) => {
@@ -41,14 +44,22 @@ function SearchableSelect<TItem extends SelectItem>({
   }, [inputValue, items]);
 
   return (
-    <div {...restProps}>
+    <div className={cx("relative", className)} {...restProps}>
       <Input
-        onFocus={() => setIsDropdownOpen(true)}
+        onFocus={() => {
+          setIsDropdownOpen(true);
+          setIsFocused(true);
+        }}
         onBlur={() => {
           setIsDropdownOpen(false);
           setInputValue("");
+          setIsFocused(false);
         }}
-        value={inputValue || value?.displayValue}
+        value={
+          isFocused
+            ? inputValue
+            : items.find((item) => item.value === value)?.displayValue
+        }
         onChange={(e) => {
           // @ts-ignore
           setInputValue(e.target.value);
@@ -70,9 +81,9 @@ function SearchableSelect<TItem extends SelectItem>({
           >
             {filteredItems.map((item) => (
               <Listbox.Option
-                key={item.id}
+                key={item.displayValue}
                 className={`hover:text-white hover:bg-${colors.PRIMARY_COLOR} text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9`}
-                value={item}
+                value={item.value}
               >
                 {({ selected, active }) => (
                   <>

@@ -1,4 +1,4 @@
-import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentMeta } from "@storybook/react";
 import { useForm } from "react-hook-form";
 import Input from "../Input";
 import Select from "../Select";
@@ -37,9 +37,9 @@ export const 컨테이너 = () => {
         inputProps={{
           label: "Mon",
           items: [
-            { id: 1, displayValue: "이상해씨" },
-            { id: 2, displayValue: "이상해풀" },
-            { id: 3, displayValue: "이상해꽃" },
+            { value: 1, displayValue: "이상해씨" },
+            { value: 2, displayValue: "이상해풀" },
+            { value: 3, displayValue: "이상해꽃" },
           ],
           className: "w-40",
         }}

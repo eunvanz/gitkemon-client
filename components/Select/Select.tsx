@@ -6,24 +6,24 @@ import { colors } from "../../constants/styles";
 import { ExtendableHTMLProps } from "../../types";
 import Typography from "../Typography";
 
-export interface SelectItem {
-  id: number | string;
+export interface SelectItem<T> {
+  value: T;
   displayValue: string;
 }
 
-export interface SelectProps<TItem extends SelectItem>
+export interface SelectProps<T>
   extends Omit<ExtendableHTMLProps<HTMLDivElement>, "onChange" | "value"> {
-  value?: TItem;
-  onChange: (item: TItem) => void;
+  value?: T;
+  onChange: (value: T) => void;
   label?: string;
-  items: TItem[];
+  items: SelectItem<T>[];
   placeholder?: string;
   hasError?: boolean;
   errorMessage?: string;
   hint?: string;
 }
 
-function Select<TItem extends SelectItem>({
+function Select<T>({
   value,
   onChange,
   label,
@@ -33,7 +33,7 @@ function Select<TItem extends SelectItem>({
   errorMessage,
   hint,
   ...restProps
-}: SelectProps<TItem>) {
+}: SelectProps<T>) {
   const borderClassName = useMemo(() => {
     if (hasError) {
       return "border border-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500";
@@ -60,7 +60,7 @@ function Select<TItem extends SelectItem>({
                 )}
               >
                 <span className={cx("block truncate")}>
-                  {value?.displayValue || (
+                  {items.find((item) => item.value === value)?.displayValue || (
                     <Typography color="hint">
                       {placeholder || "Select an item"}
                     </Typography>
@@ -84,7 +84,7 @@ function Select<TItem extends SelectItem>({
                 >
                   {items.map((item) => (
                     <Listbox.Option
-                      key={item.id}
+                      key={item.displayValue}
                       className={({ active }) =>
                         cx(
                           active
@@ -93,7 +93,7 @@ function Select<TItem extends SelectItem>({
                           "cursor-default select-none relative py-2 pl-3 pr-9",
                         )
                       }
-                      value={item}
+                      value={item.value}
                     >
                       {({ selected, active }) => (
                         <>

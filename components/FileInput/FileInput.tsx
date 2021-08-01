@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { useDropzone } from "react-dropzone";

@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
-import Select, { SelectItem } from "./Select";
+import Select from "./Select";
 
 export default {
   title: "components/Select",
@@ -9,9 +9,9 @@ export default {
   args: {
     label: "Label",
     items: [
-      { id: 1, displayValue: "이상해씨" },
-      { id: 2, displayValue: "이상해풀" },
-      { id: 3, displayValue: "이상해꽃" },
+      { value: 1, displayValue: "이상해씨" },
+      { value: 2, displayValue: "이상해풀" },
+      { value: 3, displayValue: "이상해꽃" },
     ],
     placeholder: "선택해주세요",
     hint: "Hint text",
@@ -29,12 +29,12 @@ export const 오류 = createStoryComponent(Template, {
 
 export const 컨테이너 = () => {
   const items = [
-    { id: 1, displayValue: "이상해씨" },
-    { id: 2, displayValue: "이상해풀" },
-    { id: 3, displayValue: "이상해꽃" },
+    { value: 1, displayValue: "이상해씨" },
+    { value: 2, displayValue: "이상해풀" },
+    { value: 3, displayValue: "이상해꽃" },
   ];
 
-  const [selectedItem, setSelectedItem] = useState<SelectItem | undefined>(undefined);
+  const [selectedItem, setSelectedItem] = useState<number | undefined>(undefined);
 
   return (
     <Select

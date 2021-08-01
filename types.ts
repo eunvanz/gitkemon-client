@@ -67,7 +67,7 @@ export interface Mon {
   height: number;
   weight: number;
   tier: MonTier;
-  evolutionLevel?: number;
+  evolutionLevel?: number | null;
   hp: number;
   attack: number;
   defense: number;
@@ -77,19 +77,24 @@ export interface Mon {
   total: number;
   stars: number;
   colPoint: number;
-  evolveFromId?: number;
+  evolveFromId?: number | null;
   nextMon?: Mon[];
-  monImages?: MonImage[];
+  createdAt: string;
+  updatedAt: string;
+  __monImages__?: MonImage[];
+  __has_monImages__?: boolean;
 }
 
 export type MonTier = "basic" | "special" | "rare" | "s.rare" | "elite" | "legend";
 
 export interface MonImage {
   id: number;
-  designerId?: string;
+  designerId?: string | null;
   designerName: string;
   imageUrl: string;
   mon?: Mon;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type MonPotential = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F";

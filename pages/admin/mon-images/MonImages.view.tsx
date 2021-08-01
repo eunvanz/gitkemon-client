@@ -1,4 +1,5 @@
 import { useController, useForm } from "react-hook-form";
+import ControlledInput from "../../../components/ControlledInput";
 import Typography from "../../../components/Typography";
 import { MonTier } from "../../../types";
 

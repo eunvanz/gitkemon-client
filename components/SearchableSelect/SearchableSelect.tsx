@@ -17,6 +17,7 @@ export interface SearchableSelectProps<T>
   hasError?: boolean;
   errorMessage?: string;
   hint?: string;
+  onClear?: VoidFunction;
 }
 
 function SearchableSelect<T>({
@@ -29,6 +30,7 @@ function SearchableSelect<T>({
   errorMessage,
   hint,
   className,
+  onClear,
   ...restProps
 }: SearchableSelectProps<T>) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -60,7 +62,7 @@ function SearchableSelect<T>({
         value={
           isFocused
             ? inputValue
-            : items.find((item) => item.value === value)?.displayValue
+            : items.find((item) => item.value === value)?.displayValue || ""
         }
         onChange={(e) => {
           // @ts-ignore
@@ -68,6 +70,7 @@ function SearchableSelect<T>({
         }}
         label={label}
         placeholder={placeholder}
+        onClear={onClear}
       />
       <Listbox value={value} onChange={onChange}>
         <Transition

@@ -31,7 +31,7 @@ const MonImages: React.FC<MonImagesProps> = ({
   onSelectImageFile,
   onDeleteImageFile,
 }) => {
-  const { control, watch, handleSubmit } = useForm<MonImagesFormValue>({
+  const { control, watch, setValue, handleSubmit } = useForm<MonImagesFormValue>({
     defaultValues: defaultFormValues,
     mode: "onChange",
   });
@@ -160,6 +160,7 @@ const MonImages: React.FC<MonImagesProps> = ({
                       value: item.id,
                       displayValue: `${item.id}-${item.nameKo || item.name}`,
                     })),
+                  onClear: () => setValue("evolveFromId", undefined),
                 }}
                 className="w-full sm:w-60"
               />

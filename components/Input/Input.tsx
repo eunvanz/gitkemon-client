@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/solid";
 import cx from "classnames";
+import { colors } from "../../constants/styles";
 import { ExtendableHTMLProps } from "../../types";
 
 export interface InputProps extends ExtendableHTMLProps<HTMLInputElement> {
@@ -31,7 +32,7 @@ const Input: React.FC<InputProps> = ({
     if (hasError) {
       return "border border-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500";
     } else {
-      return "focus:ring-blue-500 focus:border-blue-500 border-gray-300 border";
+      return `focus:ring-${colors.PRIMARY_COLOR} focus:border-${colors.PRIMARY_COLOR} border-gray-300 border`;
     }
   }, [hasError]);
 

@@ -121,22 +121,20 @@
   "View Template": {
     "prefix": "viewt",
     "body": [
-      "import \"./${TM_FILENAME_BASE}.scss\";",
-      "",
-      "export interface ${TM_FILENAME_BASE}Props {",
-      "  $1",
+      "export interface ${TM_FILENAME_BASE}$1Props {",
+      "  $2",
       "}",
       "",
-      "const ${TM_FILENAME_BASE} = ({",
-      "  $2",
-      "}: ${TM_FILENAME_BASE}Props) => {",
+      "const ${TM_FILENAME_BASE}$1: React.FC<${TM_FILENAME_BASE}$1Props> = ({",
+      "  $3",
+      "}) => {",
       "  return (",
       "    <>",
       "    </>",
       "  );",
       "};",
       "",
-      "export default ${TM_FILENAME_BASE}",
+      "export default ${TM_FILENAME_BASE}$1",
       ""
     ],
     "description": "View Template"

@@ -35,6 +35,7 @@ export const 컴포넌트 = () => {
       imageFile={imageFile}
       onSelectImageFile={onSelectImageFile}
       onDeleteImageFile={onDeleteImageFile}
+      isSubmitting={false}
     />
   );
 };

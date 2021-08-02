@@ -1,6 +1,5 @@
 import { Fragment, useMemo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/outline";
 import { CheckIcon, SelectorIcon, XCircleIcon } from "@heroicons/react/solid";
 import cx from "classnames";
 import { colors } from "../../constants/styles";

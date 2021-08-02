@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../../components/Button";
 import ControlledInput from "../../../components/ControlledInput";
@@ -9,7 +9,7 @@ import Select from "../../../components/Select";
 import Typography from "../../../components/Typography";
 import { Mon, MonTier } from "../../../types";
 
-interface MonImagesFormValue {
+interface MonImagesFormValues {
   monId: number;
   colPoint: number;
   evolveFromId?: number;
@@ -18,12 +18,13 @@ interface MonImagesFormValue {
 }
 
 export interface MonImagesProps {
-  defaultFormValues?: MonImagesFormValue;
+  defaultFormValues?: MonImagesFormValues;
   mons?: Mon[];
   imageFile?: File;
   onSelectImageFile: (file: File) => void;
   onDeleteImageFile: () => void;
   isSubmitting: boolean;
+  onSubmit: (values: MonImagesFormValues) => void;
 }
 
 const MonImages: React.FC<MonImagesProps> = ({
@@ -33,8 +34,15 @@ const MonImages: React.FC<MonImagesProps> = ({
   onSelectImageFile,
   onDeleteImageFile,
   isSubmitting,
+  onSubmit,
 }) => {
-  const { control, watch, setValue, handleSubmit } = useForm<MonImagesFormValue>({
+  const {
+    control,
+    watch,
+    setValue,
+    formState,
+    handleSubmit,
+  } = useForm<MonImagesFormValues>({
     defaultValues: defaultFormValues,
     mode: "onChange",
   });
@@ -45,8 +53,17 @@ const MonImages: React.FC<MonImagesProps> = ({
     return mons?.find((item) => item.id === monId)?.__monImages__?.length;
   }, [monId, mons]);
 
+  const submitForm = useCallback(() => {
+    handleSubmit((formValues) => {
+      if (!imageFile) {
+        alert("An image is required.");
+      }
+      onSubmit(formValues);
+    })();
+  }, [handleSubmit, imageFile, onSubmit]);
+
   return mons ? (
-    <form className="max-w-xl mx-auto">
+    <div className="max-w-xl mx-auto">
       <div className="p-4 border-gray-200 border-b sm:px-0">
         <Typography as="h1" weight="bold" size="xl">
           Mon Image Registration
@@ -66,8 +83,9 @@ const MonImages: React.FC<MonImagesProps> = ({
               })),
               placeholder: "Select a mon",
               disabled: isSubmitting,
+              className: "sm:w-60",
             }}
-            className="w-full sm:w-60"
+            className="w-full"
             rules={{ required: "A mon should be selected" }}
           />
         </div>
@@ -90,9 +108,10 @@ const MonImages: React.FC<MonImagesProps> = ({
             inputProps={{
               label: "Designer name",
               disabled: isSubmitting,
+              className: "sm:w-60",
             }}
             rules={{ required: "Designer name is required" }}
-            className="w-full sm:w-60"
+            className="w-full"
           />
         </div>
         {monId && !isRegisteredMon && (
@@ -180,11 +199,16 @@ const MonImages: React.FC<MonImagesProps> = ({
         <Button color="white" className="mr-1">
           Back
         </Button>
-        <Button color="primary" type="submit">
+        <Button
+          isLoading={isSubmitting}
+          disabled={!formState.isValid || !imageFile}
+          onClick={submitForm}
+          color="primary"
+        >
           Save
         </Button>
       </div>
-    </form>
+    </div>
   ) : null;
 };
 

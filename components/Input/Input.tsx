@@ -1,5 +1,5 @@
 import { forwardRef, useMemo } from "react";
-import { ExclamationCircleIcon, XCircleIcon } from "@heroicons/react/solid";
+import { XCircleIcon } from "@heroicons/react/solid";
 import cx from "classnames";
 import { colors } from "../../constants/styles";
 import { ExtendableHTMLProps } from "../../types";
@@ -73,18 +73,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             >
               <XCircleIcon className="h-5 w-5" aria-hidden="true" />
             </span>
-          )}
-          {hasError && (
-            <div
-              className={`absolute inset-y-0 right-0 flex items-center pointer-events-none ${
-                type === "number" ? "pr-8" : "pr-3"
-              }`}
-            >
-              <ExclamationCircleIcon
-                className="h-5 w-5 text-red-500"
-                aria-hidden="true"
-              />
-            </div>
           )}
         </div>
         {errorMessage && <p className="mt-2 text-sm text-red-600">{errorMessage}</p>}

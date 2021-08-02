@@ -29,6 +29,10 @@ export const 컴포넌트 = () => {
     setImageFile(undefined);
   }, []);
 
+  const onSubmit = useCallback((values) => {
+    console.log("onSubmit", values);
+  }, []);
+
   return (
     <MonImages
       mons={mons}
@@ -36,6 +40,7 @@ export const 컴포넌트 = () => {
       onSelectImageFile={onSelectImageFile}
       onDeleteImageFile={onDeleteImageFile}
       isSubmitting={false}
+      onSubmit={onSubmit}
     />
   );
 };

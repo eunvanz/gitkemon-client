@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../pages/admin/admin.less";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

@@ -1,33 +1,33 @@
 import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../../../components/Button";
-import ControlledInput from "../../../components/ControlledInput";
-import FileInput from "../../../components/FileInput";
-import Input from "../../../components/Input";
-import SearchableSelect from "../../../components/SearchableSelect";
-import Select from "../../../components/Select";
-import Typography from "../../../components/Typography";
-import { Mon, MonTier } from "../../../types";
+import Button from "../../../../components/Button";
+import ControlledInput from "../../../../components/ControlledInput";
+import FileInput from "../../../../components/FileInput";
+import Input from "../../../../components/Input";
+import SearchableSelect from "../../../../components/SearchableSelect";
+import Select from "../../../../components/Select";
+import Typography from "../../../../components/Typography";
+import { Mon, MonTier } from "../../../../types";
 
-interface MonImagesFormValues {
+interface MonImageFormValues {
   monId: number;
   colPoint: number;
-  evolveFromId?: number;
+  evolveFromId?: number | null;
   tier: MonTier;
   designerName: string;
 }
 
-export interface MonImagesProps {
-  defaultFormValues?: MonImagesFormValues;
+export interface MonImageProps {
+  defaultFormValues?: MonImageFormValues;
   mons?: Mon[];
   imageFile?: File;
   onSelectImageFile: (file: File) => void;
   onDeleteImageFile: () => void;
   isSubmitting: boolean;
-  onSubmit: (values: MonImagesFormValues) => void;
+  onSubmit: (values: MonImageFormValues) => void;
 }
 
-const MonImages: React.FC<MonImagesProps> = ({
+const MonImage: React.FC<MonImageProps> = ({
   defaultFormValues,
   mons,
   imageFile,
@@ -42,7 +42,7 @@ const MonImages: React.FC<MonImagesProps> = ({
     setValue,
     formState,
     handleSubmit,
-  } = useForm<MonImagesFormValues>({
+  } = useForm<MonImageFormValues>({
     defaultValues: defaultFormValues,
     mode: "onChange",
   });
@@ -212,4 +212,4 @@ const MonImages: React.FC<MonImagesProps> = ({
   ) : null;
 };
 
-export default MonImages;
+export default MonImage;

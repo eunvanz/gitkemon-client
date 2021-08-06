@@ -1,4 +1,4 @@
-import { User } from "../types";
+import { Mon, MonImage, User } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
 
@@ -17,11 +17,10 @@ const exchangeGithubCode = async (code: string) => {
  * @returns User
  */
 const loginWithToken = async (token?: string) => {
-  const { data } = await requester.post<User | undefined>(
-    API_URL.USERS__LOGIN_WITH_TOKEN,
-    { token },
-  );
-  return data;
+  const res = await requester.post<User | undefined>(API_URL.USERS__LOGIN_WITH_TOKEN, {
+    token,
+  });
+  return res ? res.data : null;
 };
 
 /**
@@ -31,10 +30,30 @@ const logout = async () => {
   return await requester.post<void>(API_URL.USERS__LOGOUT);
 };
 
+/**
+ * MonImage를 아이디로 조회
+ * @param monImageId 몬 이미지 아이디
+ * @returns MonImage
+ */
+const getMonImage = async (monImageId: number) => {
+  const { data } = await requester.get<MonImage>(`${API_URL.MON_IMAGES}/${monImageId}`);
+  return data;
+};
+
+/**
+ * 전체 포켓몬 조회
+ */
+const getAllMons = async () => {
+  const { data } = await requester.get<Mon[]>(API_URL.MONS);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
   logout,
+  getMonImage,
+  getAllMons,
 };
 
 export default api;

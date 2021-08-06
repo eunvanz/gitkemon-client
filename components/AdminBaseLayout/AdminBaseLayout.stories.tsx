@@ -17,7 +17,7 @@ export default {
         onClick: action("onClick"),
       },
     ],
-    children: <div style={{ background: "blue", height: "100vh" }}></div>,
+    children: <div style={{ background: "#1890ff", height: "100vh" }}></div>,
   },
 } as ComponentMeta<typeof AdminBaseLayout>;
 

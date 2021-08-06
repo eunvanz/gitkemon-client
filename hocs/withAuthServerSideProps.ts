@@ -12,7 +12,7 @@ const withAuthServerSideProps = <T>({
 }: WithAuthServerSidePropsOptions) => (
   getServerSidePropsFunc?: (
     ctx: GetServerSidePropsContext,
-    user?: User,
+    user?: User | null,
   ) => Promise<{ props: T }>,
 ) => {
   return async (ctx: GetServerSidePropsContext) => {

@@ -143,3 +143,8 @@ export type MonType =
   | "steel";
 
 export type ExtendableHTMLProps<T extends HTMLElement> = React.HTMLProps<T>;
+
+export enum QUERY_KEY {
+  MON_IMAGE = "MON_IMAGE",
+  MONS = "MONS",
+}

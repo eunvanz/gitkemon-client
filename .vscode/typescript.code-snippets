@@ -210,15 +210,14 @@
       "import { useQuery } from \"react-query\";",
       "import api from \"../api\";",
       "",
-      "export const queryKey = \"${TM_FILENAME_BASE/use([A-Z])(.*)Query/${1:/downcase}${2}/}\"",
-      "",
       "const ${TM_FILENAME_BASE} = () => {",
-      "\tconst query = useQuery(queryKey, api.$1);",
+      "\tconst query = useQuery(QUERY_KEY.$1, $2);",
       "\treturn query;",
       "};",
       "",
       "export default ${TM_FILENAME_BASE};"
     ],
     "description": "queries template"
-  }
+  },
+
 }

@@ -191,6 +191,19 @@
     ],
     "description": "Hook Template"
   },
+  "View Hook Template": {
+    "prefix": "viewhookt",
+    "body": [
+      "import { ${TM_FILENAME_BASE/use//} } from \"./${TM_FILENAME_BASE/use|Props//g}.view\"",
+      "",
+      "const ${TM_FILENAME_BASE}: () => ${TM_FILENAME_BASE/use//} = () => {",
+      "  $2",
+      "}",
+      "",
+      "export default ${TM_FILENAME_BASE}"
+    ],
+    "description": "View Hook Template"
+  },
   "useQuery Template": {
     "prefix": "uq",
     "body": [

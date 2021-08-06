@@ -195,5 +195,22 @@
       ""
     ],
     "description": "Hook Test Template"
-  }
+  },
+  "Page Index Template": {
+    "prefix": "pcidx",
+    "body": [
+      "import $1 from \"./$1.view\";",
+      "import use$1Props from \"./use$1Props\";",
+      "",
+      "const $1Page: React.FC<void> = () => {",
+      "  const props = use$1Props();",
+      "",
+      "  return <$1 {...props} />;",
+      "};",
+      "",
+      "export default $1Page;",
+      ""
+    ],
+    "description": "Page Index Template"
+  },
 }

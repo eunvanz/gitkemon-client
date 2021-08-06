@@ -1,4 +1,5 @@
-import React from "react";
+import React, { ComponentType } from "react";
+import { NextPage } from "next";
 
 export interface User {
   id: string;
@@ -148,3 +149,5 @@ export enum QUERY_KEY {
   MON_IMAGE = "MON_IMAGE",
   MONS = "MONS",
 }
+
+export type PageWithLayout = NextPage & { layout?: React.FC<any> };

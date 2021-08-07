@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
+import { GetServerSideProps } from "next";
 import { useForm } from "react-hook-form";
-import AdminBaseLayout from "../../../../components/AdminBaseLayout";
 import Button from "../../../../components/Button";
 import ControlledInput from "../../../../components/ControlledInput";
 import FileInput from "../../../../components/FileInput";
@@ -8,6 +8,8 @@ import Input from "../../../../components/Input";
 import SearchableSelect from "../../../../components/SearchableSelect";
 import Select from "../../../../components/Select";
 import Typography from "../../../../components/Typography";
+import withAdminBaseLayout from "../../../../hocs/withAdminBaseLayout";
+import withAuthServerSideProps from "../../../../hocs/withAuthServerSideProps";
 import { Mon, MonTier } from "../../../../types";
 
 interface MonImageFormValues {
@@ -28,7 +30,7 @@ export interface MonImageProps {
   onSubmit: (values: MonImageFormValues) => void;
 }
 
-const MonImage: React.FC<MonImageProps> & { layout:  } = ({
+const MonImage: React.FC<MonImageProps> = ({
   defaultFormValues,
   mons,
   imageFile,
@@ -213,6 +215,8 @@ const MonImage: React.FC<MonImageProps> & { layout:  } = ({
   ) : null;
 };
 
-MonImage.layout = AdminBaseLayout
+export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps<{}>({
+  isAuthRequired: true,
+})();
 
-export default MonImage;
+export default withAdminBaseLayout(MonImage);

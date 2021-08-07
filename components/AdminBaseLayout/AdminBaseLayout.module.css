@@ -12,8 +12,9 @@
 }
 
 .content {
-  margin: 78px 16px 0;
+  padding: 78px 16px 0;
   overflow: initial;
+  min-height: 100vh;
 }
 
 .sideBar {

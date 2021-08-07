@@ -63,7 +63,7 @@ const MonImage: React.FC<MonImageProps> = ({
   }, [handleSubmit, imageFile, onSubmit]);
 
   return mons ? (
-    <div className="max-w-xl mx-auto bg-white">
+    <div className="w-full p-4 bg-white">
       <div className="p-4 border-gray-200 border-b sm:px-0">
         <Typography as="h1" weight="bold" size="xl">
           Mon Image Registration

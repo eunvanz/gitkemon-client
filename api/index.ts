@@ -67,6 +67,35 @@ const postMonImage = async (monImage: CreateMonImageDTO) => {
   });
 };
 
+export interface UpdateMonDTO {
+  order?: number;
+  name?: string;
+  nameKo?: string;
+  nameJa?: string;
+  nameZh?: string;
+  description?: string;
+  descriptionKo?: string;
+  descriptionJa?: string;
+  descriptionZh?: string;
+  firstType?: string;
+  secondType?: string;
+  height?: number;
+  weight?: number;
+  tier?: "basic" | "special" | "rare" | "s.rare" | "elite" | "legend";
+  evolutionLevel?: number;
+  hp?: number;
+  attack?: number;
+  defense?: number;
+  specialAttack?: number;
+  specialDefense?: number;
+  speed?: number;
+  evolveFromId?: number;
+  colPoint?: number;
+}
+const patchMon = async (monId: number, mon: UpdateMonDTO) => {
+  await requester.patch<void>(`${API_URL.MONS}/${monId}`, mon);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -74,6 +103,7 @@ const api = {
   getMonImage,
   getAllMons,
   postMonImage,
+  patchMon,
 };
 
 export default api;

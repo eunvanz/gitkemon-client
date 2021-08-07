@@ -9,10 +9,11 @@ import Select from "../../../../components/Select";
 import Typography from "../../../../components/Typography";
 import { Mon, MonTier } from "../../../../types";
 
-interface MonImageFormValues {
+export interface MonImageFormValues {
   monId: number;
   colPoint: number;
-  evolveFromId?: number | null;
+  evolveFromId?: number;
+  evolutionRequiredLevel?: number;
   tier: MonTier;
   designerName: string;
 }
@@ -47,7 +48,7 @@ const MonImage: React.FC<MonImageProps> = ({
     mode: "onChange",
   });
 
-  const { monId } = watch();
+  const { monId, evolveFromId } = watch();
 
   const isRegisteredMon = useMemo(() => {
     return mons?.find((item) => item.id === monId)?.__monImages__?.length;
@@ -188,10 +189,32 @@ const MonImage: React.FC<MonImageProps> = ({
                       displayValue: `${item.id}-${item.nameKo || item.name}`,
                     })),
                   onClear: () => setValue("evolveFromId", undefined),
+                  disabled: isSubmitting,
                 }}
                 className="w-full sm:w-60"
               />
             </div>
+            {evolveFromId && (
+              <div className="flex-shrink-1 mt-3">
+                <ControlledInput
+                  control={control}
+                  name="evolutionRequiredLevel"
+                  input={Input}
+                  inputProps={{
+                    label: "Evolution required level",
+                    type: "number",
+                    disabled: isSubmitting,
+                  }}
+                  rules={{
+                    required: {
+                      value: !!evolveFromId,
+                      message: "Evolution required level is required.",
+                    },
+                  }}
+                  className="w-full sm:w-60"
+                />
+              </div>
+            )}
           </>
         )}
       </div>

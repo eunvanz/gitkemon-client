@@ -1,4 +1,5 @@
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require("next/constants");
+const withAntdLess = require('next-plugin-antd-less')
 
 module.exports = (phase) => {
   // when started in development mode `next dev` or `npm run dev` regardless of the value of STAGING environmental variable
@@ -12,6 +13,9 @@ module.exports = (phase) => {
   };
 
   return {
+    ...withAntdLess({
+      webpack5: true
+    }),
     env,
     reactStrictMode: true,
     images: {
@@ -19,4 +23,4 @@ module.exports = (phase) => {
       domains: ["tailwindui.com", "images.unsplash.com", "avatars.githubusercontent.com"],
     },
   };
-};
+}

@@ -13,7 +13,7 @@ const withAuth = (WrappedComponent: React.FC<any>) => {
   const Wrapper = ({ user: userProp, data }: { user: User; data: any }) => {
     useUserQuery({ enabled: !userProp, initialData: userProp });
 
-    return <WrappedComponent {...data.props} />;
+    return <WrappedComponent {...data?.props} />;
   };
 
   return Wrapper;

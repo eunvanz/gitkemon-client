@@ -5,7 +5,7 @@ import withAuth from "./withAuth";
 const withAdminBaseLayout = (WrappedComponent: React.FC<any>) => {
   const Wrapper = (props: any) => {
     return (
-      <AdminBaseLayoutContainer>
+      <AdminBaseLayoutContainer user={props.user}>
         <WrappedComponent {...props} />
       </AdminBaseLayoutContainer>
     );

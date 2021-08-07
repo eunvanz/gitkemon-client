@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 import api from "../../api";
 import ROUTES from "../../paths";
@@ -34,10 +34,6 @@ const useAdminBaseLayoutProps: ({
   const user = useMemo(() => {
     return queryUser || userProp;
   }, [queryUser, userProp]);
-
-  useEffect(() => {
-    !user && router.push(ROUTES.HOME);
-  }, [router, user]);
 
   return {
     user,

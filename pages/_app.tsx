@@ -4,17 +4,12 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 import queryClient from "../helpers/queryClient";
-import { PageWithLayout } from "../types";
 import "../styles/globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 config.autoAddCss = false;
 
-type Props = AppProps & {
-  Component: PageWithLayout;
-};
-
-function MyApp({ Component, pageProps }: Props) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>

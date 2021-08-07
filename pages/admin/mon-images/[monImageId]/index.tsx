@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProp
   isAuthRequired: true,
 })(async (ctx) => {
   const { monImageId } = ctx.params as { monImageId: string };
-  const isNew = monImageId === "new";
+  const isNew = isNaN(Number(monImageId));
   const ssrMons = await api.getAllMons();
   const ssrMonImage = isNew ? null : await api.getMonImage(Number(monImageId));
 

@@ -1,0 +1,30 @@
+.siteLayout {
+  margin-left: 200px;
+}
+
+.header {
+  padding: 0;
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  box-shadow: 1rem;
+}
+
+.content {
+  margin: 78px 16px 0;
+  overflow: initial;
+}
+
+.sideBar {
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+}
+
+.title {
+  color: white;
+  padding: 20px;
+  padding-left: 24px;
+}

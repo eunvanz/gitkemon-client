@@ -6,6 +6,7 @@ import { RecoilRoot } from "recoil";
 import queryClient from "../helpers/queryClient";
 import "../styles/globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import "antd/dist/antd.css";
 
 config.autoAddCss = false;
 
@@ -13,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

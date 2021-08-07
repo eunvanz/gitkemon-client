@@ -1,6 +1,6 @@
 import { Layout, Menu } from "antd";
 import { User } from "../../types";
-import "./AdminBaseLayout.less";
+import styles from "./AdminBaseLayout.module.css";
 
 export interface AdminBaseLayoutProps {
   menuItems: {
@@ -18,9 +18,9 @@ const AdminBaseLayout: React.FC<AdminBaseLayoutProps> = ({
   onSignOut,
 }) => {
   return (
-    <Layout className="admin-base-layout">
-      <Layout.Sider className="side-bar">
-        <div className="title">Gitkemon Admin</div>
+    <Layout>
+      <Layout.Sider className={styles.sideBar}>
+        <div className={styles.title}>Gitkemon Admin</div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[]}>
           {menuItems.map((item) => (
             <Menu.Item key={item.name} onClick={item.onClick}>
@@ -29,11 +29,9 @@ const AdminBaseLayout: React.FC<AdminBaseLayoutProps> = ({
           ))}
         </Menu>
       </Layout.Sider>
-      <Layout className="site-layout">
-        <Layout.Header className="site-layout-background header">
-          {/* TODO: 유저 아바타 */}
-        </Layout.Header>
-        <Layout.Content className="content">{children}</Layout.Content>
+      <Layout className={styles.siteLayout}>
+        <Layout.Header className={styles.header}>{/* TODO: 유저 아바타 */}</Layout.Header>
+        <Layout.Content className={styles.content}>{children}</Layout.Content>
       </Layout>
     </Layout>
   );

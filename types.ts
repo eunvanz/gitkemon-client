@@ -93,7 +93,7 @@ export interface MonImage {
   designerId?: string | null;
   designerName: string;
   imageUrl: string;
-  mon?: Mon;
+  __mon__?: Mon;
   createdAt?: string;
   updatedAt?: string;
 }

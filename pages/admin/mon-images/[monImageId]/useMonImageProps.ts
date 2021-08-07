@@ -1,12 +1,22 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import api, { CreateMonImageDTO, UpdateMonDTO } from "../../../../api";
+import { convertURLtoFile } from "../../../../helpers/commonHelpers";
 import ROUTES from "../../../../paths";
 import useMonImageQuery from "../../../../queries/useMonImageQuery";
 import useMonsQuery from "../../../../queries/useMonsQuery";
+import { Mon, MonImage } from "../../../../types";
 import { MonImageFormValues, MonImageProps } from "./MonImage.view";
 
-const useMonImageProps: () => MonImageProps = () => {
+export interface UseMonImagePropsParams {
+  ssrMons?: Mon[];
+  ssrMonImage?: MonImage;
+}
+
+const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
+  ssrMonImage,
+  ssrMons,
+}) => {
   const router = useRouter();
 
   const { monImageId } = router.query as { monImageId: string };
@@ -15,19 +25,25 @@ const useMonImageProps: () => MonImageProps = () => {
     return monImageId === "new";
   }, [monImageId]);
 
-  const { data: monImage } = useMonImageQuery(Number(monImageId), {
-    enabled: !isNaN(Number(monImageId)),
-  });
+  const { data: monImage, isFetching: isMonImageFetching } = useMonImageQuery(
+    Number(monImageId),
+    {
+      enabled: !isNaN(Number(monImageId)),
+      initialData: ssrMonImage,
+    },
+  );
 
-  const { data: mons } = useMonsQuery();
+  const { data: mons, isFetching: isMonsFetching } = useMonsQuery({
+    initialData: ssrMons,
+  });
 
   const defaultFormValues = useMemo(() => {
     return monImage
       ? {
-          monId: monImage.mon!.id,
-          colPoint: monImage.mon!.colPoint,
-          evolveFromId: monImage.mon!.evolveFromId || undefined,
-          tier: monImage.mon!.tier,
+          monId: monImage.__mon__!.id,
+          colPoint: monImage.__mon__!.colPoint,
+          evolveFromId: monImage.__mon__!.evolveFromId || undefined,
+          tier: monImage.__mon__!.tier,
           designerName: monImage.designerName,
         }
       : undefined;
@@ -89,6 +105,24 @@ const useMonImageProps: () => MonImageProps = () => {
     router.push(ROUTES.ADMIN__MON_IMAGES);
   }, [router]);
 
+  const isLoading = useMemo(() => {
+    return isMonImageFetching || isMonsFetching;
+  }, [isMonImageFetching, isMonsFetching]);
+
+  const setFileFromMonImage = useCallback(async () => {
+    if (!monImage) {
+      return undefined;
+    }
+    const monImageFile = await convertURLtoFile(monImage.imageUrl);
+    setImageFile(monImageFile);
+  }, [monImage]);
+
+  useEffect(() => {
+    if (monImage) {
+      setFileFromMonImage();
+    }
+  }, [monImage, setFileFromMonImage]);
+
   return {
     defaultFormValues,
     mons,
@@ -98,6 +132,7 @@ const useMonImageProps: () => MonImageProps = () => {
     isSubmitting,
     onSubmit,
     onNavigateToList,
+    isLoading,
   };
 };
 

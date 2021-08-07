@@ -27,6 +27,7 @@ export interface MonImageProps {
   isSubmitting: boolean;
   onSubmit: (values: MonImageFormValues) => void;
   onNavigateToList: VoidFunction;
+  isLoading: boolean;
 }
 
 const MonImage: React.FC<MonImageProps> = ({
@@ -38,6 +39,7 @@ const MonImage: React.FC<MonImageProps> = ({
   isSubmitting,
   onSubmit,
   onNavigateToList,
+  isLoading,
 }) => {
   const {
     control,
@@ -65,7 +67,7 @@ const MonImage: React.FC<MonImageProps> = ({
     })();
   }, [handleSubmit, imageFile, onSubmit]);
 
-  return mons ? (
+  return !isLoading ? (
     <div className="w-full p-4 bg-white">
       <div className="p-4 border-gray-200 border-b sm:px-0">
         <Typography as="h1" weight="bold" size="xl">
@@ -80,7 +82,7 @@ const MonImage: React.FC<MonImageProps> = ({
             input={SearchableSelect}
             inputProps={{
               label: "Mon",
-              items: mons.map((mon) => ({
+              items: mons!.map((mon) => ({
                 value: mon.id,
                 displayValue: `${mon.id}-${mon.nameKo || mon.name}`,
               })),
@@ -184,7 +186,7 @@ const MonImage: React.FC<MonImageProps> = ({
                 input={SearchableSelect}
                 inputProps={{
                   label: "Evolve from",
-                  items: mons
+                  items: mons!
                     .filter((item) => item.id !== monId)
                     .map((item) => ({
                       value: item.id,

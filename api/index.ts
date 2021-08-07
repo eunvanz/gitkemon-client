@@ -27,7 +27,7 @@ const loginWithToken = async (token?: string) => {
  * 로그아웃 수행
  */
 const logout = async () => {
-  return await requester.post<void>(API_URL.USERS__LOGOUT);
+  await requester.post<void>(API_URL.USERS__LOGOUT);
 };
 
 /**
@@ -48,12 +48,32 @@ const getAllMons = async () => {
   return data;
 };
 
+export interface CreateMonImageDTO {
+  file: File;
+  monId: number;
+  designerId?: string;
+  designerName: string;
+}
+const postMonImage = async (monImage: CreateMonImageDTO) => {
+  const formData = new FormData();
+  formData.append("file", monImage.file);
+  formData.append("monId", monImage.monId.toString());
+  monImage.designerId && formData.append("designerId", monImage.designerId.toString());
+  formData.append("designerName", monImage.designerName);
+  await requester.post<void>(API_URL.MON_IMAGES, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
   logout,
   getMonImage,
   getAllMons,
+  postMonImage,
 };
 
 export default api;

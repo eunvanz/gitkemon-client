@@ -8,6 +8,8 @@ import "../styles/globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "antd/dist/antd.css";
 
+// import "antd/dist/antd.css";
+
 config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }: AppProps) {

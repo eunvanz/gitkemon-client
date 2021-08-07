@@ -121,11 +121,11 @@
   "View Template": {
     "prefix": "viewt",
     "body": [
-      "export interface ${TM_FILENAME_BASE}$1Props {",
+      "export interface ${TM_FILENAME_BASE/.view//}$1Props {",
       "  $2",
       "}",
       "",
-      "const ${TM_FILENAME_BASE}$1: React.FC<${TM_FILENAME_BASE}$1Props> = ({",
+      "const ${TM_FILENAME_BASE/.view//}$1: React.FC<${TM_FILENAME_BASE/.view//}$1Props> = ({",
       "  $3",
       "}) => {",
       "  return (",
@@ -134,7 +134,7 @@
       "  );",
       "};",
       "",
-      "export default ${TM_FILENAME_BASE}$1",
+      "export default ${TM_FILENAME_BASE/.view//}$1",
       ""
     ],
     "description": "View Template"

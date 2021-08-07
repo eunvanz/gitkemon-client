@@ -146,8 +146,7 @@ export type MonType =
 export type ExtendableHTMLProps<T extends HTMLElement> = React.HTMLProps<T>;
 
 export enum QUERY_KEY {
+  USER = "USER",
   MON_IMAGE = "MON_IMAGE",
   MONS = "MONS",
 }
-
-export type PageWithLayout = NextPage & { layout?: React.FC<any> };

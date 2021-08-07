@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
+import AdminBaseLayout from "../../../../components/AdminBaseLayout";
 import Button from "../../../../components/Button";
 import ControlledInput from "../../../../components/ControlledInput";
 import FileInput from "../../../../components/FileInput";
@@ -27,7 +28,7 @@ export interface MonImageProps {
   onSubmit: (values: MonImageFormValues) => void;
 }
 
-const MonImage: React.FC<MonImageProps> = ({
+const MonImage: React.FC<MonImageProps> & { layout:  } = ({
   defaultFormValues,
   mons,
   imageFile,
@@ -211,5 +212,7 @@ const MonImage: React.FC<MonImageProps> = ({
     </div>
   ) : null;
 };
+
+MonImage.layout = AdminBaseLayout
 
 export default MonImage;

@@ -181,9 +181,9 @@
   "Hook Template": {
     "prefix": "hookt",
     "body": [
-      "import { ${TM_FILENAME_BASE/use//} } from \"./${TM_FILENAME_BASE/use|Props//g}\"",
+      "import { ${TM_FILENAME_BASE/use//}Props } from \"./${TM_FILENAME_BASE/use|Props//g}\"",
       "",
-      "const ${TM_FILENAME_BASE}: () => ${TM_FILENAME_BASE/use//} = () => {",
+      "const ${TM_FILENAME_BASE}: () => ${TM_FILENAME_BASE/use//}Props = () => {",
       "  $2",
       "}",
       "",
@@ -194,9 +194,9 @@
   "View Hook Template": {
     "prefix": "viewhookt",
     "body": [
-      "import { ${TM_FILENAME_BASE/use//} } from \"./${TM_FILENAME_BASE/use|Props//g}.view\"",
+      "import { ${TM_FILENAME_BASE/use//}Props } from \"./${TM_FILENAME_BASE/use|Props//g}.view\"",
       "",
-      "const ${TM_FILENAME_BASE}: () => ${TM_FILENAME_BASE/use//} = () => {",
+      "const ${TM_FILENAME_BASE}: () => ${TM_FILENAME_BASE/use//}Props = () => {",
       "  $2",
       "}",
       "",

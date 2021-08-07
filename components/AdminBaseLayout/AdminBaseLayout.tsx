@@ -7,13 +7,15 @@ export interface AdminBaseLayoutProps {
     name: string;
     onClick: VoidFunction;
   }[];
-  user: User;
+  user?: User;
+  onSignOut: VoidFunction;
 }
 
 const AdminBaseLayout: React.FC<AdminBaseLayoutProps> = ({
   menuItems,
   user,
   children,
+  onSignOut,
 }) => {
   return (
     <Layout className="admin-base-layout">

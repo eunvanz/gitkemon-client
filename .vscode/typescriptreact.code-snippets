@@ -213,4 +213,25 @@
     ],
     "description": "Page Index Template"
   },
+  "Component Container Template": {
+    "prefix": "cct",
+    "body": [
+      "import ${TM_DIRECTORY/^.+\\/(.*)$/$1/} from \"./${TM_DIRECTORY/^.+\\/(.*)$/$1/}\";",
+      "import use${TM_DIRECTORY/^.+\\/(.*)$/$1/}Props from \"./use${TM_DIRECTORY/^.+\\/(.*)$/$1/}Props\";",
+      "",
+      "export interface ${TM_DIRECTORY/^.+\\/(.*)$/$1/}ContainerProps {",
+      "  $1",
+      "}",
+      "",
+      "const ${TM_DIRECTORY/^.+\\/(.*)$/$1/}Container: React.FC<${TM_DIRECTORY/^.+\\/(.*)$/$1/}ContainerProps> = ({ children, $1 }) => {",
+      "  const props = use${TM_DIRECTORY/^.+\\/(.*)$/$1/}Props({ children, $1 });",
+      "",
+      "  return <${TM_DIRECTORY/^.+\\/(.*)$/$1/} {...props} />;",
+      "};",
+      "",
+      "export default ${TM_DIRECTORY/^.+\\/(.*)$/$1/}Container;",
+      ""
+    ],
+    "description": "Component Container Template"
+  }
 }

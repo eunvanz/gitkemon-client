@@ -1,8 +1,5 @@
-import React, { useCallback, useEffect } from "react";
-import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import api from "../api";
-import { userState } from "../state/user";
+import React from "react";
+import useUserQuery from "../queries/useUserQuery";
 import { User } from "../types";
 
 /**
@@ -14,25 +11,7 @@ import { User } from "../types";
  */
 const withAuth = (WrappedComponent: React.FC<any>) => {
   const Wrapper = ({ user: userProp, data }: { user: User; data: any }) => {
-    const [user, setUser] = useRecoilState(userState);
-
-    const router = useRouter();
-
-    const login = useCallback(async () => {
-      const loginUser = await api.loginWithToken();
-      loginUser && setUser(loginUser);
-    }, [setUser]);
-
-    useEffect(() => {
-      if (user) {
-        return;
-      }
-      if (userProp) {
-        setUser(userProp);
-      } else {
-        login();
-      }
-    }, [login, router, setUser, user, userProp]);
+    useUserQuery({ enabled: !userProp, initialData: userProp });
 
     return <WrappedComponent {...data.props} />;
   };

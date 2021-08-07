@@ -15,14 +15,10 @@ type Props = AppProps & {
 };
 
 function MyApp({ Component, pageProps }: Props) {
-  const Layout = Component.layout || (({ children }) => children);
-
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <Layout>
-          <Component {...pageProps} />;
-        </Layout>
+        <Component {...pageProps} />;
       </RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

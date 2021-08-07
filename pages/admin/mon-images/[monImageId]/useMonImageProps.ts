@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import api, { CreateMonImageDTO, UpdateMonDTO } from "../../../../api";
+import ROUTES from "../../../../paths";
 import useMonImageQuery from "../../../../queries/useMonImageQuery";
 import useMonsQuery from "../../../../queries/useMonsQuery";
 import { MonImageFormValues, MonImageProps } from "./MonImage.view";
@@ -84,6 +85,10 @@ const useMonImageProps: () => MonImageProps = () => {
     [imageFile, isNewMonImage],
   );
 
+  const onNavigateToList = useCallback(() => {
+    router.push(ROUTES.ADMIN__MON_IMAGES);
+  }, [router]);
+
   return {
     defaultFormValues,
     mons,
@@ -92,6 +97,7 @@ const useMonImageProps: () => MonImageProps = () => {
     onDeleteImageFile,
     isSubmitting,
     onSubmit,
+    onNavigateToList,
   };
 };
 

@@ -26,6 +26,7 @@ export interface MonImageProps {
   onDeleteImageFile: () => void;
   isSubmitting: boolean;
   onSubmit: (values: MonImageFormValues) => void;
+  onNavigateToList: VoidFunction;
 }
 
 const MonImage: React.FC<MonImageProps> = ({
@@ -36,6 +37,7 @@ const MonImage: React.FC<MonImageProps> = ({
   onDeleteImageFile,
   isSubmitting,
   onSubmit,
+  onNavigateToList,
 }) => {
   const {
     control,
@@ -219,8 +221,13 @@ const MonImage: React.FC<MonImageProps> = ({
         )}
       </div>
       <div className="border-t border-gray-200 py-4 px-4 sm:px-0 text-right">
-        <Button color="white" className="mr-1">
-          Back
+        <Button
+          color="white"
+          className="mr-1"
+          disabled={isSubmitting}
+          onClick={onNavigateToList}
+        >
+          List
         </Button>
         <Button
           isLoading={isSubmitting}

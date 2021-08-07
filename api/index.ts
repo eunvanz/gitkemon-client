@@ -54,6 +54,10 @@ export interface CreateMonImageDTO {
   designerId?: string;
   designerName: string;
 }
+/**
+ * 몬 이미지 저장
+ * @param monImage
+ */
 const postMonImage = async (monImage: CreateMonImageDTO) => {
   const formData = new FormData();
   formData.append("file", monImage.file);
@@ -92,6 +96,11 @@ export interface UpdateMonDTO {
   evolveFromId?: number;
   colPoint?: number;
 }
+/**
+ * 몬 업데이트
+ * @param monId
+ * @param mon
+ */
 const patchMon = async (monId: number, mon: UpdateMonDTO) => {
   await requester.patch<void>(`${API_URL.MONS}/${monId}`, mon);
 };

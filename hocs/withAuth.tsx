@@ -18,7 +18,6 @@ const withAuth = (WrappedComponent: React.FC<any>) => {
     useUserQuery({
       enabled: !userProp,
       initialData: userProp,
-      onSuccess: (data) => setUser(data || undefined),
     });
 
     useEffect(() => {

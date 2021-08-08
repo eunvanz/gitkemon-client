@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import api from "../../api";
 import useAvailableContributions from "../../queries/useAvailableContributions";
 import useUserQuery from "../../queries/useUserQuery";
@@ -8,11 +8,9 @@ import { Payback } from "../../types";
 import { PaybackProps } from "./Payback.view";
 
 const usePaybackProps: () => PaybackProps = () => {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
 
-  const { refetch } = useUserQuery({
-    onSuccess: (data) => setUser(data || undefined),
-  });
+  const { refetch } = useUserQuery();
 
   const {
     data: availableContributions,

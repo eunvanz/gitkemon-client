@@ -140,6 +140,15 @@ const patchMon = async (monId: number, mon: UpdateMonDTO) => {
   await requester.patch<void>(`${API_URL.MONS}/${monId}`, mon);
 };
 
+/**
+ * 마지막 기부일 이후의 컨트리뷰션 조회
+ * @returns contributions
+ */
+const getAvailableContributions = async () => {
+  const { data } = await requester.get<number>(API_URL.USERS__AVAILABLE_CONTRIBUTIONS);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -151,6 +160,7 @@ const api = {
   getMonImages,
   deleteMonImage,
   patchMonImage,
+  getAvailableContributions,
 };
 
 export default api;

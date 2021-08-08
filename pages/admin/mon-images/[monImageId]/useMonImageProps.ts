@@ -25,7 +25,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
     return monImageId === "new";
   }, [monImageId]);
 
-  const { data: monImage, isFetching: isMonImageFetching } = useMonImageQuery(
+  const { data: monImage, isLoading: isMonImageLoading } = useMonImageQuery(
     Number(monImageId),
     {
       enabled: !isNaN(Number(monImageId)),
@@ -33,8 +33,9 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
     },
   );
 
-  const { data: mons, isFetching: isMonsFetching } = useMonsQuery({
+  const { data: mons, isLoading: isMonsLoading } = useMonsQuery({
     initialData: ssrMons,
+    enabled: !ssrMons,
   });
 
   const defaultFormValues = useMemo(() => {
@@ -89,6 +90,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
               ? api.patchMon(values.evolveFromId, evolveFromMon)
               : Promise.resolve(),
           ]);
+          router.push(ROUTES.ADMIN__MON_IMAGES);
         } catch (error) {
           // TODO:
         } finally {
@@ -98,7 +100,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
         // TODO:
       }
     },
-    [imageFile, isNewMonImage],
+    [imageFile, isNewMonImage, router],
   );
 
   const onNavigateToList = useCallback(() => {
@@ -106,8 +108,8 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
   }, [router]);
 
   const isLoading = useMemo(() => {
-    return isMonImageFetching || isMonsFetching;
-  }, [isMonImageFetching, isMonsFetching]);
+    return isMonImageLoading || isMonsLoading;
+  }, [isMonImageLoading, isMonsLoading]);
 
   const setFileFromMonImage = useCallback(async () => {
     if (!monImage) {

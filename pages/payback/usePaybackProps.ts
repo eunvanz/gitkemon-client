@@ -4,10 +4,10 @@ import api from "../../api";
 import useAvailableContributions from "../../queries/useAvailableContributions";
 import useUserQuery from "../../queries/useUserQuery";
 import { userState } from "../../state/user";
-import { Donation } from "../../types";
-import { DonationProps } from "./Donation.view";
+import { Payback } from "../../types";
+import { PaybackProps } from "./Payback.view";
 
-const useDonationProps: () => DonationProps = () => {
+const usePaybackProps: () => PaybackProps = () => {
   const [user, setUser] = useRecoilState(userState);
 
   const { refetch } = useUserQuery({
@@ -25,13 +25,13 @@ const useDonationProps: () => DonationProps = () => {
 
   const [isDonating, setIsDonating] = useState(false);
 
-  const [donationResult, setDonationResult] = useState<Donation | undefined>(undefined);
+  const [paybackResult, setPaybackResult] = useState<Payback | undefined>(undefined);
 
   const onDonate = useCallback(async () => {
     setIsDonating(true);
     try {
-      const result = await api.postDonations();
-      setDonationResult(result);
+      const result = await api.postPaybacks();
+      setPaybackResult(result);
     } catch (error) {
       // TODO:
     } finally {
@@ -45,8 +45,8 @@ const useDonationProps: () => DonationProps = () => {
     availableContributions,
     onDonate,
     isDonating,
-    donationResult,
+    paybackResult,
   };
 };
 
-export default useDonationProps;
+export default usePaybackProps;

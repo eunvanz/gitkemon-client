@@ -1,4 +1,4 @@
-import { Donation, Mon, MonImage, MonImageSearchCondition, User } from "../types";
+import { Payback, Mon, MonImage, MonImageSearchCondition, User } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
 
@@ -152,8 +152,8 @@ const getAvailableContributions = async () => {
 /**
  * 기부 실행
  */
-const postDonations = async () => {
-  const { data } = await requester.post<Donation>(API_URL.DONATIONS);
+const postPaybacks = async () => {
+  const { data } = await requester.post<Payback>(API_URL.DONATIONS);
   return data;
 };
 
@@ -169,7 +169,7 @@ const api = {
   deleteMonImage,
   patchMonImage,
   getAvailableContributions,
-  postDonations,
+  postPaybacks,
 };
 
 export default api;

@@ -5,7 +5,7 @@ const user: User = {
   nickname: "Benjamin",
   introduce: "자기소개가 음슴",
   lastContributions: 2112,
-  lastDonationDate: new Date("2021-07-23"),
+  lastPaybackDate: new Date("2021-07-23"),
   contributionBaseDate: new Date("2020-07-23"),
   accessToken: "mockAccessToken",
   isActive: true,

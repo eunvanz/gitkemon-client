@@ -1,17 +1,17 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import mockUsers from "../../api/mocks/user";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
-import Donation from "./Donation.view";
+import Payback from "./Payback.view";
 
 export default {
-  title: "pages/기부",
-  component: Donation,
+  title: "pages/보상",
+  component: Payback,
   args: {
     user: mockUsers.user,
     availableContributions: 1981,
   },
-} as ComponentMeta<typeof Donation>;
+} as ComponentMeta<typeof Payback>;
 
-const Template: ComponentStory<typeof Donation> = (args) => <Donation {...args} />;
+const Template: ComponentStory<typeof Payback> = (args) => <Payback {...args} />;
 
 export const 기본 = createStoryComponent(Template);

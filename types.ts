@@ -6,7 +6,7 @@ export interface User {
   nickname: string;
   introduce: string;
   lastContributions: number;
-  lastDonationDate: Date;
+  lastPaybackDate: Date;
   contributionBaseDate: Date;
   accessToken: string;
   isActive: boolean;
@@ -155,7 +155,7 @@ export enum QUERY_KEY {
 
 export type MonImageSearchCondition = "monName" | "designerName";
 
-export interface Donation {
+export interface Payback {
   id: number;
   userId: string;
   contributions: number;
@@ -166,5 +166,5 @@ export interface Donation {
   rarePokeBalls: number;
   elitePokeBalls: number;
   legendPokeBalls: number;
-  donationDateString: string;
+  paybackDateString: string;
 }

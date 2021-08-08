@@ -5,7 +5,7 @@ const API_URL = {
   USERS__AVAILABLE_CONTRIBUTIONS: "users/available-contributions",
   MON_IMAGES: "mon-images",
   MONS: "mons",
-  DONATIONS: "donations",
+  DONATIONS: "paybacks",
 };
 
 export default API_URL;

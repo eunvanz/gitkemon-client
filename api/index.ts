@@ -1,4 +1,4 @@
-import { Mon, MonImage, MonImageSearchCondition, User } from "../types";
+import { Donation, Mon, MonImage, MonImageSearchCondition, User } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
 
@@ -149,6 +149,13 @@ const getAvailableContributions = async () => {
   return data;
 };
 
+/**
+ * 기부 실행
+ */
+const postDonations = async () => {
+  await requester.post<Donation>(API_URL.DONATIONS);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -161,6 +168,7 @@ const api = {
   deleteMonImage,
   patchMonImage,
   getAvailableContributions,
+  postDonations,
 };
 
 export default api;

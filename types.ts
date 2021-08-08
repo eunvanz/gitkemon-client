@@ -153,3 +153,17 @@ export enum QUERY_KEY {
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";
+
+export interface Donation {
+  id: number;
+  userId: string;
+  contributions: number;
+  totalContributions: number;
+  daysInARow: number;
+  basicPokeBalls: number;
+  basicRarePokeBalls: number;
+  rarePokeBalls: number;
+  elitePokeBalls: number;
+  legendPokeBalls: number;
+  donationDateString: string;
+}

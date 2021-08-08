@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import useUserQuery from "../queries/useUserQuery";
 import { userState } from "../state/user";
@@ -20,6 +20,12 @@ const withAuth = (WrappedComponent: React.FC<any>) => {
       initialData: userProp,
       onSuccess: (data) => setUser(data || undefined),
     });
+
+    useEffect(() => {
+      if (userProp) {
+        setUser(userProp);
+      }
+    }, [setUser, userProp]);
 
     return <WrappedComponent {...data?.props} />;
   };

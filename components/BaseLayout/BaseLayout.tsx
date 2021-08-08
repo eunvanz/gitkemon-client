@@ -136,6 +136,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
                   width={143}
                   height={32}
                   alt="Workflow"
+                  priority
                 />
               </div>
               <div className="mt-5 flex-1 h-0 overflow-y-auto">
@@ -166,6 +167,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
                 width={143}
                 height={32}
                 alt="Workflow"
+                priority
               />
             </div>
             <div className="mt-5 flex-1 flex flex-col">
@@ -209,6 +211,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
                         height={32}
                         src={user.githubUser.avatar_url}
                         alt={user.nickname}
+                        priority
                       />
                     </>
                   }

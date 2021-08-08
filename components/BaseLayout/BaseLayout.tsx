@@ -76,16 +76,6 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
         href: ROUTES.WORKSHOP,
         icon: PhotographIcon,
       },
-      {
-        name: "Admin",
-        icon: KeyIcon,
-        children: [
-          {
-            name: "Mon Image Registration",
-            href: `${ROUTES.ADMIN__MON_IMAGES}/new`,
-          },
-        ],
-      },
     ];
   }, []);
 

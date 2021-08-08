@@ -3,6 +3,11 @@
 }
 
 .action {
+  float: right;
   margin-bottom: 1rem;
   text-align: right;
+}
+
+.searchInput {
+  width: 4rem;
 }

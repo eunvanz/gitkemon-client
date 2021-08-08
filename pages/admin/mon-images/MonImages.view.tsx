@@ -1,5 +1,6 @@
-import { useCallback, useMemo } from "react";
-import { Button, Modal, Table } from "antd";
+import { useCallback, useMemo, useState } from "react";
+import { Button, Input, Modal, Select, Space, Table } from "antd";
+import { Option } from "antd/lib/mentions";
 import Image from "next/image";
 import { MonImage } from "../../../types";
 import styles from "./MonImages.module.css";
@@ -9,6 +10,8 @@ export interface MonImagesProps {
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onCreate: VoidFunction;
+  onSearch: (condition: string, value: string) => void;
+  isSearching: boolean;
 }
 
 const MonImages: React.FC<MonImagesProps> = ({
@@ -16,6 +19,8 @@ const MonImages: React.FC<MonImagesProps> = ({
   onEdit,
   onDelete,
   onCreate,
+  onSearch,
+  isSearching,
 }) => {
   const onViewImage = useCallback((imageUrl: string) => {
     Modal.info({
@@ -83,11 +88,29 @@ const MonImages: React.FC<MonImagesProps> = ({
     ];
   }, [onDelete, onEdit, onViewImage]);
 
+  const [searchCondition, setSearchCondition] = useState<"monName" | "designerName">(
+    "monName",
+  );
+
+  const [searchValue, setSearchValue] = useState<string>("");
+
   return (
     <div className={styles.container}>
+      <Space direction="horizontal">
+        <Select defaultValue={searchCondition}>
+          <Option value="monName">Mon name</Option>
+          <Option value="designerName">Designer name</Option>
+        </Select>
+        <Input.Search
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          onSearch={() => onSearch(searchCondition, searchValue)}
+          enterButton="Search"
+        />
+      </Space>
       <div className={styles.action}>
         <Button type="primary" onClick={onCreate}>
-          Create New
+          Create new
         </Button>
       </div>
       <Table dataSource={dataSource} columns={columns} />

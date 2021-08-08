@@ -1,8 +1,9 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
 import api from "../../api";
 import ROUTES from "../../paths";
-import useUserQuery from "../../queries/useUserQuery";
+import { userState } from "../../state/user";
 import { User } from "../../types";
 import { AdminBaseLayoutProps } from "./AdminBaseLayout";
 
@@ -13,7 +14,7 @@ const useAdminBaseLayoutProps: ({
   children: React.ReactNode;
   user?: User;
 }) => AdminBaseLayoutProps = ({ children, user: userProp }) => {
-  const { data: queryUser } = useUserQuery({ enabled: false });
+  const stateUser = useRecoilValue(userState);
 
   const router = useRouter();
 
@@ -32,8 +33,8 @@ const useAdminBaseLayoutProps: ({
   }, [router]);
 
   const user = useMemo(() => {
-    return queryUser || userProp;
-  }, [queryUser, userProp]);
+    return stateUser || userProp;
+  }, [stateUser, userProp]);
 
   return {
     user,

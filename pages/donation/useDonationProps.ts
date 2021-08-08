@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import api from "../../api";
 import useAvailableContributions from "../../queries/useAvailableContributions";
 import useUserQuery from "../../queries/useUserQuery";
+import { userState } from "../../state/user";
 import { Donation } from "../../types";
 import { DonationProps } from "./Donation.view";
 
 const useDonationProps: () => DonationProps = () => {
-  const { data: user, isFetching: isUserFetching, refetch } = useUserQuery({
-    enabled: true,
+  const [user, setUser] = useRecoilState(userState);
+
+  const { refetch } = useUserQuery({
+    onSuccess: (data) => setUser(data || undefined),
   });
 
   const {
@@ -36,8 +40,8 @@ const useDonationProps: () => DonationProps = () => {
   }, []);
 
   return {
-    user: user || undefined,
-    isLoading: isUserFetching || isAvailableContributionsFetching,
+    user: user,
+    isLoading: !user || isAvailableContributionsFetching,
     availableContributions,
     onDonate,
     isDonating,

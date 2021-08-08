@@ -1,7 +1,8 @@
 import { ReactNode, useCallback } from "react";
 import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
 import api from "../../api";
-import useUserQuery from "../../queries/useUserQuery";
+import { userState } from "../../state/user";
 import { User } from "../../types";
 import { BaseLayoutProps } from "./BaseLayout";
 
@@ -12,7 +13,7 @@ const useBaseLayoutProps: ({
   children: ReactNode;
   user?: User;
 }) => BaseLayoutProps = ({ children, user: userProp }) => {
-  const { data: user } = useUserQuery({ enabled: false });
+  const user = useRecoilValue(userState);
 
   const router = useRouter();
 

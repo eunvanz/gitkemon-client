@@ -14,7 +14,9 @@ const useMonImagesQuery = (
   const query = useQuery<MonImage[]>(
     QUERY_KEY.MON_IMAGES,
     () => api.getMonImages(options.condition, options.value),
-    queryOptions,
+    {
+      ...queryOptions,
+    },
   );
   return query;
 };

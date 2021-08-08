@@ -84,6 +84,20 @@ const postMonImage = async (monImage: CreateMonImageDTO) => {
   });
 };
 
+export type UpdateMonImageDTO = Partial<CreateMonImageDTO>;
+const patchMonImage = async (monImageId: number, monImage: UpdateMonImageDTO) => {
+  const formData = new FormData();
+  monImage.file && formData.append("file", monImage.file);
+  monImage.monId && formData.append("monId", monImage.monId.toString());
+  monImage.designerId && formData.append("designerId", monImage.designerId.toString());
+  monImage.designerName && formData.append("designerName", monImage.designerName);
+  await requester.patch<void>(`${API_URL.MON_IMAGES}/${monImageId}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 /**
  * 몬스터 이미지 삭제
  * @param monImageId
@@ -136,6 +150,7 @@ const api = {
   patchMon,
   getMonImages,
   deleteMonImage,
+  patchMonImage,
 };
 
 export default api;

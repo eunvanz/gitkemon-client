@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { message } from "antd";
 import { useRouter } from "next/router";
-import api, { CreateMonImageDTO, UpdateMonDTO } from "../../../../api";
+import { useQueryClient } from "react-query";
+import api, { CreateMonImageDTO, UpdateMonDTO, UpdateMonImageDTO } from "../../../../api";
 import { convertURLtoFile } from "../../../../helpers/commonHelpers";
 import ROUTES from "../../../../paths";
 import useMonImageQuery from "../../../../queries/useMonImageQuery";
 import useMonsQuery from "../../../../queries/useMonsQuery";
-import { Mon, MonImage } from "../../../../types";
+import { Mon, MonImage, QUERY_KEY } from "../../../../types";
 import { MonImageFormValues, MonImageProps } from "./MonImage.view";
 
 export interface UseMonImagePropsParams {
@@ -19,6 +21,8 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
 }) => {
   const router = useRouter();
 
+  const queryClient = useQueryClient();
+
   const { monImageId } = router.query as { monImageId: string };
 
   const isNewMonImage = useMemo(() => {
@@ -28,7 +32,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
   const { data: monImage, isLoading: isMonImageLoading } = useMonImageQuery(
     Number(monImageId),
     {
-      enabled: !isNaN(Number(monImageId)),
+      enabled: !isNewMonImage,
       initialData: ssrMonImage || undefined,
     },
   );
@@ -54,12 +58,15 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
 
   const [imageFile, setImageFile] = useState<File | undefined>(undefined);
 
+  const [isImageModified, setIsImageModified] = useState(false);
+
   const onSelectImageFile = useCallback((file: File) => {
     setImageFile(file);
   }, []);
 
   const onDeleteImageFile = useCallback(() => {
     setImageFile(undefined);
+    setIsImageModified(true);
   }, []);
 
   const onSubmit = useCallback(
@@ -90,17 +97,32 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
               ? api.patchMon(values.evolveFromId, evolveFromMon)
               : Promise.resolve(),
           ]);
+          queryClient.resetQueries(QUERY_KEY.MON_IMAGES);
           router.push(ROUTES.ADMIN__MON_IMAGES);
+          message.success("Mon image has been created.");
         } catch (error) {
           // TODO:
-        } finally {
           setIsSubmitting(false);
         }
       } else {
-        // TODO:
+        // 수정인 경우
+        const monImage: UpdateMonImageDTO = {
+          file: isImageModified ? imageFile : undefined,
+          monId: values.monId,
+          designerName: values.designerName,
+        };
+        try {
+          await api.patchMonImage(Number(monImageId), monImage);
+          queryClient.resetQueries([QUERY_KEY.MON_IMAGES]);
+          router.push(ROUTES.ADMIN__MON_IMAGES);
+          message.success("Mon image has been modified");
+        } catch (error) {
+          // TODO:
+          setIsSubmitting(false);
+        }
       }
     },
-    [imageFile, isNewMonImage, router],
+    [imageFile, isImageModified, isNewMonImage, monImageId, queryClient, router],
   );
 
   const onNavigateToList = useCallback(() => {

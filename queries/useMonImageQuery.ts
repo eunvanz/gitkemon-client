@@ -9,7 +9,11 @@ const useMonImageQuery = (
   const result = useQuery<MonImage>(
     [QUERY_KEY.MON_IMAGE, monImageId],
     () => api.getMonImage(monImageId),
-    queryOptions,
+    {
+      cacheTime: 0,
+      staleTime: 0,
+      ...queryOptions,
+    },
   );
   return result;
 };

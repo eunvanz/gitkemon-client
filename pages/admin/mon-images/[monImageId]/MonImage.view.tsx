@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/Button";
 import ControlledInput from "../../../../components/ControlledInput";
@@ -67,9 +67,16 @@ const MonImage: React.FC<MonImageProps> = ({
     })();
   }, [handleSubmit, imageFile, onSubmit]);
 
+  const onSelectFiles = useCallback(
+    (files: File[]) => {
+      onSelectImageFile(files[0]);
+    },
+    [onSelectImageFile],
+  );
+
   return !isLoading ? (
-    <div className="w-full p-4 bg-white">
-      <div className="p-4 border-gray-200 border-b sm:px-0">
+    <div className="w-full p-8 bg-white">
+      <div className="border-gray-200 border-b sm:px-0">
         <Typography as="h1" weight="bold" size="xl">
           Mon Image Registration
         </Typography>
@@ -99,7 +106,7 @@ const MonImage: React.FC<MonImageProps> = ({
             accept="image/png"
             maxFiles={1}
             selectedFiles={imageFile ? [imageFile] : undefined}
-            onSelectFiles={(files) => onSelectImageFile(files[0])}
+            onSelectFiles={onSelectFiles}
             onDeleteFile={onDeleteImageFile}
             label="Image"
             disabled={isSubmitting}
@@ -119,7 +126,7 @@ const MonImage: React.FC<MonImageProps> = ({
             className="w-full"
           />
         </div>
-        {monId && !isRegisteredMon && (
+        {monId && !isRegisteredMon && !defaultFormValues && (
           <>
             <div className="flex-shrink-1 mt-3">
               <ControlledInput
@@ -222,7 +229,7 @@ const MonImage: React.FC<MonImageProps> = ({
           </>
         )}
       </div>
-      <div className="border-t border-gray-200 py-4 px-4 sm:px-0 text-right">
+      <div className="border-t border-gray-200 pt-4 text-right">
         <Button
           color="white"
           className="mr-1"

@@ -93,7 +93,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       disabled={isDisabled}
       className={cx(
-        "align-middle inline-flex items-center font-medium",
+        "align-middle inline-flex items-center font-medium justify-center",
         classNameBySize,
         classNameByColor,
         classNameByRound,

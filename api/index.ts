@@ -153,7 +153,8 @@ const getAvailableContributions = async () => {
  * 기부 실행
  */
 const postDonations = async () => {
-  await requester.post<Donation>(API_URL.DONATIONS);
+  const { data } = await requester.post<Donation>(API_URL.DONATIONS);
+  return data;
 };
 
 const api = {

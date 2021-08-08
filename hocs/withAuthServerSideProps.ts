@@ -16,7 +16,9 @@ const withAuthServerSideProps = <T>({
   ) => Promise<{ props: T }>,
 ) => {
   return async (ctx: GetServerSidePropsContext) => {
-    const user = await api.loginWithToken(ctx.req.cookies.gkmat);
+    const user = await api.loginWithToken(
+      ctx.req.cookies[process.env.ACCESS_TOKEN_HEADER_NAME as string],
+    );
     if (!user && isAuthRequired) {
       return {
         redirect: {

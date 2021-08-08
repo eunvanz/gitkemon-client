@@ -4,10 +4,8 @@ import { faDonate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import {
-  BellIcon,
   GlobeIcon,
   HomeIcon,
-  KeyIcon,
   MenuAlt2Icon,
   PhotographIcon,
   SortAscendingIcon,
@@ -192,7 +190,10 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
             <div className="flex-1 flex"></div>
             {user ? (
               <div className="ml-4 flex items-center md:ml-6">
-                <button className="bg-gray-800 p-1 rounded-full text-gray-200 hover:text-gray-400">
+                <button
+                  className="bg-gray-800 p-1 rounded-full text-gray-200 hover:text-gray-400"
+                  onClick={() => router.push(ROUTES.DONATION)}
+                >
                   <span className="sr-only">Donation</span>
                   <FontAwesomeIcon icon={faDonate} size="lg" aria-hidden="true" />
                 </button>

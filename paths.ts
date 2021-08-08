@@ -9,6 +9,7 @@ const ROUTES = {
   PROFILE: "/profile",
   ADMIN: "/admin",
   ADMIN__MON_IMAGES: "/admin/mon-images",
+  DONATION: "/donation",
 };
 
 export default ROUTES;

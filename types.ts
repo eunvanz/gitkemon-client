@@ -151,3 +151,5 @@ export enum QUERY_KEY {
   MONS = "MONS",
   MON_IMAGES = "MON_IMAGES",
 }
+
+export type MonImageSearchCondition = "monName" | "designerName";

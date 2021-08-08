@@ -1,4 +1,4 @@
-import { Mon, MonImage, User } from "../types";
+import { Mon, MonImage, MonImageSearchCondition, User } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
 
@@ -46,7 +46,7 @@ const getMonImage = async (monImageId: number) => {
  * @param value
  * @returns MonImage[]
  */
-const getMonImages = async (condition: "monName" | "designerName", value: string) => {
+const getMonImages = async (condition: MonImageSearchCondition, value: string) => {
   const { data } = await requester.get<MonImage[]>(API_URL.MON_IMAGES, {
     params: { condition, value },
   });
@@ -82,6 +82,14 @@ const postMonImage = async (monImage: CreateMonImageDTO) => {
       "Content-Type": "multipart/form-data",
     },
   });
+};
+
+/**
+ * 몬스터 이미지 삭제
+ * @param monImageId
+ */
+const deleteMonImage = async (monImageId: number) => {
+  await requester.delete(`${API_URL.MON_IMAGES}/${monImageId}`);
 };
 
 export interface UpdateMonDTO {
@@ -127,6 +135,7 @@ const api = {
   postMonImage,
   patchMon,
   getMonImages,
+  deleteMonImage,
 };
 
 export default api;

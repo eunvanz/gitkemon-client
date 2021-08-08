@@ -2,16 +2,17 @@ import { useCallback, useMemo, useState } from "react";
 import { Button, Input, Modal, Select, Space, Table } from "antd";
 import { Option } from "antd/lib/mentions";
 import Image from "next/image";
-import { MonImage } from "../../../types";
+import { MonImage, MonImageSearchCondition } from "../../../types";
 import styles from "./MonImages.module.css";
 
 export interface MonImagesProps {
-  monImages: MonImage[];
+  monImages?: MonImage[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onCreate: VoidFunction;
-  onSearch: (condition: string, value: string) => void;
+  onSearch: (condition: MonImageSearchCondition, value: string) => void;
   isSearching: boolean;
+  isDeleting?: number;
 }
 
 const MonImages: React.FC<MonImagesProps> = ({
@@ -21,6 +22,7 @@ const MonImages: React.FC<MonImagesProps> = ({
   onCreate,
   onSearch,
   isSearching,
+  isDeleting,
 }) => {
   const onViewImage = useCallback((imageUrl: string) => {
     Modal.info({
@@ -29,7 +31,7 @@ const MonImages: React.FC<MonImagesProps> = ({
   }, []);
 
   const dataSource = useMemo(() => {
-    return monImages.map((monImage) => ({
+    return monImages?.map((monImage) => ({
       key: monImage.id,
       id: monImage.id,
       monName: monImage.__mon__!.nameKo,
@@ -80,15 +82,15 @@ const MonImages: React.FC<MonImagesProps> = ({
         dataIndex: "id",
         key: "Delete",
         render: (id: number) => (
-          <Button type="link" onClick={() => onDelete(id)}>
+          <Button type="link" onClick={() => onDelete(id)} loading={isDeleting === id}>
             Delete
           </Button>
         ),
       },
     ];
-  }, [onDelete, onEdit, onViewImage]);
+  }, [isDeleting, onDelete, onEdit, onViewImage]);
 
-  const [searchCondition, setSearchCondition] = useState<"monName" | "designerName">(
+  const [searchCondition, setSearchCondition] = useState<MonImageSearchCondition>(
     "monName",
   );
 
@@ -97,7 +99,7 @@ const MonImages: React.FC<MonImagesProps> = ({
   return (
     <div className={styles.container}>
       <Space direction="horizontal">
-        <Select defaultValue={searchCondition}>
+        <Select defaultValue={searchCondition} onChange={setSearchCondition}>
           <Option value="monName">Mon name</Option>
           <Option value="designerName">Designer name</Option>
         </Select>
@@ -106,6 +108,7 @@ const MonImages: React.FC<MonImagesProps> = ({
           onChange={(e) => setSearchValue(e.target.value)}
           onSearch={() => onSearch(searchCondition, searchValue)}
           enterButton="Search"
+          loading={isSearching}
         />
       </Space>
       <div className={styles.action}>

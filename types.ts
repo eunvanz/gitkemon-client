@@ -6,7 +6,7 @@ export interface User {
   nickname: string;
   introduce: string;
   lastContributions: number;
-  lastRewardedDate: Date;
+  lastDonationDate: Date;
   contributionBaseDate: Date;
   accessToken: string;
   isActive: boolean;

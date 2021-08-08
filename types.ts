@@ -149,4 +149,5 @@ export enum QUERY_KEY {
   USER = "USER",
   MON_IMAGE = "MON_IMAGE",
   MONS = "MONS",
+  MON_IMAGES = "MON_IMAGES",
 }

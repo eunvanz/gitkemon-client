@@ -41,6 +41,19 @@ const getMonImage = async (monImageId: number) => {
 };
 
 /**
+ * MonImage를 검색
+ * @param condition
+ * @param value
+ * @returns MonImage[]
+ */
+const getMonImages = async (condition: "monName" | "designerName", value: string) => {
+  const { data } = await requester.get<MonImage[]>(API_URL.MON_IMAGES, {
+    params: { condition, value },
+  });
+  return data;
+};
+
+/**
  * 전체 포켓몬 조회
  */
 const getAllMons = async () => {
@@ -113,6 +126,7 @@ const api = {
   getAllMons,
   postMonImage,
   patchMon,
+  getMonImages,
 };
 
 export default api;

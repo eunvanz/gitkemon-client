@@ -1,5 +1,6 @@
 import { Fragment, ReactNode, SVGProps, useMemo, useState } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faDonate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import {
@@ -192,8 +193,8 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
             {user ? (
               <div className="ml-4 flex items-center md:ml-6">
                 <button className="bg-gray-800 p-1 rounded-full text-gray-200 hover:text-gray-400">
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">Donation</span>
+                  <FontAwesomeIcon icon={faDonate} size="lg" aria-hidden="true" />
                 </button>
 
                 <DropDownMenu

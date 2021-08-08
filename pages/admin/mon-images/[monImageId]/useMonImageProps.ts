@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { message } from "antd";
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
-import api, { CreateMonImageDTO, UpdateMonDTO, UpdateMonImageDTO } from "../../../../api";
+import api, { CreateMonImageDto, UpdateMonDTO, UpdateMonImageDto } from "../../../../api";
 import { convertURLtoFile } from "../../../../helpers/commonHelpers";
 import ROUTES from "../../../../paths";
 import useMonImageQuery from "../../../../queries/useMonImageQuery";
@@ -76,7 +76,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
       }
       setIsSubmitting(true);
       if (isNewMonImage) {
-        const monImage: CreateMonImageDTO = {
+        const monImage: CreateMonImageDto = {
           file: imageFile,
           monId: values.monId,
           designerName: values.designerName,
@@ -106,7 +106,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
         }
       } else {
         // 수정인 경우
-        const monImage: UpdateMonImageDTO = {
+        const monImage: UpdateMonImageDto = {
           file: isImageModified ? imageFile : undefined,
           monId: values.monId,
           designerName: values.designerName,

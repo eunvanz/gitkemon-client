@@ -61,7 +61,7 @@ const getAllMons = async () => {
   return data;
 };
 
-export interface CreateMonImageDTO {
+export interface CreateMonImageDto {
   file: File;
   monId: number;
   designerId?: string;
@@ -71,7 +71,7 @@ export interface CreateMonImageDTO {
  * 몬 이미지 저장
  * @param monImage
  */
-const postMonImage = async (monImage: CreateMonImageDTO) => {
+const postMonImage = async (monImage: CreateMonImageDto) => {
   const formData = new FormData();
   formData.append("file", monImage.file);
   formData.append("monId", monImage.monId.toString());
@@ -84,8 +84,8 @@ const postMonImage = async (monImage: CreateMonImageDTO) => {
   });
 };
 
-export type UpdateMonImageDTO = Partial<CreateMonImageDTO>;
-const patchMonImage = async (monImageId: number, monImage: UpdateMonImageDTO) => {
+export type UpdateMonImageDto = Partial<CreateMonImageDto>;
+const patchMonImage = async (monImageId: number, monImage: UpdateMonImageDto) => {
   const formData = new FormData();
   monImage.file && formData.append("file", monImage.file);
   monImage.monId && formData.append("monId", monImage.monId.toString());

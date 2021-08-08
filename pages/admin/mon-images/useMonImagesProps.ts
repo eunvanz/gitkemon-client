@@ -27,10 +27,11 @@ const useMonImagesProps: () => MonImagesProps = () => {
     refetch: refetchMonImages,
   } = useMonImagesQuery(searchOptions, {
     initialData: [],
+    enabled: false,
   });
 
   useEffect(() => {
-    if (searchOptions) {
+    if (searchOptions.value !== "") {
       refetchMonImages();
     }
   }, [refetchMonImages, searchOptions]);

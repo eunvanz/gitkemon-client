@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
 import { Button, Input, Modal, Select, Space, Table } from "antd";
-import { Option } from "antd/lib/mentions";
 import Image from "next/image";
 import { MonImage, MonImageSearchCondition } from "../../../types";
 import styles from "./MonImages.module.css";
@@ -100,8 +99,8 @@ const MonImages: React.FC<MonImagesProps> = ({
     <div className={styles.container}>
       <Space direction="horizontal">
         <Select defaultValue={searchCondition} onChange={setSearchCondition}>
-          <Option value="monName">Mon name</Option>
-          <Option value="designerName">Designer name</Option>
+          <Select.Option value="monName">Mon name</Select.Option>
+          <Select.Option value="designerName">Designer name</Select.Option>
         </Select>
         <Input.Search
           value={searchValue}

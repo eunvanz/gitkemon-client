@@ -16,7 +16,12 @@ module.exports = (phase) => {
     reactStrictMode: true,
     images: {
       // TODO: 나중에 정리
-      domains: ["tailwindui.com", "images.unsplash.com", "avatars.githubusercontent.com"],
+      domains: [
+        "tailwindui.com",
+        "images.unsplash.com",
+        "avatars.githubusercontent.com",
+        "storage.googleapis.com",
+      ],
     },
   };
 

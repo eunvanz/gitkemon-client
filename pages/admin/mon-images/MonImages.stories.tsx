@@ -4,7 +4,7 @@ import { createStoryComponent } from "../../../helpers/storybookHelpers";
 import MonImages from "./MonImages.view";
 
 export default {
-  title: "pages/admin/몬스터 이미지 목록",
+  title: "pages/admin/몬스터 이미지/목록",
   component: MonImages,
   args: {
     monImages: mockMonImage.monImages,

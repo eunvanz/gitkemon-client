@@ -5,7 +5,7 @@ import { createStoryComponent } from "../../../../helpers/storybookHelpers";
 import MonImage from "./MonImage.view";
 
 export default {
-  title: "pages/admin/몬스터 이미지 등록",
+  title: "pages/admin/몬스터 이미지/등록 및 수정",
   component: MonImage,
   args: {
     mons: allMons,

@@ -81,7 +81,12 @@ const MonImages: React.FC<MonImagesProps> = ({
         dataIndex: "id",
         key: "Delete",
         render: (id: number) => (
-          <Button type="link" onClick={() => onDelete(id)} loading={isDeleting === id}>
+          <Button
+            danger
+            type="link"
+            onClick={() => onDelete(id)}
+            loading={isDeleting === id}
+          >
             Delete
           </Button>
         ),

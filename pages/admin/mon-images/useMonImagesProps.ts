@@ -9,10 +9,9 @@ import { MonImageSearchCondition } from "../../../types";
 import { MonImagesProps } from "./MonImages.view";
 
 const useMonImagesProps: () => MonImagesProps = () => {
-  const [searchOptions, setSearchOptions] = useState<UseMonImageQueryOptions>({
-    condition: "monName",
-    value: "",
-  });
+  const [searchOptions, setSearchOptions] = useState<UseMonImageQueryOptions | undefined>(
+    undefined,
+  );
 
   const onSearch = useCallback((condition: MonImageSearchCondition, value) => {
     setSearchOptions({
@@ -31,7 +30,7 @@ const useMonImagesProps: () => MonImagesProps = () => {
   });
 
   useEffect(() => {
-    if (searchOptions.value !== "") {
+    if (searchOptions) {
       refetchMonImages();
     }
   }, [refetchMonImages, searchOptions]);

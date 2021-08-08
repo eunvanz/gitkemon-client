@@ -8,7 +8,7 @@ export interface UseMonImageQueryOptions {
 }
 
 const useMonImagesQuery = (
-  options: UseMonImageQueryOptions,
+  options: UseMonImageQueryOptions = { condition: "monName", value: "" },
   queryOptions?: UseQueryOptions<MonImage[]>,
 ) => {
   const query = useQuery<MonImage[]>(

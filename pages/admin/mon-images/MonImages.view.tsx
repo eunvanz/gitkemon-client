@@ -25,7 +25,7 @@ const MonImages: React.FC<MonImagesProps> = ({
 }) => {
   const onViewImage = useCallback((imageUrl: string) => {
     Modal.info({
-      content: <Image src={imageUrl} alt="Mon image" layout="fill" />,
+      content: <Image src={imageUrl} alt="Mon image" width={200} height={200} />,
     });
   }, []);
 
@@ -57,7 +57,7 @@ const MonImages: React.FC<MonImagesProps> = ({
         key: "designerName",
       },
       {
-        title: "View image",
+        title: "Image",
         dataIndex: "imageUrl",
         key: "imageUrl",
         render: (imageUrl: string) => (

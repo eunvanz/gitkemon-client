@@ -27,7 +27,7 @@ const MonImages: React.FC<MonImagesProps> = ({
     return monImages.map((monImage) => ({
       key: monImage.id,
       id: monImage.id,
-      monName: monImage.__mon__!.name,
+      monName: monImage.__mon__!.nameKo,
       designerName: monImage.designerName,
       imageUrl: monImage.imageUrl,
     }));
@@ -86,7 +86,9 @@ const MonImages: React.FC<MonImagesProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.action}>
-        <Button onClick={onCreate}>Create</Button>
+        <Button type="primary" onClick={onCreate}>
+          Create New
+        </Button>
       </div>
       <Table dataSource={dataSource} columns={columns} />
     </div>

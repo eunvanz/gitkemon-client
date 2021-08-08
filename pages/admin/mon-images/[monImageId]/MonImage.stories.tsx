@@ -5,7 +5,7 @@ import { createStoryComponent } from "../../../../helpers/storybookHelpers";
 import MonImage from "./MonImage.view";
 
 export default {
-  title: "pages/몬 이미지 등록",
+  title: "pages/admin/몬스터 이미지 등록",
   component: MonImage,
   args: {
     mons: allMons,
@@ -33,6 +33,10 @@ export const 컴포넌트 = () => {
     console.log("onSubmit", values);
   }, []);
 
+  const onNavigateToList = useCallback(() => {
+    console.log("onNavigateToList");
+  }, []);
+
   return (
     <MonImage
       mons={mons}
@@ -41,6 +45,8 @@ export const 컴포넌트 = () => {
       onDeleteImageFile={onDeleteImageFile}
       isSubmitting={false}
       onSubmit={onSubmit}
+      onNavigateToList={onNavigateToList}
+      isLoading={false}
     />
   );
 };

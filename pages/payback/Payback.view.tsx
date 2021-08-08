@@ -1,3 +1,4 @@
+import cx from "classnames";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import CountUp from "react-countup";
@@ -24,7 +25,7 @@ const Payback: React.FC<PaybackProps> = ({
   paybackResult,
 }) => {
   if (!paybackResult) {
-    return !isLoading ? (
+    return (
       <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
@@ -32,25 +33,38 @@ const Payback: React.FC<PaybackProps> = ({
               You have made{" "}
               <span className="text-green-600 font-extrabold">
                 <CountUp
-                  end={availableContributions!}
+                  end={availableContributions || 0}
                   duration={1}
                   formattingFn={(number) => number.toLocaleString()}
                 />
               </span>{" "}
               contributions
             </h2>
-            <h3 className="text-gray-400 text-center font-light">
-              Since {dayjs(user!.lastPaybackDate).format("lll")}
+            <h3
+              className={cx("text-gray-400 text-center font-light", {
+                "animate-pulse": isLoading,
+              })}
+            >
+              {!isLoading
+                ? `Since ${dayjs(user!.lastPaybackDate).format("lll")}`
+                : "Calculating..."}
             </h3>
           </div>
           <div className="mt-8 space-y-6">
-            <Button onClick={onDonate} className="w-full" isLoading={isDonating}>
-              Get payback for contributions
+            <Button
+              onClick={onDonate}
+              className="w-full"
+              isLoading={isDonating}
+              disabled={!availableContributions}
+            >
+              {!!availableContributions
+                ? "Get payback for contributions"
+                : "Make more contributions"}
             </Button>
           </div>
         </div>
       </div>
-    ) : null;
+    );
   } else {
     // TODO: 기부 후 결과
     return null;

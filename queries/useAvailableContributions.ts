@@ -6,7 +6,9 @@ const useAvailableContributions = (options?: UseQueryOptions<number>) => {
   const query = useQuery<number>(
     QUERY_KEY.AVAILABLE_CONTRIBUTIONS,
     api.getAvailableContributions,
-    options,
+    {
+      ...options,
+    },
   );
   return query;
 };

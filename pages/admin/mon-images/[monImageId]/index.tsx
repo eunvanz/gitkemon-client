@@ -11,7 +11,7 @@ const MonImagePage: NextPage<UseMonImagePropsParams> = (params) => {
   return <MonImage {...props} />;
 };
 
-export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps<{}>({
+export const getServerSideProps = withAuthServerSideProps<UseMonImagePropsParams>({
   isAuthRequired: true,
 })(async (ctx) => {
   const { monImageId } = ctx.params as { monImageId: string };

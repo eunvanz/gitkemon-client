@@ -10,7 +10,7 @@ import { MonImageFormValues, MonImageProps } from "./MonImage.view";
 
 export interface UseMonImagePropsParams {
   ssrMons?: Mon[];
-  ssrMonImage?: MonImage;
+  ssrMonImage?: MonImage | null;
 }
 
 const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
@@ -29,7 +29,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
     Number(monImageId),
     {
       enabled: !isNaN(Number(monImageId)),
-      initialData: ssrMonImage,
+      initialData: ssrMonImage || undefined,
     },
   );
 

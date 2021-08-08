@@ -33,7 +33,7 @@ const Donation: React.FC<DonationProps> = ({
               <span className="text-green-600 font-extrabold">
                 <CountUp
                   end={availableContributions!}
-                  duration={3}
+                  duration={1}
                   formattingFn={(number) => number.toLocaleString()}
                 />
               </span>{" "}

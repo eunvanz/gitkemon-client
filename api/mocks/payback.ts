@@ -12,6 +12,8 @@ const payback: Payback = {
   elitePokeBalls: 3,
   legendPokeBalls: 1,
   paybackDateString: "2021-07-31",
+  hasContributionsCountReward: true,
+  hasDaysInARowReward: true,
 };
 
 const mockPayback = {

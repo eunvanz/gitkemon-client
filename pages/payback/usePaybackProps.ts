@@ -22,19 +22,19 @@ const usePaybackProps: () => PaybackProps = () => {
     refetchUser();
   }, [refetchUser]);
 
-  const [isGettingPayback, setIsDonating] = useState(false);
+  const [isGettingPayback, setIsGettingPayback] = useState(false);
 
   const [paybackResult, setPaybackResult] = useState<Payback | undefined>(undefined);
 
   const onPayback = useCallback(async () => {
-    setIsDonating(true);
+    setIsGettingPayback(true);
     try {
       const result = await api.postPaybacks();
       setPaybackResult(result);
     } catch (error) {
       // TODO:
     } finally {
-      setIsDonating(false);
+      setIsGettingPayback(false);
     }
   }, []);
 

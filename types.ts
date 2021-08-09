@@ -167,6 +167,8 @@ export interface Payback {
   elitePokeBalls: number;
   legendPokeBalls: number;
   paybackDateString: string;
+  hasDaysInARowReward: boolean;
+  hasContributionsCountReward: boolean;
 }
 
 export type PokeBallType = "basic" | "basicRare" | "rare" | "elite" | "legend";

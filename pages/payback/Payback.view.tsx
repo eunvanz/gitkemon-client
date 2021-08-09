@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { XIcon } from "@heroicons/react/outline";
+import { RefreshIcon, XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -21,6 +21,7 @@ export interface PaybackProps {
   isGettingPayback: boolean;
   isLoading: boolean;
   paybackResult?: PaybackType;
+  onRefresh: VoidFunction;
 }
 
 const Payback: React.FC<PaybackProps> = ({
@@ -30,6 +31,7 @@ const Payback: React.FC<PaybackProps> = ({
   isGettingPayback,
   isLoading,
   paybackResult,
+  onRefresh,
 }) => {
   const renderRewardItems = useCallback(() => {
     if (!paybackResult) {
@@ -124,6 +126,15 @@ const Payback: React.FC<PaybackProps> = ({
                 : "Make more contributions"}
             </Button>
           </div>
+          <div className="text-center">
+            <a
+              onClick={onRefresh}
+              className="text-gray-400 hover:text-gray-600 cursor-pointer text-sm"
+            >
+              <RefreshIcon className="h-3 w-3 inline mr-1" />
+              Refresh
+            </a>
+          </div>
         </div>
       </div>
     );
@@ -137,14 +148,18 @@ const Payback: React.FC<PaybackProps> = ({
             {renderRewardItems()}
           </div>
           <div className="mt-8 space-y-6">
-            <Button
-              onClick={onPayback}
-              className="w-full"
-              isLoading={isGettingPayback}
-              disabled={!availableContributions}
-            >
+            <Button onClick={onPayback} className="w-full">
               Go to catch Pokémons
             </Button>
+          </div>
+          <div className="text-center">
+            <a
+              onClick={onRefresh}
+              className="text-gray-400 hover:text-gray-600 cursor-pointer text-sm"
+            >
+              <RefreshIcon className="h-3 w-3 inline mr-1" />
+              Refresh
+            </a>
           </div>
         </div>
         {renderRainItems()}
@@ -202,11 +217,11 @@ interface RainItemProps {
 const RainItem = ({ type }: RainItemProps) => {
   const rotationClassName = `${random(0, 1) ? "-" : ""}rotate-${random(0, 180)}`;
 
-  const size = random(40, 100);
+  const size = random(20, 80);
 
   const delay = random(0, 3000);
 
-  const left = random(0, window.innerWidth);
+  const left = random(0, window.innerWidth - size);
 
   const [isVisible, setIsVisible] = useState(false);
 

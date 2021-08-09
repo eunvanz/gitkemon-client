@@ -10,16 +10,17 @@ import { PaybackProps } from "./Payback.view";
 const usePaybackProps: () => PaybackProps = () => {
   const user = useRecoilValue(userState);
 
-  const { refetch } = useUserQuery();
+  const { refetch: refetchUser } = useUserQuery();
 
   const {
     data: availableContributions,
     isFetching: isAvailableContributionsFetching,
+    refetch: refetchAvailableContributions,
   } = useAvailableContributions();
 
   useEffect(() => {
-    refetch();
-  }, [refetch]);
+    refetchUser();
+  }, [refetchUser]);
 
   const [isGettingPayback, setIsDonating] = useState(false);
 
@@ -37,6 +38,12 @@ const usePaybackProps: () => PaybackProps = () => {
     }
   }, []);
 
+  const onRefresh = useCallback(() => {
+    refetchUser();
+    refetchAvailableContributions();
+    setPaybackResult(undefined);
+  }, [refetchAvailableContributions, refetchUser]);
+
   return {
     user: user,
     isLoading: !user || isAvailableContributionsFetching,
@@ -44,6 +51,7 @@ const usePaybackProps: () => PaybackProps = () => {
     onPayback,
     isGettingPayback,
     paybackResult,
+    onRefresh,
   };
 };
 

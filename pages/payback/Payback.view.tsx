@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import CountUp from "react-countup";
 import Button from "../../components/Button";
@@ -33,6 +34,28 @@ const Payback: React.FC<PaybackProps> = ({
   isLoading,
   paybackResult,
 }) => {
+  const renderRewardItems = useCallback(() => {
+    if (!paybackResult) {
+      return null;
+    }
+    let itemsCnt = 0;
+    return [
+      "basic" as const,
+      "basicRare" as const,
+      "rare" as const,
+      "elite" as const,
+      "legend" as const,
+    ].map((type) => {
+      const amount = paybackResult[
+        `${type}PokeBalls` as keyof typeof paybackResult
+      ] as number;
+      amount && itemsCnt++;
+      return amount > 0 ? (
+        <RewardItem type={type} amount={amount} delay={500 * itemsCnt} />
+      ) : null;
+    });
+  }, [paybackResult]);
+
   if (!paybackResult) {
     return (
       <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
@@ -79,22 +102,9 @@ const Payback: React.FC<PaybackProps> = ({
       <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-xl text-gray-600">You have got</h2>
-            {paybackResult.basicPokeBalls > 0 && (
-              <RewardItem type="basic" amount={paybackResult.basicPokeBalls} />
-            )}
-            {paybackResult.basicRarePokeBalls > 0 && (
-              <RewardItem type="basicRare" amount={paybackResult.basicRarePokeBalls} />
-            )}
-            {paybackResult.rarePokeBalls > 0 && (
-              <RewardItem type="rare" amount={paybackResult.rarePokeBalls} />
-            )}
-            {paybackResult.elitePokeBalls > 0 && (
-              <RewardItem type="elite" amount={paybackResult.elitePokeBalls} />
-            )}
-            {paybackResult.legendPokeBalls > 0 && (
-              <RewardItem type="legend" amount={paybackResult.legendPokeBalls} />
-            )}
+            <h2 className="mt-6 mb-1 text-center text-3xl text-green-600">Hooray!!</h2>
+            <h2 className="text-center text-xl text-gray-600">You have got</h2>
+            {renderRewardItems()}
           </div>
           <div className="mt-8 space-y-6">
             <Button
@@ -115,9 +125,10 @@ const Payback: React.FC<PaybackProps> = ({
 interface RewardItemProps {
   type: "basic" | "basicRare" | "rare" | "elite" | "legend";
   amount: number;
+  delay: number;
 }
 
-const RewardItem = ({ type, amount }: RewardItemProps) => {
+const RewardItem = ({ type, amount, delay }: RewardItemProps) => {
   const img = useMemo(() => {
     switch (type) {
       case "basic":
@@ -133,14 +144,38 @@ const RewardItem = ({ type, amount }: RewardItemProps) => {
     }
   }, [type]);
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), delay);
+  }, [delay]);
+
   return (
-    <div className="flex justify-center items-center mt-3">
-      <Image src={img} alt="basic ball" width={30} height={30} />
-      <XIcon className="mx-2 w-4 h-4" />
-      <Typography className="w-14 text-right" size="2xl" color="primary" weight="bold">
-        <CountUp end={amount} duration={1} formattingFn={(n) => n.toLocaleString()} />
-      </Typography>
-    </div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 32 }}
+        >
+          <div className="flex justify-center items-center mt-3">
+            <Image src={img} alt="basic ball" width={30} height={30} />
+            <XIcon className="mx-2 w-4 h-4" />
+            <Typography
+              className="w-14 text-right"
+              size="2xl"
+              color="primary"
+              weight="bold"
+            >
+              <CountUp
+                end={amount}
+                duration={1}
+                formattingFn={(n) => n.toLocaleString()}
+              />
+            </Typography>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

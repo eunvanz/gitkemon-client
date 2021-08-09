@@ -22,6 +22,17 @@ export const 로딩중 = createStoryComponent(Template, {
   isLoading: true,
 });
 
-export const 보상후 = createStoryComponent(Template, {
+export const 보상후_대량 = createStoryComponent(Template, {
   paybackResult: mockPayback.payback,
+});
+
+export const 보상후_소량 = createStoryComponent(Template, {
+  paybackResult: {
+    ...mockPayback.payback,
+    basicPokeBalls: 10,
+    basicRarePokeBalls: 3,
+    rarePokeBalls: 1,
+    elitePokeBalls: 0,
+    legendPokeBalls: 0,
+  },
 });

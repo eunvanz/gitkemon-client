@@ -4,11 +4,12 @@ import cx from "classnames";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { AnimatePresence, motion } from "framer-motion";
+import { random } from "lodash-es";
 import Image from "next/image";
 import CountUp from "react-countup";
 import Button from "../../components/Button";
 import Typography from "../../components/Typography";
-import { Payback as PaybackType, User } from "../../types";
+import { Payback as PaybackType, PokeBallType, User } from "../../types";
 import imgBasicRareBall from "../../images/pokeball-basic-rare.png";
 import imgBasicBall from "../../images/pokeball-basic.png";
 import imgEliteBall from "../../images/pokeball-elite.png";
@@ -54,6 +55,30 @@ const Payback: React.FC<PaybackProps> = ({
         <RewardItem type={type} amount={amount} delay={500 * itemsCnt} />
       ) : null;
     });
+  }, [paybackResult]);
+
+  const renderRainItems = useCallback(() => {
+    if (!paybackResult) {
+      return null;
+    }
+    return (
+      <>
+        {[
+          "basic" as const,
+          "basicRare" as const,
+          "rare" as const,
+          "elite" as const,
+          "legend" as const,
+        ].map((type) => {
+          const amount = paybackResult[
+            `${type}PokeBalls` as keyof typeof paybackResult
+          ] as number;
+          return Array.from({ length: Math.min(amount, 100) }).map((_, index) => (
+            <RainItem key={index} type={type} />
+          ));
+        })}
+      </>
+    );
   }, [paybackResult]);
 
   if (!paybackResult) {
@@ -117,13 +142,14 @@ const Payback: React.FC<PaybackProps> = ({
             </Button>
           </div>
         </div>
+        {renderRainItems()}
       </div>
     );
   }
 };
 
 interface RewardItemProps {
-  type: "basic" | "basicRare" | "rare" | "elite" | "legend";
+  type: PokeBallType;
   amount: number;
   delay: number;
 }
@@ -173,6 +199,71 @@ const RewardItem = ({ type, amount, delay }: RewardItemProps) => {
               />
             </Typography>
           </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+interface RainItemProps {
+  type: PokeBallType;
+}
+
+const RainItem = ({ type }: RainItemProps) => {
+  const img = useMemo(() => {
+    switch (type) {
+      case "basic":
+        return imgBasicBall;
+      case "basicRare":
+        return imgBasicRareBall;
+      case "rare":
+        return imgRareBall;
+      case "elite":
+        return imgEliteBall;
+      case "legend":
+        return imgLegendBall;
+    }
+  }, [type]);
+
+  const rotationClassName = `${random(0, 1) ? "-" : ""}rotate-${random(0, 180)}`;
+
+  const size = random(40, 100);
+
+  const delay = random(0, 3000);
+
+  const left = random(0, window.innerWidth);
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsVisible(true);
+    }, delay);
+  }, [delay]);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ position: "absolute", left, top: -200, translateY: 0 }}
+          animate={{
+            position: "absolute",
+            left,
+            translateY: `${window.innerHeight + 200 + size}px`,
+            rotate: random(-360, 360),
+            transitionEnd: {
+              display: "none",
+            },
+          }}
+          transition={{ ease: "easeIn", duration: 1 }}
+        >
+          <Image
+            className={rotationClassName}
+            src={img}
+            width={size}
+            height={size}
+            alt="poke ball"
+          />
         </motion.div>
       )}
     </AnimatePresence>

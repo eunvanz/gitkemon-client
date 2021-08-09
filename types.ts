@@ -168,3 +168,5 @@ export interface Payback {
   legendPokeBalls: number;
   paybackDateString: string;
 }
+
+export type PokeBallType = "basic" | "basicRare" | "rare" | "elite" | "legend";

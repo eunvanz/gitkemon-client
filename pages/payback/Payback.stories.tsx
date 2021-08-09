@@ -1,4 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import mockPayback from "../../api/mocks/payback";
 import mockUsers from "../../api/mocks/user";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
 import Payback from "./Payback.view";
@@ -14,4 +15,13 @@ export default {
 
 const Template: ComponentStory<typeof Payback> = (args) => <Payback {...args} />;
 
-export const 기본 = createStoryComponent(Template);
+export const 보상전 = createStoryComponent(Template);
+
+export const 로딩중 = createStoryComponent(Template, {
+  availableContributions: undefined,
+  isLoading: true,
+});
+
+export const 보상후 = createStoryComponent(Template, {
+  paybackResult: mockPayback.payback,
+});

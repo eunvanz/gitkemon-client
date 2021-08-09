@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { AnimatePresence, motion } from "framer-motion";
-import { random } from "lodash-es";
+import random from "lodash/random";
 import Image from "next/image";
 import CountUp from "react-countup";
 import Button from "../../components/Button";
@@ -86,14 +87,23 @@ const Payback: React.FC<PaybackProps> = ({
       <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-xl text-gray-600">
+            <h2 className="text-center text-xl text-gray-600">
               You have made{" "}
               <span className="text-green-600 font-extrabold">
-                <CountUp
-                  end={availableContributions || 0}
-                  duration={1}
-                  formattingFn={(number) => number.toLocaleString()}
-                />
+                {isGettingPayback ? (
+                  <CountUp
+                    start={availableContributions}
+                    end={0}
+                    duration={1}
+                    formattingFn={(number) => number.toLocaleString()}
+                  />
+                ) : (
+                  <CountUp
+                    end={isLoading ? 0 : availableContributions || 0}
+                    duration={1}
+                    formattingFn={(number) => number.toLocaleString()}
+                  />
+                )}
               </span>{" "}
               contributions
             </h2>
@@ -127,7 +137,7 @@ const Payback: React.FC<PaybackProps> = ({
       <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 mb-1 text-center text-3xl text-green-600">Hooray!!</h2>
+            <h2 className="mb-1 text-center text-3xl text-green-600">Hooray!!</h2>
             <h2 className="text-center text-xl text-gray-600">You have got</h2>
             {renderRewardItems()}
           </div>
@@ -241,13 +251,14 @@ const RainItem = ({ type }: RainItemProps) => {
     }, delay);
   }, [delay]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isVisible && (
         <motion.div
           initial={{ position: "absolute", left, top: -200, translateY: 0 }}
           animate={{
             position: "absolute",
+            zIndex: 999999,
             left,
             translateY: `${window.innerHeight + 200 + size}px`,
             rotate: random(-360, 360),
@@ -266,7 +277,8 @@ const RainItem = ({ type }: RainItemProps) => {
           />
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };
 

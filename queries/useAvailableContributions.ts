@@ -7,6 +7,8 @@ const useAvailableContributions = (options?: UseQueryOptions<number>) => {
     QUERY_KEY.AVAILABLE_CONTRIBUTIONS,
     api.getAvailableContributions,
     {
+      cacheTime: 0,
+      staleTime: 0,
       ...options,
     },
   );

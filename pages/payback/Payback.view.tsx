@@ -59,24 +59,22 @@ const Payback: React.FC<PaybackProps> = ({
     if (!paybackResult) {
       return null;
     }
-    return (
-      <>
-        {[
-          "basic" as const,
-          "basicRare" as const,
-          "rare" as const,
-          "elite" as const,
-          "legend" as const,
-        ].map((type) => {
-          const amount = paybackResult[
-            `${type}PokeBalls` as keyof typeof paybackResult
-          ] as number;
-          return Array.from({ length: Math.min(amount, 100) }).map((_, index) => (
-            <RainItem key={index} type={type} />
-          ));
-        })}
-      </>
-    );
+
+    const result = [
+      "basic" as const,
+      "basicRare" as const,
+      "rare" as const,
+      "elite" as const,
+      "legend" as const,
+    ].map((type) => {
+      const amount = paybackResult[
+        `${type}PokeBalls` as keyof typeof paybackResult
+      ] as number;
+      return Array.from({ length: Math.min(amount, 100) }).map((_, index) => (
+        <RainItem key={index} type={type} />
+      ));
+    });
+    return result;
   }, [paybackResult]);
 
   if (!paybackResult) {
@@ -111,7 +109,7 @@ const Payback: React.FC<PaybackProps> = ({
             >
               {!isLoading
                 ? `Since ${dayjs(user!.lastPaybackDate).format("lll")}`
-                : "Calculating..."}
+                : "Loading..."}
             </h3>
           </div>
           <div className="mt-8 space-y-6">
@@ -143,6 +141,15 @@ const Payback: React.FC<PaybackProps> = ({
       <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
+            {paybackResult.daysInARow > 1 && (
+              <Typography className="text-center mb-1" as="p" color="hint">
+                Payback{" "}
+                <Typography color="primary">
+                  {paybackResult.daysInARow.toLocaleString()}
+                </Typography>{" "}
+                days in a row
+              </Typography>
+            )}
             <h2 className="mb-1 text-center text-3xl text-green-600">Hooray!!</h2>
             <h2 className="text-center text-xl text-gray-600">You have got</h2>
             {renderRewardItems()}
@@ -215,48 +222,39 @@ interface RainItemProps {
 }
 
 const RainItem = ({ type }: RainItemProps) => {
-  const rotationClassName = `${random(0, 1) ? "-" : ""}rotate-${random(0, 180)}`;
+  const rotationClassName = useMemo(
+    () => `${random(0, 1) ? "-" : ""}rotate-${random(0, 180)}`,
+    [],
+  );
 
-  const size = random(20, 80);
+  const size = useMemo(() => random(20, 80), []);
 
-  const delay = random(0, 3000);
+  const delay = useMemo(() => random(0, 3000), []);
 
-  const left = random(0, window.innerWidth - size);
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsVisible(true);
-    }, delay);
-  }, [delay]);
+  const left = useMemo(() => random(0, window.innerWidth - size), [size]);
 
   return createPortal(
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ position: "absolute", left, top: -200, translateY: 0 }}
-          animate={{
-            position: "absolute",
-            zIndex: 999999,
-            left,
-            translateY: `${window.innerHeight + 200 + size}px`,
-            rotate: random(-360, 360),
-            transitionEnd: {
-              display: "none",
-            },
-          }}
-          transition={{ ease: "easeIn", duration: 1 }}
-        >
-          <PokeBallImage
-            className={rotationClassName}
-            type={type}
-            width={size}
-            height={size}
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>,
+    <motion.div
+      initial={{ position: "absolute", left, top: -size, translateY: 0 }}
+      animate={{
+        position: "absolute",
+        zIndex: 999999,
+        left,
+        translateY: `${window.innerHeight + size}px`,
+        rotate: random(-360, 360),
+        transitionEnd: {
+          display: "none",
+        },
+      }}
+      transition={{ ease: "easeIn", duration: 1, delay: delay / 1000 }}
+    >
+      <PokeBallImage
+        className={rotationClassName}
+        type={type}
+        width={size}
+        height={size}
+      />
+    </motion.div>,
     document.body,
   );
 };

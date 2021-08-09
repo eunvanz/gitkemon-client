@@ -6,16 +6,11 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { AnimatePresence, motion } from "framer-motion";
 import random from "lodash/random";
-import Image from "next/image";
 import CountUp from "react-countup";
 import Button from "../../components/Button";
+import PokeBallImage from "../../components/PokeBallImage";
 import Typography from "../../components/Typography";
 import { Payback as PaybackType, PokeBallType, User } from "../../types";
-import imgBasicRareBall from "../../images/pokeball-basic-rare.png";
-import imgBasicBall from "../../images/pokeball-basic.png";
-import imgEliteBall from "../../images/pokeball-elite.png";
-import imgLegendBall from "../../images/pokeball-legend.png";
-import imgRareBall from "../../images/pokeball-rare.png";
 
 dayjs.extend(localizedFormat);
 
@@ -94,7 +89,7 @@ const Payback: React.FC<PaybackProps> = ({
                   <CountUp
                     start={availableContributions}
                     end={0}
-                    duration={1}
+                    duration={0.5}
                     formattingFn={(number) => number.toLocaleString()}
                   />
                 ) : (
@@ -165,21 +160,6 @@ interface RewardItemProps {
 }
 
 const RewardItem = ({ type, amount, delay }: RewardItemProps) => {
-  const img = useMemo(() => {
-    switch (type) {
-      case "basic":
-        return imgBasicBall;
-      case "basicRare":
-        return imgBasicRareBall;
-      case "rare":
-        return imgRareBall;
-      case "elite":
-        return imgEliteBall;
-      case "legend":
-        return imgLegendBall;
-    }
-  }, [type]);
-
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -194,7 +174,7 @@ const RewardItem = ({ type, amount, delay }: RewardItemProps) => {
           animate={{ opacity: 1, height: 32 }}
         >
           <div className="flex justify-center items-center mt-3">
-            <Image src={img} alt="basic ball" width={30} height={30} />
+            <PokeBallImage type={type} width={30} height={30} />
             <XIcon className="mx-2 w-4 h-4" />
             <Typography
               className="w-14 text-right"
@@ -220,21 +200,6 @@ interface RainItemProps {
 }
 
 const RainItem = ({ type }: RainItemProps) => {
-  const img = useMemo(() => {
-    switch (type) {
-      case "basic":
-        return imgBasicBall;
-      case "basicRare":
-        return imgBasicRareBall;
-      case "rare":
-        return imgRareBall;
-      case "elite":
-        return imgEliteBall;
-      case "legend":
-        return imgLegendBall;
-    }
-  }, [type]);
-
   const rotationClassName = `${random(0, 1) ? "-" : ""}rotate-${random(0, 180)}`;
 
   const size = random(40, 100);
@@ -268,12 +233,11 @@ const RainItem = ({ type }: RainItemProps) => {
           }}
           transition={{ ease: "easeIn", duration: 1 }}
         >
-          <Image
+          <PokeBallImage
             className={rotationClassName}
-            src={img}
+            type={type}
             width={size}
             height={size}
-            alt="poke ball"
           />
         </motion.div>
       )}

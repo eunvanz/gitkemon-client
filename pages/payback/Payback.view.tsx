@@ -124,7 +124,7 @@ const Payback: React.FC<PaybackProps> = ({
         <div className="max-w-md w-full space-y-8">
           <div>
             <h2 className="text-center text-xl text-gray-600">
-              You have made{" "}
+              You&apos;ve made{" "}
               <span className="text-green-600 font-extrabold">
                 {isGettingPayback ? (
                   <CountUp
@@ -299,7 +299,7 @@ interface BonusItemProps {
 const BonusItem = ({ title, amount }: BonusItemProps) => {
   return (
     <div className="text-center w-full">
-      🏆 {title} <XIcon className="w-3 inline" />{" "}
+      🎉 {title} <XIcon className="w-3 inline" />{" "}
       <Typography color="primary">{amount}</Typography>
     </div>
   );
@@ -328,7 +328,7 @@ const BonusSection: React.FC<BonusSectionProps> = ({ delay, children }) => {
             <div className="text-center">
               <div className="ml-3">
                 <h3 className={`text-sm font-medium text-green-800`}>
-                  🎉 You&apos;ve got some special bonus!
+                  💡 It&apos;s including some special bonus!
                 </h3>
                 <div className={`text-green-700`}>{children}</div>
               </div>

@@ -143,11 +143,10 @@ const Payback: React.FC<PaybackProps> = ({
           <div>
             {paybackResult.daysInARow > 1 && (
               <Typography className="text-center mb-1" as="p" color="hint">
-                Payback{" "}
                 <Typography color="primary">
                   {paybackResult.daysInARow.toLocaleString()}
                 </Typography>{" "}
-                days in a row
+                DAYS IN A ROW
               </Typography>
             )}
             <h2 className="mb-1 text-center text-3xl text-green-600">Hooray!!</h2>

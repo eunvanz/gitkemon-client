@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import cx from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { PokeBallType } from "../../types";
@@ -30,7 +31,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
       case "basic":
         return {
           title: "BASIC",
-          description: "It's a pretty common Poké Ball.",
+          description: "It's a pretty common Pokéball.",
         };
       case "basicRare":
         return {
@@ -40,17 +41,17 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
       case "rare":
         return {
           title: "RARE",
-          description: "A Poké Ball that can catch rare Pokémon.",
+          description: "A Pokéball that can catch rare Pokémon.",
         };
       case "elite":
         return {
           title: "ELITE",
-          description: "A Poké Ball that can catch very powerful Pokémon.",
+          description: "A Pokéball that can catch very powerful Pokémon.",
         };
       case "legend":
         return {
           title: "LEGEND",
-          description: "A Poké Ball that can catch Legendary Pokémon.",
+          description: "A Pokéball that can catch Legendary Pokémon.",
         };
     }
   }, [activePokeBall.type]);
@@ -59,7 +60,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="mb-10">
         <Typography as="h2" size="2xl">
-          Select a Poké Ball
+          Select a Pokéball
         </Typography>
       </div>
       <div className="relative w-full">
@@ -89,12 +90,25 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
           ))}
         </Swiper>
       </div>
-      <div className="text-center p-4 h-20 mt-5">
-        <Typography className="block mb-2" color="primary" as="h2" size="2xl">
-          {itemInfo.title}
-        </Typography>
-        <Typography className="text-center">{itemInfo.description}</Typography>
-      </div>
+      <AnimatePresence>
+        <motion.div
+          key={activeIndex}
+          className="text-center p-4 h-20 mt-5"
+          initial={{ opacity: 0, position: "absolute" }}
+          animate={{ opacity: 1, position: "relative" }}
+        >
+          <Typography className="block mb-2" color="primary" as="h2" size="2xl">
+            {itemInfo.title}
+          </Typography>
+          <Typography className="text-center">{itemInfo.description}</Typography>
+          <Typography as="p" color="hint" className="mt-3">
+            Quantity:{" "}
+            <Typography color="primary">
+              {activePokeBall.amount.toLocaleString()}
+            </Typography>
+          </Typography>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

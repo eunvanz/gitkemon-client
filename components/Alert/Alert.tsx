@@ -42,9 +42,11 @@ const Alert: React.FC<AlertProps> = ({ type, title, hasIcon, children }) => {
   return (
     <div className={`rounded-md bg-${color}-50 p-4`}>
       <div className="flex">
-        <div className="flex-shrink-0">
-          {hasIcon && <Icon className={`h-5 w-5 text-${color}-400`} aria-hidden="true" />}
-        </div>
+        {hasIcon && (
+          <div className="flex-shrink-0">
+            <Icon className={`h-5 w-5 text-${color}-400`} aria-hidden="true" />
+          </div>
+        )}
         <div className="ml-3">
           {title && <h3 className={`text-sm font-medium text-${color}-800`}>{title}</h3>}
           <div className={`text-${color}-700`}>{children}</div>

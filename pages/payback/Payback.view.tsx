@@ -7,6 +7,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { AnimatePresence, motion } from "framer-motion";
 import random from "lodash/random";
 import CountUp from "react-countup";
+import Alert from "../../components/Alert";
 import Button from "../../components/Button";
 import PokeBallCount from "../../components/PokeBallCount";
 import PokeBallImage from "../../components/PokeBallImage";
@@ -40,47 +41,56 @@ const Payback: React.FC<PaybackProps> = ({
       return null;
     }
     let itemsCnt = 0;
-    const result = [
+    const result = [];
+    [
       "basic" as const,
       "basicRare" as const,
       "rare" as const,
       "elite" as const,
       "legend" as const,
-    ].map((type) => {
+    ].forEach((type) => {
       const amount = paybackResult[
         `${type}PokeBalls` as keyof typeof paybackResult
       ] as number;
       amount && itemsCnt++;
-      return amount > 0 ? (
-        <RewardItem type={type} amount={amount} delay={500 * itemsCnt} />
-      ) : null;
+      if (amount) {
+        result.push(<RewardItem type={type} amount={amount} delay={500 * itemsCnt} />);
+      }
     });
 
+    const bonusItems = [];
     if (paybackResult.hasContributionsCountReward) {
       const { totalContributions, contributions } = paybackResult;
       const beforeTotalContributions = totalContributions - contributions;
-      [3, 10, 200, 500].forEach((commits) => {
+      [3, 10, 200, 500].forEach((contributions) => {
         const bonusCnt = getMultiplesCountBetween(
-          commits,
-          beforeTotalContributions,
+          contributions,
+          beforeTotalContributions + 1,
           totalContributions,
         );
         if (bonusCnt) {
-          result.push(
-            <BonusItem>
-              You&apos;ve got{" "}
-              <Typography color="primary" className="mx-1">
-                {bonusCnt}
-              </Typography>{" "}
-              of every{" "}
-              <Typography color="green" className="mx-1">
-                {commits}
-              </Typography>{" "}
-              commits bonus!
-            </BonusItem>,
+          bonusItems.push(
+            <BonusItem
+              title={`Every ${contributions} contributions bonus`}
+              amount={bonusCnt}
+            />,
           );
         }
       });
+    }
+    if (paybackResult.hasDaysInARowReward) {
+      bonusItems.push(
+        <BonusItem
+          title={`${paybackResult.daysInARow} days in a row payback bonus`}
+          amount={1}
+        />,
+      );
+    }
+
+    if (bonusItems.length) {
+      result.push(
+        <BonusSection delay={500 + result.length * 500}>{bonusItems}</BonusSection>,
+      );
     }
 
     return result;
@@ -181,13 +191,20 @@ const Payback: React.FC<PaybackProps> = ({
               </Typography>
             )}
             <h2 className="mb-1 text-center text-3xl text-green-600">Hooray!!</h2>
-            <h2 className="text-center text-xl text-gray-600">You&apos;ve got</h2>
+            <h2 className="text-center text-2xl text-gray-600">You&apos;ve got</h2>
             {renderRewardItems()}
           </div>
           <div className="mt-8 space-y-6">
             <Button onClick={onPayback} className="w-full">
               Go to catch Pokémons
             </Button>
+          </div>
+          <div className="text-center">
+            <Typography color="hint" weight="light">
+              You&apos;ve made{" "}
+              <Typography color="green">{paybackResult.totalContributions}</Typography>{" "}
+              contributions since {dayjs(user!.contributionBaseDate).format("LLL")}
+            </Typography>
           </div>
           <div className="text-center">
             <a
@@ -275,14 +292,51 @@ const RainItem = ({ type }: RainItemProps) => {
 };
 
 interface BonusItemProps {
-  children: React.ReactNode;
+  amount: number;
+  title: string;
 }
 
-const BonusItem = ({ children }: BonusItemProps) => {
+const BonusItem = ({ title, amount }: BonusItemProps) => {
   return (
-    <div className="flex justify-center items-center">
-      <CheckIcon className="text-green-600 w-6 mr-2" /> {children}
+    <div className="text-center w-full">
+      🏆 {title} <XIcon className="w-3 inline" />{" "}
+      <Typography color="primary">{amount}</Typography>
     </div>
+  );
+};
+
+interface BonusSectionProps {
+  delay: number;
+}
+
+const BonusSection: React.FC<BonusSectionProps> = ({ delay, children }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), delay);
+  }, [delay]);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+        >
+          <div className={`rounded-md bg-green-50 p-4`}>
+            <div className="text-center">
+              <div className="ml-3">
+                <h3 className={`text-sm font-medium text-green-800`}>
+                  🎉 You&apos;ve got some special bonus!
+                </h3>
+                <div className={`text-green-700`}>{children}</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

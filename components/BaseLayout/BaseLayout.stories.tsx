@@ -20,3 +20,8 @@ export const 로그아웃 = createStoryComponent(Template);
 export const 로그인 = createStoryComponent(Template, {
   user: mockUsers.user,
 });
+
+export const 로그인_컨트리뷰션있음 = createStoryComponent(Template, {
+  user: mockUsers.user,
+  availableContributions: 200,
+});

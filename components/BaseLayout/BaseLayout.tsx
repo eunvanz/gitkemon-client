@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import ROUTES from "../../paths";
 import { User } from "../../types";
 import DropDownMenu from "../DropDownMenu";
+import NewBadge from "../NewBadge";
 
 interface NavigationItem {
   name: string;
@@ -37,9 +38,15 @@ export interface BaseLayoutProps {
   children: ReactNode;
   user?: User;
   onSignOut: VoidFunction;
+  availableContributions?: number;
 }
 
-const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) => {
+const BaseLayout: NextPage<BaseLayoutProps> = ({
+  children,
+  user,
+  onSignOut,
+  availableContributions,
+}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const router = useRouter();
@@ -77,6 +84,10 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
       },
     ];
   }, []);
+
+  const BadgeWrapper = useMemo(() => {
+    return availableContributions ? NewBadge : "div";
+  }, [availableContributions]);
 
   return (
     <div className="h-screen flex overflow-hidden bg-white">
@@ -192,13 +203,15 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({ children, user, onSignOut }) =>
             <div className="flex-1 flex"></div>
             {user ? (
               <div className="ml-4 flex items-center md:ml-6">
-                <button
-                  className="bg-gray-800 p-1 rounded-full text-gray-200 hover:text-gray-400"
-                  onClick={() => router.push(ROUTES.PAYBACK)}
-                >
-                  <span className="sr-only">Payback</span>
-                  <FontAwesomeIcon icon={faReceipt} size="lg" aria-hidden="true" />
-                </button>
+                <BadgeWrapper>
+                  <button
+                    className="bg-gray-800 p-1 rounded-full text-gray-200 hover:text-gray-400"
+                    onClick={() => router.push(ROUTES.PAYBACK)}
+                  >
+                    <span className="sr-only">Payback</span>
+                    <FontAwesomeIcon icon={faReceipt} size="lg" aria-hidden="true" />
+                  </button>
+                </BadgeWrapper>
 
                 <DropDownMenu
                   className="ml-3 relative"

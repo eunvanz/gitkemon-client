@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { CheckIcon, RefreshIcon, XIcon } from "@heroicons/react/outline";
+import { RefreshIcon, XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { AnimatePresence, motion } from "framer-motion";
 import random from "lodash/random";
 import CountUp from "react-countup";
-import Alert from "../../components/Alert";
 import Button from "../../components/Button";
 import PokeBallCount from "../../components/PokeBallCount";
 import PokeBallImage from "../../components/PokeBallImage";
@@ -64,7 +63,7 @@ const Payback: React.FC<PaybackProps> = ({
     if (paybackResult.hasContributionsCountReward) {
       const { totalContributions, contributions } = paybackResult;
       const beforeTotalContributions = totalContributions - contributions;
-      [3, 10, 200, 500].forEach((contributions) => {
+      [3, 20, 500, 1000].forEach((contributions) => {
         const bonusCnt = getMultiplesCountBetween(
           contributions,
           beforeTotalContributions + 1,

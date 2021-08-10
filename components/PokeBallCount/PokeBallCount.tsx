@@ -23,7 +23,7 @@ const PokeBallCount: React.FC<PokeBallCountProps> = ({
       <PokeBallImage type={type} width={30} height={30} />
       <XIcon className="mx-2 w-4 h-4" />
       <Typography
-        className={cx("text-right", { "w-20": hasStaticWidth })}
+        className={cx("text-right", { "w-14": hasStaticWidth })}
         size="2xl"
         color="primary"
         weight="bold"

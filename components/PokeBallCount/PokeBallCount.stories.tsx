@@ -7,7 +7,7 @@ export default {
   component: PokeBallCount,
   args: {
     type: "basic",
-    amount: 1984,
+    amount: 19184,
   },
 } as ComponentMeta<typeof PokeBallCount>;
 

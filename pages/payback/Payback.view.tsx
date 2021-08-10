@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import random from "lodash/random";
 import CountUp from "react-countup";
 import Button from "../../components/Button";
+import PokeBallCount from "../../components/PokeBallCount";
 import PokeBallImage from "../../components/PokeBallImage";
 import Typography from "../../components/Typography";
 import { Payback as PaybackType, PokeBallType, User } from "../../types";
@@ -194,22 +195,7 @@ const RewardItem = ({ type, amount, delay }: RewardItemProps) => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 32 }}
         >
-          <div className="flex justify-center items-center mt-3">
-            <PokeBallImage type={type} width={30} height={30} />
-            <XIcon className="mx-2 w-4 h-4" />
-            <Typography
-              className="w-14 text-right"
-              size="2xl"
-              color="primary"
-              weight="bold"
-            >
-              <CountUp
-                end={amount}
-                duration={1}
-                formattingFn={(n) => n.toLocaleString()}
-              />
-            </Typography>
-          </div>
+          <PokeBallCount type={type} amount={amount} hasStaticWidth hasToCountUp />
         </motion.div>
       )}
     </AnimatePresence>

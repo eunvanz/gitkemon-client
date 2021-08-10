@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import api from "../../api";
+import ROUTES from "../../paths";
 import useAvailableContributions from "../../queries/useAvailableContributions";
 import useUserQuery from "../../queries/useUserQuery";
 import { userState } from "../../state/user";
@@ -9,6 +11,8 @@ import { PaybackProps } from "./Payback.view";
 
 const usePaybackProps: () => PaybackProps = () => {
   const user = useRecoilValue(userState);
+
+  const router = useRouter();
 
   const { refetch: refetchUser } = useUserQuery();
 
@@ -44,6 +48,10 @@ const usePaybackProps: () => PaybackProps = () => {
     setPaybackResult(undefined);
   }, [refetchAvailableContributions, refetchUser]);
 
+  const onGetPokemons = useCallback(() => {
+    router.push(ROUTES.CHOOSE_POKE_BALL);
+  }, [router]);
+
   return {
     user: user,
     isLoading: !user || isAvailableContributionsFetching,
@@ -52,6 +60,7 @@ const usePaybackProps: () => PaybackProps = () => {
     isGettingPayback,
     paybackResult,
     onRefresh,
+    onGetPokemons,
   };
 };
 

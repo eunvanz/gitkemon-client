@@ -57,12 +57,12 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="flex flex-1 w-full items-center justify-center">
+      <div className="mb-10">
         <Typography as="h2" size="2xl">
           Select a Poké Ball
         </Typography>
       </div>
-      <div className="flex flex-1 w-full items-center justify-center relative">
+      <div className="relative w-full">
         <div className={cx("absolute md:left-1/4 left-10 z-10", styles.left)}>
           <button onClick={() => swiperRef.current?.slidePrev()}>
             <ChevronDoubleLeftIcon className="w-5 h-5" />
@@ -89,7 +89,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
           ))}
         </Swiper>
       </div>
-      <div className="flex-1 flex-col w-full text-center p-4">
+      <div className="text-center p-4 h-20 mt-5">
         <Typography className="block mb-2" color="primary" as="h2" size="2xl">
           {itemInfo.title}
         </Typography>

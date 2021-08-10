@@ -1,0 +1,36 @@
+.left {
+  animation: leftBounce 1s infinite;
+}
+
+.right {
+  animation: rightBounce 1s infinite;
+}
+
+.left,
+.right {
+  top: calc(50% - 0.625rem);
+}
+
+@keyframes leftBounce {
+  0%,
+  100% {
+    transform: translateX(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes rightBounce {
+  0%,
+  100% {
+    transform: translateX(25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}

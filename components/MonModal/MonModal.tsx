@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { RefreshIcon } from "@heroicons/react/outline";
-import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { CardMon } from "../../types";
 import BaseModal, { BaseModalProps } from "../BaseModal";

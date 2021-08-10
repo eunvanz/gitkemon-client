@@ -36,3 +36,7 @@ const Template: ComponentStory<typeof SelectPokeBall> = (args) => (
 );
 
 export const 기본 = createStoryComponent(Template);
+
+export const 하나 = createStoryComponent(Template, {
+  pokeBalls: [{ type: "basic", amount: 2412 }],
+});

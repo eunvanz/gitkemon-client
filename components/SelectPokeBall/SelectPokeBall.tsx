@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { PokeBallType } from "../../types";
+import Button from "../Button";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
 import "swiper/swiper.scss";
@@ -65,16 +66,20 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
         </Typography>
       </div>
       <div className="relative w-full">
-        <div className={cx("absolute md:left-1/4 left-10 z-10", styles.left)}>
-          <button onClick={() => swiperRef.current?.slidePrev()}>
-            <ChevronDoubleLeftIcon className="w-5 h-5" />
-          </button>
-        </div>
-        <div className={cx("absolute md:right-1/4 right-10 z-10", styles.right)}>
-          <button onClick={() => swiperRef.current?.slideNext()}>
-            <ChevronDoubleRightIcon className="w-5 h-5" />
-          </button>
-        </div>
+        {pokeBalls.length > 1 && (
+          <>
+            <div className={cx("absolute md:left-1/4 left-10 z-10", styles.left)}>
+              <button onClick={() => swiperRef.current?.slidePrev()}>
+                <ChevronDoubleLeftIcon className="w-5 h-5 text-gray-400 hover:text-gray-600" />
+              </button>
+            </div>
+            <div className={cx("absolute md:right-1/4 right-10 z-10", styles.right)}>
+              <button onClick={() => swiperRef.current?.slideNext()}>
+                <ChevronDoubleRightIcon className="w-5 h-5 text-gray-400 hover:text-gray-600" />
+              </button>
+            </div>
+          </>
+        )}
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
@@ -82,7 +87,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
           onSlideChange={(e) => {
             setActiveIndex(e.realIndex);
           }}
-          loop
+          loop={pokeBalls.length > 1}
         >
           {pokeBalls.map((pokeBall) => (
             <SwiperSlide key={pokeBall.type}>
@@ -94,7 +99,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
       <AnimatePresence>
         <motion.div
           key={activeIndex}
-          className="text-center p-4 h-32 mt-5"
+          className="text-center p-4 h-40 mt-5"
           initial={{ opacity: 0, position: "absolute" }}
           animate={{ opacity: 1, position: "relative" }}
         >
@@ -110,6 +115,11 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
           </Typography>
         </motion.div>
       </AnimatePresence>
+      <div className="mt-4">
+        <Button color="primary" size="lg">
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

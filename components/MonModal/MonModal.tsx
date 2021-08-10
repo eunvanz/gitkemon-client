@@ -45,7 +45,7 @@ const MonModal: React.FC<MonModalProps> = ({
   const renderStat = useCallback(
     (props: { title: string; baseValue: number; addedValue?: number }) => {
       return (
-        <div className="mb-4">
+        <div className="mb-5">
           <div className="flex-shrink-0 mb-1">
             <Typography weight="bold" className="mr-2">
               {props.title}
@@ -112,7 +112,7 @@ const MonModal: React.FC<MonModalProps> = ({
       <div className="md:flex w-full">
         {renderImageSection()}
         {isFlipped ? (
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full h-96">
             {renderStat({
               title: "HP",
               baseValue: mon.hp,
@@ -139,7 +139,7 @@ const MonModal: React.FC<MonModalProps> = ({
             })}
           </div>
         ) : (
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full h-96">
             {renderProfile({
               title: "Name",
               content: <Typography>{mon.name}</Typography>,

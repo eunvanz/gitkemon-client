@@ -94,7 +94,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
       <AnimatePresence>
         <motion.div
           key={activeIndex}
-          className="text-center p-4 h-20 mt-5"
+          className="text-center p-4 h-32 mt-5"
           initial={{ opacity: 0, position: "absolute" }}
           animate={{ opacity: 1, position: "relative" }}
         >

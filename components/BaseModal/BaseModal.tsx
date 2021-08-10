@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { ExtendableHTMLProps } from "../../types";
+import styles from "./BaseModal.module.css";
 
 export interface BaseModalProps extends ExtendableHTMLProps<HTMLDivElement> {
   isOpen: boolean;
@@ -37,7 +38,12 @@ const BaseModal = ({
         onClose={onClose}
         {...restProps}
       >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div
+          className={cx(
+            "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0",
+            styles.perspective,
+          )}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -68,7 +74,7 @@ const BaseModal = ({
           >
             <div
               className={cx(
-                "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                "origin-center inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
                 className,
               )}
             >

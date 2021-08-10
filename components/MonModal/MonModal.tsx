@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { RefreshIcon } from "@heroicons/react/outline";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { CardMon } from "../../types";
 import BaseModal, { BaseModalProps } from "../BaseModal";
@@ -91,54 +92,9 @@ const MonModal: React.FC<MonModalProps> = ({
   );
 
   return (
-    <BaseModal
-      className="w-full md:max-w-xl"
-      footer={
-        <div className="text-right">
-          <Button
-            className="mr-1"
-            icon={RefreshIcon}
-            onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
-          >
-            Flip
-          </Button>
-          <Button color="transparent" onClick={restProps.onClose}>
-            Close
-          </Button>
-        </div>
-      }
-      {...restProps}
-    >
-      <div className="md:flex w-full">
-        {renderImageSection()}
-        {isFlipped ? (
-          <div className="flex flex-col w-full h-96">
-            {renderStat({
-              title: "HP",
-              baseValue: mon.hp,
-            })}
-            {renderStat({
-              title: "Attack",
-              baseValue: mon.attack,
-            })}
-            {renderStat({
-              title: "Defense",
-              baseValue: mon.defense,
-            })}
-            {renderStat({
-              title: "Special attack",
-              baseValue: mon.specialAttack,
-            })}
-            {renderStat({
-              title: "Special defense",
-              baseValue: mon.specialDefense,
-            })}
-            {renderStat({
-              title: "Speed",
-              baseValue: mon.speed,
-            })}
-          </div>
-        ) : (
+    <BaseMonModal mon={mon} onFlip={() => setIsFlipped(!isFlipped)} {...restProps}>
+      {!isFlipped ? (
+        <div className="md:flex w-full">
           <div className="flex flex-col w-full h-96">
             {renderProfile({
               title: "Name",
@@ -214,7 +170,84 @@ const MonModal: React.FC<MonModalProps> = ({
               <Typography>{mon.description}</Typography>
             </div>
           </div>
-        )}
+        </div>
+      ) : (
+        <div className="flex flex-col w-full h-96">
+          {renderStat({
+            title: "HP",
+            baseValue: mon.hp,
+          })}
+          {renderStat({
+            title: "Attack",
+            baseValue: mon.attack,
+          })}
+          {renderStat({
+            title: "Defense",
+            baseValue: mon.defense,
+          })}
+          {renderStat({
+            title: "Special attack",
+            baseValue: mon.specialAttack,
+          })}
+          {renderStat({
+            title: "Special defense",
+            baseValue: mon.specialDefense,
+          })}
+          {renderStat({
+            title: "Speed",
+            baseValue: mon.speed,
+          })}
+        </div>
+      )}
+    </BaseMonModal>
+  );
+};
+
+interface BaseMonModalProps extends MonModalProps {
+  onFlip: VoidFunction;
+  onClose: VoidFunction;
+}
+
+const BaseMonModal: React.FC<BaseMonModalProps> = ({
+  mon,
+  onFlip,
+  children,
+  ...restProps
+}) => {
+  return (
+    <BaseModal
+      className="w-full md:max-w-xl"
+      footer={
+        <div className="text-right">
+          <Button className="mr-1" icon={RefreshIcon} onClick={onFlip}>
+            Flip
+          </Button>
+          <Button color="transparent" onClick={restProps.onClose}>
+            Close
+          </Button>
+        </div>
+      }
+      {...restProps}
+    >
+      <div className="md:flex w-full">
+        <div className="flex flex-col mb-4 md:mx-0 md:mb-0 md:mr-8">
+          <div className="w-48 border border-dotted mb-1 mx-auto flex-shrink-0">
+            <Image
+              src={mon.image ? mon.image.imageUrl : ""}
+              alt={mon.name}
+              layout="fill"
+            />
+          </div>
+          <div className="text-center mb-1">
+            <Typography size="sm" color="hint">
+              Painting by{" "}
+              <Typography color="primary" weight="bold">
+                {mon.image?.designerName}
+              </Typography>
+            </Typography>
+          </div>
+        </div>
+        <div className="md:flex w-full">{children}</div>
       </div>
     </BaseModal>
   );

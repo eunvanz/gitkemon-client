@@ -24,24 +24,6 @@ const MonModal: React.FC<MonModalProps> = ({
 }) => {
   const [isFlipped, setIsFlipped] = useState(isInitialBack);
 
-  const renderImageSection = useCallback(() => {
-    return (
-      <div className="flex flex-col mb-4 md:mx-0 md:mb-0 md:mr-8">
-        <div className="w-48 border border-dotted mb-1 mx-auto flex-shrink-0">
-          <Image src={mon.image ? mon.image.imageUrl : ""} alt={mon.name} layout="fill" />
-        </div>
-        <div className="text-center mb-1">
-          <Typography size="sm" color="hint">
-            Painting by{" "}
-            <Typography color="primary" weight="bold">
-              {mon.image?.designerName}
-            </Typography>
-          </Typography>
-        </div>
-      </div>
-    );
-  }, [mon.image, mon.name]);
-
   const renderStat = useCallback(
     (props: { title: string; baseValue: number; addedValue?: number }) => {
       return (

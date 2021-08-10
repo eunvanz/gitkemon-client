@@ -35,12 +35,14 @@ const usePaybackProps: () => PaybackProps = () => {
     try {
       const result = await api.postPaybacks();
       setPaybackResult(result);
+      refetchAvailableContributions();
+      refetchUser();
     } catch (error) {
       // TODO:
     } finally {
       setIsGettingPayback(false);
     }
-  }, []);
+  }, [refetchAvailableContributions, refetchUser]);
 
   const onRefresh = useCallback(() => {
     refetchUser();

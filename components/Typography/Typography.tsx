@@ -4,7 +4,7 @@ import { colors } from "../../constants/styles";
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
-  color?: "primary" | "hint" | string;
+  color?: "primary" | "hint" | "green" | "black" | string;
   weight?:
     | "thin"
     | "extralight"
@@ -34,6 +34,8 @@ const Typography: React.FC<TypographyProps> = ({
         return "text-black";
       case "hint":
         return "text-gray-400";
+      case "green":
+        return "text-green-600";
       case undefined:
         return "text-gray-600";
       default:

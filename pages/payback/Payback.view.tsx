@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { RefreshIcon, XIcon } from "@heroicons/react/outline";
+import { CheckIcon, RefreshIcon, XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -11,6 +11,7 @@ import Button from "../../components/Button";
 import PokeBallCount from "../../components/PokeBallCount";
 import PokeBallImage from "../../components/PokeBallImage";
 import Typography from "../../components/Typography";
+import { getMultiplesCountBetween } from "../../helpers/commonHelpers";
 import { Payback as PaybackType, PokeBallType, User } from "../../types";
 
 dayjs.extend(localizedFormat);
@@ -39,7 +40,7 @@ const Payback: React.FC<PaybackProps> = ({
       return null;
     }
     let itemsCnt = 0;
-    return [
+    const result = [
       "basic" as const,
       "basicRare" as const,
       "rare" as const,
@@ -54,6 +55,35 @@ const Payback: React.FC<PaybackProps> = ({
         <RewardItem type={type} amount={amount} delay={500 * itemsCnt} />
       ) : null;
     });
+
+    if (paybackResult.hasContributionsCountReward) {
+      const { totalContributions, contributions } = paybackResult;
+      const beforeTotalContributions = totalContributions - contributions;
+      [3, 10, 200, 500].forEach((commits) => {
+        const bonusCnt = getMultiplesCountBetween(
+          commits,
+          beforeTotalContributions,
+          totalContributions,
+        );
+        if (bonusCnt) {
+          result.push(
+            <BonusItem>
+              You&apos;ve got{" "}
+              <Typography color="primary" className="mx-1">
+                {bonusCnt}
+              </Typography>{" "}
+              of every{" "}
+              <Typography color="green" className="mx-1">
+                {commits}
+              </Typography>{" "}
+              commits bonus!
+            </BonusItem>,
+          );
+        }
+      });
+    }
+
+    return result;
   }, [paybackResult]);
 
   const renderRainItems = useCallback(() => {
@@ -151,7 +181,7 @@ const Payback: React.FC<PaybackProps> = ({
               </Typography>
             )}
             <h2 className="mb-1 text-center text-3xl text-green-600">Hooray!!</h2>
-            <h2 className="text-center text-xl text-gray-600">You have got</h2>
+            <h2 className="text-center text-xl text-gray-600">You&apos;ve got</h2>
             {renderRewardItems()}
           </div>
           <div className="mt-8 space-y-6">
@@ -241,6 +271,18 @@ const RainItem = ({ type }: RainItemProps) => {
       />
     </motion.div>,
     document.body,
+  );
+};
+
+interface BonusItemProps {
+  children: React.ReactNode;
+}
+
+const BonusItem = ({ children }: BonusItemProps) => {
+  return (
+    <div className="flex justify-center items-center">
+      <CheckIcon className="text-green-600 w-6 mr-2" /> {children}
+    </div>
   );
 };
 

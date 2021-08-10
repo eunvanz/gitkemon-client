@@ -41,17 +41,18 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
       case "rare":
         return {
           title: "RARE",
-          description: "A Pokéball that can catch rare Pokémon.",
+          description: "A Pokéball that attracts rare Pokémon.",
         };
       case "elite":
         return {
           title: "ELITE",
-          description: "A Pokéball that can catch very powerful Pokémon.",
+          description:
+            "It is a Pokéball so strong that even a powerful Pokémon cannot escape.",
         };
       case "legend":
         return {
           title: "LEGEND",
-          description: "A Pokéball that can catch Legendary Pokémon.",
+          description: "It feels like catching a legendary Pokémon.",
         };
     }
   }, [activePokeBall.type]);

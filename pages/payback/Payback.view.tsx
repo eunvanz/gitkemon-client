@@ -112,7 +112,7 @@ const Payback: React.FC<PaybackProps> = ({
       const amount = paybackResult[
         `${type}PokeBalls` as keyof typeof paybackResult
       ] as number;
-      return Array.from({ length: Math.min(amount, 100) }).map((_, index) => (
+      return Array.from({ length: Math.min(amount, 500) }).map((_, index) => (
         <RainItem key={index} type={type} />
       ));
     });
@@ -241,7 +241,7 @@ const RewardItem = ({ type, amount, delay }: RewardItemProps) => {
       {isVisible && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 32 }}
+          animate={{ opacity: 1, height: "auto" }}
         >
           <PokeBallCount type={type} amount={amount} hasStaticWidth hasToCountUp />
         </motion.div>
@@ -260,7 +260,7 @@ const RainItem = ({ type }: RainItemProps) => {
     [],
   );
 
-  const size = useMemo(() => random(20, 80), []);
+  const size = useMemo(() => random(40, 80), []);
 
   const delay = useMemo(() => random(0, 3000), []);
 

@@ -10,7 +10,6 @@ const ROUTES = {
   ADMIN: "/admin",
   ADMIN__MON_IMAGES: "/admin/mon-images",
   PAYBACK: "/payback",
-  CHOOSE_POKE_BALL: "/choose-poke-balls",
 };
 
 export default ROUTES;

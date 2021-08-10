@@ -49,7 +49,7 @@ const usePaybackProps: () => PaybackProps = () => {
   }, [refetchAvailableContributions, refetchUser]);
 
   const onGetPokemons = useCallback(() => {
-    router.push(ROUTES.CHOOSE_POKE_BALL);
+    router.push(ROUTES.HUNT);
   }, [router]);
 
   return {

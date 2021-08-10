@@ -2,6 +2,7 @@ import { ReactNode, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import api from "../../api";
+import useAvailableContributions from "../../queries/useAvailableContributions";
 import { userState } from "../../state/user";
 import { User } from "../../types";
 import { BaseLayoutProps } from "./BaseLayout";
@@ -15,6 +16,8 @@ const useBaseLayoutProps: ({
 }) => BaseLayoutProps = ({ children, user: userProp }) => {
   const user = useRecoilValue(userState);
 
+  const { data: availableContributions } = useAvailableContributions();
+
   const router = useRouter();
 
   const onSignOut = useCallback(async () => {
@@ -26,6 +29,7 @@ const useBaseLayoutProps: ({
     user: user || userProp,
     children,
     onSignOut,
+    availableContributions,
   };
 };
 

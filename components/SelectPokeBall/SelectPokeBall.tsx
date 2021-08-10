@@ -116,7 +116,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
         </motion.div>
       </AnimatePresence>
       <div className="mt-4">
-        <Button color="primary" size="lg">
+        <Button color="primary" size="lg" className="md:w-96 w-60">
           Next
         </Button>
       </div>

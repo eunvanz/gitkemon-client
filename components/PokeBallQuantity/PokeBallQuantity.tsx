@@ -64,7 +64,10 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
     (e) => {
       if (e.y - startY > VALID_PULL_LENGTH) {
         // 던져지는 애니메이션
-        goToNextAnimStep();
+        setIsReleasable(false);
+        pokeBallContainerRef.current!.style.transitionTimingFunction = "ease-out";
+        pokeBallContainerRef.current!.style.transitionDuration = "0.5s";
+        pokeBallContainerRef.current!.style.transform = "translateY(-50vh)";
       } else {
         // 원상복구
         pokeBallContainerRef.current!.style.transitionDuration = "0.5s";
@@ -79,7 +82,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
       document.removeEventListener("mouseup", handleOnDragEnd);
       document.removeEventListener("touchend", handleOnDragEnd);
     },
-    [goToNextAnimStep, handleOnDrag],
+    [handleOnDrag],
   );
 
   const handleOnDragStart = useCallback(
@@ -161,7 +164,12 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
             Slide to add
           </Typography>
         </div>
-        <div ref={pokeBallContainerRef} className={cx({ [styles.sink]: animStep > 0 })}>
+        <div
+          ref={pokeBallContainerRef}
+          className={cx({
+            [styles.sink]: animStep > 0 && animStep < 3,
+          })}
+        >
           <span ref={pokeBallRef}>
             <PokeBallImage
               draggable={false}

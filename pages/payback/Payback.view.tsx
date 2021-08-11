@@ -171,13 +171,7 @@ const Payback: React.FC<PaybackProps> = ({
             </Button>
           </div>
           <div className="text-center">
-            <a
-              onClick={onRefresh}
-              className="text-gray-400 hover:text-gray-600 cursor-pointer text-sm"
-            >
-              <RefreshIcon className="h-3 w-3 inline mr-1" />
-              Refresh
-            </a>
+            <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
           </div>
         </div>
       </div>
@@ -212,19 +206,32 @@ const Payback: React.FC<PaybackProps> = ({
             </Typography>
           </div>
           <div className="text-center">
-            <a
-              onClick={onRefresh}
-              className="text-gray-400 hover:text-gray-600 cursor-pointer text-sm"
-            >
-              <RefreshIcon className="h-3 w-3 inline mr-1" />
-              Refresh
-            </a>
+            <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
           </div>
         </div>
         {renderRainItems()}
       </div>
     );
   }
+};
+
+interface RefreshButtonProps {
+  onRefresh: VoidFunction;
+  isRefreshing: boolean;
+}
+
+const RefreshButton = ({ onRefresh, isRefreshing }: RefreshButtonProps) => {
+  return (
+    <a
+      onClick={onRefresh}
+      className={cx("h-3 w-3 inline mr-1 text-gray-400 hover:text-gray-600")}
+    >
+      <RefreshIcon
+        className={cx("h-3 w-3 inline mr-1", { "animate-spin": isRefreshing })}
+      />
+      Refresh
+    </a>
+  );
 };
 
 interface RewardItemProps {

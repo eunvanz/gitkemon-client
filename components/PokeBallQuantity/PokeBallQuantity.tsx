@@ -91,6 +91,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
       pokeBallContainerRef.current!.style.transitionDuration = "0s";
       titleRef.current!.style.transitionDuration = "0s";
       pullToReadyRef.current!.style.transitionDuration = "0s";
+      quantityRef.current!.style.transitionDuration = "0s";
       document.addEventListener("mousemove", handleOnDrag);
       document.addEventListener("touchmove", handleOnDrag);
       document.addEventListener("mouseup", handleOnDragEnd);

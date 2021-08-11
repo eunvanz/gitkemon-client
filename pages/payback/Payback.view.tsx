@@ -72,6 +72,7 @@ const Payback: React.FC<PaybackProps> = ({
         if (bonusCnt) {
           bonusItems.push(
             <BonusItem
+              key={contributions}
               title={`Every ${contributions} contributions bonus`}
               amount={bonusCnt}
             />,
@@ -82,6 +83,7 @@ const Payback: React.FC<PaybackProps> = ({
     if (paybackResult.hasDaysInARowReward) {
       bonusItems.push(
         <BonusItem
+          key="daysInARow"
           title={`${paybackResult.daysInARow} days in a row payback bonus`}
           amount={1}
         />,
@@ -90,7 +92,9 @@ const Payback: React.FC<PaybackProps> = ({
 
     if (bonusItems.length) {
       result.push(
-        <BonusSection delay={500 + result.length * 500}>{bonusItems}</BonusSection>,
+        <BonusSection key="bonusInfo" delay={500 + result.length * 500}>
+          {bonusItems}
+        </BonusSection>,
       );
     }
 

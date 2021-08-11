@@ -1,0 +1,37 @@
+.ballContainer {
+  height: 116px;
+}
+
+.appear {
+  transition: opacity 0.5s linear;
+  opacity: 1;
+}
+
+.sink {
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(25vh);
+}
+
+.nudge {
+  animation: rightBounce 1s infinite;
+}
+
+@keyframes rightBounce {
+  0%,
+  100% {
+    transform: translateX(25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.placeholder {
+  height: 218px;
+}
+
+.pokeBall {
+  transition: transform 0.2s;
+}

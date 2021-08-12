@@ -25,3 +25,9 @@ export const getMultiplesCountBetween = (x: number, n: number, m: number) => {
   }
   return cnt;
 };
+
+export function assertNotEmpty(value: any, message?: string): asserts value {
+  if (value === null || value === undefined) {
+    throw new Error(message || "Assertion Error: Empty Value");
+  }
+}

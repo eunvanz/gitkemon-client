@@ -43,6 +43,16 @@ const user: User = {
     created_at: "2016-02-20T08:30:27Z",
     updated_at: "2021-07-24T17:42:24Z",
   },
+  __pokeBall__: {
+    createdAt: "2021-08-08T17:32:37.163Z",
+    updatedAt: "2021-08-12T01:05:02.000Z",
+    id: 74,
+    basicPokeBalls: 706,
+    basicRarePokeBalls: 235,
+    rarePokeBalls: 70,
+    elitePokeBalls: 4,
+    legendPokeBalls: 2,
+  },
 };
 
 const mockUsers = {

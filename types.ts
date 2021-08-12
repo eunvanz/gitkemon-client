@@ -1,5 +1,4 @@
-import React, { ComponentType } from "react";
-import { NextPage } from "next";
+import React from "react";
 
 export interface User {
   id: string;
@@ -11,6 +10,18 @@ export interface User {
   accessToken: string;
   isActive: boolean;
   githubUser: GithubUser;
+  __pokeBall__?: PokeBall;
+}
+
+export interface PokeBall {
+  id: number;
+  basicPokeBalls: number;
+  basicRarePokeBalls: number;
+  rarePokeBalls: number;
+  elitePokeBalls: number;
+  legendPokeBalls: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface GithubUser {

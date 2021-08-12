@@ -1,5 +1,5 @@
-const colors = require('tailwindcss/colors')
-const defaultConfig = require('tailwindcss/defaultConfig')
+const colors = require("tailwindcss/colors");
+const defaultConfig = require("tailwindcss/defaultConfig");
 
 module.exports = {
   purge: [],
@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     fontSize: {
       ...defaultConfig.theme.fontSize,
-      'xxs': '.5rem'
+      xxs: ".5rem",
     },
     colors: {
       ...colors,
@@ -17,7 +17,8 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
+  plugins: [require("@tailwindcss/forms")],
+  corePlugins: {
+    ringWith: false,
+  },
 };

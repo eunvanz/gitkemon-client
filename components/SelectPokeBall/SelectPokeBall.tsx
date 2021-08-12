@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,9 +16,10 @@ export interface SelectPokeBallProps {
     type: PokeBallType;
     amount: number;
   }[];
+  onNext: (type: PokeBallType) => void;
 }
 
-const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
+const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const swiperRef = useRef<SwiperCore>();
@@ -57,6 +58,34 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
         };
     }
   }, [activePokeBall.type]);
+
+  const handleOnClickNext = useCallback(() => {
+    onNext(activePokeBall.type);
+  }, [activePokeBall.type, onNext]);
+
+  const handleOnKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft":
+          swiperRef.current?.slidePrev();
+          break;
+        case "ArrowRight":
+          swiperRef.current?.slideNext();
+          break;
+        case "Enter":
+          handleOnClickNext();
+          break;
+      }
+    },
+    [handleOnClickNext],
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleOnKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleOnKeyDown);
+    };
+  }, [handleOnKeyDown]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
@@ -116,7 +145,12 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls }) => {
         </motion.div>
       </AnimatePresence>
       <div className="mt-4">
-        <Button color="primary" size="lg" className="md:w-96 w-60">
+        <Button
+          color="primary"
+          size="lg"
+          className="md:w-96 w-60"
+          onClick={handleOnClickNext}
+        >
           Next
         </Button>
       </div>

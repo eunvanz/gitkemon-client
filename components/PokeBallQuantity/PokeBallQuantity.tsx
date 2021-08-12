@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from "@heroicons/react/solid";
 import cx from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
 import { PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
 import Slider from "../Slider/Slider";
@@ -76,7 +75,6 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
         quantityRef.current!.style.opacity = "1";
         pullToReadyRef.current!.style.opacity = "1";
       }
-      pokeBallRef.current!.style.transform = "scale(100%)";
       document.removeEventListener("mousemove", handleOnDrag);
       document.removeEventListener("touchmove", handleOnDrag);
       document.removeEventListener("mouseup", handleOnDragEnd);

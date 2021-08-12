@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from "@heroicons/react/solid";
 import cx from "classnames";
@@ -42,6 +42,10 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
   const pullToReadyRef = useRef<HTMLDivElement>(null);
 
   const [isReleasable, setIsReleasable] = useState(false);
+
+  const maxAmount = useMemo(() => {
+    return Math.min(pokeBall.amount, 12);
+  }, [pokeBall.amount]);
 
   const goToNextAnimStep = useCallback(() => {
     setAnimStep((animStep) => animStep + 1);
@@ -98,11 +102,27 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
     [handleOnDrag, handleOnDragEnd],
   );
 
+  const handleOnKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        if (amount < maxAmount) {
+          setAmount((amount) => amount + 1);
+        }
+      } else if (e.key === "ArrowLeft") {
+        if (amount > 1) {
+          setAmount((amount) => amount - 1);
+        }
+      }
+    },
+    [amount, maxAmount],
+  );
+
   useEffect(() => {
     setTimeout(goToNextAnimStep, 500);
     setTimeout(goToNextAnimStep, 1000);
     pokeBallRef.current?.addEventListener("mousedown", handleOnDragStart);
     pokeBallRef.current?.addEventListener("touchstart", handleOnDragStart);
+    window.addEventListener("keydown", handleOnKeyDown);
 
     return () => {
       document.removeEventListener("mousemove", handleOnDrag);
@@ -112,8 +132,15 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
       pokeBallRef.current?.removeEventListener("mousedown", handleOnDragStart);
       // eslint-disable-next-line
       pokeBallRef.current?.removeEventListener("touchstart", handleOnDragStart);
+      window.removeEventListener("keydown", handleOnKeyDown);
     };
-  }, [goToNextAnimStep, handleOnDrag, handleOnDragEnd, handleOnDragStart]);
+  }, [
+    goToNextAnimStep,
+    handleOnDrag,
+    handleOnDragEnd,
+    handleOnDragStart,
+    handleOnKeyDown,
+  ]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
@@ -152,7 +179,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
           </Typography>
           <Slider
             min={1}
-            max={Math.min(pokeBall.amount, 12)}
+            max={maxAmount}
             onChange={(value) => setAmount(value)}
             value={amount}
           />

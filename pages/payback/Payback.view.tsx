@@ -310,7 +310,7 @@ interface BonusItemProps {
 
 const BonusItem = ({ title, amount }: BonusItemProps) => {
   return (
-    <div className="text-center w-full">
+    <div className="text-center w-full mb-1">
       🏆 {title} <XIcon className="w-3 inline" />{" "}
       <Typography color="primary">{amount}</Typography>
     </div>

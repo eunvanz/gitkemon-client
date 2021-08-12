@@ -30,12 +30,12 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
         <div>
           <div className="flex-1 p-1">
             {mon.level && (
-              <div className="absolute left-2">
+              <div className="absolute left-1 top-0 sm:left-2 sm:top-1">
                 <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
               </div>
             )}
             {mon.potential && (
-              <div className="absolute right-2">
+              <div className="absolute right-1 top-0 sm:right-2 sm:top-1">
                 <PotentialBadge potential={mon.potential} />
               </div>
             )}

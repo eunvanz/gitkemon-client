@@ -122,7 +122,6 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
     setTimeout(goToNextAnimStep, 1000);
     pokeBallRef.current?.addEventListener("mousedown", handleOnDragStart);
     pokeBallRef.current?.addEventListener("touchstart", handleOnDragStart);
-    window.addEventListener("keydown", handleOnKeyDown);
 
     return () => {
       document.removeEventListener("mousemove", handleOnDrag);
@@ -132,15 +131,15 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
       pokeBallRef.current?.removeEventListener("mousedown", handleOnDragStart);
       // eslint-disable-next-line
       pokeBallRef.current?.removeEventListener("touchstart", handleOnDragStart);
+    };
+  }, [goToNextAnimStep, handleOnDrag, handleOnDragEnd, handleOnDragStart]);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleOnKeyDown);
+    return () => {
       window.removeEventListener("keydown", handleOnKeyDown);
     };
-  }, [
-    goToNextAnimStep,
-    handleOnDrag,
-    handleOnDragEnd,
-    handleOnDragStart,
-    handleOnKeyDown,
-  ]);
+  }, [handleOnKeyDown]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">

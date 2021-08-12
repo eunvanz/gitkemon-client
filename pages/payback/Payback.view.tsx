@@ -189,7 +189,7 @@ const Payback: React.FC<PaybackProps> = ({
                 DAYS IN A ROW
               </Typography>
             )}
-            <h2 className="mb-1 text-center text-3xl text-green-600">Hooray!!</h2>
+            <h2 className="mb-1 text-center text-3xl text-green-600">🎉 Hooray!!</h2>
             <h2 className="text-center text-2xl text-gray-600">You&apos;ve got</h2>
             {renderRewardItems()}
           </div>
@@ -311,7 +311,7 @@ interface BonusItemProps {
 const BonusItem = ({ title, amount }: BonusItemProps) => {
   return (
     <div className="text-center w-full">
-      🎉 {title} <XIcon className="w-3 inline" />{" "}
+      🏆 {title} <XIcon className="w-3 inline" />{" "}
       <Typography color="primary">{amount}</Typography>
     </div>
   );

@@ -40,3 +40,7 @@ export const 기본 = createStoryComponent(Template);
 export const 하나 = createStoryComponent(Template, {
   pokeBalls: [{ type: "basic", amount: 2412 }],
 });
+
+export const 없음 = createStoryComponent(Template, {
+  pokeBalls: [],
+});

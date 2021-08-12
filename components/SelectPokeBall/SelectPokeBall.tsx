@@ -29,7 +29,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
   }, [activeIndex, pokeBalls]);
 
   const itemInfo = useMemo(() => {
-    switch (activePokeBall.type) {
+    switch (activePokeBall?.type) {
       case "basic":
         return {
           title: "BASIC",
@@ -57,11 +57,11 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
           description: "It feels like catching a legendary Pokémon.",
         };
     }
-  }, [activePokeBall.type]);
+  }, [activePokeBall?.type]);
 
   const handleOnClickNext = useCallback(() => {
-    onNext(activePokeBall.type);
-  }, [activePokeBall.type, onNext]);
+    onNext(activePokeBall?.type);
+  }, [activePokeBall?.type, onNext]);
 
   const handleOnKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -87,7 +87,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
     };
   }, [handleOnKeyDown]);
 
-  return (
+  return activePokeBall ? (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="mb-10">
         <Typography as="h2" size="2xl">
@@ -139,7 +139,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
           <Typography as="p" color="hint" className="mt-3">
             Quantity:{" "}
             <Typography color="primary">
-              {activePokeBall.amount.toLocaleString()}
+              {activePokeBall?.amount.toLocaleString()}
             </Typography>
           </Typography>
         </motion.div>
@@ -152,6 +152,17 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
           onClick={handleOnClickNext}
         >
           Next
+        </Button>
+      </div>
+    </div>
+  ) : (
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <div className="mb-10 text-center">
+        <Typography as="h2" size="2xl">
+          Yon have no Pokéball 😢
+        </Typography>
+        <Button color="white" size="xs">
+          Check out available payback
         </Button>
       </div>
     </div>

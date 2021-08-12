@@ -71,6 +71,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
         pokeBallContainerRef.current!.style.transitionTimingFunction = "ease-out";
         pokeBallContainerRef.current!.style.transitionDuration = "0.5s";
         pokeBallContainerRef.current!.style.transform = "translateY(-50vh)";
+        setTimeout(() => onSubmit(pokeBall.type, amount), 550);
       } else {
         // 원상복구
         pokeBallContainerRef.current!.style.transitionDuration = "0.5s";
@@ -141,6 +142,10 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
     };
   }, [handleOnKeyDown]);
 
+  const isLastPokeBall = useMemo(() => {
+    return pokeBall.amount === 1;
+  }, [pokeBall.amount]);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div
@@ -150,9 +155,15 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
           "opacity-0": animStep === 0 || animStep > 2,
         })}
       >
-        <Typography as="h2" size="2xl">
-          How many?
-        </Typography>
+        {isLastPokeBall ? (
+          <Typography as="h2" size="2xl">
+            It&apos;s the last one
+          </Typography>
+        ) : (
+          <Typography as="h2" size="2xl">
+            How many?
+          </Typography>
+        )}
       </div>
       <div className={cx("relative w-full", styles.ballContainer)}>
         <div
@@ -173,21 +184,31 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
           })}
           style={{ left: "calc(50vw - 5rem" }}
         >
-          <Typography as="h1" className="mb-2" size="4xl" color="primary">
-            {amount}
-          </Typography>
-          <Slider
-            min={1}
-            max={maxAmount}
-            onChange={(value) => setAmount(value)}
-            value={amount}
-          />
-          <Typography as="p" className="mt-3" color="hint" weight="light" size="xs">
-            <ChevronDoubleRightIcon
-              className={cx("w-3 h-3 inline-block mr-1", styles.nudge)}
-            />{" "}
-            Slide to add
-          </Typography>
+          {isLastPokeBall ? (
+            <Typography as="div" size="lg" color="hint">
+              Pull the pokeball
+              <br />
+              with ❤️
+            </Typography>
+          ) : (
+            <>
+              <Typography as="h1" className="mb-2" size="4xl" color="primary">
+                {amount}
+              </Typography>
+              <Slider
+                min={1}
+                max={maxAmount}
+                onChange={(value) => setAmount(value)}
+                value={amount}
+              />
+              <Typography as="p" className="mt-3" color="hint" weight="light" size="xs">
+                <ChevronDoubleRightIcon
+                  className={cx("w-3 h-3 inline-block mr-1", styles.nudge)}
+                />{" "}
+                Slide to add
+              </Typography>
+            </>
+          )}
         </div>
         <div
           ref={pokeBallContainerRef}

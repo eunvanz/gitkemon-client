@@ -5,31 +5,25 @@ import Badge, { BadgeProps } from "../Badge";
 
 export interface MonTierBadgeProps extends Omit<BadgeProps, "label"> {
   tier: MonTier;
-  isShorten?: boolean;
 }
 
-const MonTierBadge: React.FC<MonTierBadgeProps> = ({
-  tier,
-  isShorten,
-  className,
-  ...restProps
-}) => {
+const MonTierBadge: React.FC<MonTierBadgeProps> = ({ tier, className, ...restProps }) => {
   const labelByTier = useMemo(() => {
     switch (tier) {
       case "basic":
-        return isShorten ? "B" : "BASIC";
+        return { short: "B", long: "BASIC" };
       case "rare":
-        return isShorten ? "R" : "RARE";
+        return { short: "R", long: "RARE" };
       case "special":
-        return isShorten ? "S" : "SPECIAL";
+        return { short: "S", long: "SPECIAL" };
       case "s.rare":
-        return isShorten ? "SR" : "S.RARE";
+        return { short: "SR", long: "S.RARE" };
       case "elite":
-        return isShorten ? "E" : "ELITE";
+        return { short: "E", long: "ELITE" };
       case "legend":
-        return isShorten ? "L" : "LEGEND";
+        return { short: "L", long: "LEGEND" };
     }
-  }, [isShorten, tier]);
+  }, [tier]);
 
   const classNameByTier = useMemo(() => {
     switch (tier) {
@@ -49,13 +43,22 @@ const MonTierBadge: React.FC<MonTierBadgeProps> = ({
   }, [tier]);
 
   return (
-    <Badge
-      label={labelByTier}
-      className={cx(classNameByTier, className)}
-      size="sm"
-      isSquare
-      {...restProps}
-    />
+    <>
+      <Badge
+        label={labelByTier.short}
+        className={cx("sm:hidden", classNameByTier, className)}
+        size="sm"
+        isSquare
+        {...restProps}
+      />
+      <Badge
+        label={labelByTier.long}
+        className={cx("hidden sm:block", classNameByTier, className)}
+        size="sm"
+        isSquare
+        {...restProps}
+      />
+    </>
   );
 };
 

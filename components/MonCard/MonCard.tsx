@@ -50,11 +50,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, ...restProps }) => {
               <MonStars stars={mon.stars} />
             </div>
             <div className="flex flex-row flex-1 my-1 justify-center">
-              <MonTierBadge
-                tier={mon.tier}
-                isShorten={window.screen.width < 400}
-                className="mr-0.5"
-              />
+              <MonTierBadge tier={mon.tier} className="mr-0.5" />
               <MonTypeBadge
                 type={mon.firstType}
                 className={mon.secondType ? "mr-0.5" : undefined}

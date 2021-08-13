@@ -85,7 +85,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
       document.removeEventListener("mouseup", handleOnDragEnd);
       document.removeEventListener("touchend", handleOnDragEnd);
     },
-    [handleOnDrag],
+    [amount, handleOnDrag, onSubmit, pokeBall.type],
   );
 
   const handleOnDragStart = useCallback(

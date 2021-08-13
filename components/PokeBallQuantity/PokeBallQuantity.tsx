@@ -11,7 +11,7 @@ import styles from "./PokeBallQuantity.module.css";
 
 let startY: number;
 const TENSION = 0.85;
-const VALID_PULL_LENGTH = 150;
+const VALID_PULL_LENGTH = 200;
 
 export interface PokeBallQuantityProps {
   pokeBall: {

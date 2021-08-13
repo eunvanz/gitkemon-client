@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/Button";
 import ControlledInput from "../../../../components/ControlledInput";
@@ -54,9 +54,13 @@ const MonImage: React.FC<MonImageProps> = ({
 
   const { monId, evolveFromId } = watch();
 
-  const isRegisteredMon = useMemo(() => {
-    return mons?.find((item) => item.id === monId)?.__monImages__?.length;
+  const selectedMon = useMemo(() => {
+    return mons?.find((item) => item.id === monId);
   }, [monId, mons]);
+
+  const isRegisteredMon = useMemo(() => {
+    return selectedMon?.__monImages__?.length;
+  }, [selectedMon?.__monImages__?.length]);
 
   const submitForm = useCallback(() => {
     handleSubmit((formValues) => {
@@ -179,6 +183,7 @@ const MonImage: React.FC<MonImageProps> = ({
                     },
                   ],
                   disabled: isSubmitting,
+                  hint: `Suggestion: ${selectedMon?.tier}`,
                 }}
                 rules={{
                   required: "Tier is required",

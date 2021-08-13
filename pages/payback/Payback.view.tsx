@@ -178,7 +178,7 @@ const Payback: React.FC<PaybackProps> = ({
     );
   } else {
     return (
-      <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-md w-full space-y-8">
           <div>
             {paybackResult.daysInARow > 1 && (
@@ -275,15 +275,20 @@ const RainItem = ({ type }: RainItemProps) => {
 
   const delay = useMemo(() => random(0, 3000), []);
 
-  const left = useMemo(() => random(0, window.innerWidth - size), [size]);
+  const left = useMemo(() => random(-(size / 2), window.innerWidth - size / 2), [size]);
 
   return createPortal(
     <motion.div
-      initial={{ position: "absolute", left, top: -size, translateY: 0 }}
-      animate={{
+      initial={{
         position: "absolute",
-        zIndex: 999999,
         left,
+        top: -size,
+        translateY: 0,
+        width: size,
+        height: size,
+        zIndex: 999999,
+      }}
+      animate={{
         translateY: `${window.innerHeight + size}px`,
         rotate: random(-360, 360),
         transitionEnd: {
@@ -295,8 +300,8 @@ const RainItem = ({ type }: RainItemProps) => {
       <PokeBallImage
         className={rotationClassName}
         type={type}
-        width={size}
-        height={size}
+        width="100%"
+        height="100%"
       />
     </motion.div>,
     document.body,

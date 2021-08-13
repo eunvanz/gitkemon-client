@@ -53,7 +53,7 @@ const MonTierBadge: React.FC<MonTierBadgeProps> = ({ tier, className, ...restPro
       />
       <Badge
         label={labelByTier.long}
-        className={cx("hidden sm:block", classNameByTier, className)}
+        className={cx("hidden sm:inline-block", classNameByTier, className)}
         size="sm"
         isSquare
         {...restProps}

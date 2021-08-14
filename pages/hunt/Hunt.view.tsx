@@ -30,7 +30,7 @@ const Hunt: React.FC<HuntProps> = ({ pokeBalls, onSubmit }) => {
   );
 
   return (
-    <div className="relative">
+    <div className="relative min-h-full">
       <AnimatePresence>
         {step === 0 && (
           <motion.div
@@ -54,11 +54,9 @@ const Hunt: React.FC<HuntProps> = ({ pokeBalls, onSubmit }) => {
       <AnimatePresence>
         {step === 1 && selectedPokeBall && (
           <motion.div
+            className="absolute w-full top-0"
             initial={{
               opacity: 0,
-              position: "absolute",
-              width: "100vw",
-              top: 0,
             }}
             animate={{
               opacity: 1,

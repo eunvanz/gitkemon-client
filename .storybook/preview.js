@@ -1,4 +1,5 @@
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import "swiper/swiper.scss";
 import "../styles/globals.css";
 import "antd/dist/antd.css";
 

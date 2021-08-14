@@ -1,6 +1,5 @@
 import { useCallback, useMemo } from "react";
 import { useRecoilValue } from "recoil";
-import { assertNotEmpty } from "../../helpers/commonHelpers";
 import useUserQuery from "../../queries/useUserQuery";
 import { userState } from "../../state/user";
 import { PokeBallType } from "../../types";

@@ -4,7 +4,6 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 import queryClient from "../helpers/queryClient";
-import "swiper/swiper.scss";
 import "../styles/globals.css";
 import "../styles/slider.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";

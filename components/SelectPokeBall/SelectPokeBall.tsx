@@ -87,7 +87,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
   }, [handleOnKeyDown]);
 
   return activePokeBall ? (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className={cx("flex flex-col items-center justify-center", styles.container)}>
       <div className="mb-10">
         <Typography as="h2" size="2xl">
           Select a Pokéball
@@ -119,7 +119,9 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
         >
           {pokeBalls.map((pokeBall) => (
             <SwiperSlide key={pokeBall.type}>
-              <PokeBallImage className="mx-auto" type={pokeBall.type} />
+              <div className="flex justify-center">
+                <PokeBallImage type={pokeBall.type} />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -155,7 +157,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
       </div>
     </div>
   ) : (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className={cx("flex flex-col items-center justify-center", styles.container)}>
       <div className="mb-10 text-center">
         <Typography as="h2" size="2xl">
           Yon have no Pokéball 😢

@@ -20,6 +20,7 @@ export interface BurstOptions {
   rotate?: { [key: number]: number };
   duration?: number | number[];
   opacity?: { [key: number]: number };
+  scale?: { [key: number]: number };
 }
 
 const generateStarBurst = ({
@@ -32,6 +33,7 @@ const generateStarBurst = ({
   count,
   degree,
   opacity,
+  scale = { 1: 0 },
 }: BurstOptions) => {
   return new mojs.Burst({
     left,
@@ -46,7 +48,7 @@ const generateStarBurst = ({
       shape: "star",
       radius: 6,
       fill: color,
-      scale: { 1: 0, easing: "quad.in" },
+      scale: { ...scale, easing: "quad.in" },
       // pathScale: [0.5, null],
       // degreeShift: [0, null],
       // duration: [1000, 1200],

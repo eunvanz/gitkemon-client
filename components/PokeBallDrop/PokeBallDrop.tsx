@@ -49,9 +49,7 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
             className={cx("absolute top-0", styles.bounce)}
             initial={{ transform: "translateY(-116px) scale(40%)" }}
             animate={{
-              transform: `translateY(${
-                window.innerHeight / 2 - 58 - HEADER_HEIGHT
-              }px) scale(20%)`,
+              transform: `translateY(${window.innerHeight / 2 - 90}px) scale(20%)`,
             }}
             transition={{ ease: "easeIn", duration: 0.5 }}
           >

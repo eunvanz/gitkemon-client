@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "../node_modules/swiper/swiper.min.css";
+
+.content-container {
+  min-height: calc(100vh - 64px);
+}

@@ -183,3 +183,36 @@ export interface Payback {
 }
 
 export type PokeBallType = "basic" | "basicRare" | "rare" | "elite" | "legend";
+
+export interface Collection {
+  id: number;
+  height: number;
+  weight: number;
+  hp: number;
+  attack: number;
+  defense: number;
+  specialAttack: number;
+  specialDefense: number;
+  speed: number;
+  total: number;
+  baseHp: number;
+  baseAttack: number;
+  baseDefense: number;
+  baseSpecialAttack: number;
+  baseSpecialDefense: number;
+  baseSpeed: number;
+  baseTotal: number;
+  monImageId: number;
+  monImageUrl: string;
+  __monImage__: MonImage;
+  monId: number;
+  __mon__: Mon;
+  potential: MonPotential;
+  level: number;
+  userId: string;
+  user: User;
+  stars: number;
+  tier: MonTier;
+  firstType: MonType;
+  secondType?: MonType;
+}

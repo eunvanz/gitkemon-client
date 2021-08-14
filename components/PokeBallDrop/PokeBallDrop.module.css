@@ -5,22 +5,22 @@
 
 @keyframes bounce-anim {
   0% {
-    transform: translateY(calc(50vh - 122px)) scale(20%);
+    transform: translateY(calc(50vh - 90px)) scale(20%);
   }
   30% {
-    transform: translateY(calc(50vh - 132px)) scale(20%);
+    transform: translateY(calc(50vh - 100px)) scale(20%);
     transition-timing-function: ease-out;
   }
   60% {
-    transform: translateY(calc(50vh - 122px)) scale(20%);
+    transform: translateY(calc(50vh - 90px)) scale(20%);
     transition-timing-function: ease-in;
   }
   90% {
-    transform: translateY(calc(50vh - 125px)) scale(20%);
+    transform: translateY(calc(50vh - 93px)) scale(20%);
     transition-timing-function: ease-out;
   }
   100% {
-    transform: translateY(calc(50vh - 122px)) scale(20%);
+    transform: translateY(calc(50vh - 90px)) scale(20%);
     transition-timing-function: ease-in;
   }
 }

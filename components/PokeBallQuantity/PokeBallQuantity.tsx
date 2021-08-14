@@ -163,7 +163,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
           </Typography>
         ) : (
           <Typography as="h2" size="2xl">
-            How many?
+            Amount to use
           </Typography>
         )}
       </div>

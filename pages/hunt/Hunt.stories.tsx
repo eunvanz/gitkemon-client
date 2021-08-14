@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
 import Hunt from "./Hunt.view";
@@ -28,6 +29,7 @@ export default {
         amount: 1,
       },
     ],
+    onSubmit: action("onSubmit"),
   },
 } as ComponentMeta<typeof Hunt>;
 

@@ -27,7 +27,7 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
             animate={{
               transform: `translateY(${
                 window.innerHeight / 2 - 58 - HEADER_HEIGHT
-              }px) scale(10%)`,
+              }px) scale(20%)`,
             }}
             transition={{ ease: "easeIn", duration: 0.5 }}
           >

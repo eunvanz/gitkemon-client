@@ -1,6 +1,5 @@
 .bounce {
   animation: bounce-anim 0.6s 1 forwards;
-  transform: scale(20%);
   animation-delay: 500ms;
 }
 

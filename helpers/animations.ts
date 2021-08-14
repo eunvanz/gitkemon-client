@@ -13,7 +13,7 @@ export interface BurstOptions {
   top?: number;
   right?: number;
   bottom?: number;
-  color: string | { [key: string]: string };
+  color: string | { [key: string]: string } | string[];
   radius: { [key: number]: number };
   count: number;
   degree?: number;

@@ -23,7 +23,16 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
       burstStar({
         top: top + 11.5,
         left: left + 11.5,
-        color: colorHashes.ELECTRIC,
+        color: [
+          colorHashes.ELECTRIC,
+          colorHashes.BUG,
+          colorHashes.FIRE,
+          colorHashes.FAIRY,
+          colorHashes.GHOST,
+          colorHashes.WATER,
+          colorHashes.STEEL,
+          colorHashes.NORMAL,
+        ],
         count: 8,
         radius: { 20: 30 },
         degree: 360,

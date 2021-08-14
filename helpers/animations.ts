@@ -9,20 +9,34 @@ class Star extends mojs.CustomShape {
 mojs.addShape("star", Star);
 
 export interface BurstOptions {
-  left: number;
-  top: number;
-  color: string;
-  radius: number;
+  left?: number;
+  top?: number;
+  right?: number;
+  bottom?: number;
+  color: string | { [key: string]: string };
+  radius: { [key: number]: number };
   count: number;
   degree?: number;
   rotate?: { [key: number]: number };
+  duration?: number | number[];
 }
 
-const generateStarBurst = ({ left, top, color, radius, count, degree }: BurstOptions) => {
+const generateStarBurst = ({
+  left,
+  top,
+  right,
+  bottom,
+  color,
+  radius,
+  count,
+  degree,
+}: BurstOptions) => {
   return new mojs.Burst({
     left,
     top,
-    radius: { 0: radius },
+    right,
+    bottom,
+    radius,
     angle: 0,
     count,
     degree,
@@ -31,9 +45,9 @@ const generateStarBurst = ({ left, top, color, radius, count, degree }: BurstOpt
       radius: 6,
       fill: color,
       scale: { 1: 0, easing: "quad.in" },
-      pathScale: [0.5, null],
-      degreeShift: [0, null],
-      duration: [1000, 1200],
+      // pathScale: [0.5, null],
+      // degreeShift: [0, null],
+      // duration: [1000, 1200],
       easing: "quint.out",
     },
     isShowEnd: false,

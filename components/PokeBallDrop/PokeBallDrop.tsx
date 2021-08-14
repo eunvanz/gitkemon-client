@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { HEADER_HEIGHT } from "../../constants/styles";
+import { colorHashes, HEADER_HEIGHT } from "../../constants/styles";
+import { burstStar } from "../../helpers/animations";
 import { PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
 import styles from "./PokeBallDrop.module.css";
@@ -13,8 +14,21 @@ export interface PokeBallDropProps {
 const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
   const [isPokeBallVisible, setIsPokeBallVisible] = useState(false);
 
+  const pokeBallRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setTimeout(() => setIsPokeBallVisible(true), 500);
+    setTimeout(() => {
+      const { left, top } = pokeBallRef.current!.getClientRects()[0];
+      burstStar({
+        top: top + 11.5,
+        left: left + 11.5,
+        color: colorHashes.ELECTRIC,
+        count: 8,
+        radius: { 20: 30 },
+        degree: 360,
+      });
+    }, 1000);
   }, []);
 
   return (
@@ -31,7 +45,7 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
             }}
             transition={{ ease: "easeIn", duration: 0.5 }}
           >
-            <div className="flex justify-center">
+            <div ref={pokeBallRef} className="flex justify-center">
               <PokeBallImage type={type} />
             </div>
           </motion.div>

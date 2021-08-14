@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes, HEADER_HEIGHT } from "../../constants/styles";
-import { burstStar } from "../../helpers/animations";
 import { PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
 import styles from "./PokeBallDrop.module.css";
@@ -18,8 +17,9 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
 
   useEffect(() => {
     setTimeout(() => setIsPokeBallVisible(true), 500);
-    setTimeout(() => {
+    setTimeout(async () => {
       const { left, top } = pokeBallRef.current!.getClientRects()[0];
+      const { burstStar } = await import("../../helpers/animations");
       burstStar({
         top: top + 11.5,
         left: left + 11.5,

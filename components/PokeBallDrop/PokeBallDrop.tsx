@@ -16,7 +16,7 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
   const pokeBallRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setTimeout(() => setIsPokeBallVisible(true), 500);
+    setTimeout(() => setIsPokeBallVisible(true), 100);
     setTimeout(async () => {
       const { left, top } = pokeBallRef.current!.getClientRects()[0];
       const { burstStar } = await import("../../helpers/animations");
@@ -33,11 +33,12 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
           colorHashes.STEEL,
           colorHashes.NORMAL,
         ],
-        count: 8,
-        radius: { 20: 30 },
+        count: 16,
+        radius: { 20: 50 },
         degree: 360,
+        opacity: { 1: 0 },
       });
-    }, 1000);
+    }, 600);
   }, []);
 
   return (

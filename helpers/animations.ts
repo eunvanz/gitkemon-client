@@ -19,6 +19,7 @@ export interface BurstOptions {
   degree?: number;
   rotate?: { [key: number]: number };
   duration?: number | number[];
+  opacity?: { [key: number]: number };
 }
 
 const generateStarBurst = ({
@@ -30,6 +31,7 @@ const generateStarBurst = ({
   radius,
   count,
   degree,
+  opacity,
 }: BurstOptions) => {
   return new mojs.Burst({
     left,
@@ -51,6 +53,7 @@ const generateStarBurst = ({
       easing: "quint.out",
     },
     isShowEnd: false,
+    opacity,
   });
 };
 

@@ -1,0 +1,27 @@
+.bounce {
+  animation: bounce-anim 0.6s 1 forwards;
+  transform: scale(20%);
+  animation-delay: 500ms;
+}
+
+@keyframes bounce-anim {
+  0% {
+    transform: translateY(calc(50vh - 122px)) scale(20%);
+  }
+  30% {
+    transform: translateY(calc(50vh - 132px)) scale(20%);
+    transition-timing-function: ease-out;
+  }
+  60% {
+    transform: translateY(calc(50vh - 122px)) scale(20%);
+    transition-timing-function: ease-in;
+  }
+  90% {
+    transform: translateY(calc(50vh - 125px)) scale(20%);
+    transition-timing-function: ease-out;
+  }
+  100% {
+    transform: translateY(calc(50vh - 122px)) scale(20%);
+    transition-timing-function: ease-in;
+  }
+}

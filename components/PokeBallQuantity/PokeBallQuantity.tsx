@@ -69,7 +69,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
         setIsReleasable(false);
         pokeBallContainerRef.current!.style.transitionTimingFunction = "ease-out";
         pokeBallContainerRef.current!.style.transitionDuration = "0.5s";
-        pokeBallContainerRef.current!.style.transform = "translateY(-50vh)";
+        pokeBallContainerRef.current!.style.transform = "translateY(-50vh) scale(50%)";
         setTimeout(() => onSubmit(pokeBall.type, amount), 550);
       } else {
         // 원상복구

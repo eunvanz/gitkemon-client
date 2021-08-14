@@ -219,7 +219,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                     <>
                       <span className="sr-only">Open user menu</span>
                       <Image
-                        className="h-8 w-8 rounded-full"
+                        className="h-8 w-8 rounded-full bg-white"
                         width={32}
                         height={32}
                         src={user.githubUser.avatar_url}

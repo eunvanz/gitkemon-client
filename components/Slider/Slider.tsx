@@ -1,7 +1,6 @@
 import cx from "classnames";
 import ReactSlider, { ReactSliderProps } from "react-slider";
 import { colors } from "../../constants/styles";
-import "./Slider.css";
 
 export interface SliderProps extends ReactSliderProps {}
 

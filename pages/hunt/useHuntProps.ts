@@ -11,13 +11,9 @@ const useHuntProps: () => HuntProps = () => {
 
   const user = useRecoilValue(userState);
 
-  assertNotEmpty(user);
-
   const pokeBall = useMemo(() => {
     return user?.__pokeBall__;
   }, [user?.__pokeBall__]);
-
-  assertNotEmpty(pokeBall);
 
   const pokeBalls = useMemo(() => {
     const result: { type: PokeBallType; amount: number }[] = [];
@@ -28,7 +24,7 @@ const useHuntProps: () => HuntProps = () => {
       "elite" as const,
       "legend" as const,
     ].forEach((type) => {
-      const amount = pokeBall[`${type}PokeBalls` as keyof typeof pokeBall] as number;
+      const amount = pokeBall?.[`${type}PokeBalls` as keyof typeof pokeBall] as number;
       if (amount) {
         result.push({
           type,

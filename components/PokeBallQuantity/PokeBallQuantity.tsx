@@ -6,7 +6,6 @@ import { PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
 import Slider from "../Slider/Slider";
 import Typography from "../Typography";
-import "swiper/swiper.scss";
 import styles from "./PokeBallQuantity.module.css";
 
 let startY: number;

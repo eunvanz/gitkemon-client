@@ -8,7 +8,6 @@ import { PokeBallType } from "../../types";
 import Button from "../Button";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
-import "swiper/swiper.scss";
 import styles from "./SelectPokeBall.module.css";
 
 export interface SelectPokeBallProps {

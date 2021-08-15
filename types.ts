@@ -205,15 +205,17 @@ export interface Collection {
   baseTotal: number;
   monImageId: number;
   monImageUrl: string;
-  __monImage__: MonImage;
+  monImage?: MonImage;
   monId: number;
-  __mon__: Mon;
+  mon?: Mon;
   potential: MonPotential;
   level: number;
   userId: string;
-  user: User;
+  user?: User;
   stars: number;
   tier: MonTier;
   firstType: MonType;
   secondType?: MonType;
+  createdAt: string;
+  updatedAt: string;
 }

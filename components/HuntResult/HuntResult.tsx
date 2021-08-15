@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
 import { Collection, PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
+import Typography from "../Typography";
 import styles from "./HuntResult.module.css";
 
 export interface HuntResultProps {
@@ -54,6 +55,27 @@ const HuntResult: React.FC<HuntResultProps> = ({ type, result }) => {
 
   return (
     <div className="flex justify-center items-center content-container">
+      <AnimatePresence>
+        {hasToShowResult && (
+          <motion.div
+            className={cx("top-40 absolute flex justify-center")}
+            initial={{
+              transform: "scale(0%)",
+            }}
+            animate={{
+              transform: "scale(100%)",
+            }}
+            transition={{
+              type: "spring",
+              bounce: 0.8,
+            }}
+          >
+            <Typography as="h1" weight="extrabold" color="primary" size="4xl">
+              GOTCHA!
+            </Typography>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         <motion.div
           initial={{

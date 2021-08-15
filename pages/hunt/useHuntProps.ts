@@ -43,9 +43,10 @@ const useHuntProps: () => HuntProps = () => {
   }, [pokeBall]);
 
   const onSubmit = useCallback(
-    async (type: PokeBallType, amount: number) => {
-      const result = await api.hunt({ pokeBallType: type, amount });
-      setHuntResult(result);
+    async (pokeBallType: PokeBallType, amount: number) => {
+      setHuntResult({ pokeBallType });
+      const result = await api.hunt({ pokeBallType, amount });
+      setHuntResult({ pokeBallType, result });
     },
     [setHuntResult],
   );

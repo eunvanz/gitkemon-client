@@ -8,11 +8,11 @@ import Typography from "../Typography";
 import styles from "./HuntResult.module.css";
 
 export interface HuntResultProps {
-  type: PokeBallType;
+  pokeBallType: PokeBallType;
   result?: Collection[];
 }
 
-const HuntResult: React.FC<HuntResultProps> = ({ type, result }) => {
+const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
   const [isResultVisible, setIsResultVisible] = useState(false);
 
   const hasToShowResult = useMemo(() => {
@@ -90,7 +90,7 @@ const HuntResult: React.FC<HuntResultProps> = ({ type, result }) => {
             ref={pokeBallRef}
             className={cx("flex justify-center", { [styles.wiggle]: !hasToShowResult })}
           >
-            <PokeBallImage type={type} />
+            <PokeBallImage type={pokeBallType} />
           </div>
         </motion.div>
       </AnimatePresence>

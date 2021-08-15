@@ -128,10 +128,18 @@ export interface CardMon {
   specialDefense: number;
   speed: number;
   total: number;
+  baseHp?: number;
+  baseAttack?: number;
+  baseDefense?: number;
+  baseSpecialAttack?: number;
+  baseSpecialDefense?: number;
+  baseSpeed?: number;
+  baseTotal?: number;
   stars: number;
   colPoint: number;
   level?: number;
   potential?: MonPotential;
+  imageUrl?: string;
   image?: MonImage;
 }
 

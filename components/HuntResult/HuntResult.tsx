@@ -3,6 +3,7 @@ import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
 import { Collection, PokeBallType } from "../../types";
+import MonCard from "../MonCard";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
 import styles from "./HuntResult.module.css";
@@ -93,6 +94,23 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
             <PokeBallImage type={pokeBallType} />
           </div>
         </motion.div>
+      </AnimatePresence>
+      <AnimatePresence>
+        {hasToShowResult && result && result.length > 1 ? (
+          <motion.div></motion.div>
+        ) : (
+          <motion.div
+            className="flex justify-center"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+          >
+            <div className="w-40"></div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

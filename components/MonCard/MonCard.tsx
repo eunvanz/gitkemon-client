@@ -25,7 +25,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
     <>
       <div
         className={cx(
-          "flex flex-col max-w-full items-center transform transition-transform hover:-translate-y-0.5 cursor-pointer",
+          "flex flex-col max-w-full items-center transform transition-transform cursor-pointer",
           className,
           styles.card,
         )}
@@ -39,7 +39,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
         >
           <div className={cx(styles.hiddenBackface)}>
             <div className={cx(styles.surface)}>
-              <div ref={frontRef} className="border rounded shadow-lg">
+              <div ref={frontRef} className="border rounded shadow-md hover:shadow-lg">
                 <div className="flex-1 p-1">
                   {mon.level && (
                     <div className={cx("absolute left-1 top-0 sm:left-2 sm:top-1")}>
@@ -77,7 +77,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
           </div>
           <div className={cx(styles.surface, styles.back)}>
             <div
-              className="border rounded shadow-lg"
+              className="border rounded shadow-md hover:shadow-lg"
               style={{ height: frontRef.current?.getClientRects()[0].height }}
             >
               {/* TODO: 뒷면 디자인 */}

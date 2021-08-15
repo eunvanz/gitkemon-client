@@ -35,9 +35,9 @@ const PotentialBadge: React.FC<PotentialBadgeProps> = ({
 
   const classNameByPotential = useMemo(() => {
     switch (potential) {
-      // case "SS":
-      // case "S":
-      //   return "animate-pulse";
+      case "SS":
+      case "S":
+        return "animate-pulse";
       default:
         return undefined;
     }

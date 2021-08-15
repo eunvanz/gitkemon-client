@@ -6,6 +6,7 @@ const API_URL = {
   MON_IMAGES: "mon-images",
   MONS: "mons",
   DONATIONS: "paybacks",
+  COLLECTIONS__HUNT: "collections/hunt",
 };
 
 export default API_URL;

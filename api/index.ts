@@ -1,4 +1,12 @@
-import { Payback, Mon, MonImage, MonImageSearchCondition, User } from "../types";
+import {
+  Payback,
+  Mon,
+  MonImage,
+  MonImageSearchCondition,
+  User,
+  Collection,
+  PokeBallType,
+} from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
 
@@ -157,6 +165,15 @@ const postPaybacks = async () => {
   return data;
 };
 
+export interface HuntDto {
+  pokeBallType: PokeBallType;
+  amount: number;
+}
+const hunt = async (huntDto: HuntDto) => {
+  const { data } = await requester.post<Collection[]>(API_URL.COLLECTIONS__HUNT, huntDto);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -170,6 +187,7 @@ const api = {
   patchMonImage,
   getAvailableContributions,
   postPaybacks,
+  hunt,
 };
 
 export default api;

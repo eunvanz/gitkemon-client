@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { colorHashes, HEADER_HEIGHT } from "../../constants/styles";
+import { colorHashes } from "../../constants/styles";
 import { PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
 import styles from "./PokeBallDrop.module.css";
 
 export interface PokeBallDropProps {
   type: PokeBallType;
+  onFinish: VoidFunction;
 }
 
-const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
+const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type, onFinish }) => {
   const [isPokeBallVisible, setIsPokeBallVisible] = useState(false);
 
   const pokeBallRef = useRef<HTMLDivElement>(null);
@@ -39,7 +40,8 @@ const PokeBallDrop: React.FC<PokeBallDropProps> = ({ type }) => {
         opacity: { 1: 0 },
       });
     }, 600);
-  }, []);
+    setTimeout(onFinish, 1000);
+  }, [onFinish]);
 
   return (
     <div className="flex w-full min-h-screen justify-center items-center">

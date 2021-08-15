@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import PokeBallDrop from "../../components/PokeBallDrop";
+import PokeBallDrop, { PokeBallDropProps } from "../../components/PokeBallDrop";
 import PokeBallQuantity, {
   PokeBallQuantityProps,
 } from "../../components/PokeBallQuantity/PokeBallQuantity";
@@ -9,9 +9,10 @@ import { PokeBallType } from "../../types";
 
 export interface HuntProps
   extends Pick<SelectPokeBallProps, "pokeBalls">,
-    Pick<PokeBallQuantityProps, "onSubmit"> {}
+    Pick<PokeBallQuantityProps, "onSubmit">,
+    Pick<PokeBallDropProps, "onFinish"> {}
 
-const Hunt: React.FC<HuntProps> = ({ pokeBalls, onSubmit }) => {
+const Hunt: React.FC<HuntProps> = ({ pokeBalls, onSubmit, onFinish }) => {
   const [step, setStep] = useState(0); // 0: 포키볼 선택, 1: 포키볼 수량 선택, 2: 포키볼 드랍
 
   const [selectedPokeBall, setSelectedPokeBall] = useState<{
@@ -77,7 +78,9 @@ const Hunt: React.FC<HuntProps> = ({ pokeBalls, onSubmit }) => {
           </motion.div>
         )}
       </AnimatePresence>
-      {step === 2 && selectedPokeBall && <PokeBallDrop type={selectedPokeBall.type} />}
+      {step === 2 && selectedPokeBall && (
+        <PokeBallDrop type={selectedPokeBall.type} onFinish={onFinish} />
+      )}
     </div>
   );
 };

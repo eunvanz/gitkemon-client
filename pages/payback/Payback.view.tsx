@@ -55,7 +55,9 @@ const Payback: React.FC<PaybackProps> = ({
       ] as number;
       amount && itemsCnt++;
       if (amount) {
-        result.push(<RewardItem type={type} amount={amount} delay={500 * itemsCnt} />);
+        result.push(
+          <RewardItem key={type} type={type} amount={amount} delay={500 * itemsCnt} />,
+        );
       }
     });
 

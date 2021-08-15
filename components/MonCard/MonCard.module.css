@@ -1,0 +1,30 @@
+.card {
+  perspective: 1000px;
+}
+
+.cardInner {
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.cardInner.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.hiddenBackface {
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+}
+
+.surface {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.surface.back {
+  transform: rotateY(180deg);
+}

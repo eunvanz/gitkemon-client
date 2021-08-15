@@ -31,7 +31,6 @@ const LineGauge: React.FC<LineGaugeProps> = ({
               key={index}
               className={cx(`h-${height} bg-${color}`, {
                 ["rounded-l-md"]: index === 0,
-                ["rounded-r-md"]: index === values.length - 1,
               })}
               style={{
                 width: `${Math.min(value, restValue)}%`,

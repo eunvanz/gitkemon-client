@@ -7,7 +7,7 @@ export default {
   title: "components/MonModal",
   component: MonModal,
   args: {
-    mon: mockMons.cardMon,
+    mon: mockMons.modalMon,
     isOpen: true,
   },
 } as ComponentMeta<typeof MonModal>;
@@ -18,4 +18,8 @@ export const 기본 = createStoryComponent(Template);
 
 export const 뒷면 = createStoryComponent(Template, {
   isInitialBack: true,
+});
+
+export const 콜렉션 = createStoryComponent(Template, {
+  mon: mockMons.modalMonCollection,
 });

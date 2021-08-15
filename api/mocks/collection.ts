@@ -70,9 +70,9 @@ const huntResultLevelUp: Collection[] = [
   },
 ];
 
-const mockCollection = {
+const mockCollections = {
   huntResultNew,
   huntResultLevelUp,
 };
 
-export default mockCollection;
+export default mockCollections;

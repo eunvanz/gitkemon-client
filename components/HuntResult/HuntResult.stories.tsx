@@ -6,7 +6,7 @@ export default {
   title: "components/HuntResult",
   component: HuntResult,
   args: {
-    type: "basic",
+    pokeBallType: "basic",
     result: [],
   },
 } as ComponentMeta<typeof HuntResult>;

@@ -1,3 +1,4 @@
+import withBaseLayout from "../../hocs/withBaseLayout";
 import HuntResult from "./HuntResult.view";
 import useHuntResultProps from "./useHuntResultProps";
 
@@ -7,4 +8,4 @@ const HuntResultPage: React.FC<void> = () => {
   return <HuntResult {...props} />;
 };
 
-export default HuntResultPage;
+export default withBaseLayout(HuntResultPage);

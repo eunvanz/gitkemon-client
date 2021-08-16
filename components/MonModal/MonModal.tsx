@@ -1,6 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
 import { RefreshIcon } from "@heroicons/react/outline";
+import random from "lodash/random";
 import Image from "next/image";
+import Skeleton from "react-loading-skeleton";
 import { ModalMon } from "../../types";
 import BaseModal, { BaseModalProps } from "../BaseModal";
 import Button from "../Button";
@@ -89,96 +91,94 @@ const MonModal: React.FC<MonModalProps> = ({
     <BaseMonModal mon={mon} onFlip={() => setIsFlipped(!isFlipped)} {...restProps}>
       {mon ? (
         !isFlipped ? (
-          <div className="md:flex w-full">
-            <div className="flex flex-col w-full h-96">
-              {renderProfile({
-                title: "Name",
-                content: <Typography>{mon.name}</Typography>,
-              })}
-              {mon.level &&
-                renderProfile({
-                  title: "Level",
-                  content: (
-                    <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
-                  ),
-                })}
-              {mon.potential &&
-                renderProfile({
-                  title: "Potential",
-                  content: <PotentialBadge potential={mon.potential} />,
-                })}
-              {renderProfile({
-                title: "Tier",
-                content: <MonTierBadge tier={mon.tier} />,
-              })}
-              {renderProfile({
-                title: "Types",
+          <div className="flex flex-col w-full h-96">
+            {renderProfile({
+              title: "Name",
+              content: <Typography>{isCollection ? mon.name : "?????"}</Typography>,
+            })}
+            {mon.level &&
+              renderProfile({
+                title: "Level",
                 content: (
-                  <>
-                    <MonTypeBadge className="mr-0.5" type={mon.firstType} />
-                    {mon.secondType && <MonTypeBadge type={mon.secondType} />}
-                  </>
+                  <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
                 ),
               })}
-              {renderProfile({
-                title: "Stars",
-                content: <MonStars stars={mon.stars} />,
+            {mon.potential &&
+              renderProfile({
+                title: "Potential",
+                content: <PotentialBadge potential={mon.potential} />,
               })}
-              {renderProfile({
-                title: "Total stats",
-                content: (
-                  <Typography>
-                    {isCollection ? "" : "Avg. "}
-                    <Typography color="primary" weight="bold">
-                      {mon.total}{" "}
-                    </Typography>
-                    {isCollection && (
-                      <Typography color="gray" weight="bold">
-                        ({mon.baseTotal}
-                        {mon.total - mon.baseTotal! > 0 && (
-                          <Typography color="amber">
-                            +{mon.total - mon.baseTotal!}
-                          </Typography>
-                        )}
-                        )
-                      </Typography>
-                    )}
+            {renderProfile({
+              title: "Tier",
+              content: <MonTierBadge tier={mon.tier} />,
+            })}
+            {renderProfile({
+              title: "Types",
+              content: (
+                <>
+                  <MonTypeBadge className="mr-0.5" type={mon.firstType} />
+                  {mon.secondType && <MonTypeBadge type={mon.secondType} />}
+                </>
+              ),
+            })}
+            {renderProfile({
+              title: "Stars",
+              content: <MonStars stars={mon.stars} />,
+            })}
+            {renderProfile({
+              title: "Total stats",
+              content: (
+                <Typography>
+                  {isCollection ? "" : "Avg. "}
+                  <Typography color="primary" weight="bold">
+                    {mon.total}{" "}
                   </Typography>
-                ),
-              })}
-              {renderProfile({
-                title: "Physical",
-                content: (
-                  <Typography>
-                    {isCollection ? "" : "Avg. "}
-                    <Typography color="primary" weight="bold">
-                      {mon.height}
+                  {isCollection && (
+                    <Typography color="gray" weight="bold">
+                      ({mon.baseTotal}
+                      {mon.total - mon.baseTotal! > 0 && (
+                        <Typography color="amber">
+                          +{mon.total - mon.baseTotal!}
+                        </Typography>
+                      )}
+                      )
                     </Typography>
-                    m /{" "}
-                    <Typography color="primary" weight="bold">
-                      {mon.weight}
-                    </Typography>
-                    kg
+                  )}
+                </Typography>
+              ),
+            })}
+            {renderProfile({
+              title: "Physical",
+              content: (
+                <Typography>
+                  {isCollection ? "" : "Avg. "}
+                  <Typography color="primary" weight="bold">
+                    {mon.height}
                   </Typography>
-                ),
-              })}
-              {renderProfile({
-                title: "Evolution",
-                content: (
-                  <Typography>
-                    {mon.evolutionLevel ? (
-                      <>
-                        Available from <LevelBadge level={mon.evolutionLevel} />
-                      </>
-                    ) : (
-                      "-"
-                    )}
+                  m /{" "}
+                  <Typography color="primary" weight="bold">
+                    {mon.weight}
                   </Typography>
-                ),
-              })}
-              <div className="flex mb-2">
-                <Typography>{mon.description}</Typography>
-              </div>
+                  kg
+                </Typography>
+              ),
+            })}
+            {renderProfile({
+              title: "Evolution",
+              content: (
+                <Typography>
+                  {mon.evolutionLevel ? (
+                    <>
+                      Available from <LevelBadge level={mon.evolutionLevel} />
+                    </>
+                  ) : (
+                    "-"
+                  )}
+                </Typography>
+              ),
+            })}
+            <div className="flex mb-2">
+              <Typography>{mon.description}</Typography>
             </div>
           </div>
         ) : (
@@ -220,7 +220,19 @@ const MonModal: React.FC<MonModalProps> = ({
           </div>
         )
       ) : (
-        <>{/* TODO: 스켈레톤 */}</>
+        <div className="flex flex-col w-full h-96">
+          {Array.from({ length: 9 }).map((_, index) => (
+            <div className="flex mb-4" key={index}>
+              <div className="flex-shrink-0 w-32">
+                <Skeleton width={random(30, 80)} height={16} />
+              </div>
+              <div className="flex-1">
+                <Skeleton width={random(60, 180)} height={16} />
+              </div>
+            </div>
+          ))}
+          <Skeleton width={random(250, 300)} height={16} />
+        </div>
       )}
     </BaseMonModal>
   );
@@ -254,27 +266,31 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
     >
       <div className="md:flex w-full">
         <div className="flex flex-col mb-4 md:mx-0 md:mb-0 md:mr-8">
-          <div className="w-48 border border-dotted mb-1 mx-auto flex-shrink-0">
-            {mon ? (
+          {mon ? (
+            <div className="w-48 border border-dotted mb-1 mx-auto flex-shrink-0">
               <Image
                 src={mon.image ? mon.image.imageUrl : ""}
                 alt={mon.name}
                 layout="fill"
               />
-            ) : (
-              <>{/* TODO: 스켈레톤 */}</>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="w-48 mb-1 mx-auto flex-shrink-0">
+              <Skeleton width={190} height={190} />
+            </div>
+          )}
           <div className="text-center mb-1">
             {mon ? (
-              <Typography size="sm" color="hint">
-                Painting by{" "}
-                <Typography color="primary" weight="bold">
-                  {mon.image?.designerName}
+              mon.image ? (
+                <Typography size="sm" color="hint">
+                  Painting by{" "}
+                  <Typography color="primary" weight="bold">
+                    {mon.image?.designerName}
+                  </Typography>
                 </Typography>
-              </Typography>
+              ) : null
             ) : (
-              <>{/* TODO: 스켈레톤 */}</>
+              <Skeleton width={120} height={16} />
             )}
           </div>
         </div>

@@ -23,3 +23,7 @@ export const 뒷면 = createStoryComponent(Template, {
 export const 콜렉션 = createStoryComponent(Template, {
   mon: mockMons.modalMonCollection,
 });
+
+export const 로딩 = createStoryComponent(Template, {
+  mon: undefined,
+});

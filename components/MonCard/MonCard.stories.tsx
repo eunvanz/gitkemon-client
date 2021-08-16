@@ -1,4 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import withTestProvider from "../../.storybook/decorators/withTestProvider";
 import mockMons from "../../api/mocks/mon";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
 import MonCard from "./MonCard";
@@ -9,6 +10,7 @@ export default {
   args: {
     mon: mockMons.cardMon,
   },
+  decorators: [withTestProvider],
 } as ComponentMeta<typeof MonCard>;
 
 const Template: ComponentStory<typeof MonCard> = (args) => <MonCard {...args} />;

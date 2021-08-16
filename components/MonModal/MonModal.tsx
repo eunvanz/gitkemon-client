@@ -79,7 +79,7 @@ const MonModal: React.FC<MonModalProps> = ({
             />
             <div className="flex-shrink-0 w-10 text-right">
               <Typography color="primary" weight="bold">
-                {props.baseValue + (props.addedValue || 0)}
+                {props.baseValue + (props.addedValue || 0) + (props.updatedValue || 0)}
               </Typography>
             </div>
           </div>
@@ -152,7 +152,7 @@ const MonModal: React.FC<MonModalProps> = ({
                   {isCollection && (
                     <Typography color="gray" weight="bold">
                       ({mon.baseTotal}
-                      {mon.total - mon.baseTotal! > 0 && (
+                      {(oldMon || mon).total - (oldMon || mon).baseTotal! > 0 && (
                         <Typography color="amber">
                           +
                           {oldMon
@@ -208,26 +208,32 @@ const MonModal: React.FC<MonModalProps> = ({
             {renderStat({
               title: "HP",
               baseValue: isCollection ? mon.baseHp! : mon.hp,
-              addedValue: isCollection ? mon.hp - mon.baseHp! : undefined,
+              addedValue: isCollection
+                ? (oldMon || mon).hp - (oldMon || mon).baseHp!
+                : undefined,
               updatedValue: oldMon ? mon.hp - oldMon.hp : undefined,
             })}
             {renderStat({
               title: "Attack",
               baseValue: isCollection ? mon.baseAttack! : mon.attack,
-              addedValue: isCollection ? mon.attack - mon.baseAttack! : undefined,
+              addedValue: isCollection
+                ? (oldMon || mon).attack - (oldMon || mon).baseAttack!
+                : undefined,
               updatedValue: oldMon ? mon.attack - oldMon.attack : undefined,
             })}
             {renderStat({
               title: "Defense",
               baseValue: isCollection ? mon.baseDefense! : mon.defense,
-              addedValue: isCollection ? mon.defense - mon.baseDefense! : undefined,
+              addedValue: isCollection
+                ? (oldMon || mon).defense - (oldMon || mon).baseDefense!
+                : undefined,
               updatedValue: oldMon ? mon.defense - oldMon.defense : undefined,
             })}
             {renderStat({
               title: "Special attack",
               baseValue: isCollection ? mon.baseSpecialAttack! : mon.specialAttack,
               addedValue: isCollection
-                ? mon.specialAttack - mon.baseSpecialAttack!
+                ? (oldMon || mon).specialAttack - (oldMon || mon).baseSpecialAttack!
                 : undefined,
               updatedValue: oldMon ? mon.specialAttack - oldMon.specialAttack : undefined,
             })}
@@ -235,7 +241,7 @@ const MonModal: React.FC<MonModalProps> = ({
               title: "Special defense",
               baseValue: isCollection ? mon.baseSpecialDefense! : mon.specialDefense,
               addedValue: isCollection
-                ? mon.specialDefense - mon.baseSpecialDefense!
+                ? (oldMon || mon).specialDefense - (oldMon || mon).baseSpecialDefense!
                 : undefined,
               updatedValue: oldMon
                 ? mon.specialDefense - oldMon.specialDefense
@@ -244,7 +250,9 @@ const MonModal: React.FC<MonModalProps> = ({
             {renderStat({
               title: "Speed",
               baseValue: isCollection ? mon.baseSpeed! : mon.speed,
-              addedValue: isCollection ? mon.speed - mon.baseSpeed! : undefined,
+              addedValue: isCollection
+                ? (oldMon || mon).speed - (oldMon || mon).baseSpeed!
+                : undefined,
               updatedValue: oldMon ? mon.speed - oldMon.speed : undefined,
             })}
           </div>
@@ -301,7 +309,8 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
               <Image
                 src={mon.image ? mon.image.imageUrl : ""}
                 alt={mon.name}
-                layout="fill"
+                width={200}
+                height={200}
               />
             </div>
           ) : (

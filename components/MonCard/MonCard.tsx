@@ -30,9 +30,12 @@ const MonCard: React.FC<MonCardProps> = ({
 
   const frontRef = useRef<HTMLDivElement>(null);
 
+  const [height, setHeight] = useState(0);
+
   useEffect(() => {
     if (frontRef.current) {
       setCardHeight?.(frontRef.current.getClientRects()[0].height);
+      setHeight(frontRef.current?.getClientRects()[0].height);
     }
   }, [setCardHeight]);
 
@@ -46,6 +49,7 @@ const MonCard: React.FC<MonCardProps> = ({
         )}
         {...restProps}
         onClick={() => setIsMonModalOpen(true)}
+        style={{ height }}
       >
         <div
           className={cx("relative w-full h-full", styles.cardInner, {
@@ -57,12 +61,12 @@ const MonCard: React.FC<MonCardProps> = ({
               <div ref={frontRef} className="border rounded shadow-md hover:shadow-lg">
                 <div className="flex-1 p-1 bg-white rounded">
                   {mon.level && (
-                    <div className={cx("absolute left-1 top-0 sm:left-2 sm:top-1")}>
+                    <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5")}>
                       <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
                     </div>
                   )}
                   {mon.potential && (
-                    <div className={cx("absolute right-1 top-0 sm:right-2 sm:top-1")}>
+                    <div className={cx("absolute right-1 top-0.5 sm:right-2 sm:top-1.5")}>
                       <PotentialBadge potential={mon.potential} />
                     </div>
                   )}

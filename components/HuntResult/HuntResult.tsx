@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
 import { convertCollectionToCardMon } from "../../helpers/projectHelpers";
 import { HuntResponse, PokeBallType } from "../../types";
+import HuntResultItem from "../HuntResultItem/HuntResultItem";
 import MonCard from "../MonCard";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
@@ -100,9 +101,9 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
               transform: "scale(100%)",
             }}
             exit={{
-              opacity: 0,
+              transform: "translateY(-60vh)",
             }}
-            transition={{ duration: 1 }}
+            transition={{ type: "spring", bounce: 0.4 }}
           >
             <div
               ref={pokeBallRef}
@@ -115,7 +116,8 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
       </AnimatePresence>
       <AnimatePresence>
         {isCardVisible &&
-          (result && result.length > 1 ? (
+          result &&
+          (result.length > 1 ? (
             <motion.div></motion.div>
           ) : (
             <motion.div
@@ -129,11 +131,11 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
               transition={{ type: "spring", bounce: 0.4 }}
             >
               <div className="w-40" style={{ height: monCardHeight }}>
-                {/* <MonCard
-                  mon={convertCollectionToCardMon(result![0])}
-                  isFlipped={isCardFlipped}
-                  setCardHeight={setMonCardHeight}
-                /> */}
+                <HuntResultItem
+                  huntResult={result[0]}
+                  isRevealed={!isCardFlipped}
+                  setMonCardHeight={setMonCardHeight}
+                />
               </div>
             </motion.div>
           ))}

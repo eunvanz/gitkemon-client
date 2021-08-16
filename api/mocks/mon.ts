@@ -6,6 +6,8 @@ const cardMon: CardMon = {
   secondType: "rock",
   tier: "elite",
   stars: 6,
+  level: 1,
+  potential: "SS",
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/hand-pokemon-2.appspot.com/o/monImages%2Fdandanji.png?alt=media&token=1289a5d8-e684-4b0f-abd9-80fd8d0bc971",
 };

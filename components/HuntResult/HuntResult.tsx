@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
+import { convertCollectionToCardMon } from "../../helpers/projectHelpers";
 import { Collection, PokeBallType } from "../../types";
 import MonCard from "../MonCard";
 import PokeBallImage from "../PokeBallImage";
@@ -14,13 +15,19 @@ export interface HuntResultProps {
 }
 
 const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
-  const [isResultVisible, setIsResultVisible] = useState(false);
+  const [isTitleVisible, setIsTitleVisible] = useState(false);
+
+  const [isCardVisible, setIsCardVisible] = useState(false);
 
   const hasToShowResult = useMemo(() => {
-    return result && isResultVisible;
-  }, [isResultVisible, result]);
+    return result && isTitleVisible;
+  }, [isTitleVisible, result]);
 
   const pokeBallRef = useRef<HTMLDivElement>(null);
+
+  const [isCardFlipped, setIsCardFlipped] = useState(true);
+
+  const [monCardHeight, setMonCardHeight] = useState(0);
 
   useEffect(() => {
     if (hasToShowResult) {
@@ -46,12 +53,18 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
           opacity: { 1: 0 },
           scale: { 2: 1 },
         });
+        setTimeout(() => {
+          setIsCardVisible(true);
+        }, 500);
+        setTimeout(() => {
+          setIsCardFlipped(false);
+        }, 1000);
       })();
     }
-  }, [hasToShowResult, isResultVisible, result]);
+  }, [hasToShowResult, isTitleVisible, result]);
 
   useEffect(() => {
-    setTimeout(() => setIsResultVisible(true), 2000);
+    setTimeout(() => setIsTitleVisible(true), 2000);
   }, []);
 
   return (
@@ -78,39 +91,52 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        <motion.div
-          initial={{
-            transform: "scale(20%)",
-          }}
-          animate={{
-            transform: "scale(100%)",
-          }}
-          transition={{ duration: 1 }}
-        >
-          <div
-            ref={pokeBallRef}
-            className={cx("flex justify-center", { [styles.wiggle]: !hasToShowResult })}
-          >
-            <PokeBallImage type={pokeBallType} />
-          </div>
-        </motion.div>
-      </AnimatePresence>
-      <AnimatePresence>
-        {hasToShowResult && result && result.length > 1 ? (
-          <motion.div></motion.div>
-        ) : (
+        {!isCardVisible && (
           <motion.div
-            className="flex justify-center"
             initial={{
-              opacity: 0,
+              transform: "scale(20%)",
             }}
             animate={{
-              opacity: 1,
+              transform: "scale(100%)",
             }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{ duration: 1 }}
           >
-            <div className="w-40"></div>
+            <div
+              ref={pokeBallRef}
+              className={cx("flex justify-center", { [styles.wiggle]: !hasToShowResult })}
+            >
+              <PokeBallImage type={pokeBallType} />
+            </div>
           </motion.div>
         )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isCardVisible &&
+          (result && result.length > 1 ? (
+            <motion.div></motion.div>
+          ) : (
+            <motion.div
+              className="flex justify-center absolute"
+              initial={{
+                transform: "translateY(80vh)",
+              }}
+              animate={{
+                transform: "translateY(0vh)",
+              }}
+              transition={{ type: "spring", bounce: 0.4 }}
+            >
+              <div className="w-40" style={{ height: monCardHeight }}>
+                <MonCard
+                  mon={convertCollectionToCardMon(result![0])}
+                  isFlipped={isCardFlipped}
+                  setCardHeight={setMonCardHeight}
+                />
+              </div>
+            </motion.div>
+          ))}
       </AnimatePresence>
     </div>
   );

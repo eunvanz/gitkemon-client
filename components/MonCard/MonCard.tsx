@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import Image from "next/image";
 import { CardMon } from "../../types";
@@ -14,12 +14,25 @@ export interface MonCardProps
   extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   mon: CardMon;
   isFlipped?: boolean;
+  setCardHeight?: (height: number) => void;
 }
 
-const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restProps }) => {
+const MonCard: React.FC<MonCardProps> = ({
+  mon,
+  className,
+  isFlipped,
+  setCardHeight,
+  ...restProps
+}) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
 
   const frontRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (frontRef.current) {
+      setCardHeight?.(frontRef.current.getClientRects()[0].height);
+    }
+  }, [setCardHeight]);
 
   return (
     <>
@@ -40,7 +53,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
           <div className={cx(styles.hiddenBackface)}>
             <div className={cx(styles.surface)}>
               <div ref={frontRef} className="border rounded shadow-md hover:shadow-lg">
-                <div className="flex-1 p-1">
+                <div className="flex-1 p-1 bg-white rounded">
                   {mon.level && (
                     <div className={cx("absolute left-1 top-0 sm:left-2 sm:top-1")}>
                       <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />

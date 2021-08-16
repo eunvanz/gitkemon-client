@@ -114,7 +114,6 @@ export type MonPotential = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
 
 export interface CardMon {
   id: number;
-  name: string;
   firstType: MonType;
   secondType?: MonType;
   tier: MonTier;
@@ -239,6 +238,7 @@ export interface Collection {
   tier: MonTier;
   firstType: MonType;
   secondType?: MonType;
+  evolutionLevel?: number;
   createdAt: string;
   updatedAt: string;
 }

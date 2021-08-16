@@ -2,7 +2,6 @@ import { CardMon, ModalMon } from "../../types";
 
 const cardMon: CardMon = {
   id: 1,
-  name: "단단지",
   firstType: "bug",
   secondType: "rock",
   tier: "elite",

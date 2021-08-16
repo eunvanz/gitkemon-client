@@ -75,6 +75,8 @@ export const convertCollectionToCardMon: (collection: Collection) => CardMon = (
     stars,
     monImageUrl,
     evolutionLevel,
+    level,
+    potential,
   } = collection;
   return {
     id,
@@ -84,5 +86,7 @@ export const convertCollectionToCardMon: (collection: Collection) => CardMon = (
     stars,
     evolutionLevel,
     imageUrl: monImageUrl,
+    level,
+    potential,
   };
 };

@@ -1,5 +1,7 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import mockCollections from "../../api/mocks/collection";
 import mockMons from "../../api/mocks/mon";
+import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
 import MonModal from "./MonModal";
 
@@ -26,4 +28,11 @@ export const 콜렉션 = createStoryComponent(Template, {
 
 export const 로딩 = createStoryComponent(Template, {
   mon: undefined,
+});
+
+export const 레벨업 = createStoryComponent(Template, {
+  mon: convertCollectionToModalMon(mockCollections.huntResultLevelUp[0].newCollection),
+  oldMon: convertCollectionToModalMon(
+    mockCollections.huntResultLevelUp[0].oldCollection!,
+  ),
 });

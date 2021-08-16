@@ -129,11 +129,11 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
               transition={{ type: "spring", bounce: 0.4 }}
             >
               <div className="w-40" style={{ height: monCardHeight }}>
-                <MonCard
+                {/* <MonCard
                   mon={convertCollectionToCardMon(result![0])}
                   isFlipped={isCardFlipped}
                   setCardHeight={setMonCardHeight}
-                />
+                /> */}
               </div>
             </motion.div>
           ))}

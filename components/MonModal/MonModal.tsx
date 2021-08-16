@@ -16,11 +16,13 @@ import Typography from "../Typography";
 
 export interface MonModalProps extends Omit<BaseModalProps, "children"> {
   mon?: ModalMon;
+  oldMon?: ModalMon;
   isInitialBack?: boolean;
 }
 
 const MonModal: React.FC<MonModalProps> = ({
   mon,
+  oldMon,
   isInitialBack = false,
   ...restProps
 }) => {
@@ -31,7 +33,12 @@ const MonModal: React.FC<MonModalProps> = ({
   }, [mon?.baseTotal]);
 
   const renderStat = useCallback(
-    (props: { title: string; baseValue: number; addedValue?: number }) => {
+    (props: {
+      title: string;
+      baseValue: number;
+      addedValue?: number;
+      updatedValue?: number;
+    }) => {
       return (
         <div className="mb-5">
           <div className="flex-shrink-0 mb-1">
@@ -46,6 +53,11 @@ const MonModal: React.FC<MonModalProps> = ({
                 +{props.addedValue}
               </Typography>
             )}
+            {!!props.updatedValue && (
+              <Typography color="blue" weight="bold">
+                +{props.updatedValue}
+              </Typography>
+            )}
           </div>
           <div className="flex">
             <LineGauge
@@ -58,6 +70,10 @@ const MonModal: React.FC<MonModalProps> = ({
                 {
                   color: "amber-500",
                   value: ((props.addedValue || 0) * 100) / 400,
+                },
+                {
+                  color: "blue-500",
+                  value: ((props.updatedValue || 0) * 100) / 400,
                 },
               ]}
             />
@@ -141,6 +157,9 @@ const MonModal: React.FC<MonModalProps> = ({
                           +{mon.total - mon.baseTotal!}
                         </Typography>
                       )}
+                      {oldMon && (
+                        <Typography color="blue">+{mon.total - oldMon.total}</Typography>
+                      )}
                       )
                     </Typography>
                   )}
@@ -187,16 +206,19 @@ const MonModal: React.FC<MonModalProps> = ({
               title: "HP",
               baseValue: isCollection ? mon.baseHp! : mon.hp,
               addedValue: isCollection ? mon.hp - mon.baseHp! : undefined,
+              updatedValue: oldMon ? mon.hp - oldMon.hp : undefined,
             })}
             {renderStat({
               title: "Attack",
               baseValue: isCollection ? mon.baseAttack! : mon.attack,
               addedValue: isCollection ? mon.attack - mon.baseAttack! : undefined,
+              updatedValue: oldMon ? mon.attack - oldMon.attack : undefined,
             })}
             {renderStat({
               title: "Defense",
               baseValue: isCollection ? mon.baseDefense! : mon.defense,
               addedValue: isCollection ? mon.defense - mon.baseDefense! : undefined,
+              updatedValue: oldMon ? mon.defense - oldMon.defense : undefined,
             })}
             {renderStat({
               title: "Special attack",
@@ -204,6 +226,7 @@ const MonModal: React.FC<MonModalProps> = ({
               addedValue: isCollection
                 ? mon.specialAttack - mon.baseSpecialAttack!
                 : undefined,
+              updatedValue: oldMon ? mon.specialAttack - oldMon.specialAttack : undefined,
             })}
             {renderStat({
               title: "Special defense",
@@ -211,11 +234,15 @@ const MonModal: React.FC<MonModalProps> = ({
               addedValue: isCollection
                 ? mon.specialDefense - mon.baseSpecialDefense!
                 : undefined,
+              updatedValue: oldMon
+                ? mon.specialDefense - oldMon.specialDefense
+                : undefined,
             })}
             {renderStat({
               title: "Speed",
               baseValue: isCollection ? mon.baseSpeed! : mon.speed,
               addedValue: isCollection ? mon.speed - mon.baseSpeed! : undefined,
+              updatedValue: oldMon ? mon.speed - oldMon.speed : undefined,
             })}
           </div>
         )

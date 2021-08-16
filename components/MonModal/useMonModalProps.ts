@@ -8,6 +8,7 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   isOpen,
   onClose,
   collectionId,
+  oldMon,
 }) => {
   const { data: collection } = useCollectionQuery(collectionId, { enabled: isOpen });
 
@@ -19,6 +20,7 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     isOpen,
     onClose,
     mon,
+    oldMon,
   };
 };
 

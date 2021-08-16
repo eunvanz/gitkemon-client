@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import Image from "next/image";
-import { CardMon } from "../../types";
+import { CardMon, ModalMon } from "../../types";
 import LevelBadge from "../LevelBadge";
 import MonModalContainer from "../MonModal";
 import MonStars from "../MonStars";
@@ -13,12 +13,14 @@ import styles from "./MonCard.module.css";
 export interface MonCardProps
   extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   mon: CardMon;
+  oldMon?: ModalMon;
   isFlipped?: boolean;
   setCardHeight?: (height: number) => void;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
   mon,
+  oldMon,
   className,
   isFlipped,
   setCardHeight,
@@ -97,6 +99,7 @@ const MonCard: React.FC<MonCardProps> = ({
       </div>
       <MonModalContainer
         collectionId={mon.id}
+        oldMon={oldMon}
         isOpen={isMonModalOpen}
         onClose={() => setIsMonModalOpen(false)}
       />

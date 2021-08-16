@@ -243,7 +243,9 @@ export interface Collection {
   updatedAt: string;
 }
 
-export type HuntResponse = {
+export type HuntResponse = HuntResult[];
+
+export interface HuntResult {
   oldCollection: Collection | null;
   newCollection: Collection;
-}[];
+}

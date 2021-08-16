@@ -80,7 +80,6 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
               <div className="h-full w-full p-1 bg-gray-100" />
             </div>
           </div>
-          qlqh
         </div>
       </div>
       {/* <MonModal

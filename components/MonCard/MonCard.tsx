@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import cx from "classnames";
 import Image from "next/image";
 import { CardMon } from "../../types";
 import LevelBadge from "../LevelBadge";
-import MonModal from "../MonModal";
+import MonModalContainer from "../MonModal";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
@@ -82,11 +82,11 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
           </div>
         </div>
       </div>
-      {/* <MonModal
-        mon={mon}
+      <MonModalContainer
+        collectionId={mon.id}
         isOpen={isMonModalOpen}
         onClose={() => setIsMonModalOpen(false)}
-      /> */}
+      />
     </>
   );
 };

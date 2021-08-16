@@ -154,7 +154,10 @@ const MonModal: React.FC<MonModalProps> = ({
                       ({mon.baseTotal}
                       {mon.total - mon.baseTotal! > 0 && (
                         <Typography color="amber">
-                          +{mon.total - mon.baseTotal!}
+                          +
+                          {oldMon
+                            ? oldMon.total - oldMon.baseTotal!
+                            : mon.total - mon.baseTotal!}
                         </Typography>
                       )}
                       {oldMon && (

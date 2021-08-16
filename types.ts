@@ -242,3 +242,8 @@ export interface Collection {
   createdAt: string;
   updatedAt: string;
 }
+
+export type HuntResponse = {
+  oldCollection: Collection | null;
+  newCollection: Collection;
+}[];

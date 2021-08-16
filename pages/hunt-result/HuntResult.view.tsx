@@ -1,9 +1,9 @@
 import HuntResult from "../../components/HuntResult/HuntResult";
-import { Collection, PokeBallType } from "../../types";
+import { HuntResponse, PokeBallType } from "../../types";
 
 export interface HuntResultProps {
   pokeBallType: PokeBallType;
-  result?: Collection[];
+  result?: HuntResponse;
 }
 
 const huntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {

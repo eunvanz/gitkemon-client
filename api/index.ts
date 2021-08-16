@@ -6,6 +6,7 @@ import {
   User,
   Collection,
   PokeBallType,
+  HuntResponse,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -170,7 +171,7 @@ export interface HuntDto {
   amount: number;
 }
 const hunt = async (huntDto: HuntDto) => {
-  const { data } = await requester.post<Collection[]>(API_URL.COLLECTIONS__HUNT, huntDto);
+  const { data } = await requester.post<HuntResponse>(API_URL.COLLECTIONS__HUNT, huntDto);
   return data;
 };
 

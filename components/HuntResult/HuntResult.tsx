@@ -3,7 +3,7 @@ import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
 import { convertCollectionToCardMon } from "../../helpers/projectHelpers";
-import { Collection, PokeBallType } from "../../types";
+import { HuntResponse, PokeBallType } from "../../types";
 import MonCard from "../MonCard";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
@@ -11,7 +11,7 @@ import styles from "./HuntResult.module.css";
 
 export interface HuntResultProps {
   pokeBallType: PokeBallType;
-  result?: Collection[];
+  result?: HuntResponse;
 }
 
 const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {

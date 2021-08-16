@@ -66,15 +66,9 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
           {isRealRevealed &&
             (oldCollection ? (
               <>
-                <LevelBadge
-                  level={oldCollection.level}
-                  evolvableLevel={oldCollection.evolutionLevel}
-                />
+                <LevelBadge level={oldCollection.level} />
                 <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
-                <LevelBadge
-                  level={newCollection.level}
-                  evolvableLevel={newCollection.evolutionLevel}
-                />
+                <LevelBadge level={newCollection.level} />
               </>
             ) : (
               <Badge color="red" label="NEW" size="sm" />

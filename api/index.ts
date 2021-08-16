@@ -174,6 +174,11 @@ const hunt = async (huntDto: HuntDto) => {
   return data;
 };
 
+const getCollection = async (id: number) => {
+  const { data } = await requester.get<Collection>(`${API_URL.COLLECTIONS}/${id}`);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -188,6 +193,7 @@ const api = {
   getAvailableContributions,
   postPaybacks,
   hunt,
+  getCollection,
 };
 
 export default api;

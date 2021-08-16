@@ -113,6 +113,20 @@ export interface MonImage {
 export type MonPotential = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
 
 export interface CardMon {
+  id: number;
+  name: string;
+  firstType: MonType;
+  secondType?: MonType;
+  tier: MonTier;
+  evolutionLevel?: number;
+  stars: number;
+  level?: number;
+  potential?: MonPotential;
+  imageUrl?: string;
+}
+
+export interface ModalMon {
+  id: number;
   name: string;
   description: string;
   firstType: MonType;
@@ -213,13 +227,13 @@ export interface Collection {
   baseTotal: number;
   monImageId: number;
   monImageUrl: string;
-  monImage?: MonImage;
+  __monImage__?: MonImage;
   monId: number;
-  mon?: Mon;
+  __mon__?: Mon;
   potential: MonPotential;
   level: number;
   userId: string;
-  user?: User;
+  __user__?: User;
   stars: number;
   tier: MonTier;
   firstType: MonType;

@@ -52,11 +52,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
                     </div>
                   )}
                   <div className="flex justify-center">
-                    <Image
-                      src={mon.image ? mon.image.imageUrl : ""}
-                      alt={mon.name}
-                      layout="fill"
-                    />
+                    <Image src={mon.imageUrl || ""} alt={mon.name} layout="fill" />
                   </div>
                 </div>
                 <div className="flex-col bg-gray-50 py-1 w-full rounded-b">
@@ -84,13 +80,14 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
               <div className="h-full w-full p-1 bg-gray-100" />
             </div>
           </div>
+          qlqh
         </div>
       </div>
-      <MonModal
+      {/* <MonModal
         mon={mon}
         isOpen={isMonModalOpen}
         onClose={() => setIsMonModalOpen(false)}
-      />
+      /> */}
     </>
   );
 };

@@ -68,7 +68,7 @@ const MonModal: React.FC<MonModalProps> = ({
         </div>
       );
     },
-    [],
+    [isCollection],
   );
 
   const renderProfile = useCallback(

@@ -2,10 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
-import { convertCollectionToCardMon } from "../../helpers/projectHelpers";
 import { HuntResponse, PokeBallType } from "../../types";
-import HuntResultItem from "../HuntResultItem/HuntResultItem";
-import MonCard from "../MonCard";
+import HuntResultItem from "../HuntResultItem";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
 import styles from "./HuntResult.module.css";
@@ -27,8 +25,6 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
   const pokeBallRef = useRef<HTMLDivElement>(null);
 
   const [isCardFlipped, setIsCardFlipped] = useState(true);
-
-  const [monCardHeight, setMonCardHeight] = useState(0);
 
   useEffect(() => {
     if (hasToShowResult) {
@@ -118,7 +114,7 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
         {isCardVisible &&
           result &&
           (result.length > 1 ? (
-            <motion.div></motion.div>
+            <motion.div>{/* TODO: 멀티 채집 */}</motion.div>
           ) : (
             <motion.div
               className="flex justify-center absolute"
@@ -130,12 +126,8 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
               }}
               transition={{ type: "spring", bounce: 0.4 }}
             >
-              <div className="w-40" style={{ height: monCardHeight }}>
-                <HuntResultItem
-                  huntResult={result[0]}
-                  isRevealed={!isCardFlipped}
-                  setMonCardHeight={setMonCardHeight}
-                />
+              <div className="w-40">
+                <HuntResultItem huntResult={result[0]} isRevealed={!isCardFlipped} />
               </div>
             </motion.div>
           ))}

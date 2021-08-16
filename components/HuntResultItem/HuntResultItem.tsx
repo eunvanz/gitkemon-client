@@ -12,14 +12,9 @@ import MonCard from "../MonCard";
 export interface HuntResultItemProps {
   huntResult: HuntResult;
   isRevealed: boolean;
-  setMonCardHeight?: (height: number) => void;
 }
 
-const HuntResultItem: React.FC<HuntResultItemProps> = ({
-  huntResult,
-  isRevealed,
-  setMonCardHeight,
-}) => {
+const HuntResultItem: React.FC<HuntResultItemProps> = ({ huntResult, isRevealed }) => {
   const { oldCollection, newCollection } = huntResult;
   return (
     <div className="flex flex-col justify-center">
@@ -27,7 +22,6 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         mon={convertCollectionToCardMon(newCollection)}
         oldMon={oldCollection ? convertCollectionToModalMon(oldCollection) : undefined}
         isFlipped={!isRevealed}
-        setCardHeight={setMonCardHeight}
       />
       <AnimatePresence>
         <motion.div

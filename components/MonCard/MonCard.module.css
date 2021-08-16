@@ -27,4 +27,9 @@
 
 .surface.back {
   transform: rotateY(180deg);
+  top: 0;
+}
+
+.hidden {
+  visibility: hidden;
 }

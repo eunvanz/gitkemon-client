@@ -37,6 +37,7 @@ const PokeBallImage: React.FC<PokeBallImageProps> = ({
       className={cx(className, styles.dragNone)}
       src={img}
       alt="Poke ball"
+      quality={100}
       {...restProps}
     />
   );

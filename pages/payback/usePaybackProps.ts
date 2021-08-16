@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import api from "../../api";
 import ROUTES from "../../paths";
-import useAvailableContributions from "../../queries/useAvailableContributions";
+import useAvailableContributionsQuery from "../../queries/useAvailableContributionsQuery";
 import useUserQuery from "../../queries/useUserQuery";
 import { userState } from "../../state/user";
 import { Payback } from "../../types";
@@ -20,7 +20,7 @@ const usePaybackProps: () => PaybackProps = () => {
     data: availableContributions,
     isFetching: isAvailableContributionsFetching,
     refetch: refetchAvailableContributions,
-  } = useAvailableContributions();
+  } = useAvailableContributionsQuery();
 
   useEffect(() => {
     refetchUser();

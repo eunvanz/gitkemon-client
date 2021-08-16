@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { ArrowNarrowRightIcon } from "@heroicons/react/solid";
+import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   convertCollectionToCardMon,
@@ -12,16 +14,43 @@ import MonCard from "../MonCard";
 export interface HuntResultItemProps {
   huntResult: HuntResult;
   isRevealed: boolean;
+  delay?: number;
+  isSingle?: boolean;
 }
 
-const HuntResultItem: React.FC<HuntResultItemProps> = ({ huntResult, isRevealed }) => {
+const HuntResultItem: React.FC<HuntResultItemProps> = ({
+  huntResult,
+  isRevealed,
+  delay,
+  isSingle,
+}) => {
   const { oldCollection, newCollection } = huntResult;
+
+  const [isRealRevealed, setIsRealRevealed] = useState(isRevealed);
+
+  useEffect(() => {
+    if (isRevealed) {
+      const timer = setTimeout(() => {
+        setIsRealRevealed(isRevealed);
+      }, delay || 0);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [delay, isRevealed]);
+
   return (
-    <div className="flex flex-col justify-center">
+    <div
+      className={cx(
+        "flex flex-col justify-center mb-4",
+        isSingle ? "w-40" : "w-1/3 sm:w-1/4 md:w-1/6",
+      )}
+    >
       <MonCard
+        isFullWidth
         mon={convertCollectionToCardMon(newCollection)}
         oldMon={oldCollection ? convertCollectionToModalMon(oldCollection) : undefined}
-        isFlipped={!isRevealed}
+        isFlipped={!isRealRevealed}
       />
       <AnimatePresence>
         <motion.div
@@ -34,7 +63,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({ huntResult, isRevealed 
           }}
           transition={{ delay: 1, duration: 0.5 }}
         >
-          {isRevealed &&
+          {isRealRevealed &&
             (oldCollection ? (
               <>
                 <LevelBadge

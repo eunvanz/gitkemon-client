@@ -2,6 +2,7 @@ import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import withTestProvider from "../../.storybook/decorators/withTestProvider";
 import mockMons from "../../api/mocks/mon";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
+import MonCardGrid from "../MonCardGrid";
 import MonCard from "./MonCard";
 
 export default {
@@ -18,8 +19,19 @@ const Template: ComponentStory<typeof MonCard> = (args) => <MonCard {...args} />
 export const 기본 = createStoryComponent(Template);
 
 export const 그리드 = () => (
-  <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1">
+  <MonCardGrid>
     <MonCard mon={mockMons.cardMon} />
     <MonCard mon={mockMons.cardMon} />
-  </div>
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+    <MonCard mon={mockMons.cardMon} />
+  </MonCardGrid>
 );

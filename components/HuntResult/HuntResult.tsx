@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
 import { HuntResponse, PokeBallType } from "../../types";
 import HuntResultItem from "../HuntResultItem";
+import MonCardGrid from "../MonCardGrid";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
 import styles from "./HuntResult.module.css";
@@ -67,7 +68,7 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
   return (
     <div className="flex justify-center items-center content-container">
       <AnimatePresence>
-        {hasToShowResult && (
+        {hasToShowResult && !isCardVisible && (
           <motion.div
             className={cx("top-40 absolute flex justify-center")}
             initial={{
@@ -75,6 +76,9 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
             }}
             animate={{
               transform: "scale(100%)",
+            }}
+            exit={{
+              transform: "translateY(-100vh)",
             }}
             transition={{
               type: "spring",
@@ -97,7 +101,8 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
               transform: "scale(100%)",
             }}
             exit={{
-              transform: "translateY(-60vh)",
+              transform: "translateY(-100vh)",
+              position: "absolute",
             }}
             transition={{ type: "spring", bounce: 0.4 }}
           >
@@ -114,10 +119,8 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
         {isCardVisible &&
           result &&
           (result.length > 1 ? (
-            <motion.div>{/* TODO: 멀티 채집 */}</motion.div>
-          ) : (
             <motion.div
-              className="flex justify-center absolute"
+              className="w-full"
               initial={{
                 transform: "translateY(80vh)",
               }}
@@ -126,9 +129,33 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
               }}
               transition={{ type: "spring", bounce: 0.4 }}
             >
-              <div className="w-40">
-                <HuntResultItem huntResult={result[0]} isRevealed={!isCardFlipped} />
-              </div>
+              <MonCardGrid>
+                {result.map((item, index) => (
+                  <HuntResultItem
+                    key={index}
+                    huntResult={item}
+                    isRevealed={!isCardFlipped}
+                    delay={index * 200}
+                  />
+                ))}
+              </MonCardGrid>
+            </motion.div>
+          ) : (
+            <motion.div
+              className="flex justify-center w-full max-w-screen-lg m-auto"
+              initial={{
+                transform: "translateY(80vh)",
+              }}
+              animate={{
+                transform: "translateY(0vh)",
+              }}
+              transition={{ type: "spring", bounce: 0.4 }}
+            >
+              <HuntResultItem
+                huntResult={result[0]}
+                isRevealed={!isCardFlipped}
+                isSingle
+              />
             </motion.div>
           ))}
       </AnimatePresence>

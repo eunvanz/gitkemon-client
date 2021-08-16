@@ -16,4 +16,13 @@ export default {
 
 const Template: ComponentStory<typeof HuntResult> = (args) => <HuntResult {...args} />;
 
-export const 기본 = createStoryComponent(Template);
+export const 단일 = createStoryComponent(Template);
+
+export const 멀티 = createStoryComponent(Template, {
+  // @ts-ignore
+  result: [
+    ...mockCollections.huntResultMulti,
+    ...mockCollections.huntResultMulti,
+    ...mockCollections.huntResultMulti,
+  ],
+});

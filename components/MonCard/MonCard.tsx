@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import cx from "classnames";
 import { CardMon, ModalMon } from "../../types";
 import LevelBadge from "../LevelBadge";
@@ -14,6 +14,7 @@ export interface MonCardProps
   mon: CardMon;
   oldMon?: ModalMon;
   isFlipped?: boolean;
+  isFullWidth?: boolean;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -21,6 +22,7 @@ const MonCard: React.FC<MonCardProps> = ({
   oldMon,
   className,
   isFlipped,
+  isFullWidth,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -75,13 +77,19 @@ const MonCard: React.FC<MonCardProps> = ({
     ],
   );
 
+  const widthCLassName = useMemo(() => {
+    return isFullWidth ? "w-full" : "w-1/3 sm:w-1/4 md:w-1/6 lg:w-1/8";
+  }, [isFullWidth]);
+
   return (
     <>
       <div
         className={cx(
-          "flex flex-col max-w-full items-center transform transition-transform cursor-pointer",
+          "flex flex-col p-1 items-center transform transition-transform cursor-pointer",
+          widthCLassName,
           className,
           styles.card,
+          styles.maxWidth,
         )}
         {...restProps}
         onClick={() => setIsMonModalOpen(true)}

@@ -52,7 +52,7 @@ const MonCard: React.FC<MonCardProps> = ({ mon, className, isFlipped, ...restPro
                     </div>
                   )}
                   <div className="flex justify-center">
-                    <Image src={mon.imageUrl || ""} alt={mon.name} layout="fill" />
+                    <Image src={mon.imageUrl || ""} alt="" layout="fill" />
                   </div>
                 </div>
                 <div className="flex-col bg-gray-50 py-1 w-full rounded-b">

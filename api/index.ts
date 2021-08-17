@@ -115,7 +115,7 @@ const deleteMonImage = async (monImageId: number) => {
   await requester.delete(`${API_URL.MON_IMAGES}/${monImageId}`);
 };
 
-export interface UpdateMonDTO {
+export interface UpdateMonDto {
   order?: number;
   name?: string;
   nameKo?: string;
@@ -145,7 +145,7 @@ export interface UpdateMonDTO {
  * @param monId
  * @param mon
  */
-const patchMon = async (monId: number, mon: UpdateMonDTO) => {
+const patchMon = async (monId: number, mon: UpdateMonDto) => {
   await requester.patch<void>(`${API_URL.MONS}/${monId}`, mon);
 };
 

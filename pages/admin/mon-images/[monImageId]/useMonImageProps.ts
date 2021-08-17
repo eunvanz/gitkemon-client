@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { message } from "antd";
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
-import api, { CreateMonImageDto, UpdateMonDTO, UpdateMonImageDto } from "../../../../api";
+import api, { CreateMonImageDto, UpdateMonDto, UpdateMonImageDto } from "../../../../api";
 import { convertURLtoFile } from "../../../../helpers/commonHelpers";
 import ROUTES from "../../../../paths";
 import useMonImageQuery from "../../../../queries/useMonImageQuery";
@@ -81,12 +81,12 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
           monId: values.monId,
           designerName: values.designerName,
         };
-        const mon: UpdateMonDTO = {
+        const mon: UpdateMonDto = {
           colPoint: Number(values.colPoint),
           tier: values.tier,
           evolveFromId: values.evolveFromId,
         };
-        const evolveFromMon: UpdateMonDTO = {
+        const evolveFromMon: UpdateMonDto = {
           evolutionLevel: Number(values.evolutionRequiredLevel),
         };
         try {

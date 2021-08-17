@@ -12,7 +12,9 @@ import styles from "./MonCard.module.css";
 export interface MonCardProps
   extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   mon: CardMon;
+  /** 레벨업을 했을 때 비교하기 위해 사용하는 필드 */
   oldMon?: ModalMon;
+  /** 레벨업을 했을 때 비교하기 위해 사용하는 필드 */
   newMon?: ModalMon;
   isFlipped?: boolean;
   isFullWidth?: boolean;

@@ -70,6 +70,14 @@ const getAllMons = async () => {
   return data;
 };
 
+/**
+ * 전체 포켓몬 조회 (+이미지 조인)
+ */
+const getAllMonsWithImages = async () => {
+  const { data } = await requester.get<Mon[]>(API_URL.MONS__WITH_IMAGES);
+  return data;
+};
+
 export interface CreateMonImageDto {
   file: File;
   monId: number;
@@ -186,6 +194,7 @@ const api = {
   logout,
   getMonImage,
   getAllMons,
+  getAllMonsWithImages,
   postMonImage,
   patchMon,
   getMonImages,

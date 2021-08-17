@@ -37,10 +37,13 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
     },
   );
 
-  const { data: mons, isLoading: isMonsLoading } = useMonsQuery({
-    initialData: ssrMons,
-    enabled: !ssrMons,
-  });
+  const { data: mons, isLoading: isMonsLoading, refetch: refetchMons } = useMonsQuery(
+    { isWithImages: true },
+    {
+      initialData: ssrMons,
+      enabled: !ssrMons,
+    },
+  );
 
   const defaultFormValues = useMemo(() => {
     return monImage
@@ -121,8 +124,17 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
           setIsSubmitting(false);
         }
       }
+      refetchMons();
     },
-    [imageFile, isImageModified, isNewMonImage, monImageId, queryClient, router],
+    [
+      imageFile,
+      isImageModified,
+      isNewMonImage,
+      monImageId,
+      queryClient,
+      refetchMons,
+      router,
+    ],
   );
 
   const onNavigateToList = useCallback(() => {

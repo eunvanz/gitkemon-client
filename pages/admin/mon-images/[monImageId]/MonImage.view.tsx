@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/Button";
 import ControlledInput from "../../../../components/ControlledInput";
@@ -52,7 +52,7 @@ const MonImage: React.FC<MonImageProps> = ({
     mode: "onChange",
   });
 
-  const { monId, evolveFromId } = watch();
+  const { monId, evolveFromId, evolutionRequiredLevel } = watch();
 
   const selectedMon = useMemo(() => {
     return mons?.find((item) => item.id === monId);
@@ -77,6 +77,16 @@ const MonImage: React.FC<MonImageProps> = ({
     },
     [onSelectImageFile],
   );
+
+  const evolveFromMon = useMemo(() => {
+    return mons?.find((mon) => mon.id === evolveFromId);
+  }, [evolveFromId, mons]);
+
+  useEffect(() => {
+    if (evolutionRequiredLevel) {
+      setValue("colPoint", (evolveFromMon?.colPoint || 0) * evolutionRequiredLevel);
+    }
+  }, [evolutionRequiredLevel, evolveFromMon?.colPoint, setValue]);
 
   return !isLoading ? (
     <div className="w-full p-8 bg-white">
@@ -130,7 +140,7 @@ const MonImage: React.FC<MonImageProps> = ({
             className="w-full"
           />
         </div>
-        {monId && !isRegisteredMon && !defaultFormValues && (
+        {!!monId && !isRegisteredMon && !defaultFormValues && (
           <>
             <div className="flex-shrink-1 mt-3">
               <ControlledInput

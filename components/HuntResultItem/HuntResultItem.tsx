@@ -50,6 +50,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         isFullWidth
         mon={convertCollectionToCardMon(newCollection)}
         oldMon={oldCollection ? convertCollectionToModalMon(oldCollection) : undefined}
+        newMon={convertCollectionToModalMon(newCollection)}
         isFlipped={!isRealRevealed}
       />
       <AnimatePresence>

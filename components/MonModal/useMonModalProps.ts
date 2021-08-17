@@ -9,12 +9,15 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   onClose,
   collectionId,
   oldMon,
+  newMon,
 }) => {
-  const { data: collection } = useCollectionQuery(collectionId, { enabled: isOpen });
+  const { data: collection } = useCollectionQuery(collectionId, {
+    enabled: !newMon && isOpen,
+  });
 
   const mon = useMemo(() => {
-    return collection ? convertCollectionToModalMon(collection) : undefined;
-  }, [collection]);
+    return newMon || (collection ? convertCollectionToModalMon(collection) : undefined);
+  }, [collection, newMon]);
 
   return {
     isOpen,

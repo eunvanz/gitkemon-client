@@ -8,6 +8,7 @@ export interface MonModalContainerProps {
   collectionId: number;
   onClose: VoidFunction;
   oldMon?: ModalMon;
+  newMon?: ModalMon;
 }
 
 const MonModalContainer: React.FC<MonModalContainerProps> = (

@@ -13,6 +13,7 @@ export interface MonCardProps
   extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   mon: CardMon;
   oldMon?: ModalMon;
+  newMon?: ModalMon;
   isFlipped?: boolean;
   isFullWidth?: boolean;
 }
@@ -20,6 +21,7 @@ export interface MonCardProps
 const MonCard: React.FC<MonCardProps> = ({
   mon,
   oldMon,
+  newMon,
   className,
   isFlipped,
   isFullWidth,
@@ -116,6 +118,7 @@ const MonCard: React.FC<MonCardProps> = ({
       <MonModalContainer
         collectionId={mon.id}
         oldMon={oldMon}
+        newMon={newMon}
         isOpen={isMonModalOpen}
         onClose={() => setIsMonModalOpen(false)}
       />

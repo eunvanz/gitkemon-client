@@ -175,11 +175,11 @@ const MonModal: React.FC<MonModalProps> = ({
                 <Typography>
                   {isCollection ? "" : "Avg. "}
                   <Typography color="primary" weight="bold">
-                    {mon.height}
+                    {(mon.height * 0.1).toFixed(1)}
                   </Typography>
                   m /{" "}
                   <Typography color="primary" weight="bold">
-                    {mon.weight}
+                    {(mon.weight * 0.1).toFixed(1)}
                   </Typography>
                   kg
                 </Typography>

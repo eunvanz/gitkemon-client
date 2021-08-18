@@ -12,7 +12,6 @@ import { Mon, MonTier } from "../../../../types";
 export interface MonImageFormValues {
   monId: number;
   colPoint: number;
-  evolveFromId?: number;
   evolutionRequiredLevel?: number;
   tier: MonTier;
   designerName: string;
@@ -28,6 +27,8 @@ export interface MonImageProps {
   onSubmit: (values: MonImageFormValues) => void;
   onNavigateToList: VoidFunction;
   isLoading: boolean;
+  selectedMon?: Mon;
+  onSelectMon: (monId: number) => void;
 }
 
 const MonImage: React.FC<MonImageProps> = ({
@@ -40,6 +41,8 @@ const MonImage: React.FC<MonImageProps> = ({
   onSubmit,
   onNavigateToList,
   isLoading,
+  selectedMon,
+  onSelectMon,
 }) => {
   const {
     control,
@@ -52,11 +55,7 @@ const MonImage: React.FC<MonImageProps> = ({
     mode: "onChange",
   });
 
-  const { monId, evolveFromId, evolutionRequiredLevel } = watch();
-
-  const selectedMon = useMemo(() => {
-    return mons?.find((item) => item.id === monId);
-  }, [monId, mons]);
+  const { monId, evolutionRequiredLevel } = watch();
 
   const isRegisteredMon = useMemo(() => {
     return selectedMon?.__monImages__?.length;
@@ -79,8 +78,8 @@ const MonImage: React.FC<MonImageProps> = ({
   );
 
   const evolveFromMon = useMemo(() => {
-    return mons?.find((mon) => mon.id === evolveFromId);
-  }, [evolveFromId, mons]);
+    return mons?.find((mon) => mon.id === selectedMon?.evolveFromId);
+  }, [mons, selectedMon?.evolveFromId]);
 
   useEffect(() => {
     if (evolutionRequiredLevel) {
@@ -110,6 +109,7 @@ const MonImage: React.FC<MonImageProps> = ({
               placeholder: "Select a mon",
               disabled: isSubmitting,
               className: "sm:w-60",
+              onChange: onSelectMon,
             }}
             className="w-full"
             rules={{ required: "A mon should be selected" }}
@@ -157,6 +157,7 @@ const MonImage: React.FC<MonImageProps> = ({
                   min: { value: 1, message: "Collection point should be over 0" },
                 }}
                 className="w-full sm:w-60"
+                defaultValue={1}
               />
             </div>
             <div className="flex-shrink-1 mt-3">
@@ -201,26 +202,7 @@ const MonImage: React.FC<MonImageProps> = ({
                 className="w-full sm:w-60"
               />
             </div>
-            <div className="flex-shrink-1 mt-3">
-              <ControlledInput
-                control={control}
-                name="evolveFromId"
-                input={SearchableSelect}
-                inputProps={{
-                  label: "Evolve from",
-                  items: mons!
-                    .filter((item) => item.id !== monId)
-                    .map((item) => ({
-                      value: item.id,
-                      displayValue: `${item.id}-${item.nameKo || item.name}`,
-                    })),
-                  onClear: () => setValue("evolveFromId", undefined),
-                  disabled: isSubmitting,
-                }}
-                className="w-full sm:w-60"
-              />
-            </div>
-            {evolveFromId && (
+            {!!selectedMon?.evolveFromId && (
               <div className="flex-shrink-1 mt-3">
                 <ControlledInput
                   control={control}
@@ -233,7 +215,7 @@ const MonImage: React.FC<MonImageProps> = ({
                   }}
                   rules={{
                     required: {
-                      value: !!evolveFromId,
+                      value: true,
                       message: "Evolution required level is required.",
                     },
                   }}

@@ -5,7 +5,7 @@ export interface ControlledInputProps<TInputProps, TFormValues>
   inputProps?: Omit<
     TInputProps,
     "name" | "defaultValue" | "hasError" | "errorMessage" | "onChange"
-  > & { onChange?: (value: string | number) => void };
+  > & { onChange?: (value: any) => void };
   input: React.FC<TInputProps>;
   className?: string;
 }

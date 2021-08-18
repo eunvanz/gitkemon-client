@@ -91,10 +91,10 @@ export interface Mon {
   stars: number;
   colPoint: number;
   evolveFromId?: number | null;
-  nextMon?: Mon[];
   createdAt?: string;
   updatedAt?: string;
   __monImages__?: MonImage[];
+  __nextMons__?: Mon[];
   __has_monImages__?: boolean;
 }
 
@@ -181,6 +181,7 @@ export type ExtendableHTMLProps<T extends HTMLElement> = React.HTMLProps<T>;
 export enum QUERY_KEY {
   USER = "USER",
   MON_IMAGE = "MON_IMAGE",
+  MON = "MON",
   MONS = "MONS",
   MONS_WITH_IMAGES = "MONS_WITH_IMAGES",
   MON_IMAGES = "MON_IMAGES",

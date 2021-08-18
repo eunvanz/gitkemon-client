@@ -6,6 +6,7 @@ import api, { CreateMonImageDto, UpdateMonDto, UpdateMonImageDto } from "../../.
 import { convertURLtoFile } from "../../../../helpers/commonHelpers";
 import ROUTES from "../../../../paths";
 import useMonImageQuery from "../../../../queries/useMonImageQuery";
+import useMonQuery from "../../../../queries/useMonQuery";
 import useMonsQuery from "../../../../queries/useMonsQuery";
 import { Mon, MonImage, QUERY_KEY } from "../../../../types";
 import { MonImageFormValues, MonImageProps } from "./MonImage.view";
@@ -38,7 +39,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
   );
 
   const { data: mons, isLoading: isMonsLoading, refetch: refetchMons } = useMonsQuery(
-    { isWithImages: true },
+    undefined,
     {
       initialData: ssrMons,
       enabled: !ssrMons,
@@ -72,6 +73,14 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
     setIsImageModified(true);
   }, []);
 
+  const [selectedMonId, setSelectedMonId] = useState<number | undefined>(undefined);
+
+  const onSelectMon = useCallback((monId: number) => {
+    setSelectedMonId(monId);
+  }, []);
+
+  const { data: selectedMon } = useMonQuery(selectedMonId, { enabled: !!selectedMonId });
+
   const onSubmit = useCallback(
     async (values: MonImageFormValues) => {
       if (!imageFile) {
@@ -87,7 +96,6 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
         const mon: UpdateMonDto = {
           colPoint: Number(values.colPoint),
           tier: values.tier,
-          evolveFromId: values.evolveFromId,
         };
         const evolveFromMon: UpdateMonDto = {
           evolutionLevel: Number(values.evolutionRequiredLevel),
@@ -96,8 +104,8 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
           await Promise.all([
             api.postMonImage(monImage),
             api.patchMon(values.monId, mon),
-            values.evolveFromId
-              ? api.patchMon(values.evolveFromId, evolveFromMon)
+            selectedMon?.evolveFromId
+              ? api.patchMon(selectedMon.evolveFromId, evolveFromMon)
               : Promise.resolve(),
           ]);
           queryClient.resetQueries(QUERY_KEY.MON_IMAGES);
@@ -134,6 +142,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
       queryClient,
       refetchMons,
       router,
+      selectedMon?.evolveFromId,
     ],
   );
 
@@ -169,6 +178,8 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
     onSubmit,
     onNavigateToList,
     isLoading,
+    onSelectMon,
+    selectedMon,
   };
 };
 

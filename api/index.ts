@@ -71,6 +71,16 @@ const getAllMons = async () => {
 };
 
 /**
+ * id로 포켓몬 조회
+ * @param id mon id
+ * @returns Mon
+ */
+const getMonById = async (id: number) => {
+  const { data } = await requester.get<Mon>(`${API_URL.MONS}/${id}`);
+  return data;
+};
+
+/**
  * 전체 포켓몬 조회 (+이미지 조인)
  */
 const getAllMonsWithImages = async () => {
@@ -204,6 +214,7 @@ const api = {
   postPaybacks,
   hunt,
   getCollection,
+  getMonById,
 };
 
 export default api;

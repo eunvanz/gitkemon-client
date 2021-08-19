@@ -54,18 +54,18 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         isFlipped={!isRealRevealed}
       />
       <AnimatePresence>
-        <motion.div
-          className="flex justify-center mt-2"
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{ delay: 1, duration: 0.5 }}
-        >
-          {isRealRevealed &&
-            (oldCollection ? (
+        {isRealRevealed && (
+          <motion.div
+            className="flex justify-center mt-2"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{ duration: 0.5 }}
+          >
+            {oldCollection ? (
               <>
                 <LevelBadge level={oldCollection.level} />
                 <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
@@ -73,8 +73,9 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
               </>
             ) : (
               <Badge color="red" label="NEW" size="sm" />
-            ))}
-        </motion.div>
+            )}
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

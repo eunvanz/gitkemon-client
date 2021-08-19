@@ -12,9 +12,10 @@ import styles from "./HuntResult.module.css";
 export interface HuntResultProps {
   pokeBallType: PokeBallType;
   result?: HuntResponse;
+  onComplete: VoidFunction;
 }
 
-const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
+const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result, onComplete }) => {
   const [isTitleVisible, setIsTitleVisible] = useState(false);
 
   const [isCardVisible, setIsCardVisible] = useState(false);
@@ -57,9 +58,12 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
         setTimeout(() => {
           setIsCardFlipped(false);
         }, 1000);
+        setTimeout(() => {
+          onComplete();
+        }, 1000 + 200 * result!.length);
       })();
     }
-  }, [hasToShowResult, isTitleVisible, result]);
+  }, [hasToShowResult, isTitleVisible, onComplete, result]);
 
   useEffect(() => {
     setTimeout(() => setIsTitleVisible(true), 2000);

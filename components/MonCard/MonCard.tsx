@@ -3,6 +3,7 @@ import cx from "classnames";
 import { CardMon, ModalMon } from "../../types";
 import LevelBadge from "../LevelBadge";
 import MonModalContainer from "../MonModal";
+import MonModal from "../MonModal/MonModal";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
@@ -16,6 +17,8 @@ export interface MonCardProps
   oldMon?: ModalMon;
   /** 레벨업을 했을 때 비교하기 위해 사용하는 필드 */
   newMon?: ModalMon;
+  /** 콜렉션이 아닌 Mon 타입의 경우에 사용하는 필드 */
+  modalMon?: ModalMon;
   isFlipped?: boolean;
   isFullWidth?: boolean;
 }
@@ -24,12 +27,17 @@ const MonCard: React.FC<MonCardProps> = ({
   mon,
   oldMon,
   newMon,
+  modalMon,
   className,
   isFlipped,
   isFullWidth,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
+
+  const isHidden = useMemo(() => {
+    return !mon.imageUrl;
+  }, [mon.imageUrl]);
 
   const Front = useCallback(
     ({ isPlaceholder }: { isPlaceholder?: boolean }) => {
@@ -48,8 +56,9 @@ const MonCard: React.FC<MonCardProps> = ({
                 </div>
               )}
               <div className="flex justify-center">
+                {/* TODO: 플레이스홀더 이미지 대체 */}
                 {/* eslint-disable-next-line */}
-                <img src={mon.imageUrl || ""} alt="" />
+                <img src={mon.imageUrl || "https://via.placeholder.com/250"} alt="" />
               </div>
             </div>
             <div className="flex-col bg-gray-50 py-1 w-full rounded-b">
@@ -117,13 +126,21 @@ const MonCard: React.FC<MonCardProps> = ({
           </div>
         </div>
       </div>
-      <MonModalContainer
-        collectionId={mon.id}
-        oldMon={oldMon}
-        newMon={newMon}
-        isOpen={isMonModalOpen}
-        onClose={() => setIsMonModalOpen(false)}
-      />
+      {isHidden ? (
+        <MonModal
+          isOpen={isMonModalOpen}
+          onClose={() => setIsMonModalOpen(false)}
+          mon={modalMon}
+        />
+      ) : (
+        <MonModalContainer
+          collectionId={mon.id}
+          oldMon={oldMon}
+          newMon={newMon}
+          isOpen={isMonModalOpen}
+          onClose={() => setIsMonModalOpen(false)}
+        />
+      )}
     </>
   );
 };

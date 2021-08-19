@@ -22,6 +22,7 @@ module.exports = (phase) => {
         "images.unsplash.com",
         "avatars.githubusercontent.com",
         "storage.googleapis.com",
+        "via.placeholder.com",
       ],
     },
   };

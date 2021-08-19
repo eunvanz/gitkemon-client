@@ -20,6 +20,7 @@ export const 기본 = createStoryComponent(Template);
 
 export const 히든 = createStoryComponent(Template, {
   mon: { ...mockMons.cardMon, imageUrl: undefined },
+  modalMon: { ...mockMons.activeMons[0] },
 });
 
 export const 그리드 = () => (

@@ -245,7 +245,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                       },
                       {
                         title: "Your collection",
-                        onClick: () => router.push(ROUTES.COLLECTION),
+                        onClick: () => router.push(`${ROUTES.COLLECTIONS}/${user.id}`),
                       },
                     ],
                     [

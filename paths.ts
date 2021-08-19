@@ -4,7 +4,7 @@ const ROUTES = {
   EXCHANGE_CODE: "/exchange-code",
   HUNT: "/hunt",
   HUNT_RESULT: "/hunt-result",
-  COLLECTION: "/collection",
+  COLLECTIONS: "/collections",
   RANKING: "/ranking",
   WORKSHOP: "/workshop",
   PROFILE: "/profile",

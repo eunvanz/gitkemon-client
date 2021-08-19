@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowNarrowRightIcon } from "@heroicons/react/solid";
 import cx from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   convertCollectionToCardMon,
   convertCollectionToModalMon,
@@ -53,30 +52,22 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         newMon={convertCollectionToModalMon(newCollection)}
         isFlipped={!isRealRevealed}
       />
-      <AnimatePresence>
-        {isRealRevealed && (
-          <motion.div
-            className="flex justify-center mt-2"
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{ duration: 0.5 }}
-          >
-            {oldCollection ? (
-              <>
-                <LevelBadge level={oldCollection.level} />
-                <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
-                <LevelBadge level={newCollection.level} />
-              </>
-            ) : (
-              <Badge color="red" label="NEW" size="sm" />
-            )}
-          </motion.div>
+      <div
+        className={cx(
+          "flex justify-center mt-2 opacity-0 transition-opacity delay-300",
+          isRealRevealed ? "opacity-100" : undefined,
         )}
-      </AnimatePresence>
+      >
+        {oldCollection ? (
+          <>
+            <LevelBadge level={oldCollection.level} />
+            <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
+            <LevelBadge level={newCollection.level} />
+          </>
+        ) : (
+          <Badge color="red" label="NEW" size="sm" />
+        )}
+      </div>
     </div>
   );
 };

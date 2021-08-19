@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { colorHashes } from "../../constants/styles";
 import { HuntResponse, PokeBallType } from "../../types";
+import Button from "../Button";
 import HuntResultItem from "../HuntResultItem";
 import MonCardGrid from "../MonCardGrid";
 import PokeBallImage from "../PokeBallImage";
@@ -12,10 +14,14 @@ import styles from "./HuntResult.module.css";
 export interface HuntResultProps {
   pokeBallType: PokeBallType;
   result?: HuntResponse;
-  onComplete: VoidFunction;
+  restPokeBalls: number;
 }
 
-const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result, onComplete }) => {
+const HuntResult: React.FC<HuntResultProps> = ({
+  pokeBallType,
+  result,
+  restPokeBalls,
+}) => {
   const [isTitleVisible, setIsTitleVisible] = useState(false);
 
   const [isCardVisible, setIsCardVisible] = useState(false);
@@ -27,6 +33,8 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result, onComplet
   const pokeBallRef = useRef<HTMLDivElement>(null);
 
   const [isCardFlipped, setIsCardFlipped] = useState(true);
+
+  const [isButtonsVisible, setIsButtonsVisible] = useState(false);
 
   useEffect(() => {
     if (hasToShowResult) {
@@ -59,109 +67,139 @@ const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result, onComplet
           setIsCardFlipped(false);
         }, 1000);
         setTimeout(() => {
-          onComplete();
+          setIsButtonsVisible(true);
         }, 1000 + 200 * result!.length);
       })();
     }
-  }, [hasToShowResult, isTitleVisible, onComplete, result]);
+  }, [hasToShowResult, isTitleVisible, result]);
 
   useEffect(() => {
     setTimeout(() => setIsTitleVisible(true), 2000);
   }, []);
 
+  const keepHuntingCount = useMemo(() => {
+    return Math.min(restPokeBalls, result?.length || 0);
+  }, [restPokeBalls, result?.length]);
+
   return (
-    <div className="flex justify-center items-center content-container">
-      <AnimatePresence>
-        {hasToShowResult && !isCardVisible && (
-          <motion.div
-            className={cx("top-40 absolute flex justify-center")}
-            initial={{
-              transform: "scale(0%)",
-            }}
-            animate={{
-              transform: "scale(100%)",
-            }}
-            exit={{
-              transform: "translateY(-100vh)",
-            }}
-            transition={{
-              type: "spring",
-              bounce: 0.8,
-            }}
-          >
-            <Typography as="h1" weight="extrabold" color="primary" size="4xl">
-              GOTCHA!
-            </Typography>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {!isCardVisible && (
-          <motion.div
-            initial={{
-              transform: "scale(20%)",
-            }}
-            animate={{
-              transform: "scale(100%)",
-            }}
-            exit={{
-              transform: "translateY(-100vh)",
-              position: "absolute",
-            }}
-            transition={{ type: "spring", bounce: 0.4 }}
-          >
-            <div
-              ref={pokeBallRef}
-              className={cx("flex justify-center", { [styles.wiggle]: !hasToShowResult })}
-            >
-              <PokeBallImage type={pokeBallType} />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isCardVisible &&
-          result &&
-          (result.length > 1 ? (
+    <div className="flex flex-col justify-center items-center content-container">
+      <div className="flex justify-center">
+        <AnimatePresence>
+          {hasToShowResult && !isCardVisible && (
             <motion.div
-              className="w-full"
+              className={cx("top-40 absolute flex justify-center")}
               initial={{
-                transform: "translateY(80vh)",
+                transform: "scale(0%)",
               }}
               animate={{
-                transform: "translateY(0vh)",
+                transform: "scale(100%)",
+              }}
+              exit={{
+                transform: "translateY(-100vh)",
+              }}
+              transition={{
+                type: "spring",
+                bounce: 0.8,
+              }}
+            >
+              <Typography as="h1" weight="extrabold" color="primary" size="4xl">
+                GOTCHA!
+              </Typography>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {!isCardVisible && (
+            <motion.div
+              initial={{
+                transform: "scale(20%)",
+              }}
+              animate={{
+                transform: "scale(100%)",
+              }}
+              exit={{
+                transform: "translateY(-100vh)",
+                position: "absolute",
               }}
               transition={{ type: "spring", bounce: 0.4 }}
             >
-              <MonCardGrid>
-                {result.map((item, index) => (
-                  <HuntResultItem
-                    key={index}
-                    huntResult={item}
-                    isRevealed={!isCardFlipped}
-                    delay={index * 200}
-                  />
-                ))}
-              </MonCardGrid>
+              <div
+                ref={pokeBallRef}
+                className={cx("flex justify-center", {
+                  [styles.wiggle]: !hasToShowResult,
+                })}
+              >
+                <PokeBallImage type={pokeBallType} />
+              </div>
             </motion.div>
-          ) : (
-            <motion.div
-              className="flex justify-center w-full max-w-screen-lg m-auto"
-              initial={{
-                transform: "translateY(80vh)",
-              }}
-              animate={{
-                transform: "translateY(0vh)",
-              }}
-              transition={{ type: "spring", bounce: 0.4 }}
-            >
-              <HuntResultItem
-                huntResult={result[0]}
-                isRevealed={!isCardFlipped}
-                isSingle
-              />
-            </motion.div>
-          ))}
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isCardVisible &&
+            result &&
+            (result.length > 1 ? (
+              <motion.div
+                className="w-full"
+                initial={{
+                  transform: "translateY(80vh)",
+                }}
+                animate={{
+                  transform: "translateY(0vh)",
+                }}
+                transition={{ type: "spring", bounce: 0.4 }}
+              >
+                <MonCardGrid>
+                  {result.map((item, index) => (
+                    <HuntResultItem
+                      key={index}
+                      huntResult={item}
+                      isRevealed={!isCardFlipped}
+                      delay={index * 200}
+                    />
+                  ))}
+                </MonCardGrid>
+              </motion.div>
+            ) : (
+              <motion.div
+                className="flex justify-center w-full max-w-screen-lg m-auto"
+                initial={{
+                  transform: "translateY(80vh)",
+                }}
+                animate={{
+                  transform: "translateY(0vh)",
+                }}
+                transition={{ type: "spring", bounce: 0.4 }}
+              >
+                <HuntResultItem
+                  huntResult={result[0]}
+                  isRevealed={!isCardFlipped}
+                  isSingle
+                />
+              </motion.div>
+            ))}
+        </AnimatePresence>
+      </div>
+      <AnimatePresence>
+        {isButtonsVisible && (
+          <motion.div
+            className="flex-0 justify-center p-4"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+          >
+            <Button color="white">Choose Pokeball</Button>
+            {!!keepHuntingCount && (
+              <Button className="ml-2">
+                Keep hunting
+                {keepHuntingCount > 1 && (
+                  <>
+                    <XIcon className="mx-1 w-4 h-4" />
+                    {keepHuntingCount}
+                  </>
+                )}
+              </Button>
+            )}
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

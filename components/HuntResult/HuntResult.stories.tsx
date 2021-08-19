@@ -10,6 +10,7 @@ export default {
   args: {
     pokeBallType: "basic",
     result: mockCollections.huntResultNew,
+    restPokeBalls: 10,
   },
   decorators: [withTestProvider],
 } as ComponentMeta<typeof HuntResult>;
@@ -20,9 +21,5 @@ export const 단일 = createStoryComponent(Template);
 
 export const 멀티 = createStoryComponent(Template, {
   // @ts-ignore
-  result: [
-    ...mockCollections.huntResultMulti,
-    ...mockCollections.huntResultMulti,
-    ...mockCollections.huntResultMulti,
-  ],
+  result: mockCollections.huntResultMulti,
 });

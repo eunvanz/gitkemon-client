@@ -38,7 +38,7 @@ const Collections: React.FC<CollectionsProps> = ({ collections, mons }) => {
   }, [collections, filteredMon]);
 
   return !isLoading ? (
-    <div className="flex flex-col justify-start">
+    <div className="flex flex-col justify-start p-4">
       <MonCardGrid>
         {orderedCollections!.map((collection) => {
           const isCollection = (collection as Collection).monImageUrl;

@@ -1,3 +1,4 @@
+import withBaseLayout from "../../../hocs/withBaseLayout";
 import Collections from "./Collections.view";
 import useCollectionsProps from "./useCollectionsProps";
 
@@ -7,4 +8,4 @@ const CollectionsPage: React.FC<void> = () => {
   return <Collections {...props} />;
 };
 
-export default CollectionsPage;
+export default withBaseLayout(CollectionsPage);

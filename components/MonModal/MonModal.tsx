@@ -126,7 +126,15 @@ const MonModal: React.FC<MonModalProps> = ({
               })}
             {renderProfile({
               title: "Tier",
-              content: <MonTierBadge tier={mon.tier} />,
+              content: (
+                <>
+                  <MonTierBadge tier={mon.tier} /> (CP{" "}
+                  <Typography color="primary" weight="bold">
+                    +{mon.colPoint}
+                  </Typography>
+                  )
+                </>
+              ),
             })}
             {renderProfile({
               title: "Types",

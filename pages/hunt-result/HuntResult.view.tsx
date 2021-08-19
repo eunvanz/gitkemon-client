@@ -1,15 +1,7 @@
 import HuntResultComponent, { HuntResultProps } from "../../components/HuntResult";
 
-const HuntResult: React.FC<HuntResultProps> = ({ pokeBallType, result }) => {
-  return (
-    <div className="relative">
-      <HuntResultComponent
-        pokeBallType={pokeBallType}
-        result={result}
-        restPokeBalls={4}
-      />
-    </div>
-  );
+const HuntResult: React.FC<HuntResultProps> = (props) => {
+  return <HuntResultComponent {...props} />;
 };
 
 export default HuntResult;

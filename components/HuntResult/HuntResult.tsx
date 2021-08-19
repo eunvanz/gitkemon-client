@@ -15,12 +15,18 @@ export interface HuntResultProps {
   pokeBallType: PokeBallType;
   result?: HuntResponse;
   restPokeBalls: number;
+  onChoosePokeBall: VoidFunction;
+  onKeepHunting: VoidFunction;
+  onGoToCollections: VoidFunction;
 }
 
 const HuntResult: React.FC<HuntResultProps> = ({
   pokeBallType,
   result,
   restPokeBalls,
+  onChoosePokeBall,
+  onKeepHunting,
+  onGoToCollections,
 }) => {
   const [isTitleVisible, setIsTitleVisible] = useState(false);
 
@@ -186,9 +192,11 @@ const HuntResult: React.FC<HuntResultProps> = ({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
           >
-            <Button color="white">Choose Pokeball</Button>
-            {!!keepHuntingCount && (
-              <Button className="ml-2">
+            <Button color="white" onClick={onChoosePokeBall}>
+              Choose Pokeball
+            </Button>
+            {!!keepHuntingCount ? (
+              <Button className="ml-2" onClick={onKeepHunting}>
                 Keep hunting
                 {keepHuntingCount > 1 && (
                   <>
@@ -196,6 +204,10 @@ const HuntResult: React.FC<HuntResultProps> = ({
                     {keepHuntingCount}
                   </>
                 )}
+              </Button>
+            ) : (
+              <Button className="ml-2" onClick={onGoToCollections}>
+                Go to collections
               </Button>
             )}
           </motion.div>

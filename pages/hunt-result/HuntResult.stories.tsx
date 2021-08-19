@@ -10,7 +10,6 @@ export default {
   args: {
     pokeBallType: "basic",
     result: mockCollections.huntResultMulti,
-    count: 2,
   },
   decorators: [withTestProvider],
 } as ComponentMeta<typeof HuntResult>;

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
@@ -79,13 +79,26 @@ const HuntResult: React.FC<HuntResultProps> = ({
     }
   }, [hasToShowResult, isTitleVisible, result]);
 
-  useEffect(() => {
-    setTimeout(() => setIsTitleVisible(true), 2000);
+  const triggerAnimation = useCallback(() => {
+    setTimeout(() => setIsTitleVisible(true), 1000);
   }, []);
+
+  useEffect(() => {
+    triggerAnimation();
+  }, [triggerAnimation]);
 
   const keepHuntingCount = useMemo(() => {
     return Math.min(restPokeBalls, result?.length || 0);
   }, [restPokeBalls, result?.length]);
+
+  const handleOnKeepHunting = useCallback(() => {
+    setIsTitleVisible(false);
+    setIsCardVisible(false);
+    setIsCardFlipped(true);
+    setIsButtonsVisible(false);
+    onKeepHunting();
+    triggerAnimation();
+  }, [onKeepHunting, triggerAnimation]);
 
   return (
     <div className="flex flex-col justify-center items-center content-container">
@@ -196,7 +209,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
               Choose Pokeball
             </Button>
             {!!keepHuntingCount ? (
-              <Button className="ml-2" onClick={onKeepHunting}>
+              <Button className="ml-2" onClick={handleOnKeepHunting}>
                 Keep hunting
                 {keepHuntingCount > 1 && (
                   <>

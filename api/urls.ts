@@ -9,6 +9,7 @@ const API_URL = {
   DONATIONS: "paybacks",
   COLLECTIONS: "collections",
   COLLECTIONS__HUNT: "collections/hunt",
+  COLLECTIONS__USER: "collections/user",
 };
 
 export default API_URL;

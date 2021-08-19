@@ -198,6 +198,13 @@ const getCollection = async (id: number) => {
   return data;
 };
 
+const getUserCollection = async (userId: string) => {
+  const { data } = await requester.get<Collection[]>(
+    `${API_URL.COLLECTIONS__USER}/${userId}`,
+  );
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -215,6 +222,7 @@ const api = {
   hunt,
   getCollection,
   getMonById,
+  getUserCollection,
 };
 
 export default api;

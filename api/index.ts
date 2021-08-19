@@ -26,7 +26,7 @@ const exchangeGithubCode = async (code: string) => {
  * @returns User
  */
 const loginWithToken = async (token?: string) => {
-  const res = await requester.post<User>(API_URL.USERS__LOGIN_WITH_TOKEN, {
+  const res = await requester.post<User>(API_URL.USERS__REFRESH, {
     token,
   });
   return res ? res.data : null;

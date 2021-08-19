@@ -75,12 +75,12 @@ export interface Mon {
   descriptionKo?: string;
   descriptionJa?: string;
   descriptionZh?: string;
-  firstType: string;
-  secondType?: string | null;
+  firstType: MonType;
+  secondType?: MonType;
   height: number;
   weight: number;
   tier: MonTier;
-  evolutionLevel?: number | null;
+  evolutionLevel?: number;
   hp: number;
   attack: number;
   defense: number;
@@ -90,7 +90,7 @@ export interface Mon {
   total: number;
   stars: number;
   colPoint: number;
-  evolveFromId?: number | null;
+  evolveFromId?: number;
   createdAt?: string;
   updatedAt?: string;
   __monImages__?: MonImage[];

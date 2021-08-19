@@ -1,4 +1,4 @@
-import { CardMon, Collection, ModalMon } from "../types";
+import { CardMon, Collection, ModalMon, Mon } from "../types";
 
 export const convertCollectionToModalMon: (collection: Collection) => ModalMon = (
   collection,
@@ -88,5 +88,60 @@ export const convertCollectionToCardMon: (collection: Collection) => CardMon = (
     imageUrl: monImageUrl,
     level,
     potential,
+  };
+};
+
+export const convertMonToCardMon: (mon: Mon) => CardMon = (mon) => {
+  const { id, firstType, secondType, tier, stars, evolutionLevel } = mon;
+  return {
+    id,
+    firstType,
+    secondType,
+    tier,
+    stars,
+    evolutionLevel,
+  };
+};
+
+export const convertMonToModalMon: (mon: Mon) => ModalMon = (mon) => {
+  const {
+    id,
+    name,
+    description,
+    firstType,
+    secondType,
+    height,
+    weight,
+    tier,
+    evolutionLevel,
+    hp,
+    attack,
+    defense,
+    specialAttack,
+    specialDefense,
+    speed,
+    total,
+    stars,
+    colPoint,
+  } = mon;
+  return {
+    id,
+    name,
+    description,
+    firstType,
+    secondType,
+    height,
+    weight,
+    tier,
+    evolutionLevel,
+    hp,
+    attack,
+    defense,
+    specialAttack,
+    specialDefense,
+    speed,
+    total,
+    stars,
+    colPoint,
   };
 };

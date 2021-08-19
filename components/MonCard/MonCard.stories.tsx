@@ -18,6 +18,10 @@ const Template: ComponentStory<typeof MonCard> = (args) => <MonCard {...args} />
 
 export const 기본 = createStoryComponent(Template);
 
+export const 히든 = createStoryComponent(Template, {
+  mon: { ...mockMons.cardMon, imageUrl: undefined },
+});
+
 export const 그리드 = () => (
   <MonCardGrid>
     <MonCard mon={mockMons.cardMon} />

@@ -198,10 +198,15 @@ const getCollection = async (id: number) => {
   return data;
 };
 
-const getUserCollection = async (userId: string) => {
+const getUserCollections = async (userId: string) => {
   const { data } = await requester.get<Collection[]>(
     `${API_URL.COLLECTIONS__USER}/${userId}`,
   );
+  return data;
+};
+
+const getActiveMons = async () => {
+  const { data } = await requester.get<Mon[]>(API_URL.MONS__ACTIVE);
   return data;
 };
 
@@ -222,7 +227,8 @@ const api = {
   hunt,
   getCollection,
   getMonById,
-  getUserCollection,
+  getUserCollections,
+  getActiveMons,
 };
 
 export default api;

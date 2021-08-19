@@ -6,6 +6,7 @@ const API_URL = {
   MON_IMAGES: "mon-images",
   MONS: "mons",
   MONS__WITH_IMAGES: "mons/with-images",
+  MONS__ACTIVE: "mons/active",
   DONATIONS: "paybacks",
   COLLECTIONS: "collections",
   COLLECTIONS__HUNT: "collections/hunt",

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import orderBy from "lodash/orderBy";
-import MonCard from "../../components/MonCard";
-import MonCardGrid from "../../components/MonCardGrid";
+import MonCard from "../../../components/MonCard";
+import MonCardGrid from "../../../components/MonCardGrid";
 import {
   convertCollectionToCardMon,
   convertMonToCardMon,
   convertMonToModalMon,
-} from "../../helpers/projectHelpers";
-import { Collection, Mon } from "../../types";
+} from "../../../helpers/projectHelpers";
+import { Collection, Mon } from "../../../types";
 
 export interface CollectionsProps {
   collections?: Collection[];

@@ -194,7 +194,7 @@ const MonImage: React.FC<MonImageProps> = ({
                     },
                   ],
                   disabled: isSubmitting,
-                  hint: `Suggestion: ${selectedMon?.tier}`,
+                  hint: `Total: ${selectedMon?.total} / Suggestion: ${selectedMon?.tier}`,
                 }}
                 rules={{
                   required: "Tier is required",

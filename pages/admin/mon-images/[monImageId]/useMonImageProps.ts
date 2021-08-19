@@ -79,7 +79,15 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
     setSelectedMonId(monId);
   }, []);
 
-  const { data: selectedMon } = useMonQuery(selectedMonId, { enabled: !!selectedMonId });
+  const { data: selectedMon, refetch: refetchMon } = useMonQuery(selectedMonId, {
+    enabled: !!selectedMonId,
+  });
+
+  useEffect(() => {
+    if (selectedMonId) {
+      refetchMon();
+    }
+  }, [refetchMon, selectedMonId]);
 
   const onSubmit = useCallback(
     async (values: MonImageFormValues) => {

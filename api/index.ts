@@ -33,6 +33,11 @@ const loginWithToken = async (token?: string) => {
   return res ? res.data : null;
 };
 
+const getUser = async (userId: string) => {
+  const { data } = await requester.get<User>(`${API_URL.USERS}/${userId}`);
+  return data;
+};
+
 /**
  * 로그아웃 수행
  */
@@ -241,6 +246,7 @@ const api = {
   getActiveMons,
   getInactiveMons,
   postMon,
+  getUser,
 };
 
 export default api;

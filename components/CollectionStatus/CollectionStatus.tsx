@@ -12,7 +12,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({
   colPointInfo,
 }) => {
   return (
-    <div className="flex flex-wrap justify-center max-w-screen-xl w-full m-auto mb-4">
+    <div className="flex flex-wrap justify-center w-full m-auto mb-4">
       <div className="border rounded m-1 w-full">
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 w-full">
           {MON_TIERS.map((monTier) => (

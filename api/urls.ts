@@ -1,4 +1,5 @@
 const API_URL = {
+  USERS: "users",
   USERS__LOGIN: "users/login",
   USERS__REFRESH: "users/refresh",
   USERS__LOGOUT: "users/logout",

@@ -12,7 +12,12 @@ module.exports = {
     colors: {
       ...colors,
     },
-    extend: {},
+    extend: {
+      width: {
+        "1/5": "20%",
+        "1/8": "12.5%",
+      },
+    },
   },
   variants: {
     extend: {},

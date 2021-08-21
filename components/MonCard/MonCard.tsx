@@ -91,7 +91,7 @@ const MonCard: React.FC<MonCardProps> = ({
   );
 
   const widthCLassName = useMemo(() => {
-    return isFullWidth ? "w-full" : "w-1/3 sm:w-1/4 md:w-1/6 lg:w-1/8";
+    return isFullWidth ? "w-full" : "w-1/3 sm:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/8";
   }, [isFullWidth]);
 
   return (

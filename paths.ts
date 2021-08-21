@@ -10,6 +10,7 @@ const ROUTES = {
   PROFILE: "/profile",
   ADMIN: "/admin",
   ADMIN__MON_IMAGES: "/admin/mon-images",
+  ADMIN__MONS: "/admin/mons",
   PAYBACK: "/payback",
 };
 

@@ -210,6 +210,11 @@ const getActiveMons = async () => {
   return data;
 };
 
+const getInactiveMons = async () => {
+  const { data } = await requester.get<Mon[]>(API_URL.MONS__INACTIVE);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -229,6 +234,7 @@ const api = {
   getMonById,
   getUserCollections,
   getActiveMons,
+  getInactiveMons,
 };
 
 export default api;

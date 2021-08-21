@@ -173,6 +173,27 @@
     ],
     "description": "Storybook Template"
   },
+  "View Storybook Template ": {
+    "prefix": "viewstoryt",
+    "body": [
+      "import type { ComponentStory, ComponentMeta } from \"@storybook/react\";",
+      "import ${TM_FILENAME_BASE/\\.stories//} from \"./${TM_FILENAME_BASE/\\.stories//}\".view;",
+      "",
+      "export default {",
+      "  title: \"$1/$2\",",
+      "  component: ${TM_FILENAME_BASE/\\.stories//},",
+      "  args: {},",
+      "} as ComponentMeta<typeof ${TM_FILENAME_BASE/\\.stories//}>;",
+      "",
+      "const Template: ComponentStory<typeof ${TM_FILENAME_BASE/\\.stories//}> = (args) => (",
+      "  <${TM_FILENAME_BASE/\\.stories//} {...args} />",
+      ");",
+      "",
+      "export const 기본 = createStoryComponent(Template);",
+      ""
+    ],
+    "description": "Storybook Template"
+  },
   "Hook Test Template": {
     "prefix": "testhook",
     "body": [

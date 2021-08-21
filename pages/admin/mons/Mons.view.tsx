@@ -192,7 +192,7 @@ const Mons: React.FC<MonsProps> = ({ mons, onEdit, onChangeMonFilter, monFilter 
   }, [getColumnSearchProps, onEdit]);
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-white">
       <div className="mb-4">
         <Radio.Group
           value={monFilter}

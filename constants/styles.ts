@@ -3,6 +3,15 @@ export const colors = {
   SECONDARY_COLOR: "blue-100",
 };
 
+export const colorsByTier = {
+  basic: "yellow",
+  rare: "green",
+  special: "sky",
+  "s.rare": "purple",
+  elite: "pink",
+  legend: "orange",
+};
+
 export const colorHashes = {
   PRIMARY_COLOR: "#3B82F6",
   SECONDARY_COLOR: "#DBEAFE",

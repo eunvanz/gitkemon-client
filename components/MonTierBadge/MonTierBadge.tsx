@@ -32,7 +32,7 @@ const MonTierBadge: React.FC<MonTierBadgeProps> = ({ tier, className, ...restPro
       case "rare":
         return "bg-green-200 text-green-800";
       case "special":
-        return "bg-blue-200 text-blue-800";
+        return "bg-sky-200 text-sky-800";
       case "s.rare":
         return "bg-purple-200 text-purple-800";
       case "elite":

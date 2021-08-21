@@ -95,7 +95,6 @@ export interface Mon {
   updatedAt?: string;
   __monImages__?: MonImage[];
   __nextMons__?: Mon[];
-  __has_monImages__?: boolean;
 }
 
 export type MonTier = "basic" | "special" | "rare" | "s.rare" | "elite" | "legend";

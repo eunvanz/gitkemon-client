@@ -1,3 +1,4 @@
+import { MonFormValues } from "../pages/admin/mons/[monId]/Mon.view";
 import {
   Payback,
   Mon,
@@ -78,6 +79,10 @@ const getAllMons = async () => {
 const getMonById = async (id: number) => {
   const { data } = await requester.get<Mon>(`${API_URL.MONS}/${id}`);
   return data;
+};
+
+const postMon = async (mon: MonFormValues) => {
+  await requester.post(API_URL.MONS, mon);
 };
 
 /**
@@ -235,6 +240,7 @@ const api = {
   getUserCollections,
   getActiveMons,
   getInactiveMons,
+  postMon,
 };
 
 export default api;

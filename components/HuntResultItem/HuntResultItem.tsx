@@ -46,6 +46,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
       )}
     >
       <MonCard
+        isFullWidth
         mon={convertCollectionToCardMon(newCollection)}
         oldMon={oldCollection ? convertCollectionToModalMon(oldCollection) : undefined}
         newMon={convertCollectionToModalMon(newCollection)}

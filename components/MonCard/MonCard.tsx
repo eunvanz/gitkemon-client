@@ -20,6 +20,7 @@ export interface MonCardProps
   /** 콜렉션이 아닌 Mon 타입의 경우에 사용하는 필드 */
   modalMon?: ModalMon;
   isFlipped?: boolean;
+  isFullWidth?: boolean;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -29,6 +30,7 @@ const MonCard: React.FC<MonCardProps> = ({
   modalMon,
   className,
   isFlipped,
+  isFullWidth,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -88,11 +90,16 @@ const MonCard: React.FC<MonCardProps> = ({
     ],
   );
 
+  const widthCLassName = useMemo(() => {
+    return isFullWidth ? "w-full" : "w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8";
+  }, [isFullWidth]);
+
   return (
     <>
       <div
         className={cx(
-          "flex flex-col p-1 items-center transform transition-transform cursor-pointer hover:-translate-y-1 w-full",
+          "flex flex-col p-1 items-center transform transition-transform cursor-pointer hover:-translate-y-1",
+          widthCLassName,
           className,
           styles.card,
           styles.maxWidth,

@@ -140,7 +140,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
           <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
-              name="tier-all"
+              name="stars-all"
               checked={isArrayEqual(filterState.stars, MON_STARS)}
               onChange={(checked) =>
                 onChangeFilter({
@@ -174,7 +174,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
           <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
-              name="tier-all"
+              name="type-all"
               checked={isArrayEqual(filterState.type, MON_TYPES)}
               onChange={(checked) =>
                 onChangeFilter({

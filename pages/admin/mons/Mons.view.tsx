@@ -12,20 +12,15 @@ export interface MonsProps {
   mons?: Mon[];
   onEdit: (id: number) => void;
   onChangeMonFilter: (filter: MonFilter) => void;
+  monFilter: MonFilter;
 }
 
-const Mons: React.FC<MonsProps> = ({ mons, onEdit, onChangeMonFilter }) => {
+const Mons: React.FC<MonsProps> = ({ mons, onEdit, onChangeMonFilter, monFilter }) => {
   const searchInputRef = useRef<Input>(null);
 
   const [search, setSearch] = useState<{ searchText: string; searchedColumn?: string }>({
     searchText: "",
   });
-
-  const [monFilter, setMonFilter] = useState<MonFilter>("all");
-
-  useEffect(() => {
-    onChangeMonFilter(monFilter);
-  }, [monFilter, onChangeMonFilter]);
 
   const handleSearch = useCallback((selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -199,7 +194,10 @@ const Mons: React.FC<MonsProps> = ({ mons, onEdit, onChangeMonFilter }) => {
   return (
     <div className="p-4">
       <div className="mb-4">
-        <Radio.Group value={monFilter} onChange={(e) => setMonFilter(e.target.value)}>
+        <Radio.Group
+          value={monFilter}
+          onChange={(e) => onChangeMonFilter(e.target.value)}
+        >
           <Radio.Button value="all">All</Radio.Button>
           <Radio.Button value="active">Active</Radio.Button>
           <Radio.Button value="inactive">Inactive</Radio.Button>

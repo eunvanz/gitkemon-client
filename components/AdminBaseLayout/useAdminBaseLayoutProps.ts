@@ -29,6 +29,10 @@ const useAdminBaseLayoutProps: ({
         name: "Mon Images",
         onClick: () => router.push(ROUTES.ADMIN__MON_IMAGES),
       },
+      {
+        name: "Mons",
+        onClick: () => router.push(ROUTES.ADMIN__MONS),
+      },
     ];
   }, [router]);
 

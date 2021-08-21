@@ -1,7 +1,7 @@
 import cx from "classnames";
 
 export interface CheckboxProps {
-  label: string;
+  label: React.ReactNode;
   name: string;
   checked?: boolean;
   onChange: (checked: boolean) => void;

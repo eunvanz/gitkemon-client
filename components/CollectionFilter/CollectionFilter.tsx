@@ -9,6 +9,9 @@ import Accordion from "../Accordion";
 import BaseModal from "../BaseModal";
 import Button from "../Button";
 import Checkbox from "../Checkbox";
+import MonStars from "../MonStars";
+import MonTierBadge from "../MonTierBadge";
+import MonTypeBadge from "../MonTypeBadge";
 
 export interface CollectionFilterState {
   has: boolean[];
@@ -35,6 +38,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
     >
       <FilterIcon className="w-5 h-5 text-white" />
       <BaseModal
+        className="w-full sm:w-40"
         isOpen={isModalVisible}
         onClose={() => setIsModalVisible(false)}
         title="Collection filter"
@@ -52,7 +56,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
             !filterState.has.includes(true) || !filterState.has.includes(false)
           }
         >
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-2">
             <Checkbox
               className="mr-4"
               label="All"
@@ -99,7 +103,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
           title="Tier"
           isOpenDefault={!isArrayEqual(filterState.tier, MON_TIERS)}
         >
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
               name="tier-all"
@@ -114,7 +118,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
             {MON_TIERS.map((tier) => (
               <Checkbox
                 key={tier}
-                label={capitalize(tier)}
+                label={<MonTierBadge tier={tier} />}
                 name={`tier-${tier}`}
                 checked={filterState.tier.includes(tier)}
                 onChange={(checked) =>
@@ -133,7 +137,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
           title="Stars"
           isOpenDefault={!isArrayEqual(filterState.stars, MON_STARS)}
         >
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
               name="tier-all"
@@ -148,7 +152,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
             {MON_STARS.map((stars) => (
               <Checkbox
                 key={stars}
-                label={stars.toString()}
+                label={<MonStars size="xs" stars={stars} />}
                 name={`stars-${stars}`}
                 checked={filterState.stars.includes(stars)}
                 onChange={(checked) =>
@@ -167,7 +171,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
           title="Type"
           isOpenDefault={!isArrayEqual(filterState.type, MON_TYPES)}
         >
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
               name="tier-all"
@@ -182,7 +186,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
             {MON_TYPES.map((type) => (
               <Checkbox
                 key={type}
-                label={capitalize(type.toString())}
+                label={<MonTypeBadge type={type} />}
                 name={`type-${type}`}
                 checked={filterState.type.includes(type)}
                 onChange={(checked) =>

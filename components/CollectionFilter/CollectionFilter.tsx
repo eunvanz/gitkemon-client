@@ -1,9 +1,12 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { FilterIcon } from "@heroicons/react/outline";
+import union from "lodash/union";
+import without from "lodash/without";
 import { MonTier, MonType } from "../../types";
 import Accordion from "../Accordion";
 import BaseModal from "../BaseModal";
 import Button from "../Button";
+import Checkbox from "../Checkbox";
 
 export interface CollectionFilter {
   has: boolean[];
@@ -23,10 +26,11 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleOnApply = useCallback(() => {}, []);
-
   return (
-    <div className="absolute bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-sm hover:bg-blue-400">
+    <button
+      className="absolute bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-sm hover:bg-blue-400"
+      onClick={() => setIsModalVisible(true)}
+    >
       <FilterIcon className="w-5 h-5 text-white" />
       <BaseModal
         isOpen={isModalVisible}
@@ -34,9 +38,6 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
         title="Collection filter"
         footer={
           <div className="text-right">
-            <Button className="mr-1" onClick={handleOnApply}>
-              Apply
-            </Button>
             <Button color="transparent" onClick={() => setIsModalVisible(false)}>
               Close
             </Button>
@@ -49,10 +50,48 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
             !filterState.has.includes(true) || !filterState.has.includes(false)
           }
         >
-          <div></div>
+          <div>
+            <Checkbox
+              label="All"
+              name="has-all"
+              checked={filterState.has.includes(true) && filterState.has.includes(false)}
+              onChange={(checked) =>
+                onChangeFilter({
+                  ...filterState,
+                  has: checked ? [true, false] : [],
+                })
+              }
+            />
+            <Checkbox
+              label="Owned"
+              name="has-owned"
+              checked={filterState.has.includes(true)}
+              onChange={(checked) =>
+                onChangeFilter({
+                  ...filterState,
+                  has: checked
+                    ? union(filterState.has, [true])
+                    : without(filterState.has, true),
+                })
+              }
+            />
+            <Checkbox
+              label="Not owned"
+              name="has-not-owned"
+              checked={filterState.has.includes(false)}
+              onChange={(checked) =>
+                onChangeFilter({
+                  ...filterState,
+                  has: checked
+                    ? union(filterState.has, [false])
+                    : without(filterState.has, false),
+                })
+              }
+            />
+          </div>
         </Accordion>
       </BaseModal>
-    </div>
+    </button>
   );
 };
 

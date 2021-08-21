@@ -7,6 +7,7 @@ export default {
   component: Checkbox,
   args: {
     label: "Label",
+    id: "label",
   },
 } as ComponentMeta<typeof Checkbox>;
 

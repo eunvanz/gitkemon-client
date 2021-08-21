@@ -2,6 +2,7 @@ import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import withTestProvider from "../../../.storybook/decorators/withTestProvider";
 import mockCollections from "../../../api/mocks/collection";
 import mockMons from "../../../api/mocks/mon";
+import mockUsers from "../../../api/mocks/user";
 import { createStoryComponent } from "../../../helpers/storybookHelpers";
 import Collections from "./Collections.view";
 
@@ -11,6 +12,7 @@ export default {
   args: {
     collections: mockCollections.collections,
     mons: mockMons.activeMons,
+    user: mockUsers.user,
   },
   decorators: [withTestProvider],
 } as ComponentMeta<typeof Collections>;

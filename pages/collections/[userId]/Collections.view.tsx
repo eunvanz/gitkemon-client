@@ -3,20 +3,22 @@ import orderBy from "lodash/orderBy";
 import CollectionStatus from "../../../components/CollectionStatus";
 import MonCard from "../../../components/MonCard";
 import MonCardGrid from "../../../components/MonCardGrid";
+import Typography from "../../../components/Typography";
 import { MON_TIERS } from "../../../constants/rules";
 import {
   convertCollectionToCardMon,
   convertMonToCardMon,
   convertMonToModalMon,
 } from "../../../helpers/projectHelpers";
-import { Collection, Mon, MonTier } from "../../../types";
+import { Collection, Mon, User } from "../../../types";
 
 export interface CollectionsProps {
   collections?: Collection[];
   mons?: Mon[];
+  user: User;
 }
 
-const Collections: React.FC<CollectionsProps> = ({ collections, mons }) => {
+const Collections: React.FC<CollectionsProps> = ({ collections, mons, user }) => {
   const isLoading = useMemo(() => {
     return !collections || !mons;
   }, [collections, mons]);
@@ -66,6 +68,9 @@ const Collections: React.FC<CollectionsProps> = ({ collections, mons }) => {
 
   return !isLoading ? (
     <div className="flex flex-col justify-start p-4">
+      <Typography as="h1" size="2xl">
+        {user?.nickname}&apos;s collection
+      </Typography>
       {colPointInfo && countInfo && (
         <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />
       )}
@@ -74,7 +79,7 @@ const Collections: React.FC<CollectionsProps> = ({ collections, mons }) => {
           const isCollection = (collection as Collection).monImageUrl;
           return (
             <MonCard
-              key={collection.id}
+              key={`${isCollection ? "col" : "mon"}-${collection.id}`}
               mon={
                 isCollection
                   ? convertCollectionToCardMon(collection as Collection)

@@ -13,17 +13,19 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({
 }) => {
   return (
     <div className="flex flex-wrap justify-center max-w-screen-xl w-full m-auto mb-4">
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 w-full">
-        {MON_TIERS.map((monTier) => (
-          <CollectionStatusItem
-            key={monTier}
-            tier={monTier}
-            value={countInfo[monTier].value}
-            max={countInfo[monTier].max}
-          />
-        ))}
+      <div className="border rounded m-1 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 w-full">
+          {MON_TIERS.map((monTier) => (
+            <CollectionStatusItem
+              key={monTier}
+              tier={monTier}
+              value={countInfo[monTier].value}
+              max={countInfo[monTier].max}
+            />
+          ))}
+        </div>
+        <CollectionStatusItem value={colPointInfo.value} max={colPointInfo.max} />
       </div>
-      <CollectionStatusItem value={colPointInfo.value} max={colPointInfo.max} />
     </div>
   );
 };

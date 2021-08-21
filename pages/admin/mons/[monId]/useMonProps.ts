@@ -8,13 +8,13 @@ import useMonsQuery from "../../../../queries/useMonsQuery";
 import { MonFormValues, MonProps } from "./Mon.view";
 
 const useMonProps: () => MonProps = () => {
-  const { data: mons, isLoading: isMonsLoading } = useMonsQuery();
+  const { data: mons, isFetching: isMonsLoading } = useMonsQuery();
 
   const router = useRouter();
 
   const { monId } = router.query as { monId: string };
 
-  const { data: mon, isLoading: isMonLoading } = useMonQuery(+monId);
+  const { data: mon, isFetching: isMonLoading } = useMonQuery(+monId);
 
   const defaultFormValues = useMemo(() => {
     return mon as MonFormValues;

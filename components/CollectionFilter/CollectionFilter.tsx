@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { FilterIcon } from "@heroicons/react/outline";
 import { MonTier, MonType } from "../../types";
+import Accordion from "../Accordion";
 import BaseModal from "../BaseModal";
 import Button from "../Button";
 
@@ -13,9 +14,13 @@ export interface CollectionFilter {
 
 export interface CollectionFilterProps {
   onChangeFilter: (filter: CollectionFilter) => void;
+  filterState: CollectionFilter;
 }
 
-const CollectionFilter: React.FC<CollectionFilterProps> = ({ onChangeFilter }) => {
+const CollectionFilter: React.FC<CollectionFilterProps> = ({
+  onChangeFilter,
+  filterState,
+}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleOnApply = useCallback(() => {}, []);
@@ -37,7 +42,16 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({ onChangeFilter }) =
             </Button>
           </div>
         }
-      ></BaseModal>
+      >
+        <Accordion
+          title="Possession"
+          isOpenDefault={
+            !filterState.has.includes(true) || !filterState.has.includes(false)
+          }
+        >
+          <div></div>
+        </Accordion>
+      </BaseModal>
     </div>
   );
 };

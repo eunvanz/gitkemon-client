@@ -3,7 +3,7 @@ import { MinusSmIcon, PlusSmIcon } from "@heroicons/react/solid";
 
 export interface AccordionProps {
   title: string;
-  isOpenDefault: boolean;
+  isOpenDefault?: boolean;
 }
 
 const Accordion: React.FC<AccordionProps> = ({ title, isOpenDefault, children }) => {

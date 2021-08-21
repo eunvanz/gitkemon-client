@@ -318,6 +318,7 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
                 // TODO: 플레이스홀더 교체
                 src={mon.image ? mon.image.imageUrl : "https://via.placeholder.com/250"}
                 alt={mon.name}
+                quality={100}
                 width={200}
                 height={200}
               />

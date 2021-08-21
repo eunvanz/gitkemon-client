@@ -20,3 +20,7 @@ export default {
 const Template: ComponentStory<typeof Collections> = (args) => <Collections {...args} />;
 
 export const 기본 = createStoryComponent(Template);
+
+export const 로딩 = createStoryComponent(Template, {
+  collections: undefined,
+});

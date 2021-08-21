@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import orderBy from "lodash/orderBy";
 import CollectionStatus from "../../../components/CollectionStatus";
+import Loading from "../../../components/Loading";
 import MonCard from "../../../components/MonCard";
 import MonCardGrid from "../../../components/MonCardGrid";
 import Typography from "../../../components/Typography";
@@ -94,7 +95,9 @@ const Collections: React.FC<CollectionsProps> = ({ collections, mons, user }) =>
       </MonCardGrid>
     </div>
   ) : (
-    <>{/* TODO: 스켈레톤 */}</>
+    <div className="h-full">
+      <Loading isFullHeight />
+    </div>
   );
 };
 

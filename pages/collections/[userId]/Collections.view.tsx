@@ -1,11 +1,15 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { has } from "lodash";
 import orderBy from "lodash/orderBy";
+import CollectionFilter, {
+  CollectionFilterState,
+} from "../../../components/CollectionFilter";
 import CollectionStatus from "../../../components/CollectionStatus";
 import Loading from "../../../components/Loading";
 import MonCard from "../../../components/MonCard";
 import MonCardGrid from "../../../components/MonCardGrid";
 import Typography from "../../../components/Typography";
-import { MON_TIERS } from "../../../constants/rules";
+import { MON_STARS, MON_TIERS, MON_TYPES } from "../../../constants/rules";
 import {
   convertCollectionToCardMon,
   convertMonToCardMon,
@@ -20,27 +24,59 @@ export interface CollectionsProps {
 }
 
 const Collections: React.FC<CollectionsProps> = ({ collections, mons, user }) => {
+  const [filterState, setFilterState] = useState<CollectionFilterState>({
+    has: [true, false],
+    stars: MON_STARS,
+    tier: MON_TIERS,
+    type: MON_TYPES,
+  });
+
   const isLoading = useMemo(() => {
     return !collections || !mons;
   }, [collections, mons]);
 
   const filteredMon = useMemo(() => {
+    if (!filterState.has.includes(false)) {
+      return [];
+    }
     return mons?.filter(
       (mon) => !collections?.some((collection) => collection.monId === mon.id),
     );
-  }, [collections, mons]);
+  }, [collections, filterState.has, mons]);
 
   const orderedCollections = useMemo(() => {
     if (collections && filteredMon) {
       const mergedCollections = [
-        ...collections,
+        ...(filterState.has.includes(true) ? collections : []),
         ...filteredMon.map((mon) => ({ ...mon, monId: mon.id })),
       ];
-      return orderBy(mergedCollections, ["monId"], ["asc"]);
+      const filteredCollections = mergedCollections
+        .filter((collection) => {
+          return filterState.tier.includes(collection.tier);
+        })
+        .filter((collection) => {
+          return filterState.stars.includes(collection.stars);
+        })
+        .filter((collection) => {
+          return (
+            filterState.type.includes(collection.firstType) ||
+            (collection.secondType
+              ? filterState.type.includes(collection.secondType!)
+              : false)
+          );
+        });
+      return orderBy(filteredCollections, ["monId"], ["asc"]);
     } else {
       return undefined;
     }
-  }, [collections, filteredMon]);
+  }, [
+    collections,
+    filterState.has,
+    filterState.stars,
+    filterState.tier,
+    filterState.type,
+    filteredMon,
+  ]);
 
   const colPointInfo = useMemo(() => {
     if (!collections || !mons) {
@@ -93,6 +129,10 @@ const Collections: React.FC<CollectionsProps> = ({ collections, mons, user }) =>
           );
         })}
       </MonCardGrid>
+      <CollectionFilter
+        filterState={filterState}
+        onChangeFilter={(filter) => setFilterState(filter)}
+      />
     </div>
   ) : (
     <div className="h-full">

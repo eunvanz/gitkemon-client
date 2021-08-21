@@ -1,3 +1,5 @@
+import xor from "lodash/xor";
+
 export const convertURLtoFile = async (url: string) => {
   const response = await fetch(url);
   const data = await response.blob();
@@ -31,3 +33,11 @@ export function assertNotEmpty(value: any, message?: string): asserts value {
     throw new Error(message || "Assertion Error: Empty Value");
   }
 }
+
+export const capitalize = (s: string) => {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+
+export const isArrayEqual = (arr: any[], arr2: any[]) => {
+  return xor(arr, arr2).length === 0;
+};

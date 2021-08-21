@@ -2,13 +2,15 @@ import { useState } from "react";
 import { FilterIcon } from "@heroicons/react/outline";
 import union from "lodash/union";
 import without from "lodash/without";
+import { MON_STARS, MON_TIERS, MON_TYPES } from "../../constants/rules";
+import { capitalize, isArrayEqual } from "../../helpers/commonHelpers";
 import { MonTier, MonType } from "../../types";
 import Accordion from "../Accordion";
 import BaseModal from "../BaseModal";
 import Button from "../Button";
 import Checkbox from "../Checkbox";
 
-export interface CollectionFilter {
+export interface CollectionFilterState {
   has: boolean[];
   tier: MonTier[];
   type: MonType[];
@@ -16,8 +18,8 @@ export interface CollectionFilter {
 }
 
 export interface CollectionFilterProps {
-  onChangeFilter: (filter: CollectionFilter) => void;
-  filterState: CollectionFilter;
+  onChangeFilter: (filter: CollectionFilterState) => void;
+  filterState: CollectionFilterState;
 }
 
 const CollectionFilter: React.FC<CollectionFilterProps> = ({
@@ -28,7 +30,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
 
   return (
     <button
-      className="absolute bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-sm hover:bg-blue-400"
+      className="fixed bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-sm hover:bg-blue-400"
       onClick={() => setIsModalVisible(true)}
     >
       <FilterIcon className="w-5 h-5 text-white" />
@@ -50,8 +52,9 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
             !filterState.has.includes(true) || !filterState.has.includes(false)
           }
         >
-          <div>
+          <div className="grid grid-cols-3">
             <Checkbox
+              className="mr-4"
               label="All"
               name="has-all"
               checked={filterState.has.includes(true) && filterState.has.includes(false)}
@@ -63,6 +66,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
               }
             />
             <Checkbox
+              className="mr-4"
               label="Owned"
               name="has-owned"
               checked={filterState.has.includes(true)}
@@ -76,6 +80,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
               }
             />
             <Checkbox
+              className="mr-4"
               label="Not owned"
               name="has-not-owned"
               checked={filterState.has.includes(false)}
@@ -88,6 +93,108 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
                 })
               }
             />
+          </div>
+        </Accordion>
+        <Accordion
+          title="Tier"
+          isOpenDefault={!isArrayEqual(filterState.tier, MON_TIERS)}
+        >
+          <div className="grid grid-cols-3">
+            <Checkbox
+              label="All"
+              name="tier-all"
+              checked={isArrayEqual(filterState.tier, MON_TIERS)}
+              onChange={(checked) =>
+                onChangeFilter({
+                  ...filterState,
+                  tier: checked ? MON_TIERS : [],
+                })
+              }
+            />
+            {MON_TIERS.map((tier) => (
+              <Checkbox
+                key={tier}
+                label={capitalize(tier)}
+                name={`tier-${tier}`}
+                checked={filterState.tier.includes(tier)}
+                onChange={(checked) =>
+                  onChangeFilter({
+                    ...filterState,
+                    tier: checked
+                      ? union(filterState.tier, [tier])
+                      : without(filterState.tier, tier),
+                  })
+                }
+              />
+            ))}
+          </div>
+        </Accordion>
+        <Accordion
+          title="Stars"
+          isOpenDefault={!isArrayEqual(filterState.stars, MON_STARS)}
+        >
+          <div className="grid grid-cols-3">
+            <Checkbox
+              label="All"
+              name="tier-all"
+              checked={isArrayEqual(filterState.stars, MON_STARS)}
+              onChange={(checked) =>
+                onChangeFilter({
+                  ...filterState,
+                  stars: checked ? MON_STARS : [],
+                })
+              }
+            />
+            {MON_STARS.map((stars) => (
+              <Checkbox
+                key={stars}
+                label={stars.toString()}
+                name={`stars-${stars}`}
+                checked={filterState.stars.includes(stars)}
+                onChange={(checked) =>
+                  onChangeFilter({
+                    ...filterState,
+                    stars: checked
+                      ? union(filterState.stars, [stars])
+                      : without(filterState.stars, stars),
+                  })
+                }
+              />
+            ))}
+          </div>
+        </Accordion>
+        <Accordion
+          title="Type"
+          isOpenDefault={!isArrayEqual(filterState.type, MON_TYPES)}
+        >
+          <div className="grid grid-cols-3">
+            <Checkbox
+              label="All"
+              name="tier-all"
+              checked={isArrayEqual(filterState.type, MON_TYPES)}
+              onChange={(checked) =>
+                onChangeFilter({
+                  ...filterState,
+                  type: checked ? MON_TYPES : [],
+                })
+              }
+            />
+            {MON_TYPES.map((type) => (
+              <Checkbox
+                key={type}
+                label={capitalize(type.toString())}
+                name={`type-${type}`}
+                checked={filterState.type.includes(type)}
+                onChange={(checked) =>
+                  onChangeFilter({
+                    ...filterState,
+                    type: checked
+                      ? union(filterState.type, [type])
+                      : without(filterState.type, type),
+                  })
+                }
+              />
+            ))}
           </div>
         </Accordion>
       </BaseModal>

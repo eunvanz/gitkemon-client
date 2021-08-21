@@ -1,13 +1,15 @@
 import { useMemo } from "react";
 import orderBy from "lodash/orderBy";
+import CollectionStatus from "../../../components/CollectionStatus";
 import MonCard from "../../../components/MonCard";
 import MonCardGrid from "../../../components/MonCardGrid";
+import { MON_TIERS } from "../../../constants/rules";
 import {
   convertCollectionToCardMon,
   convertMonToCardMon,
   convertMonToModalMon,
 } from "../../../helpers/projectHelpers";
-import { Collection, Mon } from "../../../types";
+import { Collection, Mon, MonTier } from "../../../types";
 
 export interface CollectionsProps {
   collections?: Collection[];
@@ -37,8 +39,36 @@ const Collections: React.FC<CollectionsProps> = ({ collections, mons }) => {
     }
   }, [collections, filteredMon]);
 
+  const colPointInfo = useMemo(() => {
+    if (!collections || !mons) {
+      return undefined;
+    }
+    const value = collections.reduce((prev, collection) => {
+      const colPoint = mons.find((mon) => mon.id === collection.monId)!.colPoint;
+      return prev + colPoint;
+    }, 0);
+    const max = mons.reduce((prev, mon) => prev + mon.colPoint, 0);
+    return { value, max };
+  }, [collections, mons]);
+
+  const countInfo = useMemo(() => {
+    if (!collections || !mons) {
+      return undefined;
+    }
+    const result: any = {};
+    MON_TIERS.forEach((tier) => {
+      const value = collections.filter((col) => col.tier === tier).length;
+      const max = mons.filter((mon) => mon.tier === tier).length;
+      result[tier] = { value, max };
+    });
+    return result;
+  }, [collections, mons]);
+
   return !isLoading ? (
     <div className="flex flex-col justify-start p-4">
+      {colPointInfo && countInfo && (
+        <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />
+      )}
       <MonCardGrid>
         {orderedCollections!.map((collection) => {
           const isCollection = (collection as Collection).monImageUrl;

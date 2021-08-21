@@ -16,13 +16,11 @@ const CollectionStatusItem: React.FC<CollectionStatusItemProps> = ({
   max,
 }) => {
   return (
-    <div className={cx("flex flex-col p-4", tier ? "w-1/2 sm:w-1/3 lg:w-1/6" : "w-full")}>
+    <div className={cx("flex flex-col p-4 w-full")}>
       <div className="mb-1">
         <Typography>{tier ? tier.toUpperCase() : "COLLECTION POINT"}</Typography>
         <Typography className="ml-2" weight="light" color="gray">
-          {value}
-          {tier ? "" : "P"} / {max}
-          {tier ? "" : "P"}
+          {value} / {max}
         </Typography>
       </div>
       <LineGauge

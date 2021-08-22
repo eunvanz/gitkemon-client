@@ -10,6 +10,7 @@ export const colorsByTier = {
   "s.rare": "purple",
   elite: "pink",
   legend: "orange",
+  myth: "indigo",
 };
 
 export const colorHashes = {

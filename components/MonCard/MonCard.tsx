@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import cx from "classnames";
 import { CardMon, ModalMon } from "../../types";
+import Button from "../Button";
 import LevelBadge from "../LevelBadge";
 import MonModalContainer from "../MonModal";
 import MonModal from "../MonModal/MonModal";
@@ -21,6 +22,7 @@ export interface MonCardProps
   modalMon?: ModalMon;
   isFlipped?: boolean;
   isFullWidth?: boolean;
+  onSelect?: VoidFunction;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -31,6 +33,7 @@ const MonCard: React.FC<MonCardProps> = ({
   className,
   isFlipped,
   isFullWidth,
+  onSelect,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -43,7 +46,7 @@ const MonCard: React.FC<MonCardProps> = ({
     ({ isPlaceholder }: { isPlaceholder?: boolean }) => {
       return (
         <div className={cx(isPlaceholder ? undefined : styles.surface)}>
-          <div className="border rounded transition-shadow shadow hover:shadow-lg">
+          <div className="border rounded shadow transition-shadow hover:shadow-lg">
             <div className="flex-1 p-1 bg-white rounded">
               {mon.level && (
                 <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5")}>
@@ -98,7 +101,7 @@ const MonCard: React.FC<MonCardProps> = ({
     <>
       <div
         className={cx(
-          "flex flex-col p-1 items-center transform transition-transform cursor-pointer hover:-translate-y-1",
+          "flex flex-col p-1 items-center",
           widthCLassName,
           className,
           styles.card,
@@ -108,9 +111,13 @@ const MonCard: React.FC<MonCardProps> = ({
         onClick={() => setIsMonModalOpen(true)}
       >
         <div
-          className={cx("relative w-full h-full", styles.cardInner, {
-            [styles.isFlipped]: isFlipped,
-          })}
+          className={cx(
+            "relative w-full h-full transform transition-transform cursor-pointer hover:-translate-y-1",
+            styles.cardInner,
+            {
+              [styles.isFlipped]: isFlipped,
+            },
+          )}
         >
           <div className={cx(styles.hiddenBackface)}>
             <Front />
@@ -119,12 +126,17 @@ const MonCard: React.FC<MonCardProps> = ({
             <Front isPlaceholder />
           </div>
           <div className={cx(styles.surface, styles.back)}>
-            <div className="border rounded transition-shadow shadow hover:shadow-lg h-full">
+            <div className="border rounded h-full">
               {/* TODO: 뒷면 디자인 */}
               <div className="h-full w-full p-1 bg-gray-100" />
             </div>
           </div>
         </div>
+        {onSelect && (
+          <div className="text-center mt-2 w-full">
+            <Button onClick={onSelect}>Select</Button>
+          </div>
+        )}
       </div>
       {isHidden ? (
         <MonModal

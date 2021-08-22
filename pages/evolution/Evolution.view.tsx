@@ -3,8 +3,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Button from "../../components/Button";
 import HuntResultItem from "../../components/HuntResultItem";
+import Loading from "../../components/Loading";
+import MonCard from "../../components/MonCard";
+import MonCardGrid from "../../components/MonCardGrid";
 import Typography from "../../components/Typography";
 import { colorHashes } from "../../constants/styles";
+import { convertMonToCardMon, convertMonToModalMon } from "../../helpers/projectHelpers";
 import { Collection, HuntResult, Mon } from "../../types";
 
 export interface EvolutionProps {
@@ -20,12 +24,15 @@ const Evolution: React.FC<EvolutionProps> = ({
   evolveMon,
   nextMons,
   onNavigateToMyCollection,
+  onSelectNextMon,
 }) => {
   const monImageRef = useRef<HTMLDivElement>(null);
 
   const burstInterval = useRef<number | null>(null);
 
-  const [isMonImageVisible, setIsMonImageVisible] = useState(true);
+  const [isMonSelectVisible, setIsMonSelectVisible] = useState(false);
+
+  const [isMonImageVisible, setIsMonImageVisible] = useState(false);
 
   const [isCardFlipped, setIsCardFlipped] = useState(true);
 
@@ -57,14 +64,16 @@ const Evolution: React.FC<EvolutionProps> = ({
   }, []);
 
   useEffect(() => {
-    initBurstEffect();
     return () => {
       burstInterval.current && clearInterval(burstInterval.current);
     };
-  }, [initBurstEffect]);
+  }, []);
 
   useEffect(() => {
     if (result) {
+      setIsMonSelectVisible(false);
+      setIsMonImageVisible(true);
+      initBurstEffect();
       setTimeout(() => {
         setIsMonImageVisible(false);
       }, 3000);
@@ -76,12 +85,51 @@ const Evolution: React.FC<EvolutionProps> = ({
         setIsButtonVisible(true);
       }, 4000);
     }
-  }, [result]);
+  }, [initBurstEffect, result]);
 
-  return (
+  useEffect(() => {
+    if (nextMons && nextMons.length > 1) {
+      setIsMonSelectVisible(true);
+    }
+  }, [nextMons]);
+
+  return nextMons ? (
     <div className="flex flex-col justify-center items-center content-container">
       <AnimatePresence>
-        {!isMonImageVisible && isCardFlipped && (
+        {isMonSelectVisible && (
+          <motion.div
+            className="w-full"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              position: "absolute",
+              opacity: 0,
+            }}
+          >
+            <div className="text-center">
+              <Typography as="h2" size="3xl">
+                You have choices!
+              </Typography>
+            </div>
+            <MonCardGrid>
+              {nextMons.map((mon) => (
+                <MonCard
+                  key={mon.id}
+                  mon={convertMonToCardMon(mon)}
+                  onSelect={() => onSelectNextMon(mon.id)}
+                  modalMon={convertMonToModalMon(mon)}
+                />
+              ))}
+            </MonCardGrid>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {!isMonImageVisible && isCardFlipped && result && (
           <motion.div
             className={"top-40 absolute flex justify-center"}
             initial={{
@@ -152,6 +200,8 @@ const Evolution: React.FC<EvolutionProps> = ({
         )}
       </AnimatePresence>
     </div>
+  ) : (
+    <Loading isFullHeight />
   );
 };
 

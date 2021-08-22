@@ -23,6 +23,10 @@ export const 히든 = createStoryComponent(Template, {
   modalMon: { ...mockMons.activeMons[0] },
 });
 
+export const 선택가능 = createStoryComponent(Template, {
+  onSelect: () => {},
+});
+
 export const 그리드 = () => (
   <MonCardGrid>
     <MonCard mon={mockMons.cardMon} />

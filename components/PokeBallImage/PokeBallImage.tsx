@@ -1,11 +1,6 @@
 import { useMemo } from "react";
 import cx from "classnames";
 import { ExtendableHTMLProps, PokeBallType } from "../../types";
-import imgBasicRareBall from "../../images/pokeball-basic-rare.png";
-import imgBasicBall from "../../images/pokeball-basic.png";
-import imgEliteBall from "../../images/pokeball-elite.png";
-import imgLegendBall from "../../images/pokeball-legend.png";
-import imgRareBall from "../../images/pokeball-rare.png";
 import styles from "./PokeBallImage.module.css";
 
 export type PokeBallImageProps = { type: PokeBallType } & Omit<
@@ -21,15 +16,15 @@ const PokeBallImage: React.FC<PokeBallImageProps> = ({
   const img = useMemo(() => {
     switch (type) {
       case "basic":
-        return imgBasicBall;
+        return "/images/pokeball-basic.png";
       case "basicRare":
-        return imgBasicRareBall;
+        return "/images/pokeball-basic-rare.png";
       case "rare":
-        return imgRareBall;
+        return "/images/pokeball-rare.png";
       case "elite":
-        return imgEliteBall;
+        return "/images/pokeball-elite.png";
       case "legend":
-        return imgLegendBall;
+        return "/images/pokeball-legend.png";
     }
   }, [type]);
 

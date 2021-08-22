@@ -11,6 +11,7 @@ import {
   HuntResponse,
   HuntResult,
   EvolveMonDto,
+  MonTier,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -160,7 +161,7 @@ export interface UpdateMonDto {
   secondType?: string;
   height?: number;
   weight?: number;
-  tier?: "basic" | "special" | "rare" | "s.rare" | "elite" | "legend";
+  tier?: MonTier;
   evolutionLevel?: number;
   hp?: number;
   attack?: number;

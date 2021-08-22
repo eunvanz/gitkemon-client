@@ -1,11 +1,17 @@
 import { useMemo } from "react";
 import cx from "classnames";
-import { ExtendableHTMLProps, PokeBallType } from "../../types";
+import Image, { ImageProps } from "next/image";
+import { PokeBallType } from "../../types";
+import imgBasicRareBall from "../../public/images/pokeball-basic-rare.png";
+import imgBasicBall from "../../public/images/pokeball-basic.png";
+import imgEliteBall from "../../public/images/pokeball-elite.png";
+import imgLegendBall from "../../public/images/pokeball-legend.png";
+import imgRareBall from "../../public/images/pokeball-rare.png";
 import styles from "./PokeBallImage.module.css";
 
 export type PokeBallImageProps = { type: PokeBallType } & Omit<
-  ExtendableHTMLProps<HTMLImageElement>,
-  "crossOrigin"
+  ImageProps,
+  "src" | "blurDataURL"
 >;
 
 const PokeBallImage: React.FC<PokeBallImageProps> = ({
@@ -16,24 +22,24 @@ const PokeBallImage: React.FC<PokeBallImageProps> = ({
   const img = useMemo(() => {
     switch (type) {
       case "basic":
-        return "/images/pokeball-basic.png";
+        return imgBasicBall;
       case "basicRare":
-        return "/images/pokeball-basic-rare.png";
+        return imgBasicRareBall;
       case "rare":
-        return "/images/pokeball-rare.png";
+        return imgRareBall;
       case "elite":
-        return "/images/pokeball-elite.png";
+        return imgEliteBall;
       case "legend":
-        return "/images/pokeball-legend.png";
+        return imgLegendBall;
     }
   }, [type]);
 
   return (
-    // eslint-disable-next-line
-    <img
+    <Image
       className={cx(className, styles.dragNone)}
       src={img}
       alt="Poke ball"
+      quality={100}
       {...restProps}
     />
   );

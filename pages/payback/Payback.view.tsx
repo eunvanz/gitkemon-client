@@ -282,6 +282,7 @@ const RainItem = ({ type }: RainItemProps) => {
         top: -size,
         translateY: 0,
         width: size,
+        rotate: 0,
         height: size,
         zIndex: 999999,
       }}

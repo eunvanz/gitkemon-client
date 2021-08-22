@@ -46,7 +46,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
 
   return (
     <button
-      className="fixed bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-sm hover:bg-blue-400"
+      className="fixed bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-md hover:bg-blue-400"
       onClick={() => setIsModalVisible(true)}
     >
       <FilterIcon className="w-5 h-5 text-white" />

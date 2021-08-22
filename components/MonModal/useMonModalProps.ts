@@ -1,7 +1,9 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { MonModalContainerProps } from ".";
+import { assertNotEmpty, capitalize } from "../../helpers/commonHelpers";
 import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
 import useCollectionQuery from "../../queries/useCollectionQuery";
+import Dialog from "../Dialog/Dialog";
 import { MonModalProps } from "./MonModal";
 
 const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
@@ -19,11 +21,27 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     return newMon || (collection ? convertCollectionToModalMon(collection) : undefined);
   }, [collection, newMon]);
 
+  const onEvolve = useCallback(async () => {
+    assertNotEmpty(mon);
+    const levelToDown = mon.level! - mon.evolutionLevel!;
+    const content =
+      levelToDown === 0
+        ? `${capitalize(mon.name)} will disappear. Would you like to evolve?`
+        : `${capitalize(
+            mon.name,
+          )}'s level will be down to ${levelToDown}. Would you like to evolve?`;
+    await Dialog.confirm({ content });
+  }, [mon]);
+
+  const onBlend = useCallback(() => {}, []);
+
   return {
     isOpen,
     onClose,
     mon,
     oldMon,
+    onEvolve,
+    onBlend,
   };
 };
 

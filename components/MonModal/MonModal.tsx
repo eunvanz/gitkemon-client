@@ -18,6 +18,8 @@ export interface MonModalProps extends Omit<BaseModalProps, "children"> {
   mon?: ModalMon;
   oldMon?: ModalMon;
   isInitialBack?: boolean;
+  onEvolve?: VoidFunction;
+  onBlend?: VoidFunction;
 }
 
 const MonModal: React.FC<MonModalProps> = ({
@@ -294,6 +296,8 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
   mon,
   onFlip,
   children,
+  onEvolve,
+  onBlend,
   ...restProps
 }) => {
   const isCollection = useMemo(() => {
@@ -350,11 +354,11 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
           </div>
           {mon && isCollection && (
             <div className="text-center mb-2 mt-2">
-              <Button size="xs" color="white">
+              <Button size="xs" color="white" onClick={onBlend}>
                 Blend
               </Button>
               {mon.evolutionLevel && mon.evolutionLevel <= mon.level! && (
-                <Button className="ml-2" size="xs" color="white">
+                <Button className="ml-2" size="xs" color="white" onClick={onEvolve}>
                   Evolve
                 </Button>
               )}

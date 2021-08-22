@@ -19,7 +19,7 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   newMon,
 }) => {
   const { data: collection } = useCollectionQuery(collectionId, {
-    enabled: !newMon && isOpen,
+    enabled: isOpen,
   });
 
   const mon = useMemo(() => {

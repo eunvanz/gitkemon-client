@@ -156,7 +156,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
             result &&
             (result.length > 1 ? (
               <motion.div
-                className="w-full"
+                className="max-w-screen-lg"
                 initial={{
                   transform: "translateY(80vh)",
                 }}

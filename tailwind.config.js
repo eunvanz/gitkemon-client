@@ -17,6 +17,9 @@ module.exports = {
         "1/5": "20%",
         "1/8": "12.5%",
       },
+      height: {
+        98: "25rem",
+      },
     },
   },
   variants: {

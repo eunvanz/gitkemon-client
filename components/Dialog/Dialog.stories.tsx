@@ -16,6 +16,10 @@ const Template: ComponentStory<typeof Dialog> = (args) => <Dialog {...args} />;
 
 export const 컨펌 = createStoryComponent(Template);
 
+export const 제목없음 = createStoryComponent(Template, {
+  title: undefined,
+});
+
 export const 얼럿 = createStoryComponent(Template, {
   // @ts-expect-error
   onCancel: null,

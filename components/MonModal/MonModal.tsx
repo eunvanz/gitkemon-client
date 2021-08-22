@@ -107,7 +107,7 @@ const MonModal: React.FC<MonModalProps> = ({
     <BaseMonModal mon={mon} onFlip={() => setIsFlipped(!isFlipped)} {...restProps}>
       {mon ? (
         !isFlipped ? (
-          <div className="flex flex-col w-full h-96">
+          <div className="flex flex-col w-full">
             {renderProfile({
               title: "Name",
               content: <Typography>{isCollection ? mon.name : "?????"}</Typography>,
@@ -212,7 +212,7 @@ const MonModal: React.FC<MonModalProps> = ({
             </div>
           </div>
         ) : (
-          <div className="flex flex-col w-full h-96">
+          <div className="flex flex-col w-full">
             {renderStat({
               title: "HP",
               baseValue: isCollection ? mon.baseHp! : mon.hp,
@@ -266,7 +266,7 @@ const MonModal: React.FC<MonModalProps> = ({
           </div>
         )
       ) : (
-        <div className="flex flex-col w-full h-96">
+        <div className="flex flex-col w-full">
           {Array.from({ length: 9 }).map((_, index) => (
             <div className="flex mb-4" key={index}>
               <div className="flex-shrink-0 w-32">
@@ -316,7 +316,7 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
       }
       {...restProps}
     >
-      <div className="md:flex w-full">
+      <div className="md:flex w-full h-98">
         <div className="flex flex-col mb-4 md:mx-0 md:mb-0 md:mr-8">
           {mon ? (
             <div className="w-48 border border-dotted mb-1 mx-auto flex-shrink-0">

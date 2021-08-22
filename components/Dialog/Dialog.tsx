@@ -13,7 +13,7 @@ export interface DialogProps {
   onCancel?: VoidFunction;
 }
 
-const Dialog: React.FC<DialogProps> = ({
+const Dialog = ({
   title,
   children,
   isOpen,
@@ -22,7 +22,7 @@ const Dialog: React.FC<DialogProps> = ({
   onOk,
   cancelText = "Cancel",
   onCancel,
-}) => {
+}: DialogProps) => {
   const handleOnOk = useCallback(() => {
     onOk?.();
     onClose();
@@ -55,5 +55,7 @@ const Dialog: React.FC<DialogProps> = ({
     </BaseModal>
   );
 };
+
+Dialog.confirm = () => {};
 
 export default Dialog;

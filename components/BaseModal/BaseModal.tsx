@@ -97,7 +97,7 @@ const BaseModal = ({
               </div>
               <div className="bg-white p-4 sm:p-6">
                 {title && <Dialog.Title className="text-lg">{title}</Dialog.Title>}
-                <Dialog.Description>{children}</Dialog.Description>
+                {children}
               </div>
               {footer && (
                 <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

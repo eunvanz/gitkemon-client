@@ -6,6 +6,7 @@ import useMonModalProps from "./useMonModalProps";
 export interface MonModalContainerProps {
   isOpen: boolean;
   collectionId: number;
+  onOpen: VoidFunction;
   onClose: VoidFunction;
   oldMon?: ModalMon;
   newMon?: ModalMon;

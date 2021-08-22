@@ -8,6 +8,7 @@ import { MonModalProps } from "./MonModal";
 
 const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   isOpen,
+  onOpen,
   onClose,
   collectionId,
   oldMon,
@@ -30,8 +31,13 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
         : `${capitalize(
             mon.name,
           )}'s level will be down to ${levelToDown}. Would you like to evolve?`;
-    await Dialog.confirm({ content });
-  }, [mon]);
+    onClose();
+    const isConfirmed = await Dialog.confirm({ content });
+    if (isConfirmed) {
+    } else {
+      onOpen();
+    }
+  }, [mon, onClose, onOpen]);
 
   const onBlend = useCallback(() => {}, []);
 

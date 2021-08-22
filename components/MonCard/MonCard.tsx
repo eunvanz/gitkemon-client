@@ -138,6 +138,7 @@ const MonCard: React.FC<MonCardProps> = ({
           oldMon={oldMon}
           newMon={newMon}
           isOpen={isMonModalOpen}
+          onOpen={() => setIsMonModalOpen(true)}
           onClose={() => setIsMonModalOpen(false)}
         />
       )}

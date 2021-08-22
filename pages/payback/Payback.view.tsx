@@ -298,13 +298,9 @@ const RainItem = ({ type }: RainItemProps) => {
         },
       }}
       transition={{ ease: "easeIn", duration: 1, delay: delay / 1000 }}
+      className={rotationClassName}
     >
-      <PokeBallImage
-        className={rotationClassName}
-        type={type}
-        width="100%"
-        height="100%"
-      />
+      <PokeBallImage type={type} width="100%" height="100%" />
     </motion.div>,
     document.body,
   );

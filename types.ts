@@ -62,6 +62,7 @@ export interface GithubUser {
 export enum STATE_KEY {
   USER = "USER",
   HUNT_RESULT = "HUNT_RESULT",
+  EVOLVE_MON = "EVOLVE_MON",
 }
 
 export interface Mon {

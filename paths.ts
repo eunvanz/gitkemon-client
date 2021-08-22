@@ -13,6 +13,7 @@ const ROUTES = {
   ADMIN__MONS: "/admin/mons",
   PAYBACK: "/payback",
   NOT_FOUND: "/not-found",
+  EVOLUTION: "/evolution",
 };
 
 export default ROUTES;

@@ -44,7 +44,5 @@ export const isArrayEqual = (arr: any[], arr2: any[]) => {
 };
 
 export const compileUrlWithParams = (path: string, params: Object) => {
-  const { origin, pathname } = new URL(path);
-  const compiledPathname = compile(pathname)(params);
-  return `${origin}${compiledPathname}`;
+  return compile(path)(params);
 };

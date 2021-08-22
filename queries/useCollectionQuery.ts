@@ -8,7 +8,7 @@ const useCollectionQuery = (id: number, queryOptions: UseQueryOptions<Collection
     () => api.getCollection(id),
     {
       cacheTime: 60_000 * 30,
-      staleTime: 15_000,
+      staleTime: 5_000,
       ...queryOptions,
     },
   );

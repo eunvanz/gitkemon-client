@@ -34,6 +34,8 @@ const Evolution: React.FC<EvolutionProps> = ({
 
   const [isMonImageVisible, setIsMonImageVisible] = useState(false);
 
+  const [isGotchaVisible, setIsGotchaVisible] = useState(false);
+
   const [isCardFlipped, setIsCardFlipped] = useState(true);
 
   const [isButtonVisible, setIsButtonVisible] = useState(false);
@@ -76,9 +78,11 @@ const Evolution: React.FC<EvolutionProps> = ({
       initBurstEffect();
       setTimeout(() => {
         setIsMonImageVisible(false);
+        setIsGotchaVisible(true);
       }, 3000);
       setTimeout(() => {
         setIsCardFlipped(false);
+        setIsGotchaVisible(false);
         clearInterval(burstInterval.current!);
       }, 3500);
       setTimeout(() => {
@@ -129,7 +133,7 @@ const Evolution: React.FC<EvolutionProps> = ({
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {!isMonImageVisible && isCardFlipped && result && (
+        {isGotchaVisible && (
           <motion.div
             className={"top-40 absolute flex justify-center"}
             initial={{

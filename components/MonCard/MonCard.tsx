@@ -43,7 +43,7 @@ const MonCard: React.FC<MonCardProps> = ({
     ({ isPlaceholder }: { isPlaceholder?: boolean }) => {
       return (
         <div className={cx(isPlaceholder ? undefined : styles.surface)}>
-          <div className="border rounded shadow hover:shadow-lg">
+          <div className="border rounded transition-shadow shadow hover:shadow-lg">
             <div className="flex-1 p-1 bg-white rounded">
               {mon.level && (
                 <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5")}>
@@ -119,7 +119,7 @@ const MonCard: React.FC<MonCardProps> = ({
             <Front isPlaceholder />
           </div>
           <div className={cx(styles.surface, styles.back)}>
-            <div className="border rounded shadow hover:shadow-lg h-full">
+            <div className="border rounded transition-shadow shadow hover:shadow-lg h-full">
               {/* TODO: 뒷면 디자인 */}
               <div className="h-full w-full p-1 bg-gray-100" />
             </div>

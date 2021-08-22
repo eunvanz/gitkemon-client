@@ -13,7 +13,7 @@ const withAuthServerSideProps = <T>({
   getServerSidePropsFunc?: (
     ctx: GetServerSidePropsContext,
     user?: User | null,
-  ) => Promise<{ props: T }>,
+  ) => Promise<{ props: T } | { redirect: { destination: string; permanent: boolean } }>,
 ) => {
   return async (ctx: GetServerSidePropsContext) => {
     const user = await api.loginWithToken(

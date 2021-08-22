@@ -12,6 +12,7 @@ const ROUTES = {
   ADMIN__MON_IMAGES: "/admin/mon-images",
   ADMIN__MONS: "/admin/mons",
   PAYBACK: "/payback",
+  NOT_FOUND: "/not-found",
 };
 
 export default ROUTES;

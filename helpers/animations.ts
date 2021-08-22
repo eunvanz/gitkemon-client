@@ -21,9 +21,13 @@ export interface BurstOptions {
   duration?: number | number[];
   opacity?: { [key: number]: number };
   scale?: { [key: number]: number };
+  shape?: "star" | "circle" | "polygon";
+  itemRadius?: number;
+  delay?: string;
+  points?: number;
 }
 
-const generateStarBurst = ({
+const generateBurst = ({
   left,
   top,
   right,
@@ -34,6 +38,11 @@ const generateStarBurst = ({
   degree,
   opacity,
   scale = { 1: 0 },
+  shape = "star",
+  itemRadius = 6,
+  rotate,
+  delay,
+  points,
 }: BurstOptions) => {
   return new mojs.Burst({
     left,
@@ -45,14 +54,17 @@ const generateStarBurst = ({
     count,
     degree,
     children: {
-      shape: "star",
-      radius: 6,
+      shape,
+      radius: itemRadius,
       fill: color,
       scale: { ...scale, easing: "quad.in" },
       // pathScale: [0.5, null],
       // degreeShift: [0, null],
       // duration: [1000, 1200],
+      rotate,
       easing: "quint.out",
+      delay,
+      points,
     },
     isShowEnd: false,
     opacity,
@@ -60,7 +72,7 @@ const generateStarBurst = ({
 };
 
 export const burstStar = (options: BurstOptions) => {
-  const burst = generateStarBurst(options);
+  const burst = generateBurst(options);
   burst.el.style.zIndex = 999999;
   burst.tune().play();
 };

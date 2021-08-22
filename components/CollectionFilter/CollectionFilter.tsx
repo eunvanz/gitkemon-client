@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FilterIcon } from "@heroicons/react/outline";
 import union from "lodash/union";
 import without from "lodash/without";
 import { MON_STARS, MON_TIERS, MON_TYPES } from "../../constants/rules";
-import { capitalize, isArrayEqual } from "../../helpers/commonHelpers";
+import { isArrayEqual } from "../../helpers/commonHelpers";
 import { MonTier, MonType } from "../../types";
 import Accordion from "../Accordion";
 import BaseModal from "../BaseModal";
@@ -31,6 +31,19 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const [innerFilterState, setInnerFilterState] = useState(filterState);
+
+  useEffect(() => {
+    if (isModalVisible) {
+      setInnerFilterState(filterState);
+    }
+  }, [filterState, isModalVisible]);
+
+  const handleOnApply = useCallback(() => {
+    onChangeFilter(innerFilterState);
+    setIsModalVisible(false);
+  }, [innerFilterState, onChangeFilter]);
+
   return (
     <button
       className="fixed bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-sm hover:bg-blue-400"
@@ -44,6 +57,9 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
         title="Collection filter"
         footer={
           <div className="text-right">
+            <Button color="primary" className="mr-2" onClick={handleOnApply}>
+              Apply
+            </Button>
             <Button color="transparent" onClick={() => setIsModalVisible(false)}>
               Close
             </Button>
@@ -53,7 +69,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
         <Accordion
           title="Possession"
           isOpenDefault={
-            !filterState.has.includes(true) || !filterState.has.includes(false)
+            !innerFilterState.has.includes(true) || !innerFilterState.has.includes(false)
           }
         >
           <div className="grid grid-cols-3 gap-2">
@@ -61,58 +77,61 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
               className="mr-4"
               label="All"
               name="has-all"
-              checked={filterState.has.includes(true) && filterState.has.includes(false)}
+              checked={
+                innerFilterState.has.includes(true) &&
+                innerFilterState.has.includes(false)
+              }
               onChange={(checked) =>
-                onChangeFilter({
-                  ...filterState,
+                setInnerFilterState((innerFilterState) => ({
+                  ...innerFilterState,
                   has: checked ? [true, false] : [],
-                })
+                }))
               }
             />
             <Checkbox
               className="mr-4"
               label="Owned"
               name="has-owned"
-              checked={filterState.has.includes(true)}
+              checked={innerFilterState.has.includes(true)}
               onChange={(checked) =>
-                onChangeFilter({
-                  ...filterState,
+                setInnerFilterState((innerFilterState) => ({
+                  ...innerFilterState,
                   has: checked
-                    ? union(filterState.has, [true])
-                    : without(filterState.has, true),
-                })
+                    ? union(innerFilterState.has, [true])
+                    : without(innerFilterState.has, true),
+                }))
               }
             />
             <Checkbox
               className="mr-4"
               label="Not owned"
               name="has-not-owned"
-              checked={filterState.has.includes(false)}
+              checked={innerFilterState.has.includes(false)}
               onChange={(checked) =>
-                onChangeFilter({
-                  ...filterState,
+                setInnerFilterState((innerFilterState) => ({
+                  ...innerFilterState,
                   has: checked
-                    ? union(filterState.has, [false])
-                    : without(filterState.has, false),
-                })
+                    ? union(innerFilterState.has, [false])
+                    : without(innerFilterState.has, false),
+                }))
               }
             />
           </div>
         </Accordion>
         <Accordion
           title="Tier"
-          isOpenDefault={!isArrayEqual(filterState.tier, MON_TIERS)}
+          isOpenDefault={!isArrayEqual(innerFilterState.tier, MON_TIERS)}
         >
           <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
               name="tier-all"
-              checked={isArrayEqual(filterState.tier, MON_TIERS)}
+              checked={isArrayEqual(innerFilterState.tier, MON_TIERS)}
               onChange={(checked) =>
-                onChangeFilter({
-                  ...filterState,
+                setInnerFilterState((innerFilterState) => ({
+                  ...innerFilterState,
                   tier: checked ? MON_TIERS : [],
-                })
+                }))
               }
             />
             {MON_TIERS.map((tier) => (
@@ -120,14 +139,14 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
                 key={tier}
                 label={<MonTierBadge tier={tier} />}
                 name={`tier-${tier}`}
-                checked={filterState.tier.includes(tier)}
+                checked={innerFilterState.tier.includes(tier)}
                 onChange={(checked) =>
-                  onChangeFilter({
-                    ...filterState,
+                  setInnerFilterState((innerFilterState) => ({
+                    ...innerFilterState,
                     tier: checked
-                      ? union(filterState.tier, [tier])
-                      : without(filterState.tier, tier),
-                  })
+                      ? union(innerFilterState.tier, [tier])
+                      : without(innerFilterState.tier, tier),
+                  }))
                 }
               />
             ))}
@@ -135,18 +154,18 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
         </Accordion>
         <Accordion
           title="Stars"
-          isOpenDefault={!isArrayEqual(filterState.stars, MON_STARS)}
+          isOpenDefault={!isArrayEqual(innerFilterState.stars, MON_STARS)}
         >
           <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
               name="stars-all"
-              checked={isArrayEqual(filterState.stars, MON_STARS)}
+              checked={isArrayEqual(innerFilterState.stars, MON_STARS)}
               onChange={(checked) =>
-                onChangeFilter({
-                  ...filterState,
+                setInnerFilterState((innerFilterState) => ({
+                  ...innerFilterState,
                   stars: checked ? MON_STARS : [],
-                })
+                }))
               }
             />
             {MON_STARS.map((stars) => (
@@ -154,14 +173,14 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
                 key={stars}
                 label={<MonStars size="xs" stars={stars} />}
                 name={`stars-${stars}`}
-                checked={filterState.stars.includes(stars)}
+                checked={innerFilterState.stars.includes(stars)}
                 onChange={(checked) =>
-                  onChangeFilter({
-                    ...filterState,
+                  setInnerFilterState((innerFilterState) => ({
+                    ...innerFilterState,
                     stars: checked
-                      ? union(filterState.stars, [stars])
-                      : without(filterState.stars, stars),
-                  })
+                      ? union(innerFilterState.stars, [stars])
+                      : without(innerFilterState.stars, stars),
+                  }))
                 }
               />
             ))}
@@ -169,18 +188,18 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
         </Accordion>
         <Accordion
           title="Type"
-          isOpenDefault={!isArrayEqual(filterState.type, MON_TYPES)}
+          isOpenDefault={!isArrayEqual(innerFilterState.type, MON_TYPES)}
         >
           <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="All"
               name="type-all"
-              checked={isArrayEqual(filterState.type, MON_TYPES)}
+              checked={isArrayEqual(innerFilterState.type, MON_TYPES)}
               onChange={(checked) =>
-                onChangeFilter({
-                  ...filterState,
+                setInnerFilterState((innerFilterState) => ({
+                  ...innerFilterState,
                   type: checked ? MON_TYPES : [],
-                })
+                }))
               }
             />
             {MON_TYPES.map((type) => (
@@ -188,14 +207,14 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
                 key={type}
                 label={<MonTypeBadge type={type} />}
                 name={`type-${type}`}
-                checked={filterState.type.includes(type)}
+                checked={innerFilterState.type.includes(type)}
                 onChange={(checked) =>
-                  onChangeFilter({
-                    ...filterState,
+                  setInnerFilterState((innerFilterState) => ({
+                    ...innerFilterState,
                     type: checked
-                      ? union(filterState.type, [type])
-                      : without(filterState.type, type),
-                  })
+                      ? union(innerFilterState.type, [type])
+                      : without(innerFilterState.type, type),
+                  }))
                 }
               />
             ))}

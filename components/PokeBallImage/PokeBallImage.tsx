@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import cx from "classnames";
-import Image, { ImageProps } from "next/image";
-import { PokeBallType } from "../../types";
+import { ExtendableHTMLProps, PokeBallType } from "../../types";
 import imgBasicRareBall from "../../images/pokeball-basic-rare.png";
 import imgBasicBall from "../../images/pokeball-basic.png";
 import imgEliteBall from "../../images/pokeball-elite.png";
@@ -9,7 +8,10 @@ import imgLegendBall from "../../images/pokeball-legend.png";
 import imgRareBall from "../../images/pokeball-rare.png";
 import styles from "./PokeBallImage.module.css";
 
-export type PokeBallImageProps = { type: PokeBallType } & Omit<ImageProps, "src" | "alt">;
+export type PokeBallImageProps = { type: PokeBallType } & Omit<
+  ExtendableHTMLProps<HTMLImageElement>,
+  "crossOrigin"
+>;
 
 const PokeBallImage: React.FC<PokeBallImageProps> = ({
   type,
@@ -32,12 +34,11 @@ const PokeBallImage: React.FC<PokeBallImageProps> = ({
   }, [type]);
 
   return (
-    // @ts-ignore
-    <Image
+    // eslint-disable-next-line
+    <img
       className={cx(className, styles.dragNone)}
       src={img}
       alt="Poke ball"
-      quality={100}
       {...restProps}
     />
   );

@@ -5,7 +5,6 @@ import { CollectionsPageProps } from ".";
 import useActiveMonsQuery from "../../../queries/useActiveMonsQuery";
 import useCollectionsQuery from "../../../queries/useCollectionsQuery";
 import { userState } from "../../../state/user";
-import { Collection, Mon } from "../../../types";
 import { CollectionsProps } from "./Collections.view";
 
 const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps = ({

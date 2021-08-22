@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { unmountComponentAtNode, render } from "react-dom";
 import BaseModal from "../BaseModal";
 import Button from "../Button";
@@ -25,11 +25,11 @@ const Dialog = ({
   onCancel,
 }: DialogProps) => {
   const handleOnOk = useCallback(() => {
-    onOk?.();
+    (onOk || onClose)();
   }, [onClose, onOk]);
 
   const handleOnCancel = useCallback(() => {
-    onCancel?.();
+    (onCancel || onClose)();
   }, [onCancel, onClose]);
 
   return (
@@ -57,7 +57,7 @@ const Dialog = ({
 
 export type DialogAlertPromiseProps = Omit<
   DialogProps,
-  "isOpen" | "onClose" | "children" | "onCancel"
+  "isOpen" | "onClose" | "children" | "onCancel" | "cancelText" | "onOk"
 > & {
   content: React.ReactNode;
 };
@@ -82,7 +82,7 @@ function promiseDialog({
     const fragment = new DocumentFragment();
 
     const DialogContainer = () => {
-      const [isVisible, setIsVisible] = useState(true);
+      const [isVisible, setIsVisible] = useState(false);
 
       const onClose = (isConfirmed?: boolean) => {
         setIsVisible(false);
@@ -91,6 +91,10 @@ function promiseDialog({
           unmountComponentAtNode(fragment);
         }, 300);
       };
+
+      useEffect(() => {
+        setIsVisible(true);
+      }, []);
 
       return isConfirm ? (
         <Dialog
@@ -114,7 +118,8 @@ function promiseDialog({
   });
 }
 
-Dialog.confirm = (props: DialogConfirmPromiseProps) => promiseDialog(props);
+Dialog.confirm = (props: DialogConfirmPromiseProps) =>
+  promiseDialog({ ...props, cancelText: props.cancelText || "Cancel" });
 
 Dialog.show = (props: DialogAlertPromiseProps) => promiseDialog(props);
 

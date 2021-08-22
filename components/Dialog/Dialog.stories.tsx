@@ -1,5 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { createStoryComponent } from "../../helpers/storybookHelpers";
+import Button from "../Button";
 import Dialog from "./Dialog";
 
 export default {
@@ -24,3 +25,23 @@ export const 얼럿 = createStoryComponent(Template, {
   // @ts-expect-error
   onCancel: null,
 });
+
+export const 프로미즈 = () => (
+  <>
+    <Button
+      onClick={() => {
+        Dialog.show({ content: "Message" });
+      }}
+    >
+      얼럿
+    </Button>
+    <Button
+      className="ml-2"
+      onClick={() => {
+        Dialog.confirm({ content: "Message" });
+      }}
+    >
+      컨펌
+    </Button>
+  </>
+);

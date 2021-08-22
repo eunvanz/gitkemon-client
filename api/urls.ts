@@ -9,10 +9,12 @@ const API_URL = {
   MONS__WITH_IMAGES: "mons/with-images",
   MONS__ACTIVE: "mons/active",
   MONS__INACTIVE: "mons/inactive",
+  MONS__NEXT: "mons/:monId/next",
   DONATIONS: "paybacks",
   COLLECTIONS: "collections",
   COLLECTIONS__HUNT: "collections/hunt",
   COLLECTIONS__USER: "collections/user",
+  COLLECTIONS__EVOLVE: "collections/evolve",
 };
 
 export default API_URL;

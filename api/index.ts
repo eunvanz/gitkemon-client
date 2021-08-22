@@ -1,3 +1,4 @@
+import { compileUrlWithParams } from "../helpers/commonHelpers";
 import { MonFormValues } from "../pages/admin/mons/[monId]/Mon.view";
 import {
   Payback,
@@ -8,6 +9,8 @@ import {
   Collection,
   PokeBallType,
   HuntResponse,
+  HuntResult,
+  EvolveMonDto,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -225,6 +228,21 @@ const getInactiveMons = async () => {
   return data;
 };
 
+const evolve = async (evolveMonDto: EvolveMonDto) => {
+  const { data } = await requester.post<HuntResult>(
+    API_URL.COLLECTIONS__EVOLVE,
+    evolveMonDto,
+  );
+  return data;
+};
+
+const getNextMons = async (monId: number) => {
+  const { data } = await requester.get<Mon[]>(
+    compileUrlWithParams(API_URL.MONS__NEXT, { monId }),
+  );
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -247,6 +265,8 @@ const api = {
   getInactiveMons,
   postMon,
   getUser,
+  evolve,
+  getNextMons,
 };
 
 export default api;

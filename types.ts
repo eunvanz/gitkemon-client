@@ -186,6 +186,7 @@ export enum QUERY_KEY {
   ACTIVE_MONS = "ACTIVE_MONS",
   INACTIVE_MONS = "INACTIVE_MONS",
   MONS_WITH_IMAGES = "MONS_WITH_IMAGES",
+  NEXT_MONS = "NEXT_MONS",
   MON_IMAGES = "MON_IMAGES",
   AVAILABLE_CONTRIBUTIONS = "AVAILABLE_CONTRIBUTIONS",
   COLLECTION = "COLLECTION",
@@ -253,4 +254,9 @@ export type HuntResponse = HuntResult[];
 export interface HuntResult {
   oldCollection: Collection | null;
   newCollection: Collection;
+}
+
+export interface EvolveMonDto {
+  collectionId: number;
+  monId: number;
 }

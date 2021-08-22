@@ -1,4 +1,5 @@
 import xor from "lodash/xor";
+import { compile } from "path-to-regexp";
 
 export const convertURLtoFile = async (url: string) => {
   const response = await fetch(url);
@@ -40,4 +41,10 @@ export const capitalize = (s: string) => {
 
 export const isArrayEqual = (arr: any[], arr2: any[]) => {
   return xor(arr, arr2).length === 0;
+};
+
+export const compileUrlWithParams = (path: string, params: Object) => {
+  const { origin, pathname } = new URL(path);
+  const compiledPathname = compile(pathname)(params);
+  return `${origin}${compiledPathname}`;
 };

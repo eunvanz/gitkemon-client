@@ -5,17 +5,20 @@ import Button from "../../components/Button";
 import HuntResultItem from "../../components/HuntResultItem";
 import Typography from "../../components/Typography";
 import { colorHashes } from "../../constants/styles";
-import { Collection, HuntResult } from "../../types";
+import { Collection, HuntResult, Mon } from "../../types";
 
 export interface EvolutionProps {
   result?: HuntResult;
   evolveMon: Collection;
+  nextMons?: Mon[];
+  onSelectNextMon: (monId: number) => void;
   onNavigateToMyCollection: VoidFunction;
 }
 
 const Evolution: React.FC<EvolutionProps> = ({
   result,
   evolveMon,
+  nextMons,
   onNavigateToMyCollection,
 }) => {
   const monImageRef = useRef<HTMLDivElement>(null);

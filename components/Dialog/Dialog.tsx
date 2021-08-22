@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
+import { unmountComponentAtNode, render } from "react-dom";
 import BaseModal from "../BaseModal";
 import Button from "../Button";
 
@@ -25,12 +26,10 @@ const Dialog = ({
 }: DialogProps) => {
   const handleOnOk = useCallback(() => {
     onOk?.();
-    onClose();
   }, [onClose, onOk]);
 
   const handleOnCancel = useCallback(() => {
     onCancel?.();
-    onClose();
   }, [onCancel, onClose]);
 
   return (
@@ -56,6 +55,67 @@ const Dialog = ({
   );
 };
 
-Dialog.confirm = () => {};
+export type DialogAlertPromiseProps = Omit<
+  DialogProps,
+  "isOpen" | "onClose" | "children" | "onCancel"
+> & {
+  content: React.ReactNode;
+};
+
+export type DialogConfirmPromiseProps = Omit<
+  DialogProps,
+  "isOpen" | "onClose" | "children" | "onCancel" | "onOk"
+> & {
+  content: React.ReactNode;
+};
+
+function promiseDialog(props: DialogAlertPromiseProps): Promise<undefined>;
+function promiseDialog(props: DialogConfirmPromiseProps): Promise<boolean>;
+function promiseDialog({
+  okText,
+  content,
+  cancelText,
+}: DialogAlertPromiseProps & Partial<DialogConfirmPromiseProps>) {
+  const isConfirm = cancelText !== undefined;
+
+  return new Promise((resolve) => {
+    const fragment = new DocumentFragment();
+
+    const DialogContainer = () => {
+      const [isVisible, setIsVisible] = useState(true);
+
+      const onClose = (isConfirmed?: boolean) => {
+        setIsVisible(false);
+        resolve(isConfirmed);
+        setTimeout(() => {
+          unmountComponentAtNode(fragment);
+        }, 300);
+      };
+
+      return isConfirm ? (
+        <Dialog
+          isOpen={isVisible}
+          okText={okText}
+          cancelText={cancelText}
+          onClose={() => onClose(undefined)}
+          onCancel={() => onClose(false)}
+          onOk={() => onClose(true)}
+        >
+          {content}
+        </Dialog>
+      ) : (
+        <Dialog isOpen={isVisible} okText={okText} onClose={() => onClose(undefined)}>
+          {content}
+        </Dialog>
+      );
+    };
+
+    render(<DialogContainer />, fragment);
+  });
+}
+
+Dialog.confirm = (props: DialogConfirmPromiseProps) => promiseDialog(props);
+
+Dialog.show = (props: DialogAlertPromiseProps) => promiseDialog(props);
 
 export default Dialog;

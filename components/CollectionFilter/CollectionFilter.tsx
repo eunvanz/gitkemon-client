@@ -58,11 +58,15 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
         title="Collection filter"
         footer={
           <div className="text-right">
-            <Button color="primary" className="mr-2" onClick={handleOnApply}>
-              Apply
-            </Button>
-            <Button color="transparent" onClick={() => setIsModalVisible(false)}>
+            <Button
+              color="transparent"
+              className="mr-2"
+              onClick={() => setIsModalVisible(false)}
+            >
               Close
+            </Button>
+            <Button color="primary" onClick={handleOnApply}>
+              Apply
             </Button>
           </div>
         }

@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber, Select } from "antd";
+import { Button, Form, Input, InputNumber, Select, Space } from "antd";
 import { MON_TIERS, MON_TYPES } from "../../../../constants/rules";
 import { Mon as MonType } from "../../../../types";
 
@@ -271,23 +271,33 @@ const Mon: React.FC<MonProps> = ({
         >
           <InputNumber />
         </Form.Item>
-        <Form.Item name="evolveFromId" label="Evolution from">
-          <Select
-            style={{ width: 200 }}
-            showSearch
-            filterOption={(input, option) => {
-              const foundMons = mons!.filter(
-                (mon) => (mon.nameKo || mon.name).indexOf(input) >= 0,
-              );
-              return foundMons.map((mon) => mon.id).includes(option?.value);
-            }}
-          >
-            {mons!.map((mon) => (
-              <Select.Option key={mon.id} value={mon.id}>
-                {mon.id} - {mon.nameKo || mon.name}
-              </Select.Option>
-            ))}
-          </Select>
+        <Form.Item label="Evolution from">
+          <Space>
+            <Form.Item name="evolveFromId">
+              <Select
+                style={{ width: 200 }}
+                showSearch
+                filterOption={(input, option) => {
+                  const foundMons = mons!.filter(
+                    (mon) => (mon.nameKo || mon.name).indexOf(input) >= 0,
+                  );
+                  return foundMons.map((mon) => mon.id).includes(option?.value);
+                }}
+              >
+                {mons!.map((mon) => (
+                  <Select.Option key={mon.id} value={mon.id}>
+                    {mon.id} - {mon.nameKo || mon.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Button
+              style={{ marginBottom: 24 }}
+              onClick={() => form.setFieldsValue({ evolveFromId: null })}
+            >
+              Unset
+            </Button>
+          </Space>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button htmlType="button" onClick={onNavigateToList} className="mr-2">

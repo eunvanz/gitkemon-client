@@ -278,6 +278,7 @@ const MonModal: React.FC<MonModalProps> = ({
             </div>
           ))}
           <Skeleton width={random(250, 300)} height={16} />
+          <Skeleton className="mt-2" width={random(250, 300)} height={16} />
         </div>
       )}
     </BaseMonModal>

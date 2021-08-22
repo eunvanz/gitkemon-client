@@ -98,7 +98,7 @@ const Evolution: React.FC<EvolutionProps> = ({
   }, [nextMons]);
 
   return nextMons ? (
-    <div className="flex flex-col justify-center items-center content-container">
+    <div className="flex flex-col justify-center items-center h-full max-w-screen-xl mx-auto">
       <AnimatePresence>
         {isMonSelectVisible && (
           <motion.div

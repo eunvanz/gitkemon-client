@@ -108,7 +108,6 @@ const MonCard: React.FC<MonCardProps> = ({
           styles.maxWidth,
         )}
         {...restProps}
-        onClick={() => setIsMonModalOpen(true)}
       >
         <div
           className={cx(
@@ -118,6 +117,7 @@ const MonCard: React.FC<MonCardProps> = ({
               [styles.isFlipped]: isFlipped,
             },
           )}
+          onClick={() => setIsMonModalOpen(true)}
         >
           <div className={cx(styles.hiddenBackface)}>
             <Front />

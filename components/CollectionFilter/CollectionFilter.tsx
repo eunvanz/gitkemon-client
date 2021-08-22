@@ -51,6 +51,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
     >
       <FilterIcon className="w-5 h-5 text-white" />
       <BaseModal
+        isCloseButtonVisible
         className="w-full sm:w-40"
         isOpen={isModalVisible}
         onClose={() => setIsModalVisible(false)}

@@ -296,8 +296,13 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
   children,
   ...restProps
 }) => {
+  const isCollection = useMemo(() => {
+    return !!mon?.baseTotal;
+  }, [mon?.baseTotal]);
+
   return (
     <BaseModal
+      isCloseButtonVisible
       className="w-full md:max-w-xl"
       footer={
         <div className="text-right">
@@ -343,6 +348,18 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
               <Skeleton width={120} height={16} />
             )}
           </div>
+          {mon && isCollection && (
+            <div className="text-center mb-2 mt-2">
+              <Button size="xs" color="white">
+                Blend
+              </Button>
+              {mon.evolutionLevel && mon.evolutionLevel <= mon.level! && (
+                <Button className="ml-2" size="xs" color="white">
+                  Evolve
+                </Button>
+              )}
+            </div>
+          )}
         </div>
         <div className="md:flex w-full">{children}</div>
       </div>

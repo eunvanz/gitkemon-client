@@ -89,14 +89,14 @@ const BaseModal = ({
                     "cursor-default": !isCloseButtonVisible,
                   })}
                   ref={closeButtonRef}
-                  onClick={isCloseButtonVisible ? undefined : onClose}
+                  onClick={isCloseButtonVisible ? onClose : undefined}
                 >
                   <span className="sr-only">Close</span>
                   <XIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
               <div className="bg-white p-4 sm:p-6">
-                {title && <Dialog.Title>{title}</Dialog.Title>}
+                {title && <Dialog.Title className="text-lg">{title}</Dialog.Title>}
                 <Dialog.Description>{children}</Dialog.Description>
               </div>
               {footer && (

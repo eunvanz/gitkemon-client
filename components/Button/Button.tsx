@@ -68,7 +68,7 @@ const Button: React.FC<ButtonProps> = ({
             : ""
         }text-white shadow-sm border border-${colors.PRIMARY_COLOR}`;
       case "secondary":
-        return `bg-blue-100 hover:bg-blue-200 text-blue-600 border border-blue-100`;
+        return `bg-blue-100 hover:bg-blue-200 text-blue-600 border border-blue-100 shadow-sm`;
       case "white":
         return "bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 shadow-sm";
       case "transparent":

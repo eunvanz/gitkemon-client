@@ -7,6 +7,8 @@ import Input from "../../../../components/Input";
 import SearchableSelect from "../../../../components/SearchableSelect";
 import Select from "../../../../components/Select";
 import Typography from "../../../../components/Typography";
+import { MON_TIERS } from "../../../../constants/rules";
+import { capitalize } from "../../../../helpers/commonHelpers";
 import { Mon, MonTier } from "../../../../types";
 
 export interface MonImageFormValues {
@@ -167,32 +169,10 @@ const MonImage: React.FC<MonImageProps> = ({
                 input={Select}
                 inputProps={{
                   label: "Tier",
-                  items: [
-                    {
-                      value: "basic",
-                      displayValue: "Basic",
-                    },
-                    {
-                      value: "special",
-                      displayValue: "Special",
-                    },
-                    {
-                      value: "rare",
-                      displayValue: "Rare",
-                    },
-                    {
-                      value: "s.rare",
-                      displayValue: "S.Rare",
-                    },
-                    {
-                      value: "elite",
-                      displayValue: "Elite",
-                    },
-                    {
-                      value: "legend",
-                      displayValue: "Legend",
-                    },
-                  ],
+                  items: MON_TIERS.map((tier) => ({
+                    value: tier,
+                    displayValue: capitalize(tier),
+                  })),
                   disabled: isSubmitting,
                   hint: `Total: ${selectedMon?.total} / Suggestion: ${selectedMon?.tier}`,
                 }}

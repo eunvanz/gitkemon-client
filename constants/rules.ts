@@ -28,6 +28,7 @@ export const MON_TIERS: MonTier[] = [
   "s.rare",
   "elite",
   "legend",
+  "myth",
 ];
 
 export const MON_STARS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

@@ -22,6 +22,8 @@ const MonTierBadge: React.FC<MonTierBadgeProps> = ({ tier, className, ...restPro
         return { short: "E", long: "ELITE" };
       case "legend":
         return { short: "L", long: "LEGEND" };
+      case "myth":
+        return { short: "M", long: "MYTH" };
     }
   }, [tier]);
 
@@ -39,6 +41,8 @@ const MonTierBadge: React.FC<MonTierBadgeProps> = ({ tier, className, ...restPro
         return "bg-pink-200 text-pink-800";
       case "legend":
         return "bg-orange-200 text-orange-800";
+      case "myth":
+        return "bg-indigo-200 text-indigo-800";
     }
   }, [tier]);
 

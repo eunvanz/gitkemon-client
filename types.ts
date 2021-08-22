@@ -98,7 +98,14 @@ export interface Mon {
   __nextMons__?: Mon[];
 }
 
-export type MonTier = "basic" | "special" | "rare" | "s.rare" | "elite" | "legend";
+export type MonTier =
+  | "basic"
+  | "special"
+  | "rare"
+  | "s.rare"
+  | "elite"
+  | "legend"
+  | "myth";
 
 export interface MonImage {
   id: number;

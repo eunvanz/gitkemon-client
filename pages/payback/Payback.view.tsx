@@ -269,7 +269,7 @@ interface RainItemProps {
 
 const RainItem = ({ type }: RainItemProps) => {
   const rotationClassName = useMemo(
-    () => `${random(0, 1) ? "-" : ""}rotate-${random(0, 180)}`,
+    () => `transform ${random(0, 1) ? "-" : ""}rotate-${random(0, 180)}`,
     [],
   );
 

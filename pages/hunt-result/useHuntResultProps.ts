@@ -13,8 +13,9 @@ const useHuntResultProps: () => HuntResultProps = () => {
   assertNotEmpty(huntResult?.pokeBallType);
 
   const restPokeBalls = useMemo(() => {
-    return pokeBalls.find((pokeBall) => pokeBall.type === huntResult.pokeBallType)!
-      .amount;
+    return (
+      pokeBalls.find((pokeBall) => pokeBall.type === huntResult.pokeBallType)?.amount || 0
+    );
   }, [huntResult.pokeBallType, pokeBalls]);
 
   const onChoosePokeBall = useCallback(() => {
@@ -30,17 +31,12 @@ const useHuntResultProps: () => HuntResultProps = () => {
     }
   }, [huntResult, onHunt, restPokeBalls]);
 
-  const onGoToCollections = useCallback(() => {
-    // TODO: 콜렉션 페이지 생성 이후 작성
-  }, []);
-
   return {
     pokeBallType: huntResult.pokeBallType,
     result: huntResult.result,
     restPokeBalls,
     onChoosePokeBall,
     onKeepHunting,
-    onGoToCollections,
   };
 };
 

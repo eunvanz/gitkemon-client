@@ -17,7 +17,6 @@ export interface HuntResultProps {
   restPokeBalls: number;
   onChoosePokeBall: VoidFunction;
   onKeepHunting: VoidFunction;
-  onGoToCollections: VoidFunction;
 }
 
 const HuntResult: React.FC<HuntResultProps> = ({
@@ -26,7 +25,6 @@ const HuntResult: React.FC<HuntResultProps> = ({
   restPokeBalls,
   onChoosePokeBall,
   onKeepHunting,
-  onGoToCollections,
 }) => {
   const [isTitleVisible, setIsTitleVisible] = useState(false);
 
@@ -218,11 +216,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
                   </>
                 )}
               </Button>
-            ) : (
-              <Button className="ml-2" onClick={onGoToCollections}>
-                Go to collections
-              </Button>
-            )}
+            ) : null}
           </motion.div>
         )}
       </AnimatePresence>

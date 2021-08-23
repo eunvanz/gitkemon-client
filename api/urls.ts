@@ -15,6 +15,7 @@ const API_URL = {
   COLLECTIONS__HUNT: "collections/hunt",
   COLLECTIONS__USER: "collections/user",
   COLLECTIONS__EVOLVE: "collections/evolve",
+  COLLECTIONS__BLEND: "collections/blend",
 };
 
 export default API_URL;

@@ -244,6 +244,13 @@ const getNextMons = async (monId: number) => {
   return data;
 };
 
+const blend = async (collectionIds: number[]) => {
+  const { data } = await requester.post<HuntResult>(API_URL.COLLECTIONS__BLEND, {
+    collectionIds,
+  });
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -268,6 +275,7 @@ const api = {
   getUser,
   evolve,
   getNextMons,
+  blend,
 };
 
 export default api;

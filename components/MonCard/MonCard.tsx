@@ -122,7 +122,7 @@ const MonCard: React.FC<MonCardProps> = ({
           <div className={cx(styles.hiddenBackface)}>
             <Front />
           </div>
-          <div className={cx(styles.hidden)}>
+          <div className="invisible">
             <Front isPlaceholder />
           </div>
           <div className={cx(styles.surface, styles.back)}>

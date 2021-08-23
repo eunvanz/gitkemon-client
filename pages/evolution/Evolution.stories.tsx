@@ -20,7 +20,12 @@ const Template: ComponentStory<typeof Evolution> = (args) => <Evolution {...args
 
 export const 기본 = createStoryComponent(Template);
 
-export const 여러형태 = createStoryComponent(Template, {
+export const 여러형태_6개 = createStoryComponent(Template, {
   result: undefined,
-  nextMons: [allMons[1], allMons[4]],
+  nextMons: allMons.slice(0, 6),
+});
+
+export const 여러형태_6개_초과 = createStoryComponent(Template, {
+  result: undefined,
+  nextMons: allMons.slice(0, 8),
 });

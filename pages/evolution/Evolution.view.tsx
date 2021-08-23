@@ -101,8 +101,8 @@ const Evolution: React.FC<EvolutionProps> = ({
   return nextMons ? (
     <div
       className={cx(
+        isMonSelectVisible && nextMons.length > 6 ? "block md:flex" : "flex",
         "py-4 flex-col justify-center items-center h-full max-w-screen-xl mx-auto",
-        isMonSelectVisible ? "block md:flex" : "flex",
       )}
     >
       <AnimatePresence>

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Button from "../../components/Button";
@@ -98,7 +99,12 @@ const Evolution: React.FC<EvolutionProps> = ({
   }, [nextMons]);
 
   return nextMons ? (
-    <div className="flex flex-col justify-center items-center h-full max-w-screen-xl mx-auto">
+    <div
+      className={cx(
+        "py-4 flex-col justify-center items-center h-full max-w-screen-xl mx-auto",
+        isMonSelectVisible ? "block md:flex" : "flex",
+      )}
+    >
       <AnimatePresence>
         {isMonSelectVisible && (
           <motion.div

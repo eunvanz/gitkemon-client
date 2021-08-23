@@ -104,7 +104,7 @@ const Collections: React.FC<CollectionsProps> = ({ collections, mons, user }) =>
   }, [collections, mons]);
 
   return !isLoading ? (
-    <div className="flex flex-col justify-start max-w-screen-xl m-auto">
+    <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
       <Typography as="h1" size="2xl">
         {user?.nickname}&apos;s collection
       </Typography>

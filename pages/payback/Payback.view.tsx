@@ -272,7 +272,7 @@ const RainItem = ({ type }: RainItemProps) => {
 
   const delay = useMemo(() => random(0, 3000), []);
 
-  const left = useMemo(() => random(-(size / 2), window.innerWidth - size / 2), [size]);
+  const left = useMemo(() => random(0, window.innerWidth - size), [size]);
 
   return createPortal(
     <motion.div

@@ -21,6 +21,11 @@ const Template: ComponentStory<typeof Collections> = (args) => <Collections {...
 
 export const 기본 = createStoryComponent(Template);
 
+export const blendMode = createStoryComponent(Template, {
+  isBlendMode: true,
+  monToBlend: { ...mockCollections.collections[0], __mon__: mockMons.activeMons[0] },
+});
+
 export const 로딩 = createStoryComponent(Template, {
   collections: undefined,
 });

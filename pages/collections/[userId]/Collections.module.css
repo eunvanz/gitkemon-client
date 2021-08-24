@@ -1,0 +1,10 @@
+.stickyWidth {
+  width: calc(100% - 2rem);
+  max-width: calc(1280px - 2rem);
+}
+
+@media (max-width: 640px) {
+  .stickyWidth {
+    width: calc(100% - 0.5rem);
+  }
+}

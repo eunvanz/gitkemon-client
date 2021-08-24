@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import { ArrowNarrowUpIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { CardMon, ModalMon } from "../../types";
 import Button from "../Button";
@@ -134,7 +135,9 @@ const MonCard: React.FC<MonCardProps> = ({
         </div>
         {onSelect && (
           <div className="text-center mt-2 w-full">
-            <Button onClick={onSelect}>Select</Button>
+            <Button icon={ArrowNarrowUpIcon} onClick={onSelect} size="xs">
+              Select
+            </Button>
           </div>
         )}
       </div>

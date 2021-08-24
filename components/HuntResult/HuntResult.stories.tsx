@@ -23,3 +23,11 @@ export const 멀티 = createStoryComponent(Template, {
   // @ts-ignore
   result: mockCollections.huntResultMulti,
 });
+
+export const 환상포켓몬 = createStoryComponent(Template, {
+  result: mockCollections.huntResultMyth,
+});
+
+export const 상위등급포켓몬 = createStoryComponent(Template, {
+  result: mockCollections.huntResultSuperior,
+});

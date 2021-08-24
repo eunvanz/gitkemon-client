@@ -1,4 +1,4 @@
-import { CardMon, Collection, ModalMon, Mon } from "../types";
+import { CardMon, Collection, HuntResult, ModalMon, Mon } from "../types";
 
 export const convertCollectionToModalMon: (collection: Collection) => ModalMon = (
   collection,
@@ -144,4 +144,12 @@ export const convertMonToModalMon: (mon: Mon) => ModalMon = (mon) => {
     stars,
     colPoint,
   };
+};
+
+export const checkIsLuckyHuntResult = (resultItem: HuntResult) => {
+  return (
+    resultItem.newCollection.tier === "myth" ||
+    (resultItem.newCollection.potential.includes("S") &&
+      resultItem.newCollection.level === 1)
+  );
 };

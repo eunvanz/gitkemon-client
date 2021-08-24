@@ -1,4 +1,6 @@
-const monImages = [
+import { MonImage } from "../../types";
+
+const monImages: MonImage[] = [
   {
     createdAt: "2021-07-24T01:21:07.895Z",
     updatedAt: "2021-07-24T02:30:11.000Z",
@@ -27,7 +29,7 @@ const monImages = [
       height: 20,
       weight: 1000,
       tier: "basic",
-      evolutionLevel: null,
+      evolutionLevel: undefined,
       hp: 80,
       attack: 82,
       defense: 83,
@@ -39,13 +41,12 @@ const monImages = [
       stars: 7,
       evolveFromId: 2,
     },
-    __has_mon__: true,
   },
   {
     createdAt: "2021-07-24T01:31:50.442Z",
     updatedAt: "2021-07-24T01:31:50.442Z",
     id: 20,
-    designerId: null,
+    designerId: undefined,
     designerName: "웅",
     imageUrl:
       "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅_1627090308172.jpg",
@@ -81,15 +82,14 @@ const monImages = [
       total: 318,
       colPoint: 0,
       stars: 3,
-      evolveFromId: null,
+      evolveFromId: undefined,
     },
-    __has_mon__: true,
   },
   {
     createdAt: "2021-08-07T16:34:34.354Z",
     updatedAt: "2021-08-07T16:34:34.354Z",
     id: 21,
-    designerId: null,
+    designerId: undefined,
     designerName: "웅이",
     imageUrl:
       "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_2_웅이_1628354072198.png",
@@ -114,7 +114,7 @@ const monImages = [
       height: 10,
       weight: 130,
       tier: "special",
-      evolutionLevel: null,
+      evolutionLevel: undefined,
       hp: 60,
       attack: 62,
       defense: 63,
@@ -126,13 +126,12 @@ const monImages = [
       stars: 5,
       evolveFromId: 1,
     },
-    __has_mon__: true,
   },
   {
     createdAt: "2021-08-07T16:48:28.139Z",
     updatedAt: "2021-08-07T16:48:28.139Z",
     id: 22,
-    designerId: null,
+    designerId: undefined,
     designerName: "밥밥이",
     imageUrl:
       "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_4_밥밥이_1628354906313.png",
@@ -153,11 +152,11 @@ const monImages = [
         "しっぽの　ほのおは　ヒトカゲの\nせいめいりょくの　あかし。\nげんきだと　さかんに　もえさかる。",
       descriptionZh: "要是把牠帶到安靜的地方，\n就能聽見牠的尾巴燃燒時\n發出的微小聲音。",
       firstType: "fire",
-      secondType: null,
+      secondType: undefined,
       height: 6,
       weight: 85,
       tier: "basic",
-      evolutionLevel: null,
+      evolutionLevel: undefined,
       hp: 39,
       attack: 52,
       defense: 43,
@@ -167,9 +166,8 @@ const monImages = [
       total: 309,
       colPoint: 1,
       stars: 3,
-      evolveFromId: null,
+      evolveFromId: undefined,
     },
-    __has_mon__: true,
   },
 ];
 

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 import Button from "../../components/Button";
 import HuntResultItem from "../../components/HuntResultItem";
 import Loading from "../../components/Loading";
@@ -9,7 +11,11 @@ import MonCard from "../../components/MonCard";
 import MonCardGrid from "../../components/MonCardGrid";
 import Typography from "../../components/Typography";
 import { colorHashes } from "../../constants/styles";
-import { convertMonToCardMon, convertMonToModalMon } from "../../helpers/projectHelpers";
+import {
+  checkIsLuckyHuntResult,
+  convertMonToCardMon,
+  convertMonToModalMon,
+} from "../../helpers/projectHelpers";
 import { Collection, HuntResult, Mon } from "../../types";
 
 export interface EvolutionProps {
@@ -27,6 +33,8 @@ const Evolution: React.FC<EvolutionProps> = ({
   onNavigateToMyCollection,
   onSelectNextMon,
 }) => {
+  const { width, height } = useWindowSize();
+
   const monImageRef = useRef<HTMLDivElement>(null);
 
   const burstInterval = useRef<number | null>(null);
@@ -40,6 +48,8 @@ const Evolution: React.FC<EvolutionProps> = ({
   const [isCardFlipped, setIsCardFlipped] = useState(true);
 
   const [isButtonVisible, setIsButtonVisible] = useState(false);
+
+  const [isConfettiVisible, setIsConfettiVisible] = useState(false);
 
   const initBurstEffect = useCallback(async () => {
     const { burstStar } = await import("../../helpers/animations");
@@ -85,6 +95,9 @@ const Evolution: React.FC<EvolutionProps> = ({
         setIsCardFlipped(false);
         setIsGotchaVisible(false);
         clearInterval(burstInterval.current!);
+        if (checkIsLuckyHuntResult(result)) {
+          setIsConfettiVisible(true);
+        }
       }, 3500);
       setTimeout(() => {
         setIsButtonVisible(true);
@@ -105,6 +118,7 @@ const Evolution: React.FC<EvolutionProps> = ({
         "py-4 flex-col justify-center items-center h-full max-w-screen-xl mx-auto",
       )}
     >
+      {isConfettiVisible && <Confetti width={width} height={height} recycle={false} />}
       <AnimatePresence>
         {isMonSelectVisible && (
           <motion.div

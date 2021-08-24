@@ -82,6 +82,170 @@ const huntResultNew: HuntResponse = [
   },
 ];
 
+const huntResultMyth: HuntResponse = [
+  {
+    oldCollection: null,
+    newCollection: {
+      createdAt: "2021-08-15T07:31:07.328Z",
+      updatedAt: "2021-08-15T13:32:23.000Z",
+      id: 1,
+      height: 5,
+      weight: 40,
+      hp: 57,
+      attack: 53,
+      defense: 48,
+      specialAttack: 76,
+      specialDefense: 57,
+      speed: 47,
+      total: 337,
+      baseHp: 56,
+      baseAttack: 53,
+      baseDefense: 48,
+      baseSpecialAttack: 76,
+      baseSpecialDefense: 57,
+      baseSpeed: 47,
+      baseTotal: 337,
+      monImageId: 23,
+      monImageUrl:
+        "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
+      monId: 1,
+      potential: "B",
+      level: 1,
+      userId: "275de423-5b14-4082-bf67-b82e170470d7",
+      stars: 3,
+      tier: "myth",
+      firstType: "grass",
+      secondType: "poison",
+      evolutionLevel: undefined,
+      __mon__: {
+        createdAt: "2021-07-21T16:16:03.739Z",
+        updatedAt: "2021-07-29T13:33:18.000Z",
+        id: 1,
+        order: 1,
+        name: "bulbasaur",
+        nameKo: "이상해씨",
+        nameJa: "フシギダネ",
+        nameZh: "妙蛙種子",
+        description:
+          "A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON.",
+        descriptionKo:
+          "태어났을 때부터 등에\n이상한 씨앗이 심어져 있으며\n몸과 함께 자란다고 한다.",
+        descriptionJa:
+          "うまれたときから　せなかに\nふしぎな　タネが　うえてあって\nからだと　ともに　そだつという。",
+        descriptionZh:
+          "背上的種子裡存著很多營養，\n所以就算好幾天不吃東西\n也能活得好好的！",
+        firstType: "grass",
+        secondType: "poison",
+        height: 7,
+        weight: 69,
+        tier: "basic",
+        evolutionLevel: 4,
+        hp: 45,
+        attack: 49,
+        defense: 49,
+        specialAttack: 65,
+        specialDefense: 65,
+        speed: 45,
+        total: 318,
+        colPoint: 1,
+        stars: 3,
+        evolveFromId: undefined,
+      },
+      __monImage__: {
+        createdAt: "2021-08-08T04:56:53.410Z",
+        updatedAt: "2021-08-08T05:54:25.000Z",
+        id: 23,
+        designerId: undefined,
+        designerName: "웅희",
+        imageUrl:
+          "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
+      },
+    },
+  },
+];
+
+const huntResultSuperior: HuntResponse = [
+  {
+    oldCollection: null,
+    newCollection: {
+      createdAt: "2021-08-15T07:31:07.328Z",
+      updatedAt: "2021-08-15T13:32:23.000Z",
+      id: 1,
+      height: 5,
+      weight: 40,
+      hp: 57,
+      attack: 53,
+      defense: 48,
+      specialAttack: 76,
+      specialDefense: 57,
+      speed: 47,
+      total: 337,
+      baseHp: 56,
+      baseAttack: 53,
+      baseDefense: 48,
+      baseSpecialAttack: 76,
+      baseSpecialDefense: 57,
+      baseSpeed: 47,
+      baseTotal: 337,
+      monImageId: 23,
+      monImageUrl:
+        "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
+      monId: 1,
+      potential: "SS",
+      level: 1,
+      userId: "275de423-5b14-4082-bf67-b82e170470d7",
+      stars: 3,
+      tier: "basic",
+      firstType: "grass",
+      secondType: "poison",
+      evolutionLevel: undefined,
+      __mon__: {
+        createdAt: "2021-07-21T16:16:03.739Z",
+        updatedAt: "2021-07-29T13:33:18.000Z",
+        id: 1,
+        order: 1,
+        name: "bulbasaur",
+        nameKo: "이상해씨",
+        nameJa: "フシギダネ",
+        nameZh: "妙蛙種子",
+        description:
+          "A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON.",
+        descriptionKo:
+          "태어났을 때부터 등에\n이상한 씨앗이 심어져 있으며\n몸과 함께 자란다고 한다.",
+        descriptionJa:
+          "うまれたときから　せなかに\nふしぎな　タネが　うえてあって\nからだと　ともに　そだつという。",
+        descriptionZh:
+          "背上的種子裡存著很多營養，\n所以就算好幾天不吃東西\n也能活得好好的！",
+        firstType: "grass",
+        secondType: "poison",
+        height: 7,
+        weight: 69,
+        tier: "basic",
+        evolutionLevel: 4,
+        hp: 45,
+        attack: 49,
+        defense: 49,
+        specialAttack: 65,
+        specialDefense: 65,
+        speed: 45,
+        total: 318,
+        colPoint: 1,
+        stars: 3,
+        evolveFromId: undefined,
+      },
+      __monImage__: {
+        createdAt: "2021-08-08T04:56:53.410Z",
+        updatedAt: "2021-08-08T05:54:25.000Z",
+        id: 23,
+        designerId: undefined,
+        designerName: "웅희",
+        imageUrl:
+          "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
+      },
+    },
+  },
+];
+
 const huntResultLevelUp: HuntResponse = [
   {
     oldCollection: {
@@ -2428,6 +2592,8 @@ const mockCollections = {
   huntResultLevelUp,
   huntResultMulti,
   collections,
+  huntResultMyth,
+  huntResultSuperior,
 };
 
 export default mockCollections;

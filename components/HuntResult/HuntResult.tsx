@@ -2,7 +2,10 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 import { colorHashes } from "../../constants/styles";
+import { checkIsLuckyHuntResult } from "../../helpers/projectHelpers";
 import { HuntResponse, PokeBallType } from "../../types";
 import Button from "../Button";
 import HuntResultItem from "../HuntResultItem";
@@ -26,6 +29,8 @@ const HuntResult: React.FC<HuntResultProps> = ({
   onChoosePokeBall,
   onKeepHunting,
 }) => {
+  const { width, height } = useWindowSize();
+
   const [isTitleVisible, setIsTitleVisible] = useState(false);
 
   const [isCardVisible, setIsCardVisible] = useState(false);
@@ -39,6 +44,8 @@ const HuntResult: React.FC<HuntResultProps> = ({
   const [isCardFlipped, setIsCardFlipped] = useState(true);
 
   const [isButtonsVisible, setIsButtonsVisible] = useState(false);
+
+  const [isConfettiVisible, setIsConfettiVisible] = useState(false);
 
   useEffect(() => {
     if (hasToShowResult) {
@@ -69,6 +76,9 @@ const HuntResult: React.FC<HuntResultProps> = ({
         }, 500);
         setTimeout(() => {
           setIsCardFlipped(false);
+          if (result?.some(checkIsLuckyHuntResult)) {
+            setIsConfettiVisible(true);
+          }
         }, 1000);
         setTimeout(() => {
           setIsButtonsVisible(true);
@@ -100,6 +110,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
 
   return (
     <div className="flex flex-col justify-center items-center content-container">
+      {isConfettiVisible && <Confetti width={width} height={height} recycle={false} />}
       <div className="flex justify-center">
         <AnimatePresence>
           {hasToShowResult && !isCardVisible && (

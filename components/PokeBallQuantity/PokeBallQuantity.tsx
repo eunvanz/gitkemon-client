@@ -51,11 +51,12 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
   }, []);
 
   const handleOnDrag = useCallback((e) => {
+    const moveY = e.y || e.changedTouches[0].clientY;
     pokeBallContainerRef.current!.style.transform = `translateY(calc(25vh + ${Math.pow(
-      e.y - startY,
+      moveY - startY,
       TENSION,
     )}px))`;
-    const progress = ((e.y - startY) * 100) / VALID_PULL_LENGTH;
+    const progress = ((moveY - startY) * 100) / VALID_PULL_LENGTH;
     titleRef.current!.style.opacity = `${100 - progress}%`;
     quantityRef.current!.style.opacity = `${100 - progress}%`;
     pullToReadyRef.current!.style.opacity = `${100 - progress}%`;
@@ -64,7 +65,8 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
 
   const handleOnDragEnd = useCallback(
     (e) => {
-      if (e.y - startY > VALID_PULL_LENGTH) {
+      const moveY = e.y || e.changedTouches[0].clientY;
+      if (moveY - startY > VALID_PULL_LENGTH) {
         // 던져지는 애니메이션
         setIsReleasable(false);
         pokeBallContainerRef.current!.style.transitionTimingFunction = "ease-out";
@@ -89,7 +91,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
 
   const handleOnDragStart = useCallback(
     (e) => {
-      startY = e.y as number;
+      startY = e.y || (e.changedTouches[0].clientY as number);
       pokeBallContainerRef.current!.style.transitionDuration = "0s";
       titleRef.current!.style.transitionDuration = "0s";
       pullToReadyRef.current!.style.transitionDuration = "0s";

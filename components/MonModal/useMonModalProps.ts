@@ -1,12 +1,14 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { MonModalContainerProps } from ".";
 import { assertNotEmpty, capitalize } from "../../helpers/commonHelpers";
 import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
 import ROUTES from "../../paths";
 import useCollectionQuery from "../../queries/useCollectionQuery";
+import { blendMonState } from "../../state/blendMon";
 import { evolveMonState } from "../../state/evolveMon";
+import { userState } from "../../state/user";
 import Dialog from "../Dialog/Dialog";
 import { MonModalProps } from "./MonModal";
 
@@ -29,6 +31,8 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   const router = useRouter();
 
   const setEvolveMon = useSetRecoilState(evolveMonState);
+  const setBlendMon = useSetRecoilState(blendMonState);
+  const user = useRecoilValue(userState);
 
   const onEvolve = useCallback(async () => {
     assertNotEmpty(mon);
@@ -49,7 +53,11 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     }
   }, [collection, mon, onClose, onOpen, router, setEvolveMon]);
 
-  const onBlend = useCallback(() => {}, []);
+  const onBlend = useCallback(() => {
+    collection && setBlendMon([collection]);
+    onClose();
+    router.push(`${ROUTES.COLLECTIONS}/${user!.id}`);
+  }, [collection, onClose, router, setBlendMon, user]);
 
   return {
     isOpen,

@@ -63,6 +63,7 @@ export enum STATE_KEY {
   USER = "USER",
   HUNT_RESULT = "HUNT_RESULT",
   EVOLVE_MON = "EVOLVE_MON",
+  BLEND_MON = "BLEND_MON",
 }
 
 export interface Mon {

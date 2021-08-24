@@ -1,8 +1,6 @@
 import { useMemo, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
-import cx from "classnames";
 import orderBy from "lodash/orderBy";
-import { StickyContainer, Sticky } from "react-sticky";
 import Button from "../../../components/Button";
 import CollectionFilter, {
   CollectionFilterState,
@@ -19,7 +17,6 @@ import {
   convertMonToModalMon,
 } from "../../../helpers/projectHelpers";
 import { Collection, Mon, User } from "../../../types";
-import styles from "./Collections.module.css";
 
 export interface CollectionsProps {
   collections?: Collection[];
@@ -127,62 +124,46 @@ const Collections: React.FC<CollectionsProps> = ({
       {!isBlendMode && colPointInfo && countInfo && (
         <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />
       )}
-      <StickyContainer>
-        {isBlendMode && (
-          <Sticky>
-            {({ isSticky }) => (
-              <div
-                className={cx(
-                  isSticky ? "fixed top-0 max-w-screen-xl z-10" : undefined,
-                  isSticky ? styles.stickyWidth : undefined,
-                )}
-              >
-                <div
-                  className={cx(
-                    "flex justify-between items-center p-2 bg-white",
-                    isSticky ? "border-b" : undefined,
-                  )}
-                >
-                  <Typography as="div">
-                    Choose a Pokémon to blend with{" "}
-                    <Typography color="primary">{monToBlend?.__mon__?.name}</Typography>
-                  </Typography>
-                  <Button
-                    icon={XIcon}
-                    className="ml-2"
-                    size="xs"
-                    color="white"
-                    onClick={onCancelBlendMode}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </div>
-            )}
-          </Sticky>
-        )}
-        <MonCardGrid>
-          {orderedCollections!.map((collection) => {
-            const isCollection = (collection as Collection).monImageUrl;
-            return (
-              <MonCard
-                key={`${isCollection ? "col" : "mon"}-${collection.id}`}
-                mon={
-                  isCollection
-                    ? convertCollectionToCardMon(collection as Collection)
-                    : convertMonToCardMon(collection as Mon)
-                }
-                modalMon={
-                  isCollection ? undefined : convertMonToModalMon(collection as Mon)
-                }
-                onSelect={
-                  isBlendMode ? () => onSelectItem?.(collection as Collection) : undefined
-                }
-              />
-            );
-          })}
-        </MonCardGrid>
-      </StickyContainer>
+      {isBlendMode && (
+        <div className="sticky top-0 z-10 border-b mb-2">
+          <div className="flex justify-between items-center p-2 bg-white">
+            <Typography as="div">
+              Choose a Pokémon to blend with{" "}
+              <Typography color="primary">{monToBlend?.__mon__?.name}</Typography>
+            </Typography>
+            <Button
+              icon={XIcon}
+              className="ml-2"
+              size="xs"
+              color="white"
+              onClick={onCancelBlendMode}
+            >
+              Cancel
+            </Button>
+          </div>
+        </div>
+      )}
+      <MonCardGrid>
+        {orderedCollections!.map((collection) => {
+          const isCollection = (collection as Collection).monImageUrl;
+          return (
+            <MonCard
+              key={`${isCollection ? "col" : "mon"}-${collection.id}`}
+              mon={
+                isCollection
+                  ? convertCollectionToCardMon(collection as Collection)
+                  : convertMonToCardMon(collection as Mon)
+              }
+              modalMon={
+                isCollection ? undefined : convertMonToModalMon(collection as Mon)
+              }
+              onSelect={
+                isBlendMode ? () => onSelectItem?.(collection as Collection) : undefined
+              }
+            />
+          );
+        })}
+      </MonCardGrid>
       <CollectionFilter
         filterState={filterState}
         onChangeFilter={(filter) => setFilterState(filter)}

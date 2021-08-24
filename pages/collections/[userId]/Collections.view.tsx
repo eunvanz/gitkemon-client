@@ -28,6 +28,7 @@ export interface CollectionsProps {
   isBlendMode?: boolean;
   monToBlend?: Collection;
   onSelectItem?: (collection: Collection) => void;
+  onCancelBlendMode: VoidFunction;
 }
 
 const Collections: React.FC<CollectionsProps> = ({
@@ -37,6 +38,7 @@ const Collections: React.FC<CollectionsProps> = ({
   isBlendMode,
   monToBlend,
   onSelectItem,
+  onCancelBlendMode,
 }) => {
   const [filterState, setFilterState] = useState<CollectionFilterState>({
     has: [true, false],
@@ -145,7 +147,13 @@ const Collections: React.FC<CollectionsProps> = ({
                     Choose a Pokémon to blend with{" "}
                     <Typography color="primary">{monToBlend?.__mon__?.name}</Typography>
                   </Typography>
-                  <Button icon={XIcon} className="ml-2" size="xs" color="white">
+                  <Button
+                    icon={XIcon}
+                    className="ml-2"
+                    size="xs"
+                    color="white"
+                    onClick={onCancelBlendMode}
+                  >
                     Cancel
                   </Button>
                 </div>

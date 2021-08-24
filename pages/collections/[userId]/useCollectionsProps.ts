@@ -49,6 +49,10 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
     [blendMon, isBlendMode, setBlendMon],
   );
 
+  const onCancelBlendMode = useCallback(() => {
+    setBlendMon(undefined);
+  }, [setBlendMon]);
+
   return {
     collections,
     mons,
@@ -56,6 +60,7 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
     isBlendMode,
     monToBlend: blendMon?.[0],
     onSelectItem,
+    onCancelBlendMode,
   };
 };
 

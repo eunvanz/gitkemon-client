@@ -59,7 +59,10 @@ const Collections: React.FC<CollectionsProps> = ({
 
   const filteredBlendCollections = useMemo(() => {
     if (monToBlend) {
-      return collections?.filter((collection) => collection.id !== monToBlend.id);
+      return collections?.filter(
+        (collection) =>
+          collection.id !== monToBlend.id && collection.tier === monToBlend.tier,
+      );
     } else {
       return collections;
     }

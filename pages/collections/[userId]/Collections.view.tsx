@@ -48,7 +48,7 @@ const Collections: React.FC<CollectionsProps> = ({
     return !collections || !mons;
   }, [collections, mons]);
 
-  const filteredMon = useMemo(() => {
+  const filteredMons = useMemo(() => {
     if (!filterState.has.includes(false) || isBlendMode) {
       return [];
     }
@@ -57,11 +57,19 @@ const Collections: React.FC<CollectionsProps> = ({
     );
   }, [collections, filterState.has, isBlendMode, mons]);
 
+  const filteredBlendCollections = useMemo(() => {
+    if (monToBlend) {
+      return collections?.filter((collection) => collection.id !== monToBlend.id);
+    } else {
+      return collections;
+    }
+  }, [collections, monToBlend]);
+
   const orderedCollections = useMemo(() => {
-    if (collections && filteredMon) {
+    if (filteredBlendCollections && filteredMons) {
       const mergedCollections = [
-        ...(filterState.has.includes(true) ? collections : []),
-        ...filteredMon.map((mon) => ({ ...mon, monId: mon.id })),
+        ...(filterState.has.includes(true) ? filteredBlendCollections : []),
+        ...filteredMons.map((mon) => ({ ...mon, monId: mon.id })),
       ];
       const filteredCollections = mergedCollections
         .filter((collection) => {
@@ -83,12 +91,12 @@ const Collections: React.FC<CollectionsProps> = ({
       return undefined;
     }
   }, [
-    collections,
     filterState.has,
     filterState.stars,
     filterState.tier,
     filterState.type,
-    filteredMon,
+    filteredBlendCollections,
+    filteredMons,
   ]);
 
   const colPointInfo = useMemo(() => {

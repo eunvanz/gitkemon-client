@@ -14,6 +14,7 @@ const ROUTES = {
   PAYBACK: "/payback",
   NOT_FOUND: "/not-found",
   EVOLUTION: "/evolution",
+  BLEND: "/blend",
 };
 
 export default ROUTES;

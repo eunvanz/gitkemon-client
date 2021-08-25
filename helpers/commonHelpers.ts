@@ -46,3 +46,9 @@ export const isArrayEqual = (arr: any[], arr2: any[]) => {
 export const compileUrlWithParams = (path: string, params: Object) => {
   return compile(path)(params);
 };
+
+export const delayPromise = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { CollectionsPageProps } from ".";
+import Dialog from "../../../components/Dialog";
+import ROUTES from "../../../paths";
 import useActiveMonsQuery from "../../../queries/useActiveMonsQuery";
 import useCollectionsQuery from "../../../queries/useCollectionsQuery";
 import { blendMonState } from "../../../state/blendMon";
@@ -36,17 +38,25 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
 
   useEffect(() => {
     return () => {
-      setBlendMon(undefined);
+      setBlendMon((blendMon) => (blendMon?.length === 2 ? blendMon : undefined));
     };
   }, [setBlendMon]);
 
   const onSelectItem = useCallback(
-    (collection: Collection) => {
+    async (collection: Collection) => {
       if (isBlendMode) {
-        setBlendMon([blendMon![0], collection]);
+        const isConfirmed = await Dialog.confirm({
+          title: "Blend",
+          content:
+            "The level of the selected Pokémon decreases by 1, and if it is a Level 1 Pokémon, it disappears forever. Do you want to proceed?",
+        });
+        if (isConfirmed) {
+          setBlendMon([blendMon![0], collection]);
+          router.replace(ROUTES.BLEND);
+        }
       }
     },
-    [blendMon, isBlendMode, setBlendMon],
+    [blendMon, isBlendMode, router, setBlendMon],
   );
 
   const onCancelBlendMode = useCallback(() => {

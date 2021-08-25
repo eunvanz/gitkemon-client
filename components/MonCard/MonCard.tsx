@@ -24,6 +24,7 @@ export interface MonCardProps
   isFlipped?: boolean;
   isFullWidth?: boolean;
   onSelect?: VoidFunction;
+  isClickDisabled?: boolean;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -35,6 +36,7 @@ const MonCard: React.FC<MonCardProps> = ({
   isFlipped,
   isFullWidth,
   onSelect,
+  isClickDisabled,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -112,13 +114,16 @@ const MonCard: React.FC<MonCardProps> = ({
       >
         <div
           className={cx(
-            "relative w-full h-full transform transition-transform cursor-pointer hover:-translate-y-1",
+            "relative w-full h-full transform transition-transform hover:-translate-y-1",
             styles.cardInner,
+            {
+              "cursor-pointer": !isClickDisabled,
+            },
             {
               [styles.isFlipped]: isFlipped,
             },
           )}
-          onClick={() => setIsMonModalOpen(true)}
+          onClick={isClickDisabled ? undefined : () => setIsMonModalOpen(true)}
         >
           <div className={cx(styles.hiddenBackface)}>
             <Front />

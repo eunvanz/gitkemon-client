@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
 import Button from "../../components/Button";
 import Confetti from "../../components/Confetti/Confetti";
 import HuntResultItem from "../../components/HuntResultItem";
@@ -11,6 +12,7 @@ import { delayPromise } from "../../helpers/commonHelpers";
 import {
   checkIsLuckyHuntResult,
   convertCollectionToCardMon,
+  getUpdatedColPointMessage,
 } from "../../helpers/projectHelpers";
 import { Collection, HuntResult } from "../../types";
 
@@ -69,6 +71,9 @@ const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollecti
     }
     await delayPromise(500);
     setAnimStep(4);
+    if (result?.updatedColPoint) {
+      toast.dark(getUpdatedColPointMessage(result.updatedColPoint));
+    }
   }, [burstEffect, result]);
 
   useEffect(() => {

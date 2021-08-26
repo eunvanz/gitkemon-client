@@ -153,3 +153,7 @@ export const checkIsLuckyHuntResult = (resultItem: HuntResult) => {
       resultItem.newCollection.level === 1)
   );
 };
+
+export const getUpdatedColPointMessage = (updatedColPoint: number) => {
+  return `You've got CP ${updatedColPoint > 0 ? "+" : ""}${updatedColPoint}`;
+};

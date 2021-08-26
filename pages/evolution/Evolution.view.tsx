@@ -3,6 +3,7 @@ import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Confetti from "react-confetti";
+import { toast } from "react-toastify";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Button from "../../components/Button";
 import HuntResultItem from "../../components/HuntResultItem";
@@ -16,6 +17,7 @@ import {
   checkIsLuckyHuntResult,
   convertMonToCardMon,
   convertMonToModalMon,
+  getUpdatedColPointMessage,
 } from "../../helpers/projectHelpers";
 import { Collection, HuntResult, Mon } from "../../types";
 
@@ -100,6 +102,9 @@ const Evolution: React.FC<EvolutionProps> = ({
     }
     await delayPromise(500);
     setIsButtonVisible(true);
+    if (result?.updatedColPoint) {
+      toast.dark(getUpdatedColPointMessage(result.updatedColPoint));
+    }
   }, [initBurstEffect, result]);
 
   useEffect(() => {

@@ -58,15 +58,15 @@ const Collections: React.FC<CollectionsProps> = ({
   }, [collections, filterState.has, isBlendMode, mons]);
 
   const filteredBlendCollections = useMemo(() => {
-    if (monToBlend) {
+    if (isBlendMode) {
       return collections?.filter(
         (collection) =>
-          collection.id !== monToBlend.id && collection.tier === monToBlend.tier,
+          collection.id !== monToBlend!.id && collection.tier === monToBlend!.tier,
       );
     } else {
       return collections;
     }
-  }, [collections, monToBlend]);
+  }, [collections, isBlendMode, monToBlend]);
 
   const orderedCollections = useMemo(() => {
     if (filteredBlendCollections && filteredMons) {

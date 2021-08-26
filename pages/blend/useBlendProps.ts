@@ -12,7 +12,6 @@ import { BlendProps } from "./Blend.view";
 const useBlendProps: () => BlendProps = () => {
   const [blendMons, setBlendMons] = useRecoilState(blendMonState);
 
-  console.log("===== blendMons", blendMons);
   const user = useRecoilValue(userState);
 
   assertNotEmpty(user);

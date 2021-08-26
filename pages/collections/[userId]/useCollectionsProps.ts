@@ -25,7 +25,7 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
   const [blendMon, setBlendMon] = useRecoilState(blendMonState);
 
   const isBlendMode = useMemo(() => {
-    return !!blendMon;
+    return !!blendMon && blendMon.length === 1;
   }, [blendMon]);
 
   const isMyCollection = useMemo(() => {

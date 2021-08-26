@@ -32,26 +32,28 @@ const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollecti
   const burstEffect = useCallback(async () => {
     const { burstStar } = await import("../../helpers/animations");
     const burst = () => {
-      const { left, top, height, width } = monCardRef.current!.getClientRects()[0];
-      burstStar({
-        top: top + height / 2,
-        left: left + width / 2,
-        color: [
-          colorHashes.PSYCHIC,
-          colorHashes.ICE,
-          colorHashes.ELECTRIC,
-          colorHashes.GRASS,
-          colorHashes.FLYING,
-        ],
-        count: 20,
-        radius: { 50: 150 },
-        duration: 2000,
-        shape: "circle",
-        delay: "stagger(0, 100)",
-      });
+      if (monCardRef.current) {
+        const { left, top, height, width } = monCardRef.current!.getClientRects()[0];
+        burstStar({
+          top: top + height / 2,
+          left: left + width / 2,
+          color: [
+            colorHashes.PSYCHIC,
+            colorHashes.ICE,
+            colorHashes.ELECTRIC,
+            colorHashes.GRASS,
+            colorHashes.FLYING,
+          ],
+          count: 20,
+          radius: { 50: 150 },
+          duration: 2000,
+          shape: "circle",
+          delay: "stagger(0, 100)",
+        });
+      }
+      burst();
+      burstInterval.current = window.setInterval(burst, 500);
     };
-    burst();
-    burstInterval.current = window.setInterval(burst, 500);
   }, []);
 
   const [isConfettiVisible, setIsConfettiVisible] = useState(false);
@@ -59,7 +61,7 @@ const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollecti
   const proceedAnimation = useCallback(async () => {
     burstEffect();
     await delayPromise(2000);
-    clearInterval(burstInterval.current!);
+    burstInterval.current && clearInterval(burstInterval.current);
     setAnimStep(1);
     await delayPromise(3000);
     setAnimStep(2);
@@ -74,11 +76,14 @@ const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollecti
   }, [burstEffect, result]);
 
   useEffect(() => {
-    proceedAnimation();
     return () => {
       burstInterval.current && clearInterval(burstInterval.current);
     };
-  }, [proceedAnimation]);
+  }, []);
+
+  useEffect(() => {
+    result && proceedAnimation();
+  }, [proceedAnimation, result]);
 
   return result ? (
     <div className="flex flex-col justify-center items-center content-container">

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 import { colorHashes } from "../../constants/styles";
+import { delayPromise } from "../../helpers/commonHelpers";
 import { checkIsLuckyHuntResult } from "../../helpers/projectHelpers";
 import { HuntResponse, PokeBallType } from "../../types";
 import Button from "../Button";
@@ -47,6 +48,10 @@ const HuntResult: React.FC<HuntResultProps> = ({
 
   const [isConfettiVisible, setIsConfettiVisible] = useState(false);
 
+  const [isGotchaVisible, setIsGotchaVisible] = useState(false);
+
+  const resultRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (hasToShowResult) {
       (async () => {
@@ -71,18 +76,17 @@ const HuntResult: React.FC<HuntResultProps> = ({
           opacity: { 1: 0 },
           scale: { 2: 1 },
         });
-        setTimeout(() => {
-          setIsCardVisible(true);
-        }, 500);
-        setTimeout(() => {
-          setIsCardFlipped(false);
-          if (result?.some(checkIsLuckyHuntResult)) {
-            setIsConfettiVisible(true);
-          }
-        }, 1000);
+        await delayPromise(500);
+        setIsCardVisible(true);
+        await delayPromise(500);
+        setIsGotchaVisible(true);
+        setIsCardFlipped(false);
+        if (result?.some(checkIsLuckyHuntResult)) {
+          setIsConfettiVisible(true);
+        }
         setTimeout(() => {
           setIsButtonsVisible(true);
-        }, 1000 + 200 * result!.length);
+        }, 200 * result!.length);
       })();
     }
   }, [hasToShowResult, isTitleVisible, result]);
@@ -104,6 +108,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
     setIsCardVisible(false);
     setIsCardFlipped(true);
     setIsButtonsVisible(false);
+    setIsGotchaVisible(false);
     onKeepHunting();
     triggerAnimation();
   }, [onKeepHunting, triggerAnimation]);
@@ -113,17 +118,15 @@ const HuntResult: React.FC<HuntResultProps> = ({
       {isConfettiVisible && <Confetti width={width} height={height} recycle={false} />}
       <div className="flex justify-center">
         <AnimatePresence>
-          {hasToShowResult && !isCardVisible && (
+          {isGotchaVisible && (
             <motion.div
-              className={cx("top-40 absolute flex justify-center")}
+              className={cx("absolute flex justify-center")}
               initial={{
+                top: resultRef.current!.getClientRects()[0].top - 180,
                 transform: "scale(0%)",
               }}
               animate={{
                 transform: "scale(100%)",
-              }}
-              exit={{
-                transform: "translateY(-100vh)",
               }}
               transition={{
                 type: "spring",
@@ -167,6 +170,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
             result &&
             (result.length > 1 ? (
               <motion.div
+                ref={resultRef}
                 className="max-w-screen-lg"
                 initial={{
                   transform: "translateY(80vh)",
@@ -189,6 +193,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
               </motion.div>
             ) : (
               <motion.div
+                ref={resultRef}
                 className="flex justify-center w-full max-w-screen-lg m-auto"
                 initial={{
                   transform: "translateY(80vh)",

@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { MonModalContainerProps } from ".";
 import { assertNotEmpty, capitalize } from "../../helpers/commonHelpers";
 import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
@@ -31,7 +31,7 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   const router = useRouter();
 
   const setEvolveMon = useSetRecoilState(evolveMonState);
-  const setBlendMon = useSetRecoilState(blendMonState);
+  const [blendMon, setBlendMon] = useRecoilState(blendMonState);
   const user = useRecoilValue(userState);
 
   const onEvolve = useCallback(async () => {
@@ -53,11 +53,24 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     }
   }, [collection, mon, onClose, onOpen, router, setEvolveMon]);
 
-  const onBlend = useCallback(() => {
-    collection && setBlendMon([collection]);
-    onClose();
-    router.push(`${ROUTES.COLLECTIONS}/${user!.id}`);
-  }, [collection, onClose, router, setBlendMon, user]);
+  const onBlend = useCallback(async () => {
+    if (blendMon) {
+      onClose();
+      const isConfirmed = await Dialog.confirm({
+        title: "Blend",
+        content:
+          "The level of the selected Pokémon decreases by 1, and if it is a Level 1 Pokémon, it disappears forever. Do you want to proceed?",
+      });
+      if (isConfirmed) {
+        setBlendMon([blendMon![0], collection!]);
+        router.replace(ROUTES.BLEND);
+      }
+    } else {
+      collection && setBlendMon([collection]);
+      onClose();
+      router.push(`${ROUTES.COLLECTIONS}/${user!.id}`);
+    }
+  }, [blendMon, collection, onClose, router, setBlendMon, user]);
 
   return {
     isOpen,

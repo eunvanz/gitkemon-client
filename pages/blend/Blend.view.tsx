@@ -79,7 +79,7 @@ const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollecti
   }, [proceedAnimation]);
 
   return result ? (
-    <div className="flex flex-col justify-center items-center h-full max-w-screen-lg m-auto">
+    <div className="flex flex-col justify-center items-center content-container">
       <Confetti isVisible={isConfettiVisible} />
       <AnimatePresence>
         {animStep === 0 && (

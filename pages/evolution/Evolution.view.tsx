@@ -11,6 +11,7 @@ import MonCard from "../../components/MonCard";
 import MonCardGrid from "../../components/MonCardGrid";
 import Typography from "../../components/Typography";
 import { colorHashes } from "../../constants/styles";
+import { delayPromise } from "../../helpers/commonHelpers";
 import {
   checkIsLuckyHuntResult,
   convertMonToCardMon,
@@ -36,6 +37,8 @@ const Evolution: React.FC<EvolutionProps> = ({
   const { width, height } = useWindowSize();
 
   const monImageRef = useRef<HTMLDivElement>(null);
+
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const burstInterval = useRef<number | null>(null);
 
@@ -82,28 +85,28 @@ const Evolution: React.FC<EvolutionProps> = ({
     };
   }, []);
 
+  const proceedAnimation = useCallback(async () => {
+    setIsMonSelectVisible(false);
+    setIsMonImageVisible(true);
+    initBurstEffect();
+    await delayPromise(3000);
+    setIsMonImageVisible(false);
+    await delayPromise(500);
+    setIsCardFlipped(false);
+    setIsGotchaVisible(true);
+    clearInterval(burstInterval.current!);
+    if (checkIsLuckyHuntResult(result!)) {
+      setIsConfettiVisible(true);
+    }
+    await delayPromise(500);
+    setIsButtonVisible(true);
+  }, [initBurstEffect, result]);
+
   useEffect(() => {
     if (result) {
-      setIsMonSelectVisible(false);
-      setIsMonImageVisible(true);
-      initBurstEffect();
-      setTimeout(() => {
-        setIsMonImageVisible(false);
-        setIsGotchaVisible(true);
-      }, 3000);
-      setTimeout(() => {
-        setIsCardFlipped(false);
-        setIsGotchaVisible(false);
-        clearInterval(burstInterval.current!);
-        if (checkIsLuckyHuntResult(result)) {
-          setIsConfettiVisible(true);
-        }
-      }, 3500);
-      setTimeout(() => {
-        setIsButtonVisible(true);
-      }, 4000);
+      proceedAnimation();
     }
-  }, [initBurstEffect, result]);
+  }, [initBurstEffect, proceedAnimation, result]);
 
   useEffect(() => {
     if (nextMons && nextMons.length > 1) {
@@ -115,7 +118,7 @@ const Evolution: React.FC<EvolutionProps> = ({
     <div
       className={cx(
         isMonSelectVisible && nextMons.length > 6 ? "block md:flex" : "flex",
-        "py-4 flex-col justify-center items-center h-full max-w-screen-xl mx-auto",
+        "py-4 flex-col justify-center items-center content-container",
       )}
     >
       {isConfettiVisible && <Confetti width={width} height={height} recycle={false} />}
@@ -135,7 +138,7 @@ const Evolution: React.FC<EvolutionProps> = ({
             }}
           >
             <div className="text-center">
-              <Typography as="h2" size="3xl">
+              <Typography as="h2" size="3xl" color="primary">
                 You have choices!
               </Typography>
             </div>
@@ -155,8 +158,9 @@ const Evolution: React.FC<EvolutionProps> = ({
       <AnimatePresence>
         {isGotchaVisible && (
           <motion.div
-            className={"top-40 absolute flex justify-center"}
+            className={"absolute flex justify-center"}
             initial={{
+              top: resultRef.current!.getClientRects()[0].top - 150,
               transform: "scale(0%)",
             }}
             animate={{
@@ -197,6 +201,7 @@ const Evolution: React.FC<EvolutionProps> = ({
       <AnimatePresence>
         {!isMonImageVisible && result && (
           <motion.div
+            ref={resultRef}
             className="flex flex-col justify-center items-center w-full max-w-screen-lg m-auto"
             initial={{
               position: "absolute",

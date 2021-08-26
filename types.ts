@@ -269,3 +269,14 @@ export interface EvolveMonDto {
   collectionId: number;
   monId: number;
 }
+
+export interface Painting {
+  id: number;
+  imageUrl: string;
+  designerName: string;
+  designerId?: string;
+  monId: number;
+  __mon__?: Mon;
+  likesCnt: number;
+  __likes__?: Painting[];
+}

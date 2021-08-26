@@ -18,7 +18,7 @@ const CollectionStatusItem: React.FC<CollectionStatusItemProps> = ({
   return (
     <div className={cx("flex flex-col p-4 w-full")}>
       <div className="mb-1">
-        <Typography>{tier ? tier.toUpperCase() : "POINT"}</Typography>
+        <Typography>{tier ? tier.toUpperCase() : "POINTS"}</Typography>
         <Typography className="ml-2" weight="light" color="gray">
           {value} / {max}
         </Typography>

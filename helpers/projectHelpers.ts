@@ -34,8 +34,8 @@ export const convertCollectionToModalMon: (collection: Collection) => ModalMon =
   } = collection;
   return {
     id: id,
-    name: __mon__!.name,
-    description: __mon__!.description,
+    name: getLocaleProperty(__mon__!, "name"),
+    description: getLocaleProperty(__mon__!, "description"),
     firstType,
     secondType,
     weight,
@@ -107,8 +107,6 @@ export const convertMonToCardMon: (mon: Mon) => CardMon = (mon) => {
 export const convertMonToModalMon: (mon: Mon) => ModalMon = (mon) => {
   const {
     id,
-    name,
-    description,
     firstType,
     secondType,
     height,
@@ -127,8 +125,8 @@ export const convertMonToModalMon: (mon: Mon) => ModalMon = (mon) => {
   } = mon;
   return {
     id,
-    name,
-    description,
+    name: getLocaleProperty(mon, "name"),
+    description: getLocaleProperty(mon, "description"),
     firstType,
     secondType,
     height,
@@ -181,4 +179,17 @@ export const getMessagesFromHuntResult = (result: HuntResult[] | HuntResult) => 
 export const showHuntResultMessages = (result: HuntResult[] | HuntResult) => {
   const messages = getMessagesFromHuntResult(result);
   messages.forEach((message) => toast.dark(message));
+};
+
+export const getLocaleProperty = (object: any, property: string) => {
+  const lang = window.navigator.language;
+  if (/^ko/.test(lang)) {
+    return object[`${property}Ko`];
+  } else if (/^ja/.test(lang)) {
+    return object[`${property}Ja`];
+  } else if (/^zh/.test(lang)) {
+    return object[`${property}Zh`];
+  } else {
+    return object[property];
+  }
 };

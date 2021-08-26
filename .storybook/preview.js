@@ -2,6 +2,7 @@ import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import "swiper/swiper.scss";
 import "../styles/globals.css";
 import "antd/dist/antd.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

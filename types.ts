@@ -262,6 +262,7 @@ export type HuntResponse = HuntResult[];
 export interface HuntResult {
   oldCollection: Collection | null;
   newCollection: Collection;
+  updatedColPoint: number;
 }
 
 export interface EvolveMonDto {

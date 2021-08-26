@@ -4,6 +4,7 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ToastContainer } from "react-toastify";
 import { RecoilRoot } from "recoil";
+import { colorHashes } from "../constants/styles";
 import queryClient from "../helpers/queryClient";
 import "../styles/globals.css";
 import "../styles/slider.css";
@@ -17,7 +18,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <ToastContainer position="bottom-center" newestOnTop />
+        <ToastContainer
+          position="bottom-right"
+          newestOnTop
+          progressStyle={{ backgroundColor: colorHashes.PRIMARY_COLOR }}
+        />
         <Component {...pageProps} />
       </RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />

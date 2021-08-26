@@ -79,6 +79,7 @@ const huntResultNew: HuntResponse = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
 ];
 
@@ -161,6 +162,7 @@ const huntResultMyth: HuntResponse = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
 ];
 
@@ -243,6 +245,7 @@ const huntResultSuperior: HuntResponse = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
 ];
 
@@ -400,6 +403,7 @@ const huntResultLevelUp: HuntResponse = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
 ];
 

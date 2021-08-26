@@ -51,8 +51,8 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
             "The level of the selected Pokémon decreases by 1, and if it is a Level 1 Pokémon, it disappears forever. Do you want to proceed?",
         });
         if (isConfirmed) {
-          setBlendMon([blendMon![0], collection]);
           router.replace(ROUTES.BLEND);
+          setBlendMon([blendMon![0], collection]);
         }
       }
     },

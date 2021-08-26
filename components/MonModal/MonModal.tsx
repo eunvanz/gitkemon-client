@@ -20,6 +20,7 @@ export interface MonModalProps extends Omit<BaseModalProps, "children"> {
   isInitialBack?: boolean;
   onEvolve?: VoidFunction;
   onBlend?: VoidFunction;
+  isBlendHidden?: boolean;
 }
 
 const MonModal: React.FC<MonModalProps> = ({
@@ -298,6 +299,7 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
   children,
   onEvolve,
   onBlend,
+  isBlendHidden,
   ...restProps
 }) => {
   const isCollection = useMemo(() => {
@@ -354,9 +356,11 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
           </div>
           {mon && isCollection && (
             <div className="text-center mb-2 mt-2">
-              <Button size="xs" color="white" onClick={onBlend}>
-                Blend
-              </Button>
+              {!isBlendHidden && (
+                <Button size="xs" color="white" onClick={onBlend}>
+                  Blend
+                </Button>
+              )}
               {mon.evolutionLevel && mon.evolutionLevel <= mon.level! && (
                 <Button className="ml-2" size="xs" color="white" onClick={onEvolve}>
                   Evolve

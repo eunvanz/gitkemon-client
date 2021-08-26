@@ -49,7 +49,11 @@ const MonCard: React.FC<MonCardProps> = ({
     ({ isPlaceholder }: { isPlaceholder?: boolean }) => {
       return (
         <div className={cx(isPlaceholder ? undefined : styles.surface)}>
-          <div className="border rounded shadow transition-shadow hover:shadow-lg">
+          <div
+            className={cx("border rounded shadow", {
+              "transition-shadow hover:shadow-lg": !isClickDisabled,
+            })}
+          >
             <div className="flex-1 p-1 bg-white rounded">
               {mon.level && (
                 <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5")}>
@@ -85,6 +89,7 @@ const MonCard: React.FC<MonCardProps> = ({
       );
     },
     [
+      isClickDisabled,
       mon.evolutionLevel,
       mon.firstType,
       mon.imageUrl,
@@ -114,10 +119,10 @@ const MonCard: React.FC<MonCardProps> = ({
       >
         <div
           className={cx(
-            "relative w-full h-full transform transition-transform hover:-translate-y-1",
+            "relative w-full h-full transform",
             styles.cardInner,
             {
-              "cursor-pointer": !isClickDisabled,
+              "cursor-pointer hover:-translate-y-1 transition-transform": !isClickDisabled,
             },
             {
               [styles.isFlipped]: isFlipped,

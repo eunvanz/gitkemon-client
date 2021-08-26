@@ -54,23 +54,14 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   }, [collection, mon, onClose, onOpen, router, setEvolveMon]);
 
   const onBlend = useCallback(async () => {
-    if (blendMon) {
-      onClose();
-      const isConfirmed = await Dialog.confirm({
-        title: "Blend",
-        content:
-          "The level of the selected Pokémon decreases by 1, and if it is a Level 1 Pokémon, it disappears forever. Do you want to proceed?",
-      });
-      if (isConfirmed) {
-        setBlendMon([blendMon![0], collection!]);
-        router.replace(ROUTES.BLEND);
-      }
-    } else {
-      collection && setBlendMon([collection]);
-      onClose();
-      router.push(`${ROUTES.COLLECTIONS}/${user!.id}`);
-    }
-  }, [blendMon, collection, onClose, router, setBlendMon, user]);
+    collection && setBlendMon([collection]);
+    onClose();
+    router.push(`${ROUTES.COLLECTIONS}/${user!.id}`);
+  }, [collection, onClose, router, setBlendMon, user]);
+
+  const isBlendHidden = useMemo(() => {
+    return !!blendMon;
+  }, [blendMon]);
 
   return {
     isOpen,
@@ -79,6 +70,7 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     oldMon,
     onEvolve,
     onBlend,
+    isBlendHidden,
   };
 };
 

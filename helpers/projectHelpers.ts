@@ -182,14 +182,19 @@ export const showHuntResultMessages = (result: HuntResult[] | HuntResult) => {
 };
 
 export const getLocaleProperty = (object: any, property: string) => {
-  const lang = window.navigator.language;
-  if (/^ko/.test(lang)) {
-    return object[`${property}Ko`];
-  } else if (/^ja/.test(lang)) {
-    return object[`${property}Ja`];
-  } else if (/^zh/.test(lang)) {
-    return object[`${property}Zh`];
-  } else {
+  try {
+    const lang = window.navigator.language;
+    if (/^ko/.test(lang)) {
+      return object[`${property}Ko`];
+    } else if (/^ja/.test(lang)) {
+      return object[`${property}Ja`];
+    } else if (/^zh/.test(lang)) {
+      return object[`${property}Zh`];
+    } else {
+      return object[property];
+    }
+  } catch (error) {
+    // for ssr
     return object[property];
   }
 };

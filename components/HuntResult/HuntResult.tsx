@@ -3,13 +3,12 @@ import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Confetti from "react-confetti";
-import { toast, ToastContainer } from "react-toastify";
 import useWindowSize from "react-use/lib/useWindowSize";
 import { colorHashes } from "../../constants/styles";
 import { delayPromise } from "../../helpers/commonHelpers";
 import {
   checkIsLuckyHuntResult,
-  getUpdatedColPointMessage,
+  showHuntResultMessages,
 } from "../../helpers/projectHelpers";
 import { HuntResponse, PokeBallType } from "../../types";
 import Button from "../Button";
@@ -56,10 +55,6 @@ const HuntResult: React.FC<HuntResultProps> = ({
 
   const resultRef = useRef<HTMLDivElement>(null);
 
-  const updatedColPoint = useMemo(() => {
-    return result?.reduce((prev, item) => prev + item.updatedColPoint, 0);
-  }, [result]);
-
   useEffect(() => {
     if (hasToShowResult) {
       (async () => {
@@ -95,12 +90,10 @@ const HuntResult: React.FC<HuntResultProps> = ({
         setTimeout(() => {
           setIsButtonsVisible(true);
         }, 200 * result!.length);
-        if (updatedColPoint) {
-          toast.dark(getUpdatedColPointMessage(updatedColPoint));
-        }
+        showHuntResultMessages(result!);
       })();
     }
-  }, [hasToShowResult, isTitleVisible, result, updatedColPoint]);
+  }, [hasToShowResult, isTitleVisible, result]);
 
   const triggerAnimation = useCallback(() => {
     setTimeout(() => setIsTitleVisible(true), 1000);

@@ -407,7 +407,7 @@ const huntResultLevelUp: HuntResponse = [
   },
 ];
 
-const huntResultMulti = [
+const huntResultMulti: HuntResponse = [
   {
     oldCollection: {
       createdAt: "2021-08-15T07:31:07.328Z",
@@ -561,6 +561,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -715,6 +716,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -869,6 +871,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -1023,6 +1026,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -1177,6 +1181,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -1331,6 +1336,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -1485,6 +1491,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -1639,6 +1646,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -1793,6 +1801,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -1947,6 +1956,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -2101,6 +2111,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
   {
     oldCollection: {
@@ -2255,6 +2266,7 @@ const huntResultMulti = [
           "https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_1_웅이_1628398611186.png",
       },
     },
+    updatedColPoint: 1,
   },
 ];
 

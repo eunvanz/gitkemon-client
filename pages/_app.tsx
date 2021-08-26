@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ToastContainer
           position="bottom-right"
           newestOnTop
-          progressStyle={{ backgroundColor: colorHashes.PRIMARY_COLOR }}
+          progressStyle={{ backgroundColor: colorHashes.WATER }}
         />
         <Component {...pageProps} />
       </RecoilRoot>

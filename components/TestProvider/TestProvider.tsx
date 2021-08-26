@@ -13,7 +13,7 @@ const TestProvider: React.FC<TestProviderProps> = ({ children }) => {
         <ToastContainer
           position="bottom-right"
           newestOnTop
-          progressStyle={{ backgroundColor: colorHashes.PRIMARY_COLOR }}
+          progressStyle={{ backgroundColor: colorHashes.WATER }}
         />
         {children}
       </RecoilRoot>

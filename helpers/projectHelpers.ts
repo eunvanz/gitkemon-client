@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { CardMon, Collection, HuntResult, ModalMon, Mon } from "../types";
 
 export const convertCollectionToModalMon: (collection: Collection) => ModalMon = (
@@ -155,5 +156,29 @@ export const checkIsLuckyHuntResult = (resultItem: HuntResult) => {
 };
 
 export const getUpdatedColPointMessage = (updatedColPoint: number) => {
-  return `You've got CP ${updatedColPoint > 0 ? "+" : ""}${updatedColPoint}`;
+  return `You've got ${
+    updatedColPoint > 0 ? "+" : ""
+  }${updatedColPoint} collection points`;
+};
+
+export const getMessagesFromHuntResult = (result: HuntResult[] | HuntResult) => {
+  const resultArray = Array.isArray(result) ? result : [result];
+  const updatedColPoints = resultArray?.reduce(
+    (prev, item) => prev + item.updatedColPoint,
+    0,
+  );
+  const hasSuperior = resultArray.find((item) =>
+    item.newCollection.potential.includes("S"),
+  );
+  const hasMyth = resultArray.find((item) => item.newCollection.tier === "myth");
+  const messages = [];
+  updatedColPoints && messages.push(getUpdatedColPointMessage(updatedColPoints));
+  hasSuperior && messages.push("You've got a superior Pokemon!");
+  hasMyth && messages.push("You've got a mythical Pokemon!");
+  return messages;
+};
+
+export const showHuntResultMessages = (result: HuntResult[] | HuntResult) => {
+  const messages = getMessagesFromHuntResult(result);
+  messages.forEach((message) => toast.dark(message));
 };

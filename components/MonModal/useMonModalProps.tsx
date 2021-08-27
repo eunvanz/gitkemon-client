@@ -10,6 +10,7 @@ import { blendMonState } from "../../state/blendMon";
 import { evolveMonState } from "../../state/evolveMon";
 import { userState } from "../../state/user";
 import Dialog from "../Dialog/Dialog";
+import Typography from "../Typography";
 import { MonModalProps } from "./MonModal";
 
 const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
@@ -38,11 +39,18 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     assertNotEmpty(mon);
     const levelToDown = mon.level! - mon.evolutionLevel!;
     const content =
-      levelToDown === 0
-        ? `${capitalize(mon.name)} will disappear. Would you like to evolve?`
-        : `${capitalize(
-            mon.name,
-          )}'s level will be down to ${levelToDown}. Would you like to evolve?`;
+      levelToDown === 0 ? (
+        <>
+          <Typography color="primary">{capitalize(mon.name)}</Typography> will disappear.
+          Are you sure to evolve?
+        </>
+      ) : (
+        <>
+          <Typography color="primary">{capitalize(mon.name)}</Typography>&apos;s level
+          will be down to <Typography color="primary">{levelToDown}</Typography>. Are you
+          sure to evolve?
+        </>
+      );
     onClose();
     const isConfirmed = await Dialog.confirm({ content });
     if (isConfirmed) {

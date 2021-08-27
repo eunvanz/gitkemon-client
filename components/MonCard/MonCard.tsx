@@ -113,7 +113,6 @@ const MonCard: React.FC<MonCardProps> = ({
           widthCLassName,
           className,
           styles.card,
-          styles.maxWidth,
         )}
         {...restProps}
       >

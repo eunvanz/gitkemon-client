@@ -285,4 +285,20 @@ export interface Painting {
   likesCnt: number;
   __likes__?: Painting[];
   isRegistered: boolean;
+  commentsCnt: number;
+  __comments__?: PaintingComment[];
+}
+
+export interface Comment {
+  id: number;
+  userId: string;
+  user: User;
+  content: string;
+  parentId?: number;
+}
+
+export interface PaintingComment extends Comment {
+  __painting__?: Painting;
+  __replies__?: PaintingComment[];
+  __parent__?: PaintingComment;
 }

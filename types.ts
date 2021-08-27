@@ -255,6 +255,10 @@ export interface Collection {
   evolutionLevel?: number;
   createdAt: string;
   updatedAt: string;
+  name: string;
+  nameKo?: string;
+  nameJa?: string;
+  nameZh?: string;
 }
 
 export type HuntResponse = HuntResult[];
@@ -279,4 +283,5 @@ export interface Painting {
   __mon__?: Mon;
   likesCnt: number;
   __likes__?: Painting[];
+  isRegistered: boolean;
 }

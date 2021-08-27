@@ -89,6 +89,7 @@ export const convertCollectionToCardMon: (collection: Collection) => CardMon = (
     imageUrl: monImageUrl,
     level,
     potential,
+    name: getLocaleProperty(collection, "name"),
   };
 };
 

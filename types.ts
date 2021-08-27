@@ -130,6 +130,7 @@ export interface CardMon {
   level?: number;
   potential?: MonPotential;
   imageUrl?: string;
+  name: string;
 }
 
 export interface ModalMon {

@@ -11,6 +11,7 @@ import MonCard from "../../../components/MonCard";
 import MonCardGrid from "../../../components/MonCardGrid";
 import Typography from "../../../components/Typography";
 import { MON_STARS, MON_TIERS, MON_TYPES } from "../../../constants/rules";
+import { capitalize } from "../../../helpers/commonHelpers";
 import {
   convertCollectionToCardMon,
   convertMonToCardMon,
@@ -140,7 +141,9 @@ const Collections: React.FC<CollectionsProps> = ({
           <div className="flex justify-between items-center p-2 bg-white">
             <Typography as="div">
               Choose a Pokémon to blend with{" "}
-              <Typography color="primary">{monToBlend?.__mon__?.name}</Typography>
+              <Typography color="primary">
+                {capitalize(monToBlend!.__mon__!.name)}
+              </Typography>
             </Typography>
             <Button
               icon={XIcon}

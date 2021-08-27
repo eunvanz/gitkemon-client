@@ -1,8 +1,10 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { CollectionsPageProps } from ".";
 import Dialog from "../../../components/Dialog";
+import Typography from "../../../components/Typography";
+import { capitalize } from "../../../helpers/commonHelpers";
 import ROUTES from "../../../paths";
 import useActiveMonsQuery from "../../../queries/useActiveMonsQuery";
 import useCollectionsQuery from "../../../queries/useCollectionsQuery";
@@ -45,10 +47,26 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
   const onSelectItem = useCallback(
     async (collection: Collection) => {
       if (isBlendMode) {
+        const messages = [blendMon![0], collection].map((mon, index) => {
+          const { name, level } = mon;
+          return (
+            <Fragment key={mon.id}>
+              <Typography color="primary">{capitalize(name)}</Typography>
+              {level === 1 ? (
+                " will disappear"
+              ) : (
+                <>
+                  &apos;s level will be down to{" "}
+                  <Typography color="primary">{level - 1}</Typography>
+                </>
+              )}
+              {index === 0 ? ", " : "."}
+            </Fragment>
+          );
+        });
         const isConfirmed = await Dialog.confirm({
           title: "Blend",
-          content:
-            "The level of the selected Pokémon decreases by 1, and if it is a Level 1 Pokémon, it disappears forever. Do you want to proceed?",
+          content: <>{messages} Are you sure to proceed?</>,
         });
         if (isConfirmed) {
           router.replace(ROUTES.BLEND);

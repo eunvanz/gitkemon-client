@@ -102,6 +102,7 @@ export const convertMonToCardMon: (mon: Mon) => CardMon = (mon) => {
     tier,
     stars,
     evolutionLevel,
+    name: getLocaleProperty(mon, "name"),
   };
 };
 

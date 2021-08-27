@@ -44,16 +44,12 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     const content =
       levelToDown === 0 ? (
         <>
-          <Typography color="primary">
-            {capitalize(getLocaleProperty(mon, "name"))}
-          </Typography>{" "}
-          will disappear. Are you sure to evolve?
+          <Typography color="primary">{capitalize(mon.name)}</Typography> will disappear.
+          Are you sure to evolve?
         </>
       ) : (
         <>
-          <Typography color="primary">
-            {capitalize(getLocaleProperty(mon, "name"))}
-          </Typography>
+          <Typography color="primary">{capitalize(mon.name)}</Typography>
           &apos;s level will be down to{" "}
           <Typography color="primary">{levelToDown}</Typography>. Are you sure to evolve?
         </>

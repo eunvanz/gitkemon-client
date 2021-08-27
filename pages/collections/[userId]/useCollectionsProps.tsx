@@ -5,6 +5,7 @@ import { CollectionsPageProps } from ".";
 import Dialog from "../../../components/Dialog";
 import Typography from "../../../components/Typography";
 import { capitalize } from "../../../helpers/commonHelpers";
+import { getLocaleProperty } from "../../../helpers/projectHelpers";
 import ROUTES from "../../../paths";
 import useActiveMonsQuery from "../../../queries/useActiveMonsQuery";
 import useCollectionsQuery from "../../../queries/useCollectionsQuery";
@@ -48,10 +49,12 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
     async (collection: Collection) => {
       if (isBlendMode) {
         const messages = [blendMon![0], collection].map((mon, index) => {
-          const { name, level } = mon;
+          const { level } = mon;
           return (
             <Fragment key={mon.id}>
-              <Typography color="primary">{capitalize(name)}</Typography>
+              <Typography color="primary">
+                {capitalize(getLocaleProperty(mon, "name"))}
+              </Typography>
               {level === 1 ? (
                 " will disappear"
               ) : (

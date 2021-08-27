@@ -16,6 +16,7 @@ import {
   convertCollectionToCardMon,
   convertMonToCardMon,
   convertMonToModalMon,
+  getLocaleProperty,
 } from "../../../helpers/projectHelpers";
 import { Collection, Mon, User } from "../../../types";
 
@@ -142,7 +143,7 @@ const Collections: React.FC<CollectionsProps> = ({
             <Typography as="div">
               Choose a Pokémon to blend with{" "}
               <Typography color="primary">
-                {capitalize(monToBlend!.__mon__!.name)}
+                {capitalize(getLocaleProperty(monToBlend!.__mon__!, "name"))}
               </Typography>
             </Typography>
             <Button

@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { MonModalContainerProps } from ".";
 import { assertNotEmpty, capitalize } from "../../helpers/commonHelpers";
-import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
+import {
+  convertCollectionToModalMon,
+  getLocaleProperty,
+} from "../../helpers/projectHelpers";
 import ROUTES from "../../paths";
 import useCollectionQuery from "../../queries/useCollectionQuery";
 import { blendMonState } from "../../state/blendMon";
@@ -41,14 +44,18 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     const content =
       levelToDown === 0 ? (
         <>
-          <Typography color="primary">{capitalize(mon.name)}</Typography> will disappear.
-          Are you sure to evolve?
+          <Typography color="primary">
+            {capitalize(getLocaleProperty(mon, "name"))}
+          </Typography>{" "}
+          will disappear. Are you sure to evolve?
         </>
       ) : (
         <>
-          <Typography color="primary">{capitalize(mon.name)}</Typography>&apos;s level
-          will be down to <Typography color="primary">{levelToDown}</Typography>. Are you
-          sure to evolve?
+          <Typography color="primary">
+            {capitalize(getLocaleProperty(mon, "name"))}
+          </Typography>
+          &apos;s level will be down to{" "}
+          <Typography color="primary">{levelToDown}</Typography>. Are you sure to evolve?
         </>
       );
     onClose();

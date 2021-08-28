@@ -68,7 +68,10 @@ const MonCard: React.FC<MonCardProps> = ({
               <div className="flex justify-center">
                 {/* TODO: 플레이스홀더 이미지 대체 */}
                 {/* eslint-disable-next-line */}
-                <img src={mon.imageUrl || "https://via.placeholder.com/250"} alt="" />
+                <img
+                  src={mon.imageUrl || "https://via.placeholder.com/250"}
+                  alt={mon.name}
+                />
               </div>
             </div>
             <div className="flex-col bg-gray-50 py-1 w-full rounded-b">

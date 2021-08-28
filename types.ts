@@ -10,7 +10,7 @@ export interface User {
   accessToken: string;
   isActive: boolean;
   githubUser: GithubUser;
-  __pokeBall__?: PokeBall;
+  __pokeBall__?: PokeBall | null;
 }
 
 export interface PokeBall {
@@ -70,19 +70,19 @@ export interface Mon {
   id: number;
   order: number;
   name: string;
-  nameKo?: string;
-  nameJa?: string;
-  nameZh?: string;
+  nameKo?: string | null;
+  nameJa?: string | null;
+  nameZh?: string | null;
   description: string;
-  descriptionKo?: string;
-  descriptionJa?: string;
-  descriptionZh?: string;
+  descriptionKo?: string | null;
+  descriptionJa?: string | null;
+  descriptionZh?: string | null;
   firstType: MonType;
-  secondType?: MonType;
+  secondType?: MonType | null;
   height: number;
   weight: number;
   tier: MonTier;
-  evolutionLevel?: number;
+  evolutionLevel?: number | null;
   hp: number;
   attack: number;
   defense: number;
@@ -92,11 +92,11 @@ export interface Mon {
   total: number;
   stars: number;
   colPoint: number;
-  evolveFromId?: number;
+  evolveFromId?: number | null;
   createdAt?: string;
   updatedAt?: string;
-  __monImages__?: MonImage[];
-  __nextMons__?: Mon[];
+  __monImages__?: MonImage[] | null;
+  __nextMons__?: Mon[] | null;
 }
 
 export type MonTier =
@@ -113,7 +113,7 @@ export interface MonImage {
   designerId?: string | null;
   designerName: string;
   imageUrl: string;
-  __mon__?: Mon;
+  __mon__?: Mon | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -242,24 +242,24 @@ export interface Collection {
   baseTotal: number;
   monImageId: number;
   monImageUrl: string;
-  __monImage__?: MonImage;
+  __monImage__?: MonImage | null;
   monId: number;
-  __mon__?: Mon;
+  __mon__?: Mon | null;
   potential: MonPotential;
   level: number;
   userId: string;
-  __user__?: User;
+  __user__?: User | null;
   stars: number;
   tier: MonTier;
   firstType: MonType;
-  secondType?: MonType;
-  evolutionLevel?: number;
+  secondType?: MonType | null;
+  evolutionLevel?: number | null;
   createdAt: string;
   updatedAt: string;
   name: string;
-  nameKo?: string;
-  nameJa?: string;
-  nameZh?: string;
+  nameKo?: string | null;
+  nameJa?: string | null;
+  nameZh?: string | null;
 }
 
 export type HuntResponse = HuntResult[];
@@ -281,24 +281,30 @@ export interface Painting {
   designerName: string;
   designerId?: string;
   monId: number;
-  __mon__?: Mon;
+  __mon__?: Mon | null;
   likesCnt: number;
-  __likes__?: Painting[];
+  __likes__?: Like<Painting>[] | null;
   isRegistered: boolean;
   commentsCnt: number;
-  __comments__?: PaintingComment[];
+  __comments__?: Comment<Painting>[] | null;
 }
 
-export interface Comment {
+export interface Comment<T> {
   id: number;
   userId: string;
-  user: User;
-  content: string;
-  parentId?: number;
+  __user__?: User | null;
+  body: string;
+  parentId?: number | null;
+  __parent__?: Comment<T> | null;
+  contentType: string;
+  __content__?: T | null;
 }
 
-export interface PaintingComment extends Comment {
-  __painting__?: Painting;
-  __replies__?: PaintingComment[];
-  __parent__?: PaintingComment;
+export interface Like<T> {
+  id: number;
+  userId: string;
+  __user__?: User | null;
+  contentType: string;
+  contentId: string;
+  __content__?: T | null;
 }

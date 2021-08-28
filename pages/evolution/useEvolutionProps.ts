@@ -1,13 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
-import api from "../../api";
 import { assertNotEmpty } from "../../helpers/commonHelpers";
 import ROUTES from "../../paths";
+import useEvolveMutation from "../../queries/useEvolveMutation";
 import useNextMonsQuery from "../../queries/useNextMonsQuery";
 import { evolveMonState } from "../../state/evolveMon";
 import { userState } from "../../state/user";
-import { HuntResult } from "../../types";
 import { EvolutionProps } from "./Evolution.view";
 
 const useEvolutionProps: () => EvolutionProps = () => {
@@ -22,26 +21,27 @@ const useEvolutionProps: () => EvolutionProps = () => {
 
   const { data: nextMons } = useNextMonsQuery(evolveMon!.monId);
 
-  const [result, setResult] = useState<HuntResult | undefined>(undefined);
+  const { mutate: evolve, data: result } = useEvolveMutation();
 
   useEffect(() => {
     (async () => {
       if (nextMons && nextMons.length === 1) {
-        const evolutionResult = await api.evolve({
+        evolve({
           collectionId: evolveMon.id,
           monId: nextMons[0].id,
         });
-        setResult(evolutionResult);
       }
     })();
-  }, [evolveMon?.id, nextMons]);
+  }, [evolve, evolveMon.id, nextMons]);
 
   const onSelectNextMon = useCallback(
     async (monId: number) => {
-      const evolutionResult = await api.evolve({ collectionId: evolveMon.id, monId });
-      setResult(evolutionResult);
+      evolve({
+        collectionId: evolveMon.id,
+        monId,
+      });
     },
-    [evolveMon.id],
+    [evolve, evolveMon.id],
   );
 
   const onNavigateToMyCollection = useCallback(() => {

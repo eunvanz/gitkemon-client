@@ -251,6 +251,23 @@ const blend = async (collectionIds: number[]) => {
   return data;
 };
 
+export interface CreatePaintingDto {
+  designerName: string;
+  monId: number;
+  file: File;
+}
+const postPainting = async ({ designerName, monId, file }: CreatePaintingDto) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("monId", monId.toString());
+  formData.append("designerName", designerName);
+  await requester.post(API_URL.PAINTINGS, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -276,6 +293,7 @@ const api = {
   evolve,
   getNextMons,
   blend,
+  postPainting,
 };
 
 export default api;

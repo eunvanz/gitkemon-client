@@ -6,6 +6,7 @@ import ControlledInput from "../../../components/ControlledInput";
 import Dialog from "../../../components/Dialog";
 import FileInput from "../../../components/FileInput";
 import Input from "../../../components/Input";
+import Loading from "../../../components/Loading";
 import SearchableSelect from "../../../components/SearchableSelect";
 import Typography from "../../../components/Typography";
 import getCroppedImg, { convertFileToBase64 } from "../../../helpers/commonHelpers";
@@ -21,7 +22,7 @@ export interface PaintingUploadProps {
   defaultValues?: PaintingUploadFormValues;
   onSubmit: (values: PaintingUploadFormValues & { image: string }) => void;
   isSubmitting: boolean;
-  mons: Mon[];
+  mons?: Mon[];
   onNavigateToList: VoidFunction;
 }
 
@@ -67,7 +68,9 @@ const PaintingUpload: React.FC<PaintingUploadProps> = ({
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  return (
+  return !mons ? (
+    <Loading isFullHeight />
+  ) : (
     <div className="block md:flex flex-col justify-center items-center content-container p-4">
       <div className="w-full sm:w-80">
         <Typography as="h2" size="2xl">

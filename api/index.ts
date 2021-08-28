@@ -148,29 +148,29 @@ const deleteMonImage = async (monImageId: number) => {
 };
 
 export interface UpdateMonDto {
-  order?: number;
-  name?: string;
-  nameKo?: string;
-  nameJa?: string;
-  nameZh?: string;
-  description?: string;
-  descriptionKo?: string;
-  descriptionJa?: string;
-  descriptionZh?: string;
-  firstType?: string;
-  secondType?: string;
-  height?: number;
-  weight?: number;
-  tier?: MonTier;
-  evolutionLevel?: number;
-  hp?: number;
-  attack?: number;
-  defense?: number;
-  specialAttack?: number;
-  specialDefense?: number;
-  speed?: number;
-  evolveFromId?: number;
-  colPoint?: number;
+  order?: number | null;
+  name?: string | null;
+  nameKo?: string | null;
+  nameJa?: string | null;
+  nameZh?: string | null;
+  description?: string | null;
+  descriptionKo?: string | null;
+  descriptionJa?: string | null;
+  descriptionZh?: string | null;
+  firstType?: string | null;
+  secondType?: string | null;
+  height?: number | null;
+  weight?: number | null;
+  tier?: MonTier | null;
+  evolutionLevel?: number | null;
+  hp?: number | null;
+  attack?: number | null;
+  defense?: number | null;
+  specialAttack?: number | null;
+  specialDefense?: number | null;
+  speed?: number | null;
+  evolveFromId?: number | null;
+  colPoint?: number | null;
 }
 /**
  * 몬 업데이트

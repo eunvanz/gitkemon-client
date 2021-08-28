@@ -1,6 +1,5 @@
 import xor from "lodash/xor";
 import { compile } from "path-to-regexp";
-import { Mon } from "../types";
 
 export const convertURLtoFile = async (url: string) => {
   const response = await fetch(url);

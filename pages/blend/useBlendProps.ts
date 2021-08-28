@@ -1,12 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
-import api from "../../api";
 import { assertNotEmpty } from "../../helpers/commonHelpers";
 import ROUTES from "../../paths";
+import useBlendMutation from "../../queries/useBlendMutation";
 import { blendMonState } from "../../state/blendMon";
 import { userState } from "../../state/user";
-import { HuntResult } from "../../types";
 import { BlendProps } from "./Blend.view";
 
 const useBlendProps: () => BlendProps = () => {
@@ -23,12 +22,13 @@ const useBlendProps: () => BlendProps = () => {
     router.replace(`${ROUTES.COLLECTIONS}/${user!.id}`);
   }, [router, user]);
 
-  const [result, setResult] = useState<HuntResult | undefined>(undefined);
+  const { mutate: blend, data: result } = useBlendMutation(
+    blendMons.map((mon) => mon.id),
+  );
 
   const getBlendResult = useCallback(async () => {
-    const blendResult = await api.blend(blendMons.map((mon) => mon.id));
-    setResult(blendResult);
-  }, [blendMons]);
+    blend();
+  }, [blend]);
 
   useEffect(() => {
     getBlendResult();

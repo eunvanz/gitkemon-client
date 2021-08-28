@@ -1,13 +1,13 @@
 import xor from "lodash/xor";
 import { compile } from "path-to-regexp";
 
-export const convertURLtoFile = async (url: string) => {
+export const convertURLtoFile = async (url: string, extension?: string) => {
   const response = await fetch(url);
   const data = await response.blob();
-  const ext = url.split(".").pop();
+  const ext = extension || url.split(".").pop();
   const filename = url.split("/").pop();
   const metadata = { type: `image/${ext}` };
-  return new File([data], filename!, metadata);
+  return new File([data], `${filename!}${extension ? `.${extension}` : ""}`, metadata);
 };
 
 /**
@@ -117,5 +117,5 @@ export default async function getCroppedImg(
   );
 
   // As Base64 string
-  return canvas.toDataURL("image/jpeg");
+  return canvas.toDataURL("image/png");
 }

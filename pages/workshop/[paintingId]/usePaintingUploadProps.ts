@@ -35,7 +35,7 @@ const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUpload
 
   const onSubmit = useCallback(
     async (values: PaintingUploadFormValues & { image: string }) => {
-      const file = await convertURLtoFile(values.image);
+      const file = await convertURLtoFile(values.image, "png");
       uploadPainting({
         designerName: values.designerName!,
         monId: values.monId!,

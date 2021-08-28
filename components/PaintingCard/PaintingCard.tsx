@@ -16,8 +16,8 @@ const PaintingCard: React.FC<PaintingCardProps> = ({
   onClickLike,
 }) => {
   const monName = useMemo(() => {
-    return getLocaleProperty(painting.__mon__!, "name");
-  }, [painting.__mon__]);
+    return getLocaleProperty(painting.mon!, "name");
+  }, [painting.mon]);
 
   return (
     <div className="flex flex-col p-1 items-center w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8">

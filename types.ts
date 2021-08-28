@@ -281,7 +281,7 @@ export interface Painting {
   designerName: string;
   designerId?: string;
   monId: number;
-  __mon__?: Mon | null;
+  mon: Mon;
   likesCnt: number;
   __likes__?: Like<Painting>[] | null;
   isRegistered: boolean;
@@ -289,6 +289,7 @@ export interface Painting {
   __comments__?: Comment<Painting>[] | null;
   createdAt: string;
   updatedAt: string;
+  isLiked: boolean;
 }
 
 export interface Comment<T> {
@@ -313,4 +314,15 @@ export interface Like<T> {
   __content__?: T | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Pageable<T> {
+  items: T[];
+  meta: {
+    itemCount: number;
+    totalItems: number;
+    itemsPerPage: number;
+    totalPages: number;
+    currentPage: number;
+  };
 }

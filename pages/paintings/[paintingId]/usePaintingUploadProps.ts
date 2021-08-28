@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
+import { PaintingUploadPageProps } from ".";
 import { convertURLtoFile } from "../../../helpers/commonHelpers";
 import ROUTES from "../../../paths";
 import useMonsQuery from "../../../queries/useMonsQuery";
@@ -8,8 +9,13 @@ import useUploadPaintingMutation from "../../../queries/useUploadPaintingMutatio
 import { userState } from "../../../state/user";
 import { PaintingUploadFormValues, PaintingUploadProps } from "./PaintingUpload.view";
 
-const usePaintingUploadProps: () => PaintingUploadProps = () => {
-  const { data: mons } = useMonsQuery();
+const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUploadProps = ({
+  ssrMons,
+}) => {
+  const { data: mons } = useMonsQuery(undefined, {
+    enabled: !ssrMons,
+    initialData: ssrMons,
+  });
 
   const user = useRecoilValue(userState);
 

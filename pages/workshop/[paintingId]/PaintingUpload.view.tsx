@@ -94,6 +94,7 @@ const PaintingUpload: React.FC<PaintingUploadProps> = ({
                   color="transparent"
                   className="ml-auto"
                   onClick={() => setSelectedImage(null)}
+                  disabled={isSubmitting}
                 >
                   Cancel
                 </Button>

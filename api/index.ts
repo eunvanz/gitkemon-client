@@ -268,6 +268,10 @@ const postPainting = async ({ designerName, monId, file }: CreatePaintingDto) =>
   });
 };
 
+const getAllPaintings = async () => {
+  await requester.get(API_URL.PAINTINGS);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -294,6 +298,7 @@ const api = {
   getNextMons,
   blend,
   postPainting,
+  getAllPaintings,
 };
 
 export default api;

@@ -287,6 +287,8 @@ export interface Painting {
   isRegistered: boolean;
   commentsCnt: number;
   __comments__?: Comment<Painting>[] | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Comment<T> {
@@ -298,6 +300,8 @@ export interface Comment<T> {
   __parent__?: Comment<T> | null;
   contentType: string;
   __content__?: T | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Like<T> {
@@ -307,4 +311,6 @@ export interface Like<T> {
   contentType: string;
   contentId: string;
   __content__?: T | null;
+  createdAt: string;
+  updatedAt: string;
 }

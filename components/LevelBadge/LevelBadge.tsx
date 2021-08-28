@@ -3,7 +3,7 @@ import Badge, { BadgeProps } from "../Badge";
 
 export interface LevelBadgeProps extends Omit<BadgeProps, "label"> {
   level: number;
-  evolvableLevel?: number;
+  evolvableLevel?: number | null;
 }
 
 const LevelBadge: React.FC<LevelBadgeProps> = ({

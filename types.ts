@@ -123,13 +123,13 @@ export type MonPotential = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
 export interface CardMon {
   id: number;
   firstType: MonType;
-  secondType?: MonType;
+  secondType?: MonType | null;
   tier: MonTier;
-  evolutionLevel?: number;
+  evolutionLevel?: number | null;
   stars: number;
-  level?: number;
-  potential?: MonPotential;
-  imageUrl?: string;
+  level?: number | null;
+  potential?: MonPotential | null;
+  imageUrl?: string | null;
   name: string;
 }
 
@@ -138,11 +138,11 @@ export interface ModalMon {
   name: string;
   description: string;
   firstType: MonType;
-  secondType?: MonType;
+  secondType?: MonType | null;
   height: number;
   weight: number;
   tier: MonTier;
-  evolutionLevel?: number;
+  evolutionLevel?: number | null;
   hp: number;
   attack: number;
   defense: number;
@@ -150,19 +150,19 @@ export interface ModalMon {
   specialDefense: number;
   speed: number;
   total: number;
-  baseHp?: number;
-  baseAttack?: number;
-  baseDefense?: number;
-  baseSpecialAttack?: number;
-  baseSpecialDefense?: number;
-  baseSpeed?: number;
-  baseTotal?: number;
+  baseHp?: number | null;
+  baseAttack?: number | null;
+  baseDefense?: number | null;
+  baseSpecialAttack?: number | null;
+  baseSpecialDefense?: number | null;
+  baseSpeed?: number | null;
+  baseTotal?: number | null;
   stars: number;
   colPoint: number;
-  level?: number;
-  potential?: MonPotential;
-  imageUrl?: string;
-  image?: MonImage;
+  level?: number | null;
+  potential?: MonPotential | null;
+  imageUrl?: string | null;
+  image?: MonImage | null;
 }
 
 export type MonType =

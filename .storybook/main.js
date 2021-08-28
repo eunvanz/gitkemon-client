@@ -8,8 +8,13 @@ module.exports = {
     "storybook-css-modules-preset",
   ],
   webpackFinal: async (config) => {
-    config.resolve.alias = {
-      "next/image": require.resolve("./__mocks__/NextJSImageMock.js"),
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        "next/image": require.resolve("./__mocks__/NextJSImageMock.js"),
+        "~": path.resolve(__dirname, "../"),
+      },
     };
     config.module.rules.push({
       test: /\.scss$/,

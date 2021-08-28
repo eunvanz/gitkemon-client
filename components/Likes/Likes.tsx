@@ -26,7 +26,16 @@ const Likes: React.FC<LikesProps> = ({
 
   return (
     <div {...restProps}>
-      <Button size={size} className={cx(styles.svgPink)} color="transparent" icon={icon}>
+      <Button
+        size={size}
+        className={cx(styles.svgPink)}
+        color="transparent"
+        icon={icon}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+      >
         {likesCnt.toLocaleString()}
       </Button>
     </div>

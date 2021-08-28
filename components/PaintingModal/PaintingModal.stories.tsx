@@ -9,6 +9,7 @@ export default {
   args: {
     painting: mockPainting.painting,
     isManageable: true,
+    isOpen: true,
   },
 } as ComponentMeta<typeof PaintingModal>;
 

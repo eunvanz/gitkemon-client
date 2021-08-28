@@ -3,23 +3,30 @@ import { HeartIcon } from "@heroicons/react/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/solid";
 import cx from "classnames";
 import { ExtendableHTMLProps } from "../../types";
-import Button from "../Button";
+import Button, { ButtonProps } from "../Button";
 import styles from "./Likes.module.css";
 
-export interface LikesProps extends ExtendableHTMLProps<HTMLDivElement> {
+export interface LikesProps extends Omit<ExtendableHTMLProps<HTMLDivElement>, "size"> {
   likesCnt: number;
   isLiked: boolean;
   onClick: () => void;
+  size?: ButtonProps["size"];
 }
 
-const Likes: React.FC<LikesProps> = ({ likesCnt, isLiked, onClick, ...restProps }) => {
+const Likes: React.FC<LikesProps> = ({
+  likesCnt,
+  isLiked,
+  onClick,
+  size,
+  ...restProps
+}) => {
   const icon = useMemo(() => {
     return isLiked ? HeartIconSolid : HeartIcon;
   }, [isLiked]);
 
   return (
     <div {...restProps}>
-      <Button className={cx(styles.svgPink)} color="transparent" icon={icon}>
+      <Button size={size} className={cx(styles.svgPink)} color="transparent" icon={icon}>
         {likesCnt.toLocaleString()}
       </Button>
     </div>

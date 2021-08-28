@@ -97,6 +97,7 @@ const MonCard: React.FC<MonCardProps> = ({
       mon.firstType,
       mon.imageUrl,
       mon.level,
+      mon.name,
       mon.potential,
       mon.secondType,
       mon.stars,

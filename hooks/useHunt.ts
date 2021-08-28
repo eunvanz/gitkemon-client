@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import api from "../api";
+import useHuntMutation from "../queries/useHuntMutation";
 import useUserQuery from "../queries/useUserQuery";
 import { huntResultState } from "../state/huntResult";
 import { userState } from "../state/user";
 import { PokeBallType } from "../types";
 
 const useHunt = () => {
-  const { refetch: refetchUser } = useUserQuery({ enabled: true });
+  useUserQuery({ enabled: true });
 
   const [huntResult, setHuntResult] = useRecoilState(huntResultState);
 
@@ -37,14 +37,15 @@ const useHunt = () => {
     return result;
   }, [pokeBall]);
 
+  const { mutateAsync: hunt } = useHuntMutation();
+
   const onHunt = useCallback(
     async (pokeBallType: PokeBallType, amount: number) => {
       setHuntResult({ pokeBallType });
-      const result = await api.hunt({ pokeBallType, amount });
-      await refetchUser();
+      const result = await hunt({ pokeBallType, amount });
       setHuntResult({ pokeBallType, result });
     },
-    [refetchUser, setHuntResult],
+    [hunt, setHuntResult],
   );
 
   return {

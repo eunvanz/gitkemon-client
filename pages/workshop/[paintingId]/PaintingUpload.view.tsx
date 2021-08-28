@@ -107,6 +107,7 @@ const PaintingUpload: React.FC<PaintingUploadProps> = ({
               label="Painting image"
               onSelectFiles={handleOnSelectFile}
               onDeleteFile={() => {}}
+              hint="recommend transparent 250x250 PNG file"
             />
           )}
         </div>

@@ -82,7 +82,7 @@ const FileInput: React.FC<FileInputProps> = ({
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="flex text-sm text-gray-600">
+              <div className="flex text-sm justify-center text-gray-600">
                 <label
                   htmlFor={innerId}
                   className={`relative cursor-pointer bg-white rounded-md font-medium text-${getCalculatedClassName(

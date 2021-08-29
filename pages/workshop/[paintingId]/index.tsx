@@ -1,13 +1,15 @@
-import { GetServerSidePropsContext } from "next";
-import api from "../../../api";
-import withBaseLayout from "../../../hocs/withBaseLayout";
-import { Mon, Painting } from "../../../types";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import api from "~/api";
+import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
+import withBaseLayout from "~/hocs/withBaseLayout";
+import { Mon, Painting, User } from "~/types";
 import PaintingUpload from "./PaintingUpload.view";
 import usePaintingUploadProps from "./usePaintingUploadProps";
 
 export interface PaintingUploadPageProps {
   ssrMons: Mon[];
-  ssrPainting: Painting;
+  ssrPainting: Painting | null;
+  ssrUser: User | null;
 }
 
 const PaintingUploadPage: React.FC<PaintingUploadPageProps> = (
@@ -18,10 +20,12 @@ const PaintingUploadPage: React.FC<PaintingUploadPageProps> = (
   return <PaintingUpload {...props} />;
 };
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+export const getServerSideProps = withAuthServerSideProps<PaintingUploadPageProps>({
+  isAuthRequired: true,
+})(async (ctx, user) => {
   const ssrMons = await api.getAllMons();
   const { paintingId } = ctx.query;
-  let ssrPainting = undefined;
+  let ssrPainting = null;
   if (paintingId !== "new") {
     ssrPainting = await api.getPainting(Number(paintingId));
   }
@@ -29,8 +33,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       ssrMons,
       ssrPainting,
+      ssrUser: user,
     },
   };
-};
+});
 
 export default withBaseLayout(PaintingUploadPage);

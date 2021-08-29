@@ -12,7 +12,7 @@ const withAuthServerSideProps = <T>({
 }: WithAuthServerSidePropsOptions) => (
   getServerSidePropsFunc?: (
     ctx: GetServerSidePropsContext,
-    user?: User | null,
+    user: User | null,
   ) => Promise<{ props: T } | { redirect: { destination: string; permanent: boolean } }>,
 ) => {
   return async (ctx: GetServerSidePropsContext) => {

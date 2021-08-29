@@ -14,6 +14,7 @@ import { PaintingUploadFormValues, PaintingUploadProps } from "./PaintingUpload.
 const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUploadProps = ({
   ssrMons,
   ssrPainting,
+  ssrUser,
 }) => {
   const router = useRouter();
   const { paintingId } = router.query as { paintingId: string };
@@ -24,7 +25,7 @@ const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUpload
 
   const { data: painting } = usePaintingQuery(Number(paintingId), {
     enabled: !isNew,
-    initialData: ssrPainting,
+    initialData: ssrPainting || undefined,
   });
 
   const { data: mons } = useMonsQuery(undefined, {
@@ -37,9 +38,11 @@ const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUpload
   const defaultValues = useMemo(() => {
     return {
       monId: painting ? painting.monId : undefined,
-      designerName: painting ? painting.designerName : user?.nickname,
+      designerName: painting
+        ? painting.designerName
+        : user?.nickname || ssrUser?.nickname,
     };
-  }, [painting, user]);
+  }, [painting, ssrUser?.nickname, user?.nickname]);
 
   const defaultImage = useMemo(() => {
     return painting?.imageUrl;

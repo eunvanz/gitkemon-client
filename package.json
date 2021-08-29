@@ -28,6 +28,7 @@
     "compose-function": "^3.0.3",
     "dayjs": "^1.10.6",
     "framer-motion": "^4.1.17",
+    "immer": "^9.0.5",
     "lodash": "^4.17.21",
     "next": "11.0.1",
     "path-to-regexp": "^6.2.0",

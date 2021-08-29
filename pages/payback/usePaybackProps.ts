@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
+import { PaybackPageProps } from ".";
 import api from "../../api";
 import ROUTES from "../../paths";
 import useAvailableContributionsQuery from "../../queries/useAvailableContributionsQuery";
@@ -9,18 +10,27 @@ import { userState } from "../../state/user";
 import { Payback } from "../../types";
 import { PaybackProps } from "./Payback.view";
 
-const usePaybackProps: () => PaybackProps = () => {
-  const user = useRecoilValue(userState);
+const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
+  ssrAvailableContributions,
+  ssrUser,
+}) => {
+  const stateUser = useRecoilValue(userState);
 
   const router = useRouter();
 
-  const { refetch: refetchUser } = useUserQuery();
+  const { refetch: refetchUser } = useUserQuery({
+    enabled: !ssrUser,
+    initialData: ssrUser,
+  });
 
   const {
     data: availableContributions,
     isFetching: isAvailableContributionsFetching,
     refetch: refetchAvailableContributions,
-  } = useAvailableContributionsQuery();
+  } = useAvailableContributionsQuery({
+    enabled: !ssrAvailableContributions,
+    initialData: ssrAvailableContributions,
+  });
 
   useEffect(() => {
     refetchUser();
@@ -54,8 +64,12 @@ const usePaybackProps: () => PaybackProps = () => {
     router.push(ROUTES.HUNT);
   }, [router]);
 
+  const user = useMemo(() => {
+    return ssrUser || stateUser;
+  }, [ssrUser, stateUser]);
+
   return {
-    user: user,
+    user,
     isLoading: !user || isAvailableContributionsFetching,
     availableContributions,
     onPayback,

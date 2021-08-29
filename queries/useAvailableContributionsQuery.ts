@@ -5,10 +5,10 @@ import { QUERY_KEY } from "../types";
 const useAvailableContributionsQuery = (options?: UseQueryOptions<number>) => {
   const query = useQuery<number>(
     QUERY_KEY.AVAILABLE_CONTRIBUTIONS,
-    api.getAvailableContributions,
+    () => api.getAvailableContributions(),
     {
-      cacheTime: 0,
-      staleTime: 0,
+      cacheTime: Infinity,
+      staleTime: 60 * 1000 * 10,
       ...options,
     },
   );

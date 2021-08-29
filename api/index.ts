@@ -189,8 +189,17 @@ const patchMon = async (monId: number, mon: UpdateMonDto) => {
  * 마지막 기부일 이후의 컨트리뷰션 조회
  * @returns contributions
  */
-const getAvailableContributions = async () => {
-  const { data } = await requester.get<number>(API_URL.USERS__AVAILABLE_CONTRIBUTIONS);
+const getAvailableContributions = async (accessToken?: string) => {
+  const { data } = await requester.get<number>(
+    API_URL.USERS__AVAILABLE_CONTRIBUTIONS,
+    accessToken
+      ? {
+          headers: {
+            "x-gkm-access-token": accessToken,
+          },
+        }
+      : undefined,
+  );
   return data;
 };
 

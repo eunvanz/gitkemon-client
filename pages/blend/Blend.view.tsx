@@ -1,19 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Button from "../../components/Button";
-import Confetti from "../../components/Confetti/Confetti";
-import HuntResultItem from "../../components/HuntResultItem";
-import Loading from "../../components/Loading";
-import MonCard from "../../components/MonCard";
-import Typography from "../../components/Typography";
-import { colorHashes } from "../../constants/styles";
-import { delayPromise } from "../../helpers/commonHelpers";
-import {
-  checkIsLuckyHuntResult,
-  convertCollectionToCardMon,
-  showHuntResultMessages,
-} from "../../helpers/projectHelpers";
-import { Collection, HuntResult } from "../../types";
+import BlendCard from "~/components/BlendCard";
+import Button from "~/components/Button";
+import Confetti from "~/components/Confetti/Confetti";
+import Loading from "~/components/Loading";
+import Typography from "~/components/Typography";
+import { delayPromise } from "~/helpers/commonHelpers";
+import { checkIsLuckyHuntResult, showHuntResultMessages } from "~/helpers/projectHelpers";
+import { Collection, HuntResult } from "~/types";
 
 export interface BlendProps {
   blendMons: Collection[];
@@ -22,137 +16,72 @@ export interface BlendProps {
 }
 
 const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollection }) => {
-  const [animStep, setAnimStep] = useState<number>(0);
+  const [isCardVisible, setIsCardVisible] = useState(false);
 
-  const monCardRef = useRef<HTMLDivElement>(null);
-  const resultRef = useRef<HTMLDivElement>(null);
+  const [isGotchaVisible, setIsGotchaVisible] = useState(false);
 
-  const burstInterval = useRef<number | null>(null);
-
-  const burstEffect = useCallback(async () => {
-    const { burstStar } = await import("../../helpers/animations");
-    const burst = () => {
-      const { left, top, height, width } = monCardRef.current!.getClientRects()[0];
-      burstStar({
-        top: top + height / 2,
-        left: left + width / 2,
-        color: [
-          colorHashes.PSYCHIC,
-          colorHashes.ICE,
-          colorHashes.ELECTRIC,
-          colorHashes.GRASS,
-          colorHashes.FLYING,
-        ],
-        count: 20,
-        radius: { 50: 150 },
-        duration: 2000,
-        shape: "circle",
-        delay: "stagger(0, 100)",
-      });
-    };
-    burst();
-    burstInterval.current = window.setInterval(burst, 500);
-  }, []);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   const [isConfettiVisible, setIsConfettiVisible] = useState(false);
 
-  const proceedAnimation = useCallback(async () => {
-    burstEffect();
-    await delayPromise(2000);
-    burstInterval.current && clearInterval(burstInterval.current);
-    setAnimStep(1);
-    await delayPromise(3000);
-    setAnimStep(2);
+  const monCardRef = useRef<HTMLDivElement>(null);
+
+  const proceedResultAnim = useCallback(async () => {
     await delayPromise(500);
-    setAnimStep(3);
     if (checkIsLuckyHuntResult(result!)) {
       setIsConfettiVisible(true);
     }
-    await delayPromise(500);
-    setAnimStep(4);
+    setIsGotchaVisible(true);
+    setIsButtonVisible(true);
     showHuntResultMessages(result!);
-  }, [burstEffect, result]);
+  }, [result]);
 
   useEffect(() => {
-    return () => {
-      burstInterval.current && clearInterval(burstInterval.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    result && proceedAnimation();
-  }, [proceedAnimation, result]);
+    result && setIsCardVisible(true);
+  }, [result]);
 
   return result ? (
     <div className="flex flex-col justify-center items-center content-container">
       <Confetti isVisible={isConfettiVisible} />
       <AnimatePresence>
-        {animStep === 0 && (
+        {isCardVisible && (
           <motion.div
             ref={monCardRef}
-            className="flex justify-center w-full"
+            className="w-full"
             initial={{
               opacity: 0,
             }}
             animate={{
               opacity: 1,
             }}
-            exit={{
-              rotate: 3600,
-              scale: 0,
-              transition: {
-                duration: 3,
-              },
-            }}
           >
-            {blendMons.map((mon) => (
-              <MonCard
-                key={mon.id}
-                mon={convertCollectionToCardMon(mon)}
-                isClickDisabled
-              />
-            ))}
+            <BlendCard
+              blendMons={blendMons}
+              result={result}
+              onFinish={proceedResultAnim}
+            />
           </motion.div>
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {animStep > 1 && result && (
+        {isButtonVisible && (
           <motion.div
-            ref={resultRef}
-            className="flex flex-col justify-center items-center w-full max-w-screen-lg m-auto"
-            initial={{
-              scale: 0,
-            }}
-            animate={{
-              scale: 1,
-            }}
-            transition={{
-              type: "spring",
-            }}
+            className="flex-0 justify-center p-4 text-center"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
           >
-            <HuntResultItem huntResult={result} isRevealed={animStep === 3} isSingle />
-            <AnimatePresence>
-              {animStep === 4 && (
-                <motion.div
-                  className="flex-0 justify-center p-4"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                >
-                  <Button color="primary" onClick={onNavigateToMyCollection}>
-                    My collection
-                  </Button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <Button color="primary" onClick={onNavigateToMyCollection}>
+              My collection
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {animStep > 2 && (
+        {isGotchaVisible && (
           <motion.div
             className={"absolute flex justify-center"}
             initial={{
-              top: resultRef.current!.getClientRects()[0].top - 150,
+              top: monCardRef.current!.getClientRects()[0].top - 150,
               transform: "scale(0%)",
             }}
             animate={{

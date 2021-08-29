@@ -1,23 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
-import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
+import Button from "~/components/Button";
+import Confetti from "~/components/Confetti/Confetti";
 import EvolutionCard from "~/components/EvolutionCard";
-import Button from "../../components/Button";
-import Loading from "../../components/Loading";
-import MonCard from "../../components/MonCard";
-import MonCardGrid from "../../components/MonCardGrid";
-import Typography from "../../components/Typography";
-import { delayPromise } from "../../helpers/commonHelpers";
+import Loading from "~/components/Loading";
+import MonCard from "~/components/MonCard";
+import MonCardGrid from "~/components/MonCardGrid";
+import Typography from "~/components/Typography";
+import { delayPromise } from "~/helpers/commonHelpers";
 import {
   checkIsLuckyHuntResult,
   convertMonToCardMon,
   convertMonToModalMon,
   showHuntResultMessages,
-} from "../../helpers/projectHelpers";
-import { Collection, HuntResult, Mon } from "../../types";
+} from "~/helpers/projectHelpers";
+import { Collection, HuntResult, Mon } from "~/types";
 
 export interface EvolutionProps {
   result?: HuntResult;
@@ -78,7 +77,7 @@ const Evolution: React.FC<EvolutionProps> = ({
         "py-4 flex-col justify-center items-center content-container",
       )}
     >
-      {isConfettiVisible && <Confetti width={width} height={height} recycle={false} />}
+      <Confetti isVisible={isConfettiVisible} />
       <AnimatePresence>
         {isMonSelectVisible && (
           <motion.div

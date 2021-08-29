@@ -90,7 +90,9 @@ const BlendCard: React.FC<BlendCardProps> = ({ blendMons, result, onFinish }) =>
               } transition-opacity`}
             />
           )}
-          {isProgressComplete && <HuntResultItem huntResult={result} isRevealed />}
+          {isProgressComplete && (
+            <HuntResultItem huntResult={result} isRevealed isMonCardWidth />
+          )}
         </div>
       </Shakeable>
       {progress === 0 && (

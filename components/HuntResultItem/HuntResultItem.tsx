@@ -18,6 +18,7 @@ export interface HuntResultItemProps {
   isDiffHidden?: boolean;
   isClickDisabled?: boolean;
   isFullWidth?: boolean;
+  isMonCardWidth?: boolean;
 }
 
 const HuntResultItem: React.FC<HuntResultItemProps> = ({
@@ -28,6 +29,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
   isDiffHidden,
   isClickDisabled,
   isFullWidth,
+  isMonCardWidth,
 }) => {
   const { oldCollection, newCollection } = huntResult;
 
@@ -48,7 +50,13 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
     <div
       className={cx(
         "flex flex-col justify-center mb-4",
-        isFullWidth ? "w-full" : isSingle ? "w-40" : "w-1/3 sm:w-1/4 md:w-1/6",
+        isMonCardWidth
+          ? "w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8"
+          : isFullWidth
+          ? "w-full"
+          : isSingle
+          ? "w-40"
+          : "w-1/3 sm:w-1/4 md:w-1/6",
       )}
     >
       <MonCard

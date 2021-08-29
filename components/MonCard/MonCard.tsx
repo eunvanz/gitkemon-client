@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { ArrowNarrowUpIcon } from "@heroicons/react/outline";
 import cx from "classnames";
+import { MON_CARD_WIDTH } from "~/constants/styles";
 import { CardMon, ModalMon } from "../../types";
 import Button from "../Button";
 import LevelBadge from "../LevelBadge";
@@ -107,7 +108,7 @@ const MonCard: React.FC<MonCardProps> = ({
   );
 
   const widthCLassName = useMemo(() => {
-    return isFullWidth ? "w-full" : "w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8";
+    return isFullWidth ? "w-full" : MON_CARD_WIDTH;
   }, [isFullWidth]);
 
   return (

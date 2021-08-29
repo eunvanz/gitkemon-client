@@ -36,3 +36,5 @@ export const colorHashes = {
 };
 
 export const HEADER_HEIGHT = 64;
+
+export const MON_CARD_WIDTH = "w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8";

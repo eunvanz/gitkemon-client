@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowNarrowRightIcon } from "@heroicons/react/solid";
 import cx from "classnames";
+import { MON_CARD_WIDTH } from "~/constants/styles";
 import {
   convertCollectionToCardMon,
   convertCollectionToModalMon,
@@ -51,7 +52,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
       className={cx(
         "flex flex-col justify-center mb-4",
         isMonCardWidth
-          ? "w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8"
+          ? MON_CARD_WIDTH
           : isFullWidth
           ? "w-full"
           : isSingle

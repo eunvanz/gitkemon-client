@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { random } from "lodash";
-import { colorHashes } from "~/constants/styles";
+import { colorHashes, MON_CARD_WIDTH } from "~/constants/styles";
 import { convertCollectionToCardMon } from "~/helpers/projectHelpers";
 import { Collection, HuntResult } from "~/types";
 import HuntResultItem from "../HuntResultItem";
@@ -55,7 +55,7 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
       <Shakeable
         onChangeDirection={handleOnChangeDirection}
         isActive={!isProgressComplete}
-        className="relative flex w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8 m-auto cursor-grab"
+        className={`relative flex ${MON_CARD_WIDTH} m-auto cursor-grab`}
         onDragEnd={handleOnDragEnd}
       >
         <div ref={monCardRef}>

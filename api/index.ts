@@ -279,16 +279,18 @@ const getPaintingList = async (pageOptions: PageRequestOptions) => {
   return data;
 };
 
-export type UpdatePaintingDto = Partial<CreatePaintingDto>;
-const patchPainting = async (
-  paintingId: number,
-  { designerName, monId, file }: UpdatePaintingDto,
-) => {
+export type UpdatePaintingDto = Partial<CreatePaintingDto> & { paintingId: number };
+const patchPainting = async ({
+  designerName,
+  monId,
+  file,
+  paintingId,
+}: UpdatePaintingDto) => {
   const formData = new FormData();
   designerName && formData.append("designerName", designerName);
   monId && formData.append("monId", monId.toString());
   file && formData.append("file", file);
-  await requester.post(`${API_URL.PAINTINGS}/${paintingId}`, formData, {
+  await requester.patch(`${API_URL.PAINTINGS}/${paintingId}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

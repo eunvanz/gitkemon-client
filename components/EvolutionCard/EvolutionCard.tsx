@@ -37,39 +37,6 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
 
   const monCardRef = useRef<HTMLDivElement>(null);
 
-  const burstPowder = useCallback(async () => {
-    const { burstStar } = await import("~/helpers/animations");
-    const burst = () => {
-      const { left, top } = monCardRef.current!.getClientRects()[0];
-      const parent = document.querySelector("main");
-      const parentPosition = parent?.getClientRects()[0];
-      const colors = [
-        colorHashes.PSYCHIC,
-        colorHashes.ICE,
-        colorHashes.ELECTRIC,
-        colorHashes.GRASS,
-        colorHashes.FLYING,
-        colorHashes.FIRE,
-      ];
-      burstStar({
-        parent: document.querySelector("main"),
-        top: top + 120 - (parentPosition?.top || 0),
-        left: left + 90 - (parentPosition?.left || 0),
-        color: [
-          colors[random(0, colors.length - 1)],
-          colors[random(0, colors.length - 1)],
-          colors[random(0, colors.length - 1)],
-        ],
-        count: 3,
-        radius: { 100: 250 },
-        duration: 2000,
-        itemRadius: 10,
-        degreeShift: "rand(-50, 50)",
-      });
-    };
-    burst();
-  }, []);
-
   const handleOnDragEnd = useCallback(() => {
     if (!isProgressCompleteRef.current) {
       setProgress(0);
@@ -89,7 +56,6 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
         onChangeDirection={handleOnChangeDirection}
         isActive={!isProgressComplete}
         className="relative flex w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8 m-auto cursor-grab"
-        onDrag={burstPowder}
         onDragEnd={handleOnDragEnd}
       >
         <div ref={monCardRef}>

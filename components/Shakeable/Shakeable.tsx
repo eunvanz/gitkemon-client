@@ -1,4 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
+import cx from "classnames";
+import random from "lodash/random";
+import { colorHashes } from "~/constants/styles";
 import { ExtendableHTMLProps } from "~/types";
 
 export interface ShakeableProps extends ExtendableHTMLProps<HTMLDivElement> {
@@ -16,6 +19,7 @@ const Shakeable = ({
   onDrag,
   onDragEnd,
   threshold = 10,
+  className,
   ...restProps
 }: ShakeableProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,6 +27,39 @@ const Shakeable = ({
   const lastMoveRef = useRef<{ x: number; y: number } | null>(null);
   const directionRef = useRef<{ x: boolean; y: boolean } | null>(null);
   const directionChangeCountRef = useRef<number>(0);
+
+  const burstPowder = useCallback(async () => {
+    const { burstStar } = await import("~/helpers/animations");
+    const burst = () => {
+      const { left, top, width, height } = containerRef.current!.getClientRects()[0];
+      const parent = document.querySelector("main");
+      const parentPosition = parent?.getClientRects()[0];
+      const colors = [
+        colorHashes.PSYCHIC,
+        colorHashes.ICE,
+        colorHashes.ELECTRIC,
+        colorHashes.GRASS,
+        colorHashes.FLYING,
+        colorHashes.FIRE,
+      ];
+      burstStar({
+        parent: document.querySelector("main"),
+        top: top + height / 2 - (parentPosition?.top || 0),
+        left: left + width / 2 - (parentPosition?.left || 0),
+        color: [
+          colors[random(0, colors.length - 1)],
+          colors[random(0, colors.length - 1)],
+          colors[random(0, colors.length - 1)],
+        ],
+        count: 3,
+        radius: { 100: 250 },
+        duration: 2000,
+        itemRadius: 10,
+        degreeShift: "rand(-50, 50)",
+      });
+    };
+    burst();
+  }, []);
 
   const handleOnDrag = useCallback(
     (e: TouchEvent | MouseEvent) => {
@@ -46,6 +83,7 @@ const Shakeable = ({
       ) {
         directionChangeCountRef.current++;
         onChangeDirection(directionChangeCountRef.current);
+        burstPowder();
         onDrag?.();
       }
 
@@ -54,7 +92,7 @@ const Shakeable = ({
         move.x - startRef.current!.x
       }px, ${move.y - startRef.current!.y}px)`;
     },
-    [onChangeDirection, onDrag, threshold],
+    [burstPowder, onChangeDirection, onDrag, threshold],
   );
 
   const handleOnDragEnd = useCallback(() => {
@@ -105,7 +143,7 @@ const Shakeable = ({
   }, []);
 
   return (
-    <div {...restProps} ref={containerRef}>
+    <div className={cx("cursor-grab", className)} {...restProps} ref={containerRef}>
       {children}
     </div>
   );

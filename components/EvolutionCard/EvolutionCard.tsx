@@ -41,6 +41,8 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
     const { burstStar } = await import("~/helpers/animations");
     const burst = () => {
       const { left, top } = monCardRef.current!.getClientRects()[0];
+      const parent = document.querySelector("main");
+      const parentPosition = parent?.getClientRects()[0];
       const colors = [
         colorHashes.PSYCHIC,
         colorHashes.ICE,
@@ -50,8 +52,9 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
         colorHashes.FIRE,
       ];
       burstStar({
-        top: top + 120,
-        left: left + 90,
+        parent: document.querySelector("main"),
+        top: top + 120 - (parentPosition?.top || 0),
+        left: left + 90 - (parentPosition?.left || 0),
         color: [
           colors[random(0, colors.length - 1)],
           colors[random(0, colors.length - 1)],

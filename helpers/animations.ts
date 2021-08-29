@@ -26,6 +26,7 @@ export interface BurstOptions {
   itemRadius?: number;
   delay?: string;
   points?: number;
+  parent?: HTMLElement | null;
 }
 
 const generateBurst = ({
@@ -45,9 +46,10 @@ const generateBurst = ({
   delay,
   points,
   degreeShift,
+  parent,
 }: BurstOptions) => {
   return new mojs.Burst({
-    parent: document.querySelector("main"),
+    parent,
     left,
     top,
     right,

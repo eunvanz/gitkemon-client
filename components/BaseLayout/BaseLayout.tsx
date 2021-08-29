@@ -273,7 +273,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
           </div>
         </div>
 
-        <main className="flex-1 relative overflow-y-auto focus:outline-none">
+        <main className="flex-1 relative overflow-y-auto overflow-x-hidden focus:outline-none">
           {children}
         </main>
       </div>

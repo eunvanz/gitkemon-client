@@ -11,7 +11,7 @@ const useHuntMutation = () => {
 
   return useMutation(api.hunt, {
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.COLLECTIONS, user!.id]);
+      queryClient.refetchQueries([QUERY_KEY.COLLECTIONS, user!.id]);
       queryClient.invalidateQueries(QUERY_KEY.USER);
     },
   });

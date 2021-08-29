@@ -8,6 +8,7 @@ import { Collection, HuntResult } from "~/types";
 import HuntResultItem from "../HuntResultItem";
 import MonCard from "../MonCard";
 import Shakeable from "../Shakeable";
+import Typography from "../Typography";
 import styles from "./EvolutionCard.module.css";
 
 const MAX_SHAKE_COUNT = 20;
@@ -84,7 +85,7 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
       <Shakeable
         onChangeDirection={handleOnChangeDirection}
         isActive={!isProgressComplete}
-        className="relative flex w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8 m-auto cursor-move"
+        className="relative flex w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8 m-auto cursor-grab"
         onDrag={burstPowder}
         onDragEnd={handleOnDragEnd}
       >
@@ -115,15 +116,15 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
         </div>
       </Shakeable>
       {progress === 0 && (
-        <div
-          className={cx(
-            "w-full text-center text-gray-400 animate-pulse mt-2",
-            styles.nudge,
-          )}
+        <Typography
+          color="hint"
+          weight="light"
+          as="div"
+          className={cx("w-full text-center animate-pulse mt-2", styles.nudge)}
         >
           <ChevronDoubleLeftIcon className="w-4 h-4 inline-block" /> Shake it!{" "}
           <ChevronDoubleRightIcon className="w-4 h-4 inline-block" />
-        </div>
+        </Typography>
       )}
     </>
   );

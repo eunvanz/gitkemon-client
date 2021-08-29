@@ -11,7 +11,7 @@ const useBlendMutation = (blendMonIds: number[]) => {
 
   return useMutation(() => api.blend(blendMonIds), {
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.COLLECTIONS, user!.id]);
+      queryClient.refetchQueries([QUERY_KEY.COLLECTIONS, user!.id]);
       queryClient.invalidateQueries(QUERY_KEY.USER);
     },
   });

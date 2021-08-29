@@ -47,6 +47,7 @@ const generateBurst = ({
   degreeShift,
 }: BurstOptions) => {
   return new mojs.Burst({
+    parent: document.querySelector("main"),
     left,
     top,
     right,

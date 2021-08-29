@@ -225,7 +225,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
             <div className="flex justify-center">
               <PokeBallImage
                 draggable={false}
-                className={cx("m-auto cursor-pointer", styles.pokeBall)}
+                className={cx("m-auto cursor-grab", styles.pokeBall)}
                 type={pokeBall.type}
               />
             </div>

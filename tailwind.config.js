@@ -28,6 +28,9 @@ module.exports = {
         65: ".65",
         85: ".85",
       },
+      cursor: {
+        grab: "grab",
+      },
     },
   },
   variants: {

@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { getLocaleProperty } from "~/helpers/projectHelpers";
 import { Painting } from "~/types";
 import Badge from "../Badge";
+import Dialog from "../Dialog";
 import Likes from "../Likes";
 import PaintingModal, { PaintingModalProps } from "../PaintingModal/PaintingModal";
 import Typography from "../Typography";
@@ -15,6 +16,7 @@ export interface PaintingCardProps
 const PaintingCard: React.FC<PaintingCardProps> = ({
   painting,
   onClickLike,
+  onDelete,
   ...restProps
 }) => {
   const monName = useMemo(() => {
@@ -22,6 +24,19 @@ const PaintingCard: React.FC<PaintingCardProps> = ({
   }, [painting.mon]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOnDelete = useCallback(async () => {
+    setIsModalOpen(false);
+    const isConfirmed = await Dialog.confirm({
+      title: "Delete work",
+      content: "Are you sure to delete your work?",
+    });
+    if (isConfirmed) {
+      onDelete();
+    } else {
+      setIsModalOpen(true);
+    }
+  }, [onDelete]);
 
   return (
     <>
@@ -68,6 +83,7 @@ const PaintingCard: React.FC<PaintingCardProps> = ({
         onClose={() => setIsModalOpen(false)}
         onClickLike={onClickLike}
         painting={painting}
+        onDelete={handleOnDelete}
         {...restProps}
       />
     </>

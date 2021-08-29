@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { getMergedPageData } from "~/helpers/projectHelpers";
 import ROUTES from "~/paths";
+import useDeletePaintingMutation from "~/queries/useDeletePaintingMutation";
 import useLikeMutation from "~/queries/useLikeMutation";
 import usePaintingListQuery from "~/queries/usePaintingListQuery";
 import { userState } from "~/state/user";
@@ -18,6 +19,8 @@ const useWorkshopProps: () => WorkshopProps = () => {
 
   const { mutate: like } = useLikeMutation();
 
+  const { mutate: deletePainting } = useDeletePaintingMutation();
+
   const onClickLike = useCallback(
     (painting: Painting) => {
       like({ contentId: painting.id, contentType: "painting" });
@@ -25,7 +28,12 @@ const useWorkshopProps: () => WorkshopProps = () => {
     [like],
   );
 
-  const onDelete = useCallback((painting: Painting) => {}, []);
+  const onDelete = useCallback(
+    (painting: Painting) => {
+      deletePainting(painting.id);
+    },
+    [deletePainting],
+  );
 
   const onEdit = useCallback(
     (painting: Painting) => {

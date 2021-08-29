@@ -7,7 +7,7 @@ const usePaintingListQuery = (
 ) => {
   const query = useInfiniteQuery<Pageable<Painting>>(
     QUERY_KEY.PAINTING_LIST,
-    ({ pageParam = 1 }) => api.getAllPaintings({ page: pageParam }),
+    ({ pageParam = 1 }) => api.getPaintingList({ page: pageParam }),
     {
       ...queryOptions,
       getNextPageParam: ({ meta: { totalPages, currentPage } }) =>

@@ -272,7 +272,7 @@ const postPainting = async ({ designerName, monId, file }: CreatePaintingDto) =>
   });
 };
 
-const getAllPaintings = async (pageOptions: PageRequestOptions) => {
+const getPaintingList = async (pageOptions: PageRequestOptions) => {
   const { data } = await requester.get<Pageable<Painting>>(API_URL.PAINTINGS, {
     params: pageOptions,
   });
@@ -317,7 +317,7 @@ const api = {
   getNextMons,
   blend,
   postPainting,
-  getAllPaintings,
+  getPaintingList,
   postLike,
   deleteLike,
 };

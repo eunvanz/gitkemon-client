@@ -95,7 +95,7 @@ const Evolution: React.FC<EvolutionProps> = ({
             }}
           >
             <div className="text-center">
-              <Typography as="h2" size="3xl" color="primary">
+              <Typography as="h2" size="3xl" color="primary" weight="bold">
                 You have choices!
               </Typography>
             </div>

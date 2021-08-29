@@ -15,6 +15,9 @@ export interface HuntResultItemProps {
   isRevealed: boolean;
   delay?: number;
   isSingle?: boolean;
+  isDiffHidden?: boolean;
+  isClickDisabled?: boolean;
+  isMonCardSize?: boolean;
 }
 
 const HuntResultItem: React.FC<HuntResultItemProps> = ({
@@ -22,13 +25,16 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
   isRevealed,
   delay,
   isSingle,
+  isDiffHidden,
+  isClickDisabled,
+  isMonCardSize,
 }) => {
   const { oldCollection, newCollection } = huntResult;
 
   const [isRealRevealed, setIsRealRevealed] = useState(isRevealed);
 
   useEffect(() => {
-    if (isRevealed) {
+    if (isRevealed && !isDiffHidden) {
       const timer = setTimeout(() => {
         setIsRealRevealed(isRevealed);
       }, delay || 0);
@@ -36,13 +42,17 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         clearTimeout(timer);
       };
     }
-  }, [delay, isRevealed]);
+  }, [delay, isDiffHidden, isRevealed]);
 
   return (
     <div
       className={cx(
         "flex flex-col justify-center mb-4",
-        isSingle ? "w-40" : "w-1/3 sm:w-1/4 md:w-1/6",
+        isMonCardSize
+          ? "w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8"
+          : isSingle
+          ? "w-40"
+          : "w-1/3 sm:w-1/4 md:w-1/6",
       )}
     >
       <MonCard
@@ -51,23 +61,26 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         oldMon={oldCollection ? convertCollectionToModalMon(oldCollection) : undefined}
         newMon={convertCollectionToModalMon(newCollection)}
         isFlipped={!isRealRevealed}
+        isClickDisabled={isClickDisabled}
       />
-      <div
-        className={cx(
-          "flex justify-center mt-2 opacity-0 transition-opacity delay-300",
-          isRealRevealed ? "opacity-100" : undefined,
-        )}
-      >
-        {oldCollection ? (
-          <>
-            <LevelBadge level={oldCollection.level} />
-            <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
-            <LevelBadge level={newCollection.level} />
-          </>
-        ) : (
-          <Badge color="red" label="NEW" size="sm" />
-        )}
-      </div>
+      {!isDiffHidden && (
+        <div
+          className={cx(
+            "flex justify-center mt-2 opacity-0 transition-opacity delay-300",
+            isRealRevealed ? "opacity-100" : undefined,
+          )}
+        >
+          {oldCollection ? (
+            <>
+              <LevelBadge level={oldCollection.level} />
+              <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
+              <LevelBadge level={newCollection.level} />
+            </>
+          ) : (
+            <Badge color="red" label="NEW" size="sm" />
+          )}
+        </div>
+      )}
     </div>
   );
 };

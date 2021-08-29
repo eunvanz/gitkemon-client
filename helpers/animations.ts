@@ -16,7 +16,8 @@ export interface BurstOptions {
   color: string | { [key: string]: string } | string[];
   radius: { [key: number]: number };
   count: number;
-  degree?: number;
+  degree?: number | string;
+  degreeShift?: string;
   rotate?: { [key: number]: number };
   duration?: number | number[];
   opacity?: { [key: number]: number };
@@ -43,6 +44,7 @@ const generateBurst = ({
   rotate,
   delay,
   points,
+  degreeShift,
 }: BurstOptions) => {
   return new mojs.Burst({
     left,
@@ -65,6 +67,7 @@ const generateBurst = ({
       easing: "quint.out",
       delay,
       points,
+      degreeShift,
     },
     isShowEnd: false,
     opacity,

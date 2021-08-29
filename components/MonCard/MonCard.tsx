@@ -71,6 +71,7 @@ const MonCard: React.FC<MonCardProps> = ({
                 <img
                   src={mon.imageUrl || "https://via.placeholder.com/250"}
                   alt={mon.name}
+                  draggable={false}
                 />
               </div>
             </div>

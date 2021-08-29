@@ -10,9 +10,12 @@ const useHuntMutation = () => {
   const user = useRecoilValue(userState);
 
   return useMutation(api.hunt, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.refetchQueries([QUERY_KEY.COLLECTIONS, user!.id]);
       queryClient.invalidateQueries(QUERY_KEY.USER);
+      data.forEach((result) => {
+        queryClient.invalidateQueries([QUERY_KEY.COLLECTION, result.newCollection.id]);
+      });
     },
   });
 };

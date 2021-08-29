@@ -10,9 +10,13 @@ const useEvolveMutation = () => {
   const user = useRecoilValue(userState);
 
   return useMutation(api.evolve, {
-    onSuccess: () => {
+    onMutate: ({ collectionId }) => {
+      queryClient.invalidateQueries([QUERY_KEY.COLLECTION, collectionId]);
+    },
+    onSuccess: (data) => {
       queryClient.refetchQueries([QUERY_KEY.COLLECTIONS, user!.id]);
       queryClient.invalidateQueries(QUERY_KEY.USER);
+      queryClient.invalidateQueries([QUERY_KEY.COLLECTION, data.newCollection.id]);
     },
   });
 };

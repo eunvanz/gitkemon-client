@@ -10,9 +10,15 @@ const useBlendMutation = (blendMonIds: number[]) => {
   const user = useRecoilValue(userState);
 
   return useMutation(() => api.blend(blendMonIds), {
-    onSuccess: () => {
+    onMutate: () => {
+      blendMonIds.forEach((id) => {
+        queryClient.invalidateQueries([QUERY_KEY.COLLECTION, id]);
+      });
+    },
+    onSuccess: (data) => {
       queryClient.refetchQueries([QUERY_KEY.COLLECTIONS, user!.id]);
       queryClient.invalidateQueries(QUERY_KEY.USER);
+      queryClient.invalidateQueries([QUERY_KEY.COLLECTION, data.newCollection.id]);
     },
   });
 };

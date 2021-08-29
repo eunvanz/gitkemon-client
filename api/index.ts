@@ -13,6 +13,9 @@ import {
   EvolveMonDto,
   MonTier,
   ContentType,
+  PageRequestOptions,
+  Pageable,
+  Painting,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -269,8 +272,11 @@ const postPainting = async ({ designerName, monId, file }: CreatePaintingDto) =>
   });
 };
 
-const getAllPaintings = async () => {
-  await requester.get(API_URL.PAINTINGS);
+const getAllPaintings = async (pageOptions: PageRequestOptions) => {
+  const { data } = await requester.get<Pageable<Painting>>(API_URL.PAINTINGS, {
+    params: pageOptions,
+  });
+  return data;
 };
 
 export interface CreateLikeDto {

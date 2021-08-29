@@ -200,6 +200,7 @@ export enum QUERY_KEY {
   AVAILABLE_CONTRIBUTIONS = "AVAILABLE_CONTRIBUTIONS",
   COLLECTION = "COLLECTION",
   COLLECTIONS = "COLLECTIONS",
+  PAINTING_LIST = "PAINTING_LIST",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";
@@ -326,3 +327,5 @@ export interface Pageable<T> {
     currentPage: number;
   };
 }
+
+export type ContentType = "painting";

@@ -6,12 +6,10 @@ import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 import EvolutionCard from "~/components/EvolutionCard";
 import Button from "../../components/Button";
-import HuntResultItem from "../../components/HuntResultItem";
 import Loading from "../../components/Loading";
 import MonCard from "../../components/MonCard";
 import MonCardGrid from "../../components/MonCardGrid";
 import Typography from "../../components/Typography";
-import { colorHashes } from "../../constants/styles";
 import { delayPromise } from "../../helpers/commonHelpers";
 import {
   checkIsLuckyHuntResult,
@@ -40,8 +38,6 @@ const Evolution: React.FC<EvolutionProps> = ({
 
   const resultRef = useRef<HTMLDivElement>(null);
 
-  const burstInterval = useRef<number | null>(null);
-
   const [isMonSelectVisible, setIsMonSelectVisible] = useState(false);
 
   const [isCardVisible, setIsCardVisible] = useState(false);
@@ -53,12 +49,11 @@ const Evolution: React.FC<EvolutionProps> = ({
   const [isConfettiVisible, setIsConfettiVisible] = useState(false);
 
   const proceedResultAnim = useCallback(async () => {
-    setIsGotchaVisible(true);
-    clearInterval(burstInterval.current!);
+    await delayPromise(500);
     if (checkIsLuckyHuntResult(result!)) {
       setIsConfettiVisible(true);
     }
-    await delayPromise(500);
+    setIsGotchaVisible(true);
     setIsButtonVisible(true);
     showHuntResultMessages(result!);
   }, [result]);
@@ -122,7 +117,7 @@ const Evolution: React.FC<EvolutionProps> = ({
           <motion.div
             className={"absolute flex justify-center"}
             initial={{
-              top: resultRef.current!.getClientRects()[0].top - 100,
+              top: resultRef.current!.getClientRects()[0].top - 150,
               transform: "scale(0%)",
             }}
             animate={{

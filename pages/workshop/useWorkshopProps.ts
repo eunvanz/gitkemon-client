@@ -23,7 +23,11 @@ const useWorkshopProps: () => WorkshopProps = () => {
 
   const onClickLike = useCallback(
     (painting: Painting) => {
-      like({ contentId: painting.id, contentType: "painting" });
+      like({
+        contentId: painting.id,
+        contentType: "painting",
+        isLike: !painting.isLiked,
+      });
     },
     [like],
   );

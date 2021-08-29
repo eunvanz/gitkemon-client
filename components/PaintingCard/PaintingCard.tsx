@@ -41,7 +41,7 @@ const PaintingCard: React.FC<PaintingCardProps> = ({
   return (
     <>
       <div
-        className="flex flex-col p-1 items-center w-1/3 sm:w-1/4 lg:w-1/6 xl:w-1/8 cursor-pointer"
+        className="flex flex-col p-1 items-center w-1/2 sm:w-1/3 lg:w-1/4 xl:w-1/6 cursor-pointer"
         onClick={() => setIsModalOpen(true)}
       >
         <div className="relative w-full h-full">

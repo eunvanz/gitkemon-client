@@ -309,8 +309,9 @@ const postLike = async (createLikeDto: CreateLikeDto) => {
   await requester.post(API_URL.LIKES, createLikeDto);
 };
 
-const deleteLike = async (likeId: number) => {
-  await requester.delete(`${API_URL.LIKES}/${likeId}`);
+export type UnlikeDto = CreateLikeDto;
+const postUnlike = async (unlikeDto: UnlikeDto) => {
+  await requester.post(API_URL.LIKES_UNLIKE, unlikeDto);
 };
 
 const api = {
@@ -341,7 +342,7 @@ const api = {
   postPainting,
   getPaintingList,
   postLike,
-  deleteLike,
+  postUnlike,
   patchPainting,
   deletePainting,
 };

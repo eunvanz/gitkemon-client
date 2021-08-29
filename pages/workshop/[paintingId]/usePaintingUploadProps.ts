@@ -12,6 +12,9 @@ import { PaintingUploadFormValues, PaintingUploadProps } from "./PaintingUpload.
 const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUploadProps = ({
   ssrMons,
 }) => {
+  const router = useRouter();
+  const { paintingId } = router.query as { paintingId: string };
+
   const { data: mons } = useMonsQuery(undefined, {
     enabled: !ssrMons,
     initialData: ssrMons,
@@ -25,24 +28,26 @@ const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUpload
     };
   }, [user]);
 
-  const router = useRouter();
-
   const onNavigateToList = useCallback(() => {
     router.push(ROUTES.WORKSHOP);
   }, [router]);
 
-  const { mutate: uploadPainting, isLoading: isSubmitting } = useUploadPaintingMutation();
+  const {
+    mutateAsync: uploadPainting,
+    isLoading: isSubmitting,
+  } = useUploadPaintingMutation();
 
   const onSubmit = useCallback(
     async (values: PaintingUploadFormValues & { image: string }) => {
       const file = await convertURLtoFile(values.image, "png");
-      uploadPainting({
+      await uploadPainting({
         designerName: values.designerName!,
         monId: values.monId!,
         file,
       });
+      onNavigateToList();
     },
-    [uploadPainting],
+    [onNavigateToList, uploadPainting],
   );
 
   return {

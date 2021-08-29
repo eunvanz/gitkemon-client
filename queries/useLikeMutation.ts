@@ -1,36 +1,48 @@
-import { useMutation, useQueryClient } from "react-query";
+import produce from "immer";
+import { InfiniteData, useMutation, useQueryClient } from "react-query";
 import api from "~/api";
 import { assertNotEmpty } from "~/helpers/commonHelpers";
-import { Pageable, Painting, QUERY_KEY } from "~/types";
+import { ContentType, Pageable, Painting, QUERY_KEY } from "~/types";
+
+export interface LikeMutationParam {
+  contentId: number;
+  contentType: ContentType;
+  isLike: boolean;
+}
 
 const useLikeMutation = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(api.postLike, {
-    onMutate: ({ contentId, contentType }) => {
-      switch (contentType) {
-        case "painting":
-          queryClient.setQueriesData<Pageable<Painting>>(
-            QUERY_KEY.PAINTING_LIST,
-            (oldData) => {
-              assertNotEmpty(oldData);
-              return {
-                ...oldData,
-                items: oldData.items.map((item) =>
-                  item.id !== contentId
-                    ? item
-                    : {
-                        ...item,
-                        likesCnt: item.likesCnt + 1,
-                      },
-                ),
-              };
-            },
-          );
-          break;
-      }
+  return useMutation(
+    ({ contentId, contentType, isLike }: LikeMutationParam) =>
+      isLike
+        ? api.postLike({ contentId, contentType })
+        : api.postUnlike({ contentId, contentType }),
+    {
+      onMutate: ({ contentId, contentType, isLike }) => {
+        switch (contentType) {
+          case "painting":
+            queryClient.setQueriesData<InfiniteData<Pageable<Painting>>>(
+              QUERY_KEY.PAINTING_LIST,
+              (oldData) => {
+                assertNotEmpty(oldData);
+                return produce(oldData, (draft) => {
+                  draft.pages.forEach((page) => {
+                    const index = page.items.findIndex((item) => item.id === contentId);
+                    if (index > -1) {
+                      const item = page.items[index];
+                      page.items[index].likesCnt = item.likesCnt + (isLike ? 1 : -1);
+                      page.items[index].isLiked = isLike;
+                    }
+                  });
+                });
+              },
+            );
+            break;
+        }
+      },
     },
-  });
+  );
 };
 
 export default useLikeMutation;

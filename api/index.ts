@@ -279,6 +279,26 @@ const getPaintingList = async (pageOptions: PageRequestOptions) => {
   return data;
 };
 
+export type UpdatePaintingDto = Partial<CreatePaintingDto>;
+const patchPainting = async (
+  paintingId: number,
+  { designerName, monId, file }: UpdatePaintingDto,
+) => {
+  const formData = new FormData();
+  designerName && formData.append("designerName", designerName);
+  monId && formData.append("monId", monId.toString());
+  file && formData.append("file", file);
+  await requester.post(`${API_URL.PAINTINGS}/${paintingId}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+const deletePainting = async (paintingId: number) => {
+  await requester.delete(`${API_URL.PAINTINGS}/${paintingId}`);
+};
+
 export interface CreateLikeDto {
   contentType: ContentType;
   contentId: number;
@@ -320,6 +340,8 @@ const api = {
   getPaintingList,
   postLike,
   deleteLike,
+  patchPainting,
+  deletePainting,
 };
 
 export default api;

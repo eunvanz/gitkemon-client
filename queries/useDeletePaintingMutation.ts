@@ -5,7 +5,7 @@ import api from "../api";
 const useUpdatePaintingMutation = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(api.deletePainting, {
+  return useMutation(api.patchPainting, {
     onSuccess: () => {
       queryClient.invalidateQueries(QUERY_KEY.PAINTING_LIST);
     },

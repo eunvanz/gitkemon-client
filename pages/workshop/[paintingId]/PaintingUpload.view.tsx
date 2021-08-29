@@ -24,6 +24,7 @@ export interface PaintingUploadProps {
   isSubmitting: boolean;
   mons?: Mon[];
   onNavigateToList: VoidFunction;
+  defaultImage?: string;
 }
 
 const PaintingUpload: React.FC<PaintingUploadProps> = ({
@@ -32,13 +33,14 @@ const PaintingUpload: React.FC<PaintingUploadProps> = ({
   isSubmitting,
   mons,
   onNavigateToList,
+  defaultImage,
 }) => {
   const { control, handleSubmit, formState } = useForm<PaintingUploadFormValues>({
     defaultValues,
     mode: "onChange",
   });
 
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(defaultImage || null);
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
 
@@ -55,7 +57,7 @@ const PaintingUpload: React.FC<PaintingUploadProps> = ({
   }, []);
 
   const submitForm = useCallback(() => {
-    handleSubmit(async (formValues, error) => {
+    handleSubmit(async (formValues) => {
       if (!selectedImage || !croppedAreaPixels) {
         return Dialog.show({ content: "An image is required." });
       }

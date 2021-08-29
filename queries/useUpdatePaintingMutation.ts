@@ -6,8 +6,9 @@ const useUpdatePaintingMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(api.patchPainting, {
-    onSuccess: () => {
+    onSuccess: (_, { paintingId }) => {
       queryClient.invalidateQueries(QUERY_KEY.PAINTING_LIST);
+      queryClient.invalidateQueries([QUERY_KEY.PAINTING, paintingId]);
     },
   });
 };

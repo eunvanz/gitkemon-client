@@ -12,6 +12,7 @@ import {
   HuntResult,
   EvolveMonDto,
   MonTier,
+  ContentType,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -272,6 +273,18 @@ const getAllPaintings = async () => {
   await requester.get(API_URL.PAINTINGS);
 };
 
+export interface CreateLikeDto {
+  contentType: ContentType;
+  contentId: number;
+}
+const postLike = async (createLikeDto: CreateLikeDto) => {
+  await requester.post(API_URL.LIKES, createLikeDto);
+};
+
+const deleteLike = async (likeId: number) => {
+  await requester.delete(`${API_URL.LIKES}/${likeId}`);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -299,6 +312,8 @@ const api = {
   blend,
   postPainting,
   getAllPaintings,
+  postLike,
+  deleteLike,
 };
 
 export default api;

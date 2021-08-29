@@ -4,7 +4,7 @@ import { createStoryComponent } from "../../../helpers/storybookHelpers";
 import PaintingUpload from "./PaintingUpload.view";
 
 export default {
-  title: "pages/PaintingUpload",
+  title: "pages/Workshop/PaintingUpload",
   component: PaintingUpload,
   args: {
     mons: allMons,

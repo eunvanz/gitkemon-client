@@ -10,7 +10,7 @@ import Typography from "../Typography";
 
 dayjs.extend(relativeTime);
 
-export interface PaintingModalProps extends BaseModalProps {
+export interface PaintingModalProps extends Omit<BaseModalProps, "children"> {
   painting: Painting;
   isManageable: boolean;
   onEdit: VoidFunction;

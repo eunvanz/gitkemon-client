@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
+import EvolutionCard from "~/components/EvolutionCard";
 import Button from "../../components/Button";
 import HuntResultItem from "../../components/HuntResultItem";
 import Loading from "../../components/Loading";
@@ -37,63 +38,21 @@ const Evolution: React.FC<EvolutionProps> = ({
 }) => {
   const { width, height } = useWindowSize();
 
-  const monImageRef = useRef<HTMLDivElement>(null);
-
   const resultRef = useRef<HTMLDivElement>(null);
 
   const burstInterval = useRef<number | null>(null);
 
   const [isMonSelectVisible, setIsMonSelectVisible] = useState(false);
 
-  const [isMonImageVisible, setIsMonImageVisible] = useState(false);
+  const [isCardVisible, setIsCardVisible] = useState(false);
 
   const [isGotchaVisible, setIsGotchaVisible] = useState(false);
-
-  const [isCardFlipped, setIsCardFlipped] = useState(true);
 
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   const [isConfettiVisible, setIsConfettiVisible] = useState(false);
 
-  const initBurstEffect = useCallback(async () => {
-    const { burstStar } = await import("../../helpers/animations");
-    const burst = () => {
-      const { left, top } = monImageRef.current!.getClientRects()[0];
-      burstStar({
-        top: top + 100,
-        left: left + 100,
-        color: [
-          colorHashes.PSYCHIC,
-          colorHashes.ICE,
-          colorHashes.ELECTRIC,
-          colorHashes.GRASS,
-          colorHashes.FLYING,
-        ],
-        count: 20,
-        radius: { 50: 150 },
-        duration: 2000,
-        shape: "circle",
-        delay: "stagger(0, 100)",
-      });
-    };
-    burst();
-    burstInterval.current = window.setInterval(burst, 500);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      burstInterval.current && clearInterval(burstInterval.current);
-    };
-  }, []);
-
-  const proceedAnimation = useCallback(async () => {
-    setIsMonSelectVisible(false);
-    setIsMonImageVisible(true);
-    initBurstEffect();
-    await delayPromise(3000);
-    setIsMonImageVisible(false);
-    await delayPromise(500);
-    setIsCardFlipped(false);
+  const proceedResultAnim = useCallback(async () => {
     setIsGotchaVisible(true);
     clearInterval(burstInterval.current!);
     if (checkIsLuckyHuntResult(result!)) {
@@ -102,13 +61,14 @@ const Evolution: React.FC<EvolutionProps> = ({
     await delayPromise(500);
     setIsButtonVisible(true);
     showHuntResultMessages(result!);
-  }, [initBurstEffect, result]);
+  }, [result]);
 
   useEffect(() => {
     if (result) {
-      proceedAnimation();
+      setIsMonSelectVisible(false);
+      setIsCardVisible(true);
     }
-  }, [initBurstEffect, proceedAnimation, result]);
+  }, [proceedResultAnim, result]);
 
   useEffect(() => {
     if (nextMons && nextMons.length > 1) {
@@ -162,7 +122,7 @@ const Evolution: React.FC<EvolutionProps> = ({
           <motion.div
             className={"absolute flex justify-center"}
             initial={{
-              top: resultRef.current!.getClientRects()[0].top - 150,
+              top: resultRef.current!.getClientRects()[0].top - 100,
               transform: "scale(0%)",
             }}
             animate={{
@@ -186,25 +146,10 @@ const Evolution: React.FC<EvolutionProps> = ({
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {isMonImageVisible && (
-          <motion.div exit={{ opacity: 0 }}>
-            <div ref={monImageRef} className="flex justify-center animate-pulse">
-              <Image
-                src={evolveMon.monImageUrl}
-                quality={100}
-                width={200}
-                height={200}
-                alt=""
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {!isMonImageVisible && result && (
+        {isCardVisible && result && (
           <motion.div
             ref={resultRef}
-            className="flex flex-col justify-center items-center w-full max-w-screen-lg m-auto"
+            className="w-full"
             initial={{
               position: "absolute",
               opacity: 0,
@@ -213,11 +158,15 @@ const Evolution: React.FC<EvolutionProps> = ({
               opacity: 1,
             }}
           >
-            <HuntResultItem huntResult={result} isRevealed={!isCardFlipped} isSingle />
+            <EvolutionCard
+              evolveMon={evolveMon}
+              result={result}
+              onFinish={proceedResultAnim}
+            />
             <AnimatePresence>
               {isButtonVisible && (
                 <motion.div
-                  className="flex-0 justify-center p-4"
+                  className="flex-0 justify-center p-4 text-center"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                 >

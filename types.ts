@@ -328,4 +328,9 @@ export interface Pageable<T> {
   };
 }
 
+export interface PageRequestOptions {
+  page?: number;
+  limit?: number;
+}
+
 export type ContentType = "painting";

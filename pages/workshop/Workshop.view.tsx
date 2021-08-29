@@ -4,26 +4,28 @@ import Loading from "~/components/Loading";
 import MonCardGrid from "~/components/MonCardGrid";
 import PaintingCard from "~/components/PaintingCard";
 import Typography from "~/components/Typography";
-import { Pageable, Painting, User } from "~/types";
+import { Painting, User } from "~/types";
 
 export interface WorkshopProps {
-  paintingList?: Pageable<Painting>;
+  paintings?: Painting[];
   onNavigateToUpload: (id: number | "new") => void;
   user?: User;
   onClickLike: (painting: Painting) => void;
   onDelete: (painting: Painting) => void;
   onEdit: (painting: Painting) => void;
+  onFetchNextPage: VoidFunction;
+  hasNextPage: boolean;
 }
 
 const Workshop: React.FC<WorkshopProps> = ({
-  paintingList,
+  paintings,
   onNavigateToUpload,
   user,
   onClickLike,
   onDelete,
   onEdit,
 }) => {
-  return paintingList ? (
+  return paintings ? (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
       <Typography as="h1" size="2xl">
         Pokemon workshop
@@ -43,7 +45,7 @@ const Workshop: React.FC<WorkshopProps> = ({
         </div>
       </div>
       <MonCardGrid>
-        {paintingList.items.map((painting) => {
+        {paintings.map((painting) => {
           return (
             <PaintingCard
               key={painting.id}

@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { CardMon, Collection, HuntResult, ModalMon, Mon } from "../types";
+import { CardMon, Collection, HuntResult, ModalMon, Mon, Pageable } from "../types";
 
 export const convertCollectionToModalMon: (collection: Collection) => ModalMon = (
   collection,
@@ -199,4 +199,8 @@ export const getLocaleProperty = (object: any, property: string) => {
     // for ssr
     return object[property];
   }
+};
+
+export const getMergedPageData = (data: Pageable<any>[]) => {
+  return data.reduce((prev: any[], item) => [...prev, ...item.items], []);
 };

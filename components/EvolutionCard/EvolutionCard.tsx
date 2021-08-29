@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
+import cx from "classnames";
 import { random } from "lodash";
 import { colorHashes } from "~/constants/styles";
 import { convertCollectionToCardMon } from "~/helpers/projectHelpers";
@@ -7,6 +8,7 @@ import { Collection, HuntResult } from "~/types";
 import HuntResultItem from "../HuntResultItem";
 import MonCard from "../MonCard";
 import Shakeable from "../Shakeable";
+import styles from "./EvolutionCard.module.css";
 
 const MAX_SHAKE_COUNT = 20;
 
@@ -113,7 +115,12 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
         </div>
       </Shakeable>
       {progress === 0 && (
-        <div className="w-full text-center text-gray-500 animate-pulse">
+        <div
+          className={cx(
+            "w-full text-center text-gray-400 animate-pulse mt-2",
+            styles.nudge,
+          )}
+        >
           <ChevronDoubleLeftIcon className="w-4 h-4 inline-block" /> Shake it!{" "}
           <ChevronDoubleRightIcon className="w-4 h-4 inline-block" />
         </div>

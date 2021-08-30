@@ -19,7 +19,7 @@ const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
   const router = useRouter();
 
   const { refetch: refetchUser } = useUserQuery({
-    enabled: !ssrUser,
+    enabled: false,
     initialData: ssrUser,
   });
 
@@ -28,13 +28,9 @@ const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
     isFetching: isAvailableContributionsFetching,
     refetch: refetchAvailableContributions,
   } = useAvailableContributionsQuery({
-    enabled: !ssrAvailableContributions,
+    enabled: false,
     initialData: ssrAvailableContributions,
   });
-
-  useEffect(() => {
-    refetchUser();
-  }, [refetchUser]);
 
   const [isGettingPayback, setIsGettingPayback] = useState(false);
 

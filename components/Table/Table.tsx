@@ -1,9 +1,5 @@
 import cx from "classnames";
 
-export interface DataSource {
-  key: number | string;
-}
-
 export interface Column<T> {
   title: string;
   dataIndex: keyof T;
@@ -13,12 +9,12 @@ export interface Column<T> {
   width?: number;
 }
 
-export interface TableProps<T extends DataSource> {
+export interface TableProps<T> {
   dataSource: T[];
   columns: Column<T>[];
 }
 
-const Table: React.FC<TableProps<any>> = ({ dataSource, columns }) => {
+const Table = <T extends object>({ dataSource, columns }: TableProps<T>) => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -44,8 +40,8 @@ const Table: React.FC<TableProps<any>> = ({ dataSource, columns }) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {dataSource.map((data) => (
-                  <tr key={data.key}>
+                {dataSource.map((data, index) => (
+                  <tr key={index}>
                     {columns.map((col) => (
                       <td
                         // @ts-ignore

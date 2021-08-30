@@ -1,6 +1,7 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import mockCollectionRanking from "~/api/mocks/collectionRanking";
 import { createStoryComponent } from "~/helpers/storybookHelpers";
+import { Collection } from "~/types";
 import MonTypeBadge from "../MonTypeBadge";
 import Table from "./Table";
 
@@ -11,7 +12,7 @@ export default {
     dataSource: mockCollectionRanking.total.items.map((item, index) => ({
       ...item,
       rank: index + 1,
-      key: item.id,
+      key: index,
     })),
     columns: [
       {
@@ -21,7 +22,7 @@ export default {
       {
         title: "name",
         dataIndex: "name",
-        render: (data) => (
+        render: (data: Collection) => (
           <div className="flex items-center">
             <div className="flex-shrink-0 h-10 w-10">
               {/* eslint-disable-next-line */}
@@ -37,12 +38,12 @@ export default {
         title: "user",
         dataIndex: "__user__",
         key: "user",
-        render: (data) => data.__user__.nickname,
+        render: (data: Collection) => data.__user__!.nickname,
       },
       {
         title: "type",
         dataIndex: "firstType",
-        render: (data) => (
+        render: (data: Collection) => (
           <div className="flex items-center">
             <MonTypeBadge type={data.firstType} />
             {data.secondType && <MonTypeBadge type={data.secondType} />}

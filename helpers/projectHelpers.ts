@@ -167,8 +167,9 @@ export const getMessagesFromHuntResult = (result: HuntResult[] | HuntResult) => 
     (prev, item) => prev + item.updatedColPoint,
     0,
   );
-  const hasSuperior = resultArray.find((item) =>
-    item.newCollection.potential.includes("S"),
+  const hasSuperior = resultArray.find(
+    (item) =>
+      item.newCollection.potential.includes("S") && item.newCollection.level === 1,
   );
   const hasMyth = resultArray.find((item) => item.newCollection.tier === "myth");
   const messages = [];

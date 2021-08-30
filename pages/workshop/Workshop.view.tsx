@@ -1,5 +1,6 @@
 import { UploadIcon } from "@heroicons/react/outline";
 import Button from "~/components/Button";
+import Intersection from "~/components/Intersection";
 import Loading from "~/components/Loading";
 import MonCardGrid from "~/components/MonCardGrid";
 import PaintingCard from "~/components/PaintingCard";
@@ -24,6 +25,8 @@ const Workshop: React.FC<WorkshopProps> = ({
   onClickLike,
   onDelete,
   onEdit,
+  hasNextPage,
+  onFetchNextPage,
 }) => {
   return paintings ? (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
@@ -58,6 +61,7 @@ const Workshop: React.FC<WorkshopProps> = ({
           );
         })}
       </MonCardGrid>
+      <Intersection onIntersect={() => hasNextPage && onFetchNextPage()} />
     </div>
   ) : (
     <Loading isFullHeight />

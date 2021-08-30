@@ -11,7 +11,7 @@ module.exports = {
     config.resolve = {
       ...config.resolve,
       alias: {
-        ...config.resolve?.alias,
+        ...config.resolve.alias,
         "next/image": require.resolve("./__mocks__/NextJSImageMock.js"),
         "~": path.resolve(__dirname, "../"),
       },

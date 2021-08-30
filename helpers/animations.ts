@@ -23,7 +23,7 @@ export interface BurstOptions {
   opacity?: { [key: number]: number };
   scale?: { [key: number]: number };
   shape?: "star" | "circle" | "polygon";
-  itemRadius?: number;
+  itemRadius?: number | string;
   delay?: string;
   points?: number;
   parent?: HTMLElement | null;

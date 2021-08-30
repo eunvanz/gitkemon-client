@@ -40,7 +40,8 @@ const Shakeable = ({
         colorHashes.ELECTRIC,
         colorHashes.GRASS,
         colorHashes.FLYING,
-        colorHashes.FIRE,
+        colorHashes.FIGHTING,
+        colorHashes.GHOST,
       ];
       burstStar({
         parent: document.querySelector("main"),
@@ -51,10 +52,10 @@ const Shakeable = ({
           colors[random(0, colors.length - 1)],
           colors[random(0, colors.length - 1)],
         ],
-        count: 3,
+        count: 4,
         radius: { 100: 250 },
         duration: 2000,
-        itemRadius: 10,
+        itemRadius: "rand(6, 10)",
         degreeShift: "rand(-50, 50)",
       });
     };

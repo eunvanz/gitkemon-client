@@ -1,24 +1,22 @@
 import { useMemo, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import orderBy from "lodash/orderBy";
-import Button from "../../../components/Button";
-import CollectionFilter, {
-  CollectionFilterState,
-} from "../../../components/CollectionFilter";
-import CollectionStatus from "../../../components/CollectionStatus";
-import Loading from "../../../components/Loading";
-import MonCard from "../../../components/MonCard";
-import MonCardGrid from "../../../components/MonCardGrid";
-import Typography from "../../../components/Typography";
-import { MON_STARS, MON_TIERS, MON_TYPES } from "../../../constants/rules";
-import { capitalize } from "../../../helpers/commonHelpers";
+import Button from "~/components/Button";
+import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
+import CollectionStatus from "~/components/CollectionStatus";
+import Loading from "~/components/Loading";
+import MonCard from "~/components/MonCard";
+import MonCardGrid from "~/components/MonCardGrid";
+import Typography from "~/components/Typography";
+import { MON_STARS, MON_TIERS, MON_TYPES } from "~/constants/rules";
+import { capitalize } from "~/helpers/commonHelpers";
 import {
   convertCollectionToCardMon,
   convertMonToCardMon,
   convertMonToModalMon,
   getLocaleProperty,
-} from "../../../helpers/projectHelpers";
-import { Collection, Mon, User } from "../../../types";
+} from "~/helpers/projectHelpers";
+import { Collection, Mon, User } from "~/types";
 
 export interface CollectionsProps {
   collections?: Collection[];

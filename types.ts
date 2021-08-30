@@ -97,6 +97,7 @@ export interface Mon {
   updatedAt?: string;
   __monImages__?: MonImage[] | null;
   __nextMons__?: Mon[] | null;
+  __has_monImages__?: boolean;
 }
 
 export type MonTier =

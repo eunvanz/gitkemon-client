@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import ROUTES from "~/paths";
 import { RankingsProps } from "./Rankings.view";
@@ -26,6 +26,10 @@ const useRankingsProps: () => RankingsProps = () => {
     },
     [router, tabs],
   );
+
+  useEffect(() => {
+    router.isReady && setActiveTabIndex(initialTabIndex);
+  }, [initialTabIndex, router.isReady]);
 
   return {
     activeTabIndex,

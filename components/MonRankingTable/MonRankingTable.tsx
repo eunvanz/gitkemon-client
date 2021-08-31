@@ -86,7 +86,7 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
         ),
       },
       {
-        title: "total",
+        title: "stats",
         dataIndex: "total",
       },
       {

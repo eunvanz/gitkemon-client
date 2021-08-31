@@ -19,7 +19,7 @@ const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
   const router = useRouter();
 
   const { refetch: refetchUser } = useUserQuery({
-    enabled: false,
+    enabled: !ssrUser,
     initialData: ssrUser,
   });
 
@@ -28,7 +28,7 @@ const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
     isFetching: isAvailableContributionsFetching,
     refetch: refetchAvailableContributions,
   } = useAvailableContributionsQuery({
-    enabled: false,
+    enabled: !ssrAvailableContributions,
     initialData: ssrAvailableContributions,
   });
 
@@ -54,11 +54,6 @@ const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
     refetchUser();
     refetchAvailableContributions();
     setPaybackResult(undefined);
-  }, [refetchAvailableContributions, refetchUser]);
-
-  useEffect(() => {
-    refetchUser();
-    refetchAvailableContributions();
   }, [refetchAvailableContributions, refetchUser]);
 
   const onGetPokemons = useCallback(() => {

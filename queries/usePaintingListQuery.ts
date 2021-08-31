@@ -1,18 +1,15 @@
-import { useInfiniteQuery, UseInfiniteQueryOptions } from "react-query";
+import { UseInfiniteQueryOptions } from "react-query";
 import { Pageable, Painting, QUERY_KEY } from "~/types";
 import api from "../api";
+import useCommonInfiniteQuery from "./useCommonInfiniteQuery";
 
 const usePaintingListQuery = (
   queryOptions?: UseInfiniteQueryOptions<Pageable<Painting>>,
 ) => {
-  const query = useInfiniteQuery<Pageable<Painting>>(
+  const query = useCommonInfiniteQuery<Painting>(
     QUERY_KEY.PAINTING_LIST,
-    ({ pageParam = 1 }) => api.getPaintingList({ page: pageParam }),
-    {
-      ...queryOptions,
-      getNextPageParam: ({ meta: { totalPages, currentPage } }) =>
-        totalPages === currentPage ? undefined : currentPage + 1,
-    },
+    api.getPaintingList,
+    queryOptions,
   );
   return query;
 };

@@ -44,8 +44,8 @@ const PaintingCard: React.FC<PaintingCardProps> = ({
         className="flex flex-col p-1 items-center w-1/2 sm:w-1/3 lg:w-1/4 xl:w-1/6 cursor-pointer"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="relative w-full h-full">
-          <div className="border rounded shadow">
+        <div className="relative w-full h-ful transform hover:-translate-y-1 transition-transform">
+          <div className="border rounded shadow transition-shadow hover:shadow-lg">
             <div className="flex-1 p-1 bg-white rounded">
               {painting.isRegistered && (
                 <div className="absolute right-1 top-0.5 sm:right-2 sm:top-1.5">

@@ -67,6 +67,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         newMon={convertCollectionToModalMon(newCollection)}
         isFlipped={!isRealRevealed}
         isClickDisabled={isClickDisabled}
+        isOwned
       />
       {!isDiffHidden && (
         <div

@@ -26,6 +26,7 @@ export interface MonCardProps
   isFullWidth?: boolean;
   onSelect?: VoidFunction;
   isClickDisabled?: boolean;
+  isOwned?: boolean;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -38,6 +39,7 @@ const MonCard: React.FC<MonCardProps> = ({
   isFullWidth,
   onSelect,
   isClickDisabled,
+  isOwned,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -161,6 +163,7 @@ const MonCard: React.FC<MonCardProps> = ({
           isOpen={isMonModalOpen}
           onClose={() => setIsMonModalOpen(false)}
           mon={modalMon}
+          isOwned={isOwned}
         />
       ) : (
         <MonModalContainer

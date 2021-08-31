@@ -72,8 +72,8 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
   }, [blendMon]);
 
   const isOwned = useMemo(() => {
-    return !!mon?.userId && user?.id === mon.userId;
-  }, [mon?.userId, user?.id]);
+    return (!!mon?.userId && user?.id === mon.userId) || !!newMon;
+  }, [mon?.userId, newMon, user?.id]);
 
   return {
     isOpen,

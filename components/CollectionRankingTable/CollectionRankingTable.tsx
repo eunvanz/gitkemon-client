@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import Table from "~/components/Table";
-import { convertCollectionToModalMon, getLocaleProperty } from "~/helpers/projectHelpers";
-import { Collection, ModalMon } from "~/types";
+import { getLocaleProperty } from "~/helpers/projectHelpers";
+import { Collection } from "~/types";
 import Intersection from "../Intersection";
 import LevelBadge from "../LevelBadge";
 import MonModalContainer from "../MonModal";
@@ -17,8 +17,8 @@ interface RankingItem extends Collection {
 
 export interface CollectionRankingTableProps {
   collections: Collection[];
-  hasNextPage: boolean;
-  onFetchNextPage: VoidFunction;
+  hasNextPage?: boolean;
+  onFetchNextPage?: VoidFunction;
 }
 
 const CollectionRankingTable: React.FC<CollectionRankingTableProps> = ({

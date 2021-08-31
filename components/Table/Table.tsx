@@ -46,7 +46,9 @@ const Table = <T extends object>({ dataSource, columns }: TableProps<T>) => {
                       <td
                         // @ts-ignore
                         key={col.key || col.dataIndex}
-                        className={cx(`text-${col.align || "left"}`)}
+                        className={cx(
+                          `text-${col.align || "left"} px-6 py-4 whitespace-nowrap`,
+                        )}
                       >
                         {col.render ? col.render(data) : data[col.dataIndex]}
                       </td>

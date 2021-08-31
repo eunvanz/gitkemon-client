@@ -174,7 +174,7 @@ const MonImage: React.FC<MonImageProps> = ({
                     displayValue: capitalize(tier),
                   })),
                   disabled: isSubmitting,
-                  hint: `Total: ${selectedMon?.total} / Suggestion: ${selectedMon?.tier}`,
+                  hint: `Total: ${selectedMon?.total} / Stars: ${selectedMon?.stars} / Suggestion: ${selectedMon?.tier}`,
                 }}
                 rules={{
                   required: "Tier is required",

@@ -15,13 +15,13 @@ interface RankingItem extends Collection {
   key: number;
 }
 
-export interface CollectionRankingTableProps {
-  collections: Collection[];
+export interface MonRankingTableProps {
+  collections?: Collection[];
   hasNextPage?: boolean;
   onFetchNextPage?: VoidFunction;
 }
 
-const CollectionRankingTable: React.FC<CollectionRankingTableProps> = ({
+const MonRankingTable: React.FC<MonRankingTableProps> = ({
   collections,
   hasNextPage,
   onFetchNextPage,
@@ -39,11 +39,13 @@ const CollectionRankingTable: React.FC<CollectionRankingTableProps> = ({
   }, []);
 
   const dataSource: RankingItem[] = useMemo(() => {
-    return collections.map((collection, index) => ({
-      ...collection,
-      rank: index + 1,
-      key: collection.id,
-    }));
+    return collections
+      ? collections.map((collection, index) => ({
+          ...collection,
+          rank: index + 1,
+          key: collection.id,
+        }))
+      : [];
   }, [collections]);
 
   const columns: Column<RankingItem>[] = useMemo(() => {
@@ -115,4 +117,4 @@ const CollectionRankingTable: React.FC<CollectionRankingTableProps> = ({
   );
 };
 
-export default CollectionRankingTable;
+export default MonRankingTable;

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { getMergedPageData } from "~/helpers/projectHelpers";
+import useList from "~/hooks/useList";
 import ROUTES from "~/paths";
 import useDeletePaintingMutation from "~/queries/useDeletePaintingMutation";
 import useLikeMutation from "~/queries/useLikeMutation";
@@ -15,7 +15,7 @@ const useWorkshopProps: () => WorkshopProps = () => {
 
   const router = useRouter();
 
-  const { data: paintingListData, fetchNextPage, hasNextPage } = usePaintingListQuery();
+  const { data: paintings, fetchNextPage, hasNextPage } = useList(usePaintingListQuery);
 
   const { mutate: like } = useLikeMutation();
 
@@ -49,10 +49,6 @@ const useWorkshopProps: () => WorkshopProps = () => {
   const onNavigateToUpload = useCallback(() => {
     router.push(`${ROUTES.WORKSHOP}/new`);
   }, [router]);
-
-  const paintings = useMemo(() => {
-    return paintingListData ? getMergedPageData(paintingListData.pages) : undefined;
-  }, [paintingListData]);
 
   return {
     onClickLike,

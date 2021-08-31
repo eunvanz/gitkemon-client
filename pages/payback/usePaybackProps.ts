@@ -56,6 +56,11 @@ const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
     setPaybackResult(undefined);
   }, [refetchAvailableContributions, refetchUser]);
 
+  useEffect(() => {
+    refetchUser();
+    refetchAvailableContributions();
+  }, [refetchAvailableContributions, refetchUser]);
+
   const onGetPokemons = useCallback(() => {
     router.push(ROUTES.HUNT);
   }, [router]);

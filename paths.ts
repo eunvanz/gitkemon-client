@@ -5,7 +5,7 @@ const ROUTES = {
   HUNT: "/hunt",
   HUNT_RESULT: "/hunt-result",
   COLLECTIONS: "/collections",
-  RANKING: "/ranking",
+  RANKINGS: "/rankings",
   WORKSHOP: "/workshop",
   PROFILE: "/profile",
   ADMIN: "/admin",

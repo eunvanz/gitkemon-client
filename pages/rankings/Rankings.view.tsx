@@ -1,45 +1,37 @@
 import { useCallback, useState } from "react";
+import MonRankingTableContainer from "~/components/MonRankingTable";
 import Tabs from "~/components/Tabs";
 import Typography from "~/components/Typography";
 
 export interface RankingsProps {
-  initialTabIndex: number;
+  activeTabIndex: number;
+  onChangeTab: (index: number) => void;
 }
 
-const Rankings: React.FC<RankingsProps> = ({
-  initialTabIndex
-}) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(initialTabIndex);
-
-  const onChangeTab = useCallback((index: number) => {
-    setActiveTabIndex(index)
-  }, []);
-
+const Rankings: React.FC<RankingsProps> = ({ activeTabIndex, onChangeTab }) => {
   return (
     <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4">
       <Typography as="h1" size="2xl">
         Rankings
       </Typography>
-      <Tabs 
+      <Tabs
         labels={[
           {
-            name: "Collection ranking"
+            name: "Collection",
           },
           {
-            name: "Pokemon ranking"
+            name: "Pokemon",
           },
           {
-            name: "Contribution ranking"
+            name: "Contribution",
           },
         ]}
         activeIndex={activeTabIndex}
         onChange={onChangeTab}
       />
-      {
-        activeTabIndex === 2 &&
-      }
+      <div className="mt-4">{activeTabIndex === 1 && <MonRankingTableContainer />}</div>
     </div>
   );
 };
 
-export default Rankings
+export default Rankings;

@@ -65,15 +65,15 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
         children: [
           {
             name: "Collection Ranking",
-            href: `${ROUTES.RANKING}?tab=collection`,
+            href: `${ROUTES.RANKINGS}?tab=collection`,
           },
           {
             name: "Pokemon Ranking",
-            href: `${ROUTES.RANKING}?tab=pokemon`,
+            href: `${ROUTES.RANKINGS}?tab=pokemon`,
           },
           {
             name: "Contribution Ranking",
-            href: `${ROUTES.RANKING}?tab=contribution`,
+            href: `${ROUTES.RANKINGS}?tab=contribution`,
           },
         ],
       },
@@ -222,7 +222,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                         className="h-8 w-8 rounded-full"
                         width={32}
                         height={32}
-                        src={user.githubUser.avatar_url}
+                        src={user.githubUser!.avatar_url}
                         alt={user.nickname}
                         priority
                       />
@@ -233,7 +233,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                     <>
                       Signed in as{" "}
                       <span className="text-gray-900 font-bold">
-                        {user.githubUser.login}
+                        {user.githubUser!.login}
                       </span>
                     </>
                   }

@@ -21,6 +21,7 @@ export interface MonModalProps extends Omit<BaseModalProps, "children"> {
   onEvolve?: VoidFunction;
   onBlend?: VoidFunction;
   isBlendHidden?: boolean;
+  isOwned?: boolean;
 }
 
 const MonModal: React.FC<MonModalProps> = ({
@@ -300,6 +301,7 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
   onEvolve,
   onBlend,
   isBlendHidden,
+  isOwned,
   ...restProps
 }) => {
   const isCollection = useMemo(() => {
@@ -354,7 +356,7 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
               <Skeleton width={120} height={16} />
             )}
           </div>
-          {mon && isCollection && (
+          {mon && isCollection && isOwned && (
             <div className="text-center mb-2 mt-2">
               {!isBlendHidden && (
                 <Button size="xs" color="white" onClick={onBlend}>

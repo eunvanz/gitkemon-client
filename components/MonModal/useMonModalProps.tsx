@@ -3,10 +3,7 @@ import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { MonModalContainerProps } from ".";
 import { assertNotEmpty, capitalize } from "../../helpers/commonHelpers";
-import {
-  convertCollectionToModalMon,
-  getLocaleProperty,
-} from "../../helpers/projectHelpers";
+import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
 import ROUTES from "../../paths";
 import useCollectionQuery from "../../queries/useCollectionQuery";
 import { blendMonState } from "../../state/blendMon";
@@ -74,6 +71,10 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     return !!blendMon;
   }, [blendMon]);
 
+  const isOwned = useMemo(() => {
+    return !!mon?.userId && user?.id === mon.userId;
+  }, [mon?.userId, user?.id]);
+
   return {
     isOpen,
     onClose,
@@ -82,6 +83,7 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     onEvolve,
     onBlend,
     isBlendHidden,
+    isOwned,
   };
 };
 

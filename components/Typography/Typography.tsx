@@ -3,7 +3,7 @@ import cx from "classnames";
 import { colors } from "../../constants/styles";
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "a";
   color?: "primary" | "hint" | "green" | "black" | string;
   weight?:
     | "thin"
@@ -27,6 +27,9 @@ const Typography: React.FC<TypographyProps> = ({
   ...restProps
 }) => {
   const classNameByColor = useMemo(() => {
+    if (As === "a") {
+      return `text-blue-500 hover:underline`;
+    }
     switch (color) {
       case "primary":
         return `text-${colors.PRIMARY_COLOR}`;
@@ -41,7 +44,7 @@ const Typography: React.FC<TypographyProps> = ({
       default:
         return `text-${color}-500`;
     }
-  }, [color]);
+  }, [As, color]);
 
   const classNameBySize = useMemo(() => {
     switch (size) {

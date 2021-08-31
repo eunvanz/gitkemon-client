@@ -30,18 +30,20 @@ export const convertCollectionToModalMon: (collection: Collection) => ModalMon =
     level,
     potential,
     monImageUrl,
+    evolutionLevel,
     __monImage__,
+    userId,
   } = collection;
   return {
     id: id,
-    name: getLocaleProperty(__mon__!, "name"),
+    name: getLocaleProperty(collection, "name"),
     description: getLocaleProperty(__mon__!, "description"),
     firstType,
     secondType,
     weight,
     height,
     tier,
-    evolutionLevel: __mon__!.evolutionLevel || undefined,
+    evolutionLevel,
     hp,
     attack,
     defense,
@@ -62,6 +64,7 @@ export const convertCollectionToModalMon: (collection: Collection) => ModalMon =
     potential,
     imageUrl: monImageUrl,
     image: __monImage__!,
+    userId,
   };
 };
 

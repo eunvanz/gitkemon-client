@@ -3,13 +3,13 @@ import React from "react";
 export interface User {
   id: string;
   nickname: string;
-  introduce: string;
+  introduce?: string | null;
   lastContributions: number;
-  lastPaybackDate: Date;
-  contributionBaseDate: Date;
+  lastPaybackDate: string;
+  contributionBaseDate: string;
   accessToken: string;
   isActive: boolean;
-  githubUser: GithubUser;
+  githubUser?: GithubUser;
   __pokeBall__?: PokeBall | null;
 }
 
@@ -164,6 +164,7 @@ export interface ModalMon {
   potential?: MonPotential | null;
   imageUrl?: string | null;
   image?: MonImage | null;
+  userId?: string;
 }
 
 export type MonType =

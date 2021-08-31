@@ -205,6 +205,6 @@ export const getLocaleProperty = (object: any, property: string) => {
   }
 };
 
-export const getMergedPageData = (data: Pageable<any>[]) => {
-  return data.reduce((prev: any[], item) => [...prev, ...item.items], []);
+export const getMergedPageData = <T>(data: Pageable<T>[]) => {
+  return data.reduce((prev: T[], item) => [...prev, ...item.items], []);
 };

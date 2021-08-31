@@ -5,8 +5,10 @@ import { Collection } from "~/types";
 import Intersection from "../Intersection";
 import LevelBadge from "../LevelBadge";
 import MonModalContainer from "../MonModal";
+import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
+import PotentialBadge from "../PotentialBadge";
 import { Column } from "../Table/Table";
 import Typography from "../Typography";
 
@@ -68,6 +70,7 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
                 {getLocaleProperty(data, "name")}
               </Typography>
               <LevelBadge className="ml-2" level={data.level} />
+              <PotentialBadge className="ml-2" potential={data.potential} />
             </div>
           </div>
         ),
@@ -84,6 +87,11 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
       {
         title: "total",
         dataIndex: "total",
+      },
+      {
+        title: "stars",
+        dataIndex: "stars",
+        render: (data) => <MonStars stars={data.stars} />,
       },
       {
         title: "tier",

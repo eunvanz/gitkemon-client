@@ -218,5 +218,26 @@
       "export default ${TM_FILENAME_BASE};"
     ],
     "description": "queries template"
+  },
+  "useMutation template": {
+    "prefix": "um",
+    "body": [
+      "import { useMutation, useQueryClient } from \"react-query\";",
+      "import api from \"~/api\";",
+      "",
+      "const ${TM_FILENAME_BASE} = () => {",
+      "  const queryClient = useQueryClient();",
+      "",
+      "  return useMutation(api.$1, {",
+      "    onSuccess: () => {",
+      "      $2",
+      "    },",
+      "  });",
+      "};",
+      "",
+      "export default ${TM_FILENAME_BASE};",
+      ""
+    ],
+    "description": "useMutation template"
   }
 }

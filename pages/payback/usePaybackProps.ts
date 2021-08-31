@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
+import usePaybackMutation from "~/queries/usePaybackMutation";
 import { PaybackPageProps } from ".";
 import api from "../../api";
 import ROUTES from "../../paths";
@@ -32,23 +33,14 @@ const usePaybackProps: (props: PaybackPageProps) => PaybackProps = ({
     initialData: ssrAvailableContributions,
   });
 
-  const [isGettingPayback, setIsGettingPayback] = useState(false);
+  const { mutateAsync: payback, isLoading: isGettingPayback } = usePaybackMutation();
 
   const [paybackResult, setPaybackResult] = useState<Payback | undefined>(undefined);
 
   const onPayback = useCallback(async () => {
-    setIsGettingPayback(true);
-    try {
-      const result = await api.postPaybacks();
-      setPaybackResult(result);
-      refetchAvailableContributions();
-      refetchUser();
-    } catch (error) {
-      // TODO:
-    } finally {
-      setIsGettingPayback(false);
-    }
-  }, [refetchAvailableContributions, refetchUser]);
+    const result = await payback();
+    setPaybackResult(result);
+  }, [payback]);
 
   const onRefresh = useCallback(() => {
     refetchUser();

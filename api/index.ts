@@ -333,6 +333,13 @@ const postUnlike = async (unlikeDto: UnlikeDto) => {
   await requester.post(API_URL.LIKES_UNLIKE, unlikeDto);
 };
 
+const getMonRanking = async (pageOptions: PageRequestOptions) => {
+  const { data } = await requester.get<Pageable<Collection>>(API_URL.COLLECTIONS__RANK, {
+    params: pageOptions,
+  });
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -365,6 +372,7 @@ const api = {
   patchPainting,
   deletePainting,
   getPainting,
+  getMonRanking,
 };
 
 export default api;

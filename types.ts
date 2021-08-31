@@ -204,6 +204,7 @@ export enum QUERY_KEY {
   COLLECTIONS = "COLLECTIONS",
   PAINTING_LIST = "PAINTING_LIST",
   PAINTING = "PAINTING",
+  MON_RANKING = "MON_RANKING",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";

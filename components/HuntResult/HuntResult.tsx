@@ -60,7 +60,10 @@ const HuntResult: React.FC<HuntResultProps> = ({
   useEffect(() => {
     if (hasToShowResult) {
       (async () => {
-        const { left, top } = pokeBallRef.current!.getClientRects()[0];
+        if (!pokeBallRef.current) {
+          return;
+        }
+        const { left, top } = pokeBallRef.current.getClientRects()[0];
         const { burstStar } = await import("../../helpers/animations");
         burstStar({
           top: top + 58,

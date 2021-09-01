@@ -57,7 +57,7 @@ const MonImage: React.FC<MonImageProps> = ({
     mode: "onChange",
   });
 
-  const { monId, evolutionRequiredLevel } = watch();
+  const { monId, evolutionRequiredLevel, tier } = watch();
 
   const isRegisteredMon = useMemo(() => {
     return selectedMon?.__monImages__?.length;
@@ -88,6 +88,18 @@ const MonImage: React.FC<MonImageProps> = ({
       setValue("colPoint", (evolveFromMon?.colPoint || 0) * evolutionRequiredLevel);
     }
   }, [evolutionRequiredLevel, evolveFromMon?.colPoint, setValue]);
+
+  useEffect(() => {
+    if (tier === "rare") {
+      setValue("colPoint", 3);
+    } else if (tier === "elite") {
+      setValue("colPoint", 60);
+    } else if (tier === "legend") {
+      setValue("colPoint", 90);
+    } else if (tier === "myth") {
+      setValue("colPoint", 120);
+    }
+  }, [setValue, tier]);
 
   return !isLoading ? (
     <div className="w-full p-8 bg-white">

@@ -188,7 +188,7 @@ export const getMessagesFromHuntResult = (result: HuntResult[] | HuntResult) => 
   hasSuperior && messages.push("You've got a superior Pokemon!");
   hasMyth && messages.push("You've got a mythical Pokemon!");
   hasPromoted &&
-    messages.push(`You've become a ${capitalize(TRAINER_CLASSES[trainerClass])}`);
+    messages.push(`You've become a ${capitalize(TRAINER_CLASSES[trainerClass - 1])}`);
   return messages;
 };
 

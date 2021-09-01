@@ -77,11 +77,15 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
           )}
         >
           {oldCollection ? (
-            <>
-              <LevelBadge level={oldCollection.level} />
-              <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
-              <LevelBadge level={newCollection.level} />
-            </>
+            oldCollection.level === newCollection.level ? (
+              <Badge color="gray" label="FAIL" size="sm" />
+            ) : (
+              <>
+                <LevelBadge level={oldCollection.level} />
+                <ArrowNarrowRightIcon className="w-4 h-4 text-gray-400 mx-1" />
+                <LevelBadge level={newCollection.level} />
+              </>
+            )
           ) : (
             <Badge color="red" label="NEW" size="sm" />
           )}

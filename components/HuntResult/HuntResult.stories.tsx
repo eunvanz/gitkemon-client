@@ -19,6 +19,16 @@ const Template: ComponentStory<typeof HuntResult> = (args) => <HuntResult {...ar
 
 export const 단일 = createStoryComponent(Template);
 
+export const 두마리 = createStoryComponent(Template, {
+  // @ts-ignore
+  result: mockCollections.huntResultMulti.slice(0, 2),
+});
+
+export const 세마리 = createStoryComponent(Template, {
+  // @ts-ignore
+  result: mockCollections.huntResultMulti.slice(0, 3),
+});
+
 export const 멀티 = createStoryComponent(Template, {
   // @ts-ignore
   result: mockCollections.huntResultMulti,

@@ -122,7 +122,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
   return (
     <div className="flex flex-col justify-center items-center content-container">
       {isConfettiVisible && <Confetti width={width} height={height} recycle={false} />}
-      <div className="flex justify-center">
+      <div className="flex justify-center w-full">
         <AnimatePresence>
           {isGotchaVisible && (
             <motion.div
@@ -177,7 +177,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
             (result.length > 1 ? (
               <motion.div
                 ref={resultRef}
-                className="max-w-screen-lg"
+                className="max-w-screen-lg w-full"
                 initial={{
                   transform: "translateY(80vh)",
                 }}

@@ -83,6 +83,7 @@ const huntResultNew: HuntResponse = [
       },
     },
     updatedColPoint: 1,
+    trainerClass: 1,
   },
 ];
 
@@ -169,6 +170,7 @@ const huntResultMyth: HuntResponse = [
       },
     },
     updatedColPoint: 1,
+    trainerClass: 1,
   },
 ];
 
@@ -255,6 +257,7 @@ const huntResultSuperior: HuntResponse = [
       },
     },
     updatedColPoint: 1,
+    trainerClass: 1,
   },
 ];
 
@@ -419,6 +422,7 @@ const huntResultLevelUp: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
 ];
 
@@ -583,6 +587,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -746,6 +751,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -907,6 +913,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -1068,6 +1075,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -1231,6 +1239,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -1394,6 +1403,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -1555,6 +1565,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -1718,6 +1729,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -1881,6 +1893,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -2042,6 +2055,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -2205,6 +2219,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
   {
     oldCollection: {
@@ -2368,6 +2383,7 @@ const huntResultMulti: HuntResponse = [
       },
     },
     updatedColPoint: 0,
+    trainerClass: 1,
   },
 ];
 

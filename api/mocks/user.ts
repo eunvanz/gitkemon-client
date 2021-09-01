@@ -9,6 +9,9 @@ const user: User = {
   contributionBaseDate: "2020-07-24T06:38:12.000Z",
   accessToken: "mockAccessToken",
   isActive: true,
+  githubLogin: "eunvanz",
+  colPoint: 1111,
+  trainerClass: 1,
   githubUser: {
     login: "eunvanz",
     id: 17351661,

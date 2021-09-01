@@ -1,5 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import mockCollectionRanking from "~/api/mocks/collectionRanking";
+import mockMonRanking from "~/api/mocks/monRanking";
 import { createStoryComponent } from "~/helpers/storybookHelpers";
 import { Collection } from "~/types";
 import MonTypeBadge from "../MonTypeBadge";
@@ -9,7 +9,7 @@ export default {
   title: "components/Table",
   component: Table,
   args: {
-    dataSource: mockCollectionRanking.total.items.map((item, index) => ({
+    dataSource: mockMonRanking.total.items.map((item, index) => ({
       ...item,
       rank: index + 1,
       key: index,

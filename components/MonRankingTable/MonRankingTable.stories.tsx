@@ -1,6 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import withTestProvider from "~/.storybook/decorators/withTestProvider";
-import mockCollectionRanking from "~/api/mocks/collectionRanking";
+import mockMonRanking from "~/api/mocks/monRanking";
 import { createStoryComponent } from "~/helpers/storybookHelpers";
 import MonRankingTable from "./MonRankingTable";
 
@@ -8,7 +8,7 @@ export default {
   title: "components/MonRankingTable",
   component: MonRankingTable,
   args: {
-    collections: mockCollectionRanking.total.items,
+    collections: mockMonRanking.total.items,
     hasNextPage: true,
   },
   decorators: [withTestProvider],

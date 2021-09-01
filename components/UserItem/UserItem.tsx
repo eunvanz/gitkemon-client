@@ -4,13 +4,13 @@ import Typography from "../Typography";
 
 export interface UserItemProps {
   user: User;
-  isAvatarHidden: boolean;
+  isAvatarHidden?: boolean;
 }
 
 const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden }) => {
   return (
     <div className="flex items-center">
-      {!isAvatarHidden && (
+      {!isAvatarHidden && !!user.githubUser && (
         <div className="flex-shrink-0 h-10 w-10">
           {/* eslint-disable-next-line */}
           <img
@@ -24,7 +24,7 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden }) => {
         <Typography as="a" weight="bold" onClick={() => {}}>
           {user.nickname}
         </Typography>
-        <div className="text-sm text-gray-500">{user.githubUser!.login}</div>
+        <div className="text-sm text-gray-500">{user.githubLogin}</div>
       </div>
     </div>
   );

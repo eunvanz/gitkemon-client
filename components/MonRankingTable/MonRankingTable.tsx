@@ -12,6 +12,7 @@ import MonTypeBadge from "../MonTypeBadge";
 import PotentialBadge from "../PotentialBadge";
 import { Column } from "../Table/Table";
 import Typography from "../Typography";
+import UserItem from "../UserItem";
 
 interface RankingItem extends Collection {
   rank: number;
@@ -67,7 +68,11 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
               <img className="h-10 w-10" src={data.monImageUrl} alt={data.name} />
             </div>
             <div className="ml-4">
-              <Typography as="a" onClick={() => handleOnOpenMonModal(data.id)}>
+              <Typography
+                as="a"
+                weight="bold"
+                onClick={() => handleOnOpenMonModal(data.id)}
+              >
                 {getLocaleProperty(data, "name")}
               </Typography>
               <LevelBadge className="ml-2" level={data.level} />
@@ -79,11 +84,7 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
       {
         title: "user",
         dataIndex: "__user__",
-        render: (data) => (
-          <Typography as="a" onClick={() => {}}>
-            {data.__user__!.nickname}
-          </Typography>
-        ),
+        render: (data) => <UserItem user={data.__user__!} isAvatarHidden />,
       },
       {
         title: "stats",

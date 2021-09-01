@@ -9,7 +9,10 @@ export interface User {
   contributionBaseDate: string;
   accessToken: string;
   isActive: boolean;
+  githubLogin: string;
   githubUser?: GithubUser;
+  colPoint: number;
+  trainerClass: number;
   __pokeBall__?: PokeBall | null;
 }
 

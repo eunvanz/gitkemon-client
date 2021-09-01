@@ -102,18 +102,7 @@ const MonCard: React.FC<MonCardProps> = ({
         </div>
       );
     },
-    [
-      isClickDisabled,
-      mon.evolutionLevel,
-      mon.firstType,
-      mon.imageUrl,
-      mon.level,
-      mon.name,
-      mon.potential,
-      mon.secondType,
-      mon.stars,
-      mon.tier,
-    ],
+    [isClickDisabled, isOwned, mon, user],
   );
 
   const widthCLassName = useMemo(() => {

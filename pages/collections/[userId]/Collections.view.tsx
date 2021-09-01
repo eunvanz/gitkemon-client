@@ -173,6 +173,7 @@ const Collections: React.FC<CollectionsProps> = ({
               onSelect={
                 isBlendMode ? () => onSelectItem?.(collection as Collection) : undefined
               }
+              isOwned
               user={user}
             />
           );

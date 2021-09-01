@@ -5,8 +5,8 @@ const user: User = {
   nickname: "Benjamin",
   introduce: "자기소개가 음슴",
   lastContributions: 2112,
-  lastPaybackDate: new Date("2021-07-23"),
-  contributionBaseDate: new Date("2020-07-23"),
+  lastPaybackDate: "2021-08-31T15:10:02.000Z",
+  contributionBaseDate: "2020-07-24T06:38:12.000Z",
   accessToken: "mockAccessToken",
   isActive: true,
   githubUser: {

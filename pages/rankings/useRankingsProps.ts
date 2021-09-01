@@ -9,7 +9,7 @@ const useRankingsProps: () => RankingsProps = () => {
   const { tab } = router.query as { tab: string };
 
   const tabs = useMemo(() => {
-    return ["collection", "pokemon", "contribution"];
+    return ["collection", "contribution", "pokemon"];
   }, []);
 
   const initialTabIndex = useMemo(() => {

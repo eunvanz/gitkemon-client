@@ -68,12 +68,12 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
             href: `${ROUTES.RANKINGS}?tab=collection`,
           },
           {
-            name: "Pokemon Ranking",
-            href: `${ROUTES.RANKINGS}?tab=pokemon`,
-          },
-          {
             name: "Contribution Ranking",
             href: `${ROUTES.RANKINGS}?tab=contribution`,
+          },
+          {
+            name: "Pokemon Ranking",
+            href: `${ROUTES.RANKINGS}?tab=pokemon`,
           },
         ],
       },

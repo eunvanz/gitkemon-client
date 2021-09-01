@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import MonRankingTableContainer from "~/components/MonRankingTable";
 import Tabs from "~/components/Tabs";
 import Typography from "~/components/Typography";
+import UserRankingTableContainer from "~/components/UserRankingTable";
 
 export interface RankingsProps {
   activeTabIndex: number;
@@ -20,16 +21,20 @@ const Rankings: React.FC<RankingsProps> = ({ activeTabIndex, onChangeTab }) => {
             name: "Collection",
           },
           {
-            name: "Pokemon",
+            name: "Contribution",
           },
           {
-            name: "Contribution",
+            name: "Pokemon",
           },
         ]}
         activeIndex={activeTabIndex}
         onChange={onChangeTab}
       />
-      <div className="mt-4">{activeTabIndex === 1 && <MonRankingTableContainer />}</div>
+      <div className="mt-4">
+        {activeTabIndex === 0 && <UserRankingTableContainer type="collection" />}
+        {activeTabIndex === 1 && <UserRankingTableContainer type="contributions" />}
+        {activeTabIndex === 2 && <MonRankingTableContainer />}
+      </div>
     </div>
   );
 };

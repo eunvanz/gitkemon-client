@@ -1,4 +1,3 @@
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import api from "~/api";
 import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
 import withBaseLayout from "~/hocs/withBaseLayout";

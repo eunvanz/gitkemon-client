@@ -181,7 +181,7 @@
   "Hook Template": {
     "prefix": "hookt",
     "body": [
-      "import { ${TM_FILENAME_BASE/use//} } from \"./${TM_FILENAME_BASE/use|Props//g}\"",
+      "import { ${TM_FILENAME_BASE/use//}Props } from \"./${TM_FILENAME_BASE/use|Props//g}\"",
       "",
       "const ${TM_FILENAME_BASE}: () => ${TM_FILENAME_BASE/use//}Props = () => {",
       "  $2",

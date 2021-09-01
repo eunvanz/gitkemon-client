@@ -340,6 +340,23 @@ const getMonRanking = async (pageOptions: PageRequestOptions) => {
   return data;
 };
 
+const getUserCollectionRanking = async (pageOptions: PageRequestOptions) => {
+  const { data } = await requester.get<Pageable<User>>(API_URL.USERS__RANK__COLLECTION, {
+    params: pageOptions,
+  });
+  return data;
+};
+
+const getUserContributionsRanking = async (pageOptions: PageRequestOptions) => {
+  const { data } = await requester.get<Pageable<User>>(
+    API_URL.USERS__RANK__CONTRIBUTIONS,
+    {
+      params: pageOptions,
+    },
+  );
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -373,6 +390,8 @@ const api = {
   deletePainting,
   getPainting,
   getMonRanking,
+  getUserCollectionRanking,
+  getUserContributionsRanking,
 };
 
 export default api;

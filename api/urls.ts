@@ -4,6 +4,8 @@ const API_URL = {
   USERS__REFRESH: "users/refresh",
   USERS__LOGOUT: "users/logout",
   USERS__AVAILABLE_CONTRIBUTIONS: "users/available-contributions",
+  USERS__RANK__COLLECTION: "users/rank/collection",
+  USERS__RANK__CONTRIBUTIONS: "users/rank/contributions",
   MON_IMAGES: "mon-images",
   MONS: "mons",
   MONS__WITH_IMAGES: "mons/with-images",

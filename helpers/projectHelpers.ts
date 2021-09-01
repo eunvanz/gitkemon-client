@@ -1,5 +1,8 @@
 import { toast } from "react-toastify";
+import TrainerClassBadge from "~/components/TrainerClassBadge";
+import { TRAINER_CLASSES } from "~/constants/rules";
 import { CardMon, Collection, HuntResult, ModalMon, Mon, Pageable } from "../types";
+import { capitalize } from "./commonHelpers";
 
 export const convertCollectionToModalMon: (collection: Collection) => ModalMon = (
   collection,
@@ -175,10 +178,17 @@ export const getMessagesFromHuntResult = (result: HuntResult[] | HuntResult) => 
       item.newCollection.potential.includes("S") && item.newCollection.level === 1,
   );
   const hasMyth = resultArray.find((item) => item.newCollection.tier === "myth");
+  let trainerClass = 0;
+  const hasPromoted = resultArray.find((item) => {
+    trainerClass = item.trainerClass;
+    return !!item.trainerClass;
+  });
   const messages = [];
   updatedColPoints && messages.push(getUpdatedColPointMessage(updatedColPoints));
   hasSuperior && messages.push("You've got a superior Pokemon!");
   hasMyth && messages.push("You've got a mythical Pokemon!");
+  hasPromoted &&
+    messages.push(`You've become a ${capitalize(TRAINER_CLASSES[trainerClass])}`);
   return messages;
 };
 

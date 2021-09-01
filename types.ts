@@ -278,6 +278,7 @@ export interface HuntResult {
   oldCollection: Collection | null;
   newCollection: Collection;
   updatedColPoint: number;
+  trainerClass: number;
 }
 
 export interface EvolveMonDto {

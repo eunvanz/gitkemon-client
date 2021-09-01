@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import cx from "classnames";
+import { TRAINER_CLASSES } from "~/constants/rules";
 import Badge, { BadgeProps } from "../Badge";
 
 export interface TrainerClassBadgeProps extends Omit<BadgeProps, "label"> {
@@ -12,24 +13,7 @@ const TrainerClassBadge: React.FC<TrainerClassBadgeProps> = ({
   ...restProps
 }) => {
   const label = useMemo(() => {
-    return [
-      "newbie",
-      "junior",
-      "senior",
-      "trainer",
-      "addict",
-      "nerd",
-      "hacker",
-      "star",
-      "captain",
-      "champion",
-      "master",
-      "president",
-      "king",
-      "emperor",
-      "god",
-      "the one",
-    ][trainerClass - 1];
+    return TRAINER_CLASSES[trainerClass - 1];
   }, [trainerClass]);
 
   const color = useMemo(() => {

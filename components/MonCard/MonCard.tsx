@@ -2,7 +2,8 @@ import { useCallback, useMemo, useState } from "react";
 import { ArrowNarrowUpIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { MON_CARD_WIDTH } from "~/constants/styles";
-import { CardMon, ModalMon } from "../../types";
+import { checkIsCollectionMaxLevel } from "~/helpers/projectHelpers";
+import { CardMon, ModalMon, User } from "../../types";
 import Button from "../Button";
 import LevelBadge from "../LevelBadge";
 import MonModalContainer from "../MonModal";
@@ -27,6 +28,7 @@ export interface MonCardProps
   onSelect?: VoidFunction;
   isClickDisabled?: boolean;
   isOwned?: boolean;
+  user?: User;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -40,6 +42,7 @@ const MonCard: React.FC<MonCardProps> = ({
   onSelect,
   isClickDisabled,
   isOwned,
+  user,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -60,7 +63,11 @@ const MonCard: React.FC<MonCardProps> = ({
             <div className="flex-1 p-1 bg-white rounded">
               {mon.level && (
                 <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5")}>
-                  <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
+                  <LevelBadge
+                    level={mon.level}
+                    evolvableLevel={mon.evolutionLevel}
+                    isMax={user && isOwned ? checkIsCollectionMaxLevel(user, mon) : false}
+                  />
                 </div>
               )}
               {mon.potential && (

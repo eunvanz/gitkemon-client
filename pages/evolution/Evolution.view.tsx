@@ -16,7 +16,7 @@ import {
   convertMonToModalMon,
   showHuntResultMessages,
 } from "~/helpers/projectHelpers";
-import { Collection, HuntResult, Mon } from "~/types";
+import { Collection, HuntResult, Mon, User } from "~/types";
 
 export interface EvolutionProps {
   result?: HuntResult;
@@ -24,6 +24,7 @@ export interface EvolutionProps {
   nextMons?: Mon[];
   onSelectNextMon: (monId: number) => void;
   onNavigateToMyCollection: VoidFunction;
+  user: User;
 }
 
 const Evolution: React.FC<EvolutionProps> = ({
@@ -32,9 +33,8 @@ const Evolution: React.FC<EvolutionProps> = ({
   nextMons,
   onNavigateToMyCollection,
   onSelectNextMon,
+  user,
 }) => {
-  const { width, height } = useWindowSize();
-
   const resultRef = useRef<HTMLDivElement>(null);
 
   const [isMonSelectVisible, setIsMonSelectVisible] = useState(false);
@@ -156,6 +156,7 @@ const Evolution: React.FC<EvolutionProps> = ({
               evolveMon={evolveMon}
               result={result}
               onFinish={proceedResultAnim}
+              user={user}
             />
             <AnimatePresence>
               {isButtonVisible && (

@@ -7,15 +7,21 @@ import Loading from "~/components/Loading";
 import Typography from "~/components/Typography";
 import { delayPromise } from "~/helpers/commonHelpers";
 import { checkIsLuckyHuntResult, showHuntResultMessages } from "~/helpers/projectHelpers";
-import { Collection, HuntResult } from "~/types";
+import { Collection, HuntResult, User } from "~/types";
 
 export interface BlendProps {
   blendMons: Collection[];
   result?: HuntResult;
   onNavigateToMyCollection: VoidFunction;
+  user: User;
 }
 
-const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollection }) => {
+const Blend: React.FC<BlendProps> = ({
+  blendMons,
+  result,
+  onNavigateToMyCollection,
+  user,
+}) => {
   const [isCardVisible, setIsCardVisible] = useState(false);
 
   const [isGotchaVisible, setIsGotchaVisible] = useState(false);
@@ -59,6 +65,7 @@ const Blend: React.FC<BlendProps> = ({ blendMons, result, onNavigateToMyCollecti
               blendMons={blendMons}
               result={result}
               onFinish={proceedResultAnim}
+              user={user}
             />
           </motion.div>
         )}

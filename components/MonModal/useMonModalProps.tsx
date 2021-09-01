@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { MonModalContainerProps } from ".";
 import { assertNotEmpty, capitalize } from "../../helpers/commonHelpers";
-import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
+import {
+  checkIsCollectionMaxLevel,
+  convertCollectionToModalMon,
+} from "../../helpers/projectHelpers";
 import ROUTES from "../../paths";
 import useCollectionQuery from "../../queries/useCollectionQuery";
 import { blendMonState } from "../../state/blendMon";
@@ -75,6 +78,10 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     return (!!mon?.userId && user?.id === mon.userId) || !!newMon;
   }, [mon?.userId, newMon, user?.id]);
 
+  const isMaxLevel = useMemo(() => {
+    return user && isOwned && mon ? checkIsCollectionMaxLevel(user, mon) : false;
+  }, [isOwned, mon, user]);
+
   return {
     isOpen,
     onClose,
@@ -84,6 +91,7 @@ const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({
     onBlend,
     isBlendHidden,
     isOwned,
+    isMaxLevel,
   };
 };
 

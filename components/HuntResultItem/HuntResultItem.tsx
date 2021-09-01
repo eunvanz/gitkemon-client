@@ -6,7 +6,7 @@ import {
   convertCollectionToCardMon,
   convertCollectionToModalMon,
 } from "../../helpers/projectHelpers";
-import { HuntResult } from "../../types";
+import { HuntResult, User } from "../../types";
 import Badge from "../Badge";
 import LevelBadge from "../LevelBadge";
 import MonCard from "../MonCard";
@@ -20,6 +20,7 @@ export interface HuntResultItemProps {
   isClickDisabled?: boolean;
   isFullWidth?: boolean;
   isMonCardWidth?: boolean;
+  user: User;
 }
 
 const HuntResultItem: React.FC<HuntResultItemProps> = ({
@@ -31,6 +32,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
   isClickDisabled,
   isFullWidth,
   isMonCardWidth,
+  user,
 }) => {
   const { oldCollection, newCollection } = huntResult;
 
@@ -68,6 +70,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         isFlipped={!isRealRevealed}
         isClickDisabled={isClickDisabled}
         isOwned
+        user={user}
       />
       {!isDiffHidden && (
         <div

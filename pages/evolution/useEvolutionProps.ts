@@ -60,6 +60,7 @@ const useEvolutionProps: () => EvolutionProps = () => {
     result,
     onSelectNextMon,
     onNavigateToMyCollection,
+    user,
   };
 };
 

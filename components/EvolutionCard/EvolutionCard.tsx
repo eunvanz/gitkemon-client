@@ -4,7 +4,7 @@ import cx from "classnames";
 import { random } from "lodash";
 import { colorHashes, MON_CARD_WIDTH } from "~/constants/styles";
 import { convertCollectionToCardMon } from "~/helpers/projectHelpers";
-import { Collection, HuntResult } from "~/types";
+import { Collection, HuntResult, User } from "~/types";
 import HuntResultItem from "../HuntResultItem";
 import MonCard from "../MonCard";
 import Shakeable from "../Shakeable";
@@ -17,9 +17,15 @@ export interface EvolutionCardProps {
   evolveMon: Collection;
   result: HuntResult;
   onFinish: VoidFunction;
+  user: User;
 }
 
-const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFinish }) => {
+const EvolutionCard: React.FC<EvolutionCardProps> = ({
+  evolveMon,
+  result,
+  onFinish,
+  user,
+}) => {
   const [progress, setProgress] = useState(0);
 
   const isProgressCompleteRef = useRef<boolean>(false);
@@ -77,10 +83,12 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({ evolveMon, result, onFini
                 progress * (100 / MAX_SHAKE_COUNT)
               } transition-opacity`}
               isFullWidth
+              isOwned
+              user={user}
             />
           )}
           {isProgressComplete && (
-            <HuntResultItem huntResult={result} isRevealed isFullWidth />
+            <HuntResultItem huntResult={result} isRevealed isFullWidth user={user} />
           )}
         </div>
       </Shakeable>

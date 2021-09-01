@@ -4,6 +4,7 @@ import random from "lodash/random";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import { ModalMon } from "../../types";
+import Badge from "../Badge";
 import BaseModal, { BaseModalProps } from "../BaseModal";
 import Button from "../Button";
 import LevelBadge from "../LevelBadge";
@@ -22,12 +23,14 @@ export interface MonModalProps extends Omit<BaseModalProps, "children"> {
   onBlend?: VoidFunction;
   isBlendHidden?: boolean;
   isOwned?: boolean;
+  isMaxLevel?: boolean;
 }
 
 const MonModal: React.FC<MonModalProps> = ({
   mon,
   oldMon,
   isInitialBack = false,
+  isMaxLevel,
   ...restProps
 }) => {
   const [isFlipped, setIsFlipped] = useState(isInitialBack);
@@ -120,7 +123,16 @@ const MonModal: React.FC<MonModalProps> = ({
               renderProfile({
                 title: "Level",
                 content: (
-                  <LevelBadge level={mon.level} evolvableLevel={mon.evolutionLevel} />
+                  <>
+                    <LevelBadge
+                      level={mon.level}
+                      evolvableLevel={mon.evolutionLevel}
+                      isMax={isMaxLevel}
+                    />
+                    {isMaxLevel && (
+                      <Badge size="sm" className="ml-1" label="MAX" color="red" />
+                    )}
+                  </>
                 ),
               })}
             {mon.potential &&

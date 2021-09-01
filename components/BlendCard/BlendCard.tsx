@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { convertCollectionToCardMon } from "~/helpers/projectHelpers";
-import { Collection, HuntResult } from "~/types";
+import { Collection, HuntResult, User } from "~/types";
 import HuntResultItem from "../HuntResultItem";
 import MonCard from "../MonCard";
 import Shakeable from "../Shakeable";
@@ -15,9 +15,10 @@ export interface BlendCardProps {
   blendMons: Collection[];
   result: HuntResult;
   onFinish: VoidFunction;
+  user: User;
 }
 
-const BlendCard: React.FC<BlendCardProps> = ({ blendMons, result, onFinish }) => {
+const BlendCard: React.FC<BlendCardProps> = ({ blendMons, result, onFinish, user }) => {
   const [progress, setProgress] = useState(0);
 
   const isProgressCompleteRef = useRef<boolean>(false);
@@ -68,6 +69,8 @@ const BlendCard: React.FC<BlendCardProps> = ({ blendMons, result, onFinish }) =>
                 style={{
                   transform: `translateX(${((progress / MAX_SHAKE_COUNT) * 100) / 2}%)`,
                 }}
+                user={user}
+                isOwned
               />
               <MonCard
                 mon={convertCollectionToCardMon(blendMons[1])}
@@ -78,6 +81,8 @@ const BlendCard: React.FC<BlendCardProps> = ({ blendMons, result, onFinish }) =>
                 style={{
                   transform: `translateX(${((progress / MAX_SHAKE_COUNT) * -100) / 2}%)`,
                 }}
+                user={user}
+                isOwned
               />
             </>
           )}
@@ -91,7 +96,7 @@ const BlendCard: React.FC<BlendCardProps> = ({ blendMons, result, onFinish }) =>
             />
           )}
           {isProgressComplete && (
-            <HuntResultItem huntResult={result} isRevealed isMonCardWidth />
+            <HuntResultItem huntResult={result} isRevealed isMonCardWidth user={user} />
           )}
         </div>
       </Shakeable>

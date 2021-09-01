@@ -135,6 +135,9 @@ export interface CardMon {
   potential?: MonPotential | null;
   imageUrl?: string | null;
   name: string;
+  total: number;
+  baseTotal?: number;
+  colPoint: number;
 }
 
 export interface ModalMon {
@@ -270,6 +273,9 @@ export interface Collection {
   nameKo?: string | null;
   nameJa?: string | null;
   nameZh?: string | null;
+  colPoint: number;
+  __has_mon__?: boolean;
+  __has_monImage__?: boolean;
 }
 
 export type HuntResponse = HuntResult[];

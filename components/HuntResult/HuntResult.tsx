@@ -10,7 +10,7 @@ import {
   checkIsLuckyHuntResult,
   showHuntResultMessages,
 } from "../../helpers/projectHelpers";
-import { HuntResponse, PokeBallType } from "../../types";
+import { HuntResponse, PokeBallType, User } from "../../types";
 import Button from "../Button";
 import HuntResultItem from "../HuntResultItem";
 import MonCardGrid from "../MonCardGrid";
@@ -24,6 +24,7 @@ export interface HuntResultProps {
   restPokeBalls: number;
   onChoosePokeBall: VoidFunction;
   onKeepHunting: VoidFunction;
+  user: User;
 }
 
 const HuntResult: React.FC<HuntResultProps> = ({
@@ -32,6 +33,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
   restPokeBalls,
   onChoosePokeBall,
   onKeepHunting,
+  user,
 }) => {
   const { width, height } = useWindowSize();
 
@@ -191,6 +193,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
                       huntResult={item}
                       isRevealed={!isCardFlipped}
                       delay={index * 200}
+                      user={user}
                     />
                   ))}
                 </MonCardGrid>
@@ -211,6 +214,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
                   huntResult={result[0]}
                   isRevealed={!isCardFlipped}
                   isSingle
+                  user={user}
                 />
               </motion.div>
             ))}

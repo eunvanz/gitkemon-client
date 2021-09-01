@@ -41,6 +41,7 @@ const useBlendProps: () => BlendProps = () => {
     blendMons: blendMons!,
     onNavigateToMyCollection,
     result,
+    user,
   };
 };
 

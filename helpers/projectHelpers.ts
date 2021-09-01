@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
-import TrainerClassBadge from "~/components/TrainerClassBadge";
 import { TRAINER_CLASSES } from "~/constants/rules";
-import { CardMon, Collection, HuntResult, ModalMon, Mon, Pageable } from "../types";
+import { CardMon, Collection, HuntResult, ModalMon, Mon, Pageable, User } from "../types";
 import { capitalize } from "./commonHelpers";
 
 export const convertCollectionToModalMon: (collection: Collection) => ModalMon = (
@@ -84,6 +83,9 @@ export const convertCollectionToCardMon: (collection: Collection) => CardMon = (
     evolutionLevel,
     level,
     potential,
+    baseTotal,
+    total,
+    colPoint,
   } = collection;
   return {
     id,
@@ -96,11 +98,14 @@ export const convertCollectionToCardMon: (collection: Collection) => CardMon = (
     level,
     potential,
     name: getLocaleProperty(collection, "name"),
+    baseTotal,
+    total,
+    colPoint,
   };
 };
 
 export const convertMonToCardMon: (mon: Mon) => CardMon = (mon) => {
-  const { id, firstType, secondType, tier, stars, evolutionLevel } = mon;
+  const { id, firstType, secondType, tier, stars, evolutionLevel, total, colPoint } = mon;
   return {
     id,
     firstType,
@@ -109,6 +114,8 @@ export const convertMonToCardMon: (mon: Mon) => CardMon = (mon) => {
     stars,
     evolutionLevel,
     name: getLocaleProperty(mon, "name"),
+    total,
+    colPoint,
   };
 };
 
@@ -217,4 +224,17 @@ export const getLocaleProperty = (object: any, property: string) => {
 
 export const getMergedPageData = <T>(data: Pageable<T>[]) => {
   return data.reduce((prev: T[], item) => [...prev, ...item.items], []);
+};
+
+export const getTrainerClassLimit = (trainerClass: number) => {
+  return trainerClass * 60;
+};
+
+export const checkIsCollectionMaxLevel = (user: User, mon: CardMon | ModalMon) => {
+  if (!mon.baseTotal) {
+    return false;
+  }
+  return (
+    getTrainerClassLimit(user.trainerClass) < mon.total - mon.baseTotal + mon.colPoint
+  );
 };

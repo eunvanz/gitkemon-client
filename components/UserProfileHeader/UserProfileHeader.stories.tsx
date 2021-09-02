@@ -7,8 +7,8 @@ export default {
   title: "components/UserProfileHeader",
   component: UserProfileHeader,
   args: {
-    user: mockUsers.user,
-    profileUser: mockUsers.user,
+    user: { ...mockUsers.user, id: "mock-uuid" },
+    userProfile: { ...mockUsers.userProfile, id: "mock-uuid" },
   },
 } as ComponentMeta<typeof UserProfileHeader>;
 
@@ -17,3 +17,7 @@ const Template: ComponentStory<typeof UserProfileHeader> = (args) => (
 );
 
 export const 기본 = createStoryComponent(Template);
+
+export const 로딩 = createStoryComponent(Template, {
+  userProfile: undefined,
+});

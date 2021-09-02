@@ -218,7 +218,7 @@
     "description": "Hook Test Template"
   },
   "Page Index Template": {
-    "prefix": "pcidx",
+    "prefix": "pidx",
     "body": [
       "import $1 from \"./$1.view\";",
       "import use$1Props from \"./use$1Props\";",
@@ -234,8 +234,8 @@
     ],
     "description": "Page Index Template"
   },
-  "Component Container Template": {
-    "prefix": "cct",
+  "Container Index Template": {
+    "prefix": "ctidx",
     "body": [
       "import ${TM_DIRECTORY/^.+\\/(.*)$/$1/} from \"./${TM_DIRECTORY/^.+\\/(.*)$/$1/}\";",
       "import use${TM_DIRECTORY/^.+\\/(.*)$/$1/}Props from \"./use${TM_DIRECTORY/^.+\\/(.*)$/$1/}Props\";",

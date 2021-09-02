@@ -365,6 +365,14 @@ const getUserProfile = async (userId: string) => {
   return data;
 };
 
+export interface UpdateUserDto {
+  nickname: string;
+  introduce: string;
+}
+const patchUserProfile = async (updateUserDto: UpdateUserDto) => {
+  await requester.patch(API_URL.USERS__PROFILE, updateUserDto);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -401,6 +409,7 @@ const api = {
   getUserCollectionRanking,
   getUserContributionsRanking,
   getUserProfile,
+  patchUserProfile,
 };
 
 export default api;

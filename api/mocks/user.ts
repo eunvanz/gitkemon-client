@@ -72,6 +72,7 @@ const userProfile: UserProfile = {
 
 const mockUsers = {
   user,
+  userProfile,
 };
 
 export default mockUsers;

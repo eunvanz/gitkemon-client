@@ -1,5 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import Skeleton from "react-loading-skeleton";
 import { User, UserProfile } from "~/types";
 import Button from "../Button";
 import ControlledInput from "../ControlledInput";
@@ -11,8 +12,8 @@ export interface UserProfileFormValues {
 }
 
 export interface UserProfileHeaderProps {
-  user: User;
-  userProfile: UserProfile;
+  user?: User;
+  userProfile?: UserProfile;
   onSubmit: (values: UserProfileFormValues) => void;
   isSubmitting: boolean;
 }
@@ -23,10 +24,10 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
   onSubmit,
   isSubmitting,
 }) => {
-  const { control, handleSubmit, formState } = useForm<UserProfileFormValues>({
+  const { control, handleSubmit, formState, setValue } = useForm<UserProfileFormValues>({
     defaultValues: {
-      nickname: user.nickname,
-      introduce: user.introduce || "",
+      nickname: user?.nickname || "",
+      introduce: user?.introduce || "",
     },
     mode: "onChange",
   });
@@ -39,27 +40,40 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
     })();
   }, [handleSubmit, onSubmit]);
 
+  useEffect(() => {
+    if (user) {
+      setValue("nickname", user.nickname);
+      setValue("introduce", user.introduce || "");
+    }
+  }, [setValue, user]);
+
   return (
     <div className="w-full mx-auto md:flex md:items-center md:justify-between md:space-x-5">
       <div className="flex items-center space-x-5">
         <div className="flex-shrink-0">
           <div className="relative">
-            {/* eslint-disable-next-line */}
-            <img
-              className="h-16 w-16 rounded-full"
-              src={userProfile.avatarUrl}
-              alt="user image"
-            />
-            <span
-              className="absolute inset-0 shadow-inner rounded-full"
-              aria-hidden="true"
-            />
+            {userProfile ? (
+              <>
+                {/* eslint-disable-next-line */}
+                <img
+                  className="h-16 w-16 rounded-full"
+                  src={userProfile.avatarUrl}
+                  alt="user image"
+                />
+                <span
+                  className="absolute inset-0 shadow-inner rounded-full"
+                  aria-hidden="true"
+                />
+              </>
+            ) : (
+              <Skeleton style={{ width: "4rem", height: "4rem", borderRadius: "50%" }} />
+            )}
           </div>
         </div>
         <div className="flex-1">
           {isEditing ? (
             <div className="flex flex-col w-full justify-start sm:flex-row sm:justify-start">
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 sm:w-40">
                 <ControlledInput
                   control={control}
                   name="nickname"
@@ -78,7 +92,7 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
                   }}
                 />
               </div>
-              <div className="flex-1 mt-2 sm:mt-0 sm:ml-4">
+              <div className="flex-1 mt-2 sm:mt-0 sm:ml-4 sm:w-80">
                 <ControlledInput
                   control={control}
                   name="introduce"
@@ -97,7 +111,7 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
                 />
               </div>
             </div>
-          ) : (
+          ) : userProfile ? (
             <>
               <h1 className="text-2xl font-bold text-gray-900 mb-0">
                 {userProfile.nickname}
@@ -106,6 +120,11 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
                 {userProfile.githubLogin}{" "}
                 {userProfile.introduce && `· ${userProfile.introduce}`}
               </p>
+            </>
+          ) : (
+            <>
+              <Skeleton style={{ display: "block", width: 200, height: 30 }} />
+              <Skeleton style={{ display: "block", marginTop: 4, width: 150 }} />
             </>
           )}
         </div>
@@ -130,7 +149,7 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
             </Button>
           </>
         )}
-        {!isEditing && user.id === userProfile.id && (
+        {!isEditing && user?.id === userProfile?.id && (
           <Button color="white" onClick={() => setIsEditing(true)}>
             Edit profile
           </Button>

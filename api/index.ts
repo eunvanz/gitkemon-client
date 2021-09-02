@@ -16,6 +16,7 @@ import {
   PageRequestOptions,
   Pageable,
   Painting,
+  UserProfile,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -357,6 +358,13 @@ const getUserContributionsRanking = async (pageOptions: PageRequestOptions) => {
   return data;
 };
 
+const getUserProfile = async (userId: string) => {
+  const { data } = await requester.get<UserProfile>(
+    `${API_URL.USERS__PROFILE}/${userId}`,
+  );
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -392,6 +400,7 @@ const api = {
   getMonRanking,
   getUserCollectionRanking,
   getUserContributionsRanking,
+  getUserProfile,
 };
 
 export default api;

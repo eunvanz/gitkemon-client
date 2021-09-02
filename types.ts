@@ -350,3 +350,20 @@ export interface PageRequestOptions {
 }
 
 export type ContentType = "painting";
+
+export interface PaybackLog {
+  date: string;
+  totalContributions: number;
+}
+
+export interface UserProfile {
+  id: string;
+  nickname: string;
+  introduce: string | null;
+  githubLogin: string;
+  colPoint: number;
+  lastContributions: number;
+  lastPaybackDate: string;
+  avatarUrl: string;
+  githubUrl: string;
+}

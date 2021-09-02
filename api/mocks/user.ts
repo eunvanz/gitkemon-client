@@ -1,4 +1,4 @@
-import { User } from "../../types";
+import { User, UserProfile } from "../../types";
 
 const user: User = {
   id: "mock-uuid",
@@ -56,6 +56,18 @@ const user: User = {
     elitePokeBalls: 4,
     legendPokeBalls: 2,
   },
+};
+
+const userProfile: UserProfile = {
+  id: "275de423-5b14-4082-bf67-b82e170470d7",
+  nickname: "Benjamin",
+  introduce: null,
+  githubLogin: "eunvanz",
+  colPoint: 1096,
+  lastContributions: 1071,
+  lastPaybackDate: "2021-09-02T10:55:35.000Z",
+  avatarUrl: "https://avatars.githubusercontent.com/u/17351661?v=4",
+  githubUrl: "https://github.com/eunvanz",
 };
 
 const mockUsers = {

@@ -128,7 +128,7 @@ const PaintingUpload: React.FC<PaintingUploadProps> = ({
             required: "Designer name is required",
             maxLength: {
               value: 20,
-              message: "Should be lower then 15 characters",
+              message: "Should be lower than 20 characters",
             },
             validate: (value) =>
               !(value as string).includes(" ") || "Spaces are not allowed",

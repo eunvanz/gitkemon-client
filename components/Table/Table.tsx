@@ -1,4 +1,5 @@
 import cx from "classnames";
+import Skeleton from "react-loading-skeleton";
 
 export interface Column<T> {
   title: string;
@@ -12,9 +13,10 @@ export interface Column<T> {
 export interface TableProps<T> {
   dataSource: T[];
   columns: Column<T>[];
+  isLoading: boolean;
 }
 
-const Table = <T extends object>({ dataSource, columns }: TableProps<T>) => {
+const Table = <T extends object>({ dataSource, columns, isLoading }: TableProps<T>) => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -40,21 +42,29 @@ const Table = <T extends object>({ dataSource, columns }: TableProps<T>) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {dataSource.map((data, index) => (
-                  <tr key={index}>
-                    {columns.map((col) => (
-                      <td
-                        // @ts-ignore
-                        key={col.key || col.dataIndex}
-                        className={cx(
-                          `text-${col.align || "left"} px-6 py-4 whitespace-nowrap`,
-                        )}
-                      >
-                        {col.render ? col.render(data) : data[col.dataIndex]}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
+                {(isLoading ? Array.from({ length: 10 }) : dataSource).map(
+                  (data, index) => (
+                    <tr key={index}>
+                      {columns.map((col) => (
+                        <td
+                          // @ts-ignore
+                          key={col.key || col.dataIndex}
+                          className={cx(
+                            `text-${col.align || "left"} px-6 py-4 whitespace-nowrap`,
+                          )}
+                        >
+                          {isLoading ? (
+                            <Skeleton width="100%" height={30} />
+                          ) : col.render ? (
+                            col.render(data as T)
+                          ) : (
+                            (data as T)[col.dataIndex]
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ),
+                )}
               </tbody>
             </table>
           </div>

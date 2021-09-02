@@ -4,7 +4,6 @@ import { getLocaleProperty } from "~/helpers/projectHelpers";
 import { Collection } from "~/types";
 import Intersection from "../Intersection";
 import LevelBadge from "../LevelBadge";
-import Loading from "../Loading";
 import MonModalContainer from "../MonModal";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
@@ -113,9 +112,9 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
     ];
   }, [handleOnOpenMonModal]);
 
-  return collections ? (
+  return (
     <>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={dataSource} columns={columns} isLoading={!collections} />
       {hasNextPage && <Intersection onIntersect={onFetchNextPage} />}
       <MonModalContainer
         isOpen={isMonModalOpen}
@@ -124,10 +123,6 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
         collectionId={modalMonId}
       />
     </>
-  ) : (
-    <div className="h-60">
-      <Loading isFullHeight />
-    </div>
   );
 };
 

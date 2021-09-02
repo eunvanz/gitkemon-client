@@ -13,7 +13,7 @@ export interface Column<T> {
 export interface TableProps<T> {
   dataSource: T[];
   columns: Column<T>[];
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 const Table = <T extends object>({ dataSource, columns, isLoading }: TableProps<T>) => {

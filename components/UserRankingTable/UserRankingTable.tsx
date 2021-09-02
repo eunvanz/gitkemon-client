@@ -4,7 +4,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import Table from "~/components/Table";
 import { User } from "~/types";
 import Intersection from "../Intersection";
-import Loading from "../Loading";
 import { Column } from "../Table/Table";
 import TrainerClassBadge from "../TrainerClassBadge";
 import UserItem from "../UserItem";
@@ -71,15 +70,11 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
     ];
   }, []);
 
-  return users ? (
+  return (
     <>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={dataSource} columns={columns} isLoading={!users} />
       {hasNextPage && <Intersection onIntersect={onFetchNextPage} />}
     </>
-  ) : (
-    <div className="h-60">
-      <Loading isFullHeight />
-    </div>
   );
 };
 

@@ -182,6 +182,7 @@ const Collections: React.FC<CollectionsProps> = ({
               }
               isOwned
               user={user}
+              isStatic
             />
           );
         })}

@@ -64,7 +64,7 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({
         className={`relative flex ${MON_CARD_WIDTH} m-auto cursor-grab`}
         onDragEnd={handleOnDragEnd}
       >
-        <div ref={monCardRef}>
+        <div className="w-full" ref={monCardRef}>
           {!isProgressComplete && (
             <MonCard
               mon={convertCollectionToCardMon(evolveMon)}

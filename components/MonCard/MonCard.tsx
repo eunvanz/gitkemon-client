@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { ArrowNarrowUpIcon } from "@heroicons/react/outline";
 import cx from "classnames";
+import Image from "next/image";
 import { MON_CARD_WIDTH } from "~/constants/styles";
 import { checkIsCollectionMaxLevel } from "~/helpers/projectHelpers";
 import { CardMon, ModalMon, User } from "../../types";
@@ -30,6 +31,7 @@ export interface MonCardProps
   isOwned?: boolean;
   user?: User;
   customSize?: string;
+  isStatic?: boolean;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -45,6 +47,7 @@ const MonCard: React.FC<MonCardProps> = ({
   isOwned,
   user,
   customSize,
+  isStatic,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -64,7 +67,7 @@ const MonCard: React.FC<MonCardProps> = ({
           >
             <div className="flex-1 p-1 bg-white rounded">
               {mon.level && (
-                <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5")}>
+                <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5 z-10")}>
                   <LevelBadge
                     level={mon.level}
                     evolvableLevel={mon.evolutionLevel}
@@ -73,18 +76,31 @@ const MonCard: React.FC<MonCardProps> = ({
                 </div>
               )}
               {mon.potential && (
-                <div className={cx("absolute right-1 top-0.5 sm:right-2 sm:top-1.5")}>
+                <div
+                  className={cx("absolute right-1 top-0.5 sm:right-2 sm:top-1.5 z-10")}
+                >
                   <PotentialBadge potential={mon.potential} />
                 </div>
               )}
-              <div className="flex justify-center">
-                {/* TODO: 플레이스홀더 이미지 대체 */}
-                {/* eslint-disable-next-line */}
-                <img
-                  src={mon.imageUrl || "https://via.placeholder.com/250"}
-                  alt={mon.name}
-                  draggable={false}
-                />
+              {/* TODO: 플레이스홀더 이미지 대체 */}
+              {/* eslint-disable-next-line */}
+              <div className={cx("relative", { "h-36": isStatic })}>
+                {isStatic ? (
+                  <Image
+                    src={mon.imageUrl || "https://via.placeholder.com/250"}
+                    alt={mon.name}
+                    draggable={false}
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                ) : (
+                  // eslint-disable-next-line
+                  <img
+                    src={mon.imageUrl || "https://via.placeholder.com/250"}
+                    alt={mon.name}
+                    draggable={false}
+                  />
+                )}
               </div>
             </div>
             <div className="flex-col bg-gray-50 py-1 w-full rounded-b">

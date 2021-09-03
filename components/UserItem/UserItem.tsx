@@ -1,4 +1,6 @@
 import cx from "classnames";
+import { useRouter } from "next/router";
+import ROUTES from "~/paths";
 import { User } from "~/types";
 import Typography from "../Typography";
 
@@ -8,6 +10,8 @@ export interface UserItemProps {
 }
 
 const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden }) => {
+  const router = useRouter();
+
   return (
     <div className="flex items-center">
       {!isAvatarHidden && !!user.githubUser && (
@@ -21,7 +25,11 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden }) => {
         </div>
       )}
       <div className={cx(isAvatarHidden ? undefined : "ml-4")}>
-        <Typography as="a" weight="bold" onClick={() => {}}>
+        <Typography
+          as="a"
+          weight="bold"
+          onClick={() => router.push(`${ROUTES.PROFILE}/${user.id}`)}
+        >
           {user.nickname}
         </Typography>
         <div className="text-sm text-gray-500">{user.githubLogin}</div>

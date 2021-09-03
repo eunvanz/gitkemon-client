@@ -63,7 +63,7 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
         render: (data) => <TrainerClassBadge trainerClass={data.trainerClass} />,
       },
       {
-        title: "last payback",
+        title: "last check-in",
         dataIndex: "lastPaybackDate",
         render: (data) => dayjs(data.lastPaybackDate).fromNow(),
       },

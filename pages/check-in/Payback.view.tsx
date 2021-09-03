@@ -168,7 +168,7 @@ const Payback: React.FC<PaybackProps> = ({
               disabled={!availableContributions}
             >
               {!!availableContributions
-                ? "Get payback for contributions"
+                ? "Check in to get payback"
                 : "Make more contributions"}
             </Button>
           </div>

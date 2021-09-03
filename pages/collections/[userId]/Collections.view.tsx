@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import orderBy from "lodash/orderBy";
+import { useRouter } from "next/router";
 import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
 import CollectionStatus from "~/components/CollectionStatus";
@@ -16,6 +17,7 @@ import {
   convertMonToModalMon,
   getLocaleProperty,
 } from "~/helpers/projectHelpers";
+import ROUTES from "~/paths";
 import { Collection, Mon, User } from "~/types";
 
 export interface CollectionsProps {
@@ -127,10 +129,15 @@ const Collections: React.FC<CollectionsProps> = ({
     return result;
   }, [collections, mons]);
 
+  const router = useRouter();
+
   return !isLoading ? (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
       <Typography as="h1" size="2xl">
-        {user?.nickname}&apos;s collection
+        <a onClick={() => router.push(`${ROUTES.PROFILE}/${user.id}`)}>
+          {user?.nickname}
+        </a>
+        &apos;s collection
       </Typography>
       {!isBlendMode && colPointInfo && countInfo && (
         <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />

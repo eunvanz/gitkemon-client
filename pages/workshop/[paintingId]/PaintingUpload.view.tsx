@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import Cropper from "react-easy-crop";
 import { useForm } from "react-hook-form";
+import Footer from "~/components/Footer";
 import Button from "../../../components/Button";
 import ControlledInput from "../../../components/ControlledInput";
 import Dialog from "../../../components/Dialog";
@@ -73,104 +74,107 @@ const PaintingUpload: React.FC<PaintingUploadProps> = ({
   return !mons ? (
     <Loading isFullHeight />
   ) : (
-    <div className="block md:flex flex-col justify-center items-center content-container p-4">
-      <div className="w-full sm:w-80">
-        <Typography as="h2" size="2xl">
-          Painting upload
-        </Typography>
-        <div className="mb-4">
-          {selectedImage ? (
-            <div>
-              <div className="relative w-full h-60">
-                <Cropper
-                  image={selectedImage}
-                  aspect={1 / 1}
-                  crop={crop}
-                  onCropChange={setCrop}
-                  onCropComplete={onCropComplete}
-                />
+    <>
+      <div className="block md:flex flex-col justify-center items-center content-container p-4">
+        <div className="w-full sm:w-80">
+          <Typography as="h2" size="2xl">
+            Painting upload
+          </Typography>
+          <div className="mb-4">
+            {selectedImage ? (
+              <div>
+                <div className="relative w-full h-60">
+                  <Cropper
+                    image={selectedImage}
+                    aspect={1 / 1}
+                    crop={crop}
+                    onCropChange={setCrop}
+                    onCropComplete={onCropComplete}
+                  />
+                </div>
+                <div className="text-right mt-2">
+                  <Button
+                    size="sm"
+                    color="transparent"
+                    className="ml-auto"
+                    onClick={() => setSelectedImage(null)}
+                    disabled={isSubmitting}
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </div>
-              <div className="text-right mt-2">
-                <Button
-                  size="sm"
-                  color="transparent"
-                  className="ml-auto"
-                  onClick={() => setSelectedImage(null)}
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <FileInput
-              accept="image/png"
-              maxFiles={1}
-              label="Painting image"
-              onSelectFiles={handleOnSelectFile}
-              onDeleteFile={() => {}}
-              hint="recommend transparent 250x250 PNG file"
-            />
-          )}
-        </div>
-        <ControlledInput
-          className="mb-4"
-          control={control}
-          name="designerName"
-          input={Input}
-          inputProps={{
-            label: "Designer name",
-            placeholder: "Painted by",
-            disabled: isSubmitting,
-            className: "w-full",
-          }}
-          rules={{
-            required: "Designer name is required",
-            maxLength: {
-              value: 20,
-              message: "Should be lower than 20 characters",
-            },
-            validate: (value) =>
-              !(value as string).includes(" ") || "Spaces are not allowed",
-          }}
-        />
-        <ControlledInput
-          className="mb-4"
-          control={control}
-          name="monId"
-          input={SearchableSelect}
-          inputProps={{
-            label: "Mon",
-            items: mons!.map((mon) => ({
-              value: mon.id,
-              displayValue: `${mon.id}-${getLocaleProperty(mon, "name")}`,
-            })),
-            placeholder: "Select a mon",
-            disabled: isSubmitting,
-            className: "w-full",
-          }}
-          rules={{ required: "A mon should be selected" }}
-        />
-        <div className="border-t border-gray-200 pt-4 text-right">
-          <Button
-            color="white"
-            className="mr-1"
-            disabled={isSubmitting}
-            onClick={onNavigateToList}
-          >
-            List
-          </Button>
-          <Button
-            isLoading={isSubmitting}
-            disabled={!formState.isValid}
-            onClick={submitForm}
-            color="primary"
-          >
-            Upload
-          </Button>
+            ) : (
+              <FileInput
+                accept="image/png"
+                maxFiles={1}
+                label="Painting image"
+                onSelectFiles={handleOnSelectFile}
+                onDeleteFile={() => {}}
+                hint="recommend transparent 250x250 PNG file"
+              />
+            )}
+          </div>
+          <ControlledInput
+            className="mb-4"
+            control={control}
+            name="designerName"
+            input={Input}
+            inputProps={{
+              label: "Designer name",
+              placeholder: "Painted by",
+              disabled: isSubmitting,
+              className: "w-full",
+            }}
+            rules={{
+              required: "Designer name is required",
+              maxLength: {
+                value: 20,
+                message: "Should be lower than 20 characters",
+              },
+              validate: (value) =>
+                !(value as string).includes(" ") || "Spaces are not allowed",
+            }}
+          />
+          <ControlledInput
+            className="mb-4"
+            control={control}
+            name="monId"
+            input={SearchableSelect}
+            inputProps={{
+              label: "Mon",
+              items: mons!.map((mon) => ({
+                value: mon.id,
+                displayValue: `${mon.id}-${getLocaleProperty(mon, "name")}`,
+              })),
+              placeholder: "Select a mon",
+              disabled: isSubmitting,
+              className: "w-full",
+            }}
+            rules={{ required: "A mon should be selected" }}
+          />
+          <div className="border-t border-gray-200 pt-4 text-right">
+            <Button
+              color="white"
+              className="mr-1"
+              disabled={isSubmitting}
+              onClick={onNavigateToList}
+            >
+              List
+            </Button>
+            <Button
+              isLoading={isSubmitting}
+              disabled={!formState.isValid}
+              onClick={submitForm}
+              color="primary"
+            >
+              Upload
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

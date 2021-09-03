@@ -7,6 +7,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { AnimatePresence, motion } from "framer-motion";
 import random from "lodash/random";
 import CountUp from "react-countup";
+import Footer from "~/components/Footer";
 import Button from "../../components/Button";
 import PokeBallCount from "../../components/PokeBallCount";
 import PokeBallImage from "../../components/PokeBallImage";
@@ -127,92 +128,100 @@ const Payback: React.FC<PaybackProps> = ({
 
   if (!paybackResult) {
     return (
-      <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <h2 className="text-center text-xl text-gray-600">
-              You&apos;ve made{" "}
-              <span className="text-green-600 font-extrabold">
-                {isGettingPayback ? (
-                  <CountUp
-                    start={availableContributions}
-                    end={0}
-                    duration={0.5}
-                    formattingFn={(number) => number.toLocaleString()}
-                  />
-                ) : (
-                  <CountUp
-                    end={isLoading ? 0 : availableContributions || 0}
-                    duration={1}
-                    formattingFn={(number) => number.toLocaleString()}
-                  />
-                )}
-              </span>{" "}
-              contributions
-            </h2>
-            <h3
-              className={cx("text-gray-400 text-center font-light", {
-                "animate-pulse": isLoading,
-              })}
-            >
-              {!isLoading
-                ? `Since ${dayjs(user!.lastPaybackDate).format("lll")}`
-                : "Loading..."}
-            </h3>
-          </div>
-          <div className="mt-8 space-y-6">
-            <Button
-              onClick={onPayback}
-              className="w-full"
-              isLoading={isGettingPayback}
-              disabled={!availableContributions}
-            >
-              {!!availableContributions
-                ? "Check in to get payback"
-                : "Make more contributions"}
-            </Button>
-          </div>
-          <div className="text-center">
-            <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
+      <>
+        <div className="flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8 content-container">
+          <div className="max-w-md w-full space-y-8">
+            <div>
+              <h2 className="text-center text-xl text-gray-600">
+                You&apos;ve made{" "}
+                <span className="text-green-600 font-extrabold">
+                  {isGettingPayback ? (
+                    <CountUp
+                      start={availableContributions}
+                      end={0}
+                      duration={0.5}
+                      formattingFn={(number) => number.toLocaleString()}
+                    />
+                  ) : (
+                    <CountUp
+                      end={isLoading ? 0 : availableContributions || 0}
+                      duration={1}
+                      formattingFn={(number) => number.toLocaleString()}
+                    />
+                  )}
+                </span>{" "}
+                contributions
+              </h2>
+              <h3
+                className={cx("text-gray-400 text-center font-light", {
+                  "animate-pulse": isLoading,
+                })}
+              >
+                {!isLoading
+                  ? `Since ${dayjs(user!.lastPaybackDate).format("lll")}`
+                  : "Loading..."}
+              </h3>
+            </div>
+            <div className="mt-8 space-y-6">
+              <Button
+                onClick={onPayback}
+                className="w-full"
+                isLoading={isGettingPayback}
+                disabled={!availableContributions}
+              >
+                {!!availableContributions
+                  ? "Check in to get payback"
+                  : "Make more contributions"}
+              </Button>
+            </div>
+            <div className="text-center">
+              <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
+            </div>
           </div>
         </div>
-      </div>
+        <Footer />
+      </>
     );
   } else {
     return (
-      <div className="min-h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            {paybackResult.daysInARow > 1 && (
-              <Typography className="text-center mb-1" as="p" color="hint">
-                <Typography color="primary">
-                  {paybackResult.daysInARow.toLocaleString()}
+      <>
+        <div className="flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden content-container">
+          <div className="max-w-md w-full space-y-8">
+            <div>
+              {paybackResult.daysInARow > 1 && (
+                <Typography className="text-center mb-1" as="p" color="hint">
+                  <Typography color="primary">
+                    {paybackResult.daysInARow.toLocaleString()}
+                  </Typography>{" "}
+                  DAYS IN A ROW
+                </Typography>
+              )}
+              <h2 className="mb-1 text-center text-3xl text-green-600">🎉 Hooray!!</h2>
+              <h2 className="text-center text-2xl text-gray-600">You&apos;ve got</h2>
+              {renderRewardItems()}
+            </div>
+            <div className="mt-8 space-y-6">
+              <Button className="w-full" onClick={onGetPokemons}>
+                Go to get Pokémons
+              </Button>
+            </div>
+            <div className="text-center">
+              <Typography color="hint" weight="light">
+                You&apos;ve made{" "}
+                <Typography color="green">
+                  {paybackResult.totalContributions.toLocaleString()}
                 </Typography>{" "}
-                DAYS IN A ROW
+                contributions since {dayjs(user!.contributionBaseDate).format("LLL")}
               </Typography>
-            )}
-            <h2 className="mb-1 text-center text-3xl text-green-600">🎉 Hooray!!</h2>
-            <h2 className="text-center text-2xl text-gray-600">You&apos;ve got</h2>
-            {renderRewardItems()}
+            </div>
+            <div className="text-center">
+              <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
+            </div>
           </div>
-          <div className="mt-8 space-y-6">
-            <Button className="w-full" onClick={onGetPokemons}>
-              Go to get Pokémons
-            </Button>
-          </div>
-          <div className="text-center">
-            <Typography color="hint" weight="light">
-              You&apos;ve made{" "}
-              <Typography color="green">{paybackResult.totalContributions}</Typography>{" "}
-              contributions since {dayjs(user!.contributionBaseDate).format("LLL")}
-            </Typography>
-          </div>
-          <div className="text-center">
-            <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
-          </div>
+          {renderRainItems()}
         </div>
-        {renderRainItems()}
-      </div>
+        <Footer />
+      </>
     );
   }
 };

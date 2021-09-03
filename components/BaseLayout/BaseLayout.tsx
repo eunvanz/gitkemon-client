@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import ROUTES from "../../paths";
 import { User } from "../../types";
 import DropDownMenu from "../DropDownMenu";
+import Footer from "../Footer";
 import NewBadge from "../NewBadge";
 
 interface NavigationItem {

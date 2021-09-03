@@ -1,3 +1,4 @@
+import { Image } from "antd";
 import cx from "classnames";
 import { useRouter } from "next/router";
 import ROUTES from "~/paths";
@@ -16,9 +17,10 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden }) => {
     <div className="flex items-center">
       {!isAvatarHidden && !!user.githubUser && (
         <div className="flex-shrink-0 h-10 w-10">
-          {/* eslint-disable-next-line */}
-          <img
+          <Image
             className="h-10 w-10 rounded-full"
+            width={40}
+            height={40}
             src={user.githubUser!.avatar_url}
             alt="user image"
           />

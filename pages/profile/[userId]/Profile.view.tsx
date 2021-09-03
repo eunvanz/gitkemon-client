@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import Button from "~/components/Button";
 import CollectionStatus, { CollectionStatusProps } from "~/components/CollectionStatus";
 import ContributionChart from "~/components/ContributionChart";
 import MonCard from "~/components/MonCard";
+import SelectButton from "~/components/SelectButton";
 import Typography from "~/components/Typography";
 import UserProfileHeaderContainer from "~/components/UserProfileHeader";
 import { convertCollectionToCardMon } from "~/helpers/projectHelpers";
@@ -25,6 +26,8 @@ const Profile: React.FC<ProfileProps> = ({
   paybacks,
 }) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
+
+  const [chartType, setChartType] = useState<"daily" | "total">("daily");
 
   return (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
@@ -54,13 +57,26 @@ const Profile: React.FC<ProfileProps> = ({
               </Typography>
             </Typography>
             {paybacks ? (
-              <div className="flex flex-col border rounded m-1 h-60">
+              <div className="flex flex-col border rounded m-1 h-72">
                 <div className="flex-shrink-0 flex justify-end p-2 border-b">
-                  <Button></Button>
+                  <SelectButton
+                    items={[
+                      {
+                        displayValue: "Daily",
+                        value: "daily",
+                      },
+                      {
+                        displayValue: "Total",
+                        value: "total",
+                      },
+                    ]}
+                    onChange={(value) => setChartType(value)}
+                    value={chartType}
+                  />
                 </div>
                 <div ref={chartContainerRef} className="flex-1">
                   <ContributionChart
-                    type="daily"
+                    type={chartType}
                     paybackLogs={paybacks}
                     containerRef={chartContainerRef}
                   />

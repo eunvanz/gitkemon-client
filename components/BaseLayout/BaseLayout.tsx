@@ -1,9 +1,9 @@
-import { Fragment, ReactNode, SVGProps, useMemo, useState } from "react";
+import React, { Fragment, ReactNode, SVGProps, useMemo, useState } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faReceipt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import {
+  BellIcon,
   GlobeIcon,
   HomeIcon,
   MenuAlt2Icon,
@@ -86,7 +86,13 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
   }, []);
 
   const BadgeWrapper = useMemo(() => {
-    return availableContributions ? NewBadge : "div";
+    return availableContributions
+      ? ({ children }: { children: React.ReactNode }) => (
+          <NewBadge top={1} right={1}>
+            {children}
+          </NewBadge>
+        )
+      : "div";
   }, [availableContributions]);
 
   return (
@@ -209,7 +215,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                     onClick={() => router.push(ROUTES.PAYBACK)}
                   >
                     <span className="sr-only">Payback</span>
-                    <FontAwesomeIcon icon={faReceipt} size="lg" aria-hidden="true" />
+                    <BellIcon className="w-6 h-6" />
                   </button>
                 </BadgeWrapper>
 

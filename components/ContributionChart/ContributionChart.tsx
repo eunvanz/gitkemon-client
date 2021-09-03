@@ -1,4 +1,5 @@
 import { RefObject, useMemo } from "react";
+import dayjs from "dayjs";
 import { ResponsiveContainer, XAxis, Tooltip, ComposedChart, Bar, Area } from "recharts";
 import { colorHashes } from "~/constants/styles";
 import { PaybackLog } from "~/types";
@@ -17,12 +18,33 @@ const ContributionChart: React.FC<ContributionChartProps> = ({
   const containerInfo = containerRef.current?.getClientRects()[0];
 
   const data = useMemo(() => {
-    return paybackLogs.map((item, index) => ({
+    const filledPaybackLogs = paybackLogs.reduce((prev: PaybackLog[], item, index) => {
+      if (index === 0) {
+        return [item];
+      }
+      const newArray = [...prev];
+      const fillEmptyDates = () => {
+        const lastItem = newArray[newArray.length - 1] as PaybackLog;
+        const nextDate = dayjs(lastItem.date).add(1, "day").format("YYYY-MM-DD");
+        if (item.date !== nextDate) {
+          newArray.push({
+            date: nextDate,
+            totalContributions: lastItem.totalContributions,
+          });
+          fillEmptyDates();
+        } else {
+          newArray.push(item);
+        }
+      };
+      fillEmptyDates();
+      return newArray;
+    }, []);
+    return filledPaybackLogs.map((item, index) => ({
       date: item.date,
       "Total contributions": item.totalContributions,
       "Daily contributions":
         index > 0
-          ? item.totalContributions - paybackLogs[index - 1].totalContributions
+          ? item.totalContributions - filledPaybackLogs[index - 1].totalContributions
           : 0,
     }));
   }, [paybackLogs]);

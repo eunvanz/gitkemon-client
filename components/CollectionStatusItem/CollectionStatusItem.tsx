@@ -20,7 +20,7 @@ const CollectionStatusItem: React.FC<CollectionStatusItemProps> = ({
       <div className="mb-1">
         <Typography>{tier ? tier.toUpperCase() : "POINTS"}</Typography>
         <Typography className="ml-2" weight="light" color="gray">
-          {value} / {max}
+          {value.toLocaleString()} / {max.toLocaleString()}
         </Typography>
       </div>
       <LineGauge

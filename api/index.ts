@@ -17,6 +17,7 @@ import {
   Pageable,
   Painting,
   UserProfile,
+  ProfileMon,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -373,6 +374,13 @@ const patchUserProfile = async (updateUserDto: UpdateUserDto) => {
   await requester.patch(API_URL.USERS__PROFILE, updateUserDto);
 };
 
+const getProfileMons = async (userId: string) => {
+  const { data } = await requester.get<ProfileMon>(
+    `${API_URL.COLLECTIONS__PROFILE}/${userId}`,
+  );
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -410,6 +418,7 @@ const api = {
   getUserContributionsRanking,
   getUserProfile,
   patchUserProfile,
+  getProfileMons,
 };
 
 export default api;

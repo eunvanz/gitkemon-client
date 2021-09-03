@@ -1,4 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import withContentContainer from "~/.storybook/decorators/withContentContainer";
+import withMockRouter from "~/.storybook/decorators/withMockRouter";
 import withTestProvider from "~/.storybook/decorators/withTestProvider";
 import mockCollections from "~/api/mocks/collection";
 import mockUsers from "~/api/mocks/user";
@@ -48,16 +50,18 @@ export default {
       },
     },
     monRanks: [1, 40, 123],
-    representativeMons: mockCollections.collections.slice(0, 3),
+    topMons: mockCollections.collections.slice(0, 3),
+    recentMons: mockCollections.collections.slice(0, 3),
   },
-  decorators: [withTestProvider],
-  parameters: {
-    nextRouter: {
+  decorators: [
+    withTestProvider,
+    withMockRouter({
       query: {
         userId: "mock-uuid",
       },
-    },
-  },
+    }),
+    withContentContainer,
+  ],
 } as ComponentMeta<typeof Profile>;
 
 const Template: ComponentStory<typeof Profile> = (args) => <Profile {...args} />;
@@ -66,5 +70,6 @@ export const 기본 = createStoryComponent(Template);
 
 export const noPokemons = createStoryComponent(Template, {
   monRanks: [],
-  representativeMons: [],
+  topMons: [],
+  recentMons: [],
 });

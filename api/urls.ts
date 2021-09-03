@@ -20,6 +20,7 @@ const API_URL = {
   COLLECTIONS__EVOLVE: "collections/evolve",
   COLLECTIONS__BLEND: "collections/blend",
   COLLECTIONS__RANK: "collections/rank",
+  COLLECTIONS__PROFILE: "collections/profile",
   PAINTINGS: "paintings",
   LIKES: "likes",
   LIKES_UNLIKE: "likes/unlike",

@@ -367,4 +367,11 @@ export interface UserProfile {
   lastPaybackDate: string;
   avatarUrl: string;
   githubUrl: string;
+  trainerClass: number;
+}
+
+export interface ProfileMon {
+  topMons: Collection[];
+  monRanks: number[];
+  recentMons: Collection[];
 }

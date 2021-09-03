@@ -68,6 +68,7 @@ const userProfile: UserProfile = {
   lastPaybackDate: "2021-09-02T10:55:35.000Z",
   avatarUrl: "https://avatars.githubusercontent.com/u/17351661?v=4",
   githubUrl: "https://github.com/eunvanz",
+  trainerClass: 3,
 };
 
 const mockUsers = {

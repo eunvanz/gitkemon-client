@@ -24,6 +24,7 @@ const API_URL = {
   PAINTINGS: "paintings",
   LIKES: "likes",
   LIKES_UNLIKE: "likes/unlike",
+  PAYBACKS__HISTORY: "paybacks/history",
 };
 
 export default API_URL;

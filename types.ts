@@ -214,6 +214,8 @@ export enum QUERY_KEY {
   USER_COLLECTION_RANKING = "USER_COLLECTION_RANKING",
   USER_CONTRIBUTIONS_RANKING = "USER_CONTRIBUTIONS_RANKING",
   USER_PROFILE = "USER_PROFILE",
+  PROFILE_MON = "PROFILE_MON",
+  PAYBACK_HISTORY = "PAYBACK_HISTORY",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";
@@ -368,10 +370,12 @@ export interface UserProfile {
   avatarUrl: string;
   githubUrl: string;
   trainerClass: number;
+  collectionRank: number;
+  contributionsRank: number;
 }
 
 export interface ProfileMon {
   topMons: Collection[];
-  monRanks: number[];
+  topMonRanks: number[];
   recentMons: Collection[];
 }

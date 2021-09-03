@@ -209,6 +209,7 @@
     "body": [
       "import { useQuery } from \"react-query\";",
       "import api from \"../api\";",
+      "import { QUERY_KEY } from \"~/types\";",
       "",
       "const ${TM_FILENAME_BASE} = () => {",
       "\tconst query = useQuery(QUERY_KEY.$1, $2);",

@@ -12,7 +12,7 @@ export default {
   component: Profile,
   args: {
     user: mockUsers.user,
-    collectionRank: 12,
+    userProfile: mockUsers.userProfile,
     collectionStatus: {
       countInfo: {
         basic: {
@@ -49,9 +49,7 @@ export default {
         max: 1000,
       },
     },
-    monRanks: [1, 40, 123],
-    topMons: mockCollections.collections.slice(0, 3),
-    recentMons: mockCollections.collections.slice(0, 3),
+    profileMon: mockCollections.profileMon,
   },
   decorators: [
     withTestProvider,
@@ -69,7 +67,9 @@ const Template: ComponentStory<typeof Profile> = (args) => <Profile {...args} />
 export const 기본 = createStoryComponent(Template);
 
 export const noPokemons = createStoryComponent(Template, {
-  monRanks: [],
-  topMons: [],
-  recentMons: [],
+  profileMon: {
+    topMonRanks: [],
+    topMons: [],
+    recentMons: [],
+  },
 });

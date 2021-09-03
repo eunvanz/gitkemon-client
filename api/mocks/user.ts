@@ -69,6 +69,8 @@ const userProfile: UserProfile = {
   avatarUrl: "https://avatars.githubusercontent.com/u/17351661?v=4",
   githubUrl: "https://github.com/eunvanz",
   trainerClass: 3,
+  collectionRank: 2,
+  contributionsRank: 12,
 };
 
 const mockUsers = {

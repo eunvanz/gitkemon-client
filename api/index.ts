@@ -18,6 +18,7 @@ import {
   Painting,
   UserProfile,
   ProfileMon,
+  PaybackLog,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -381,6 +382,13 @@ const getProfileMons = async (userId: string) => {
   return data;
 };
 
+const getPaybackHistory = async (userId: string) => {
+  const { data } = await requester.get<PaybackLog[]>(
+    `${API_URL.PAYBACKS__HISTORY}/${userId}`,
+  );
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -419,6 +427,7 @@ const api = {
   getUserProfile,
   patchUserProfile,
   getProfileMons,
+  getPaybackHistory,
 };
 
 export default api;

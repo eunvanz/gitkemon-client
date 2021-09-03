@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Skeleton from "react-loading-skeleton";
@@ -69,11 +70,12 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
           <div className="relative">
             {userProfile ? (
               <>
-                {/* eslint-disable-next-line */}
-                <img
-                  className="h-16 w-16 rounded-full"
+                <Image
+                  className="rounded-full"
                   src={userProfile.avatarUrl}
                   alt="user image"
+                  width={64}
+                  height={64}
                 />
                 <span
                   className="absolute inset-0 shadow-inner rounded-full"

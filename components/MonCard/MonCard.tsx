@@ -83,7 +83,6 @@ const MonCard: React.FC<MonCardProps> = ({
                 </div>
               )}
               {/* TODO: 플레이스홀더 이미지 대체 */}
-              {/* eslint-disable-next-line */}
               <div className={cx("relative", { "h-36": isStatic })}>
                 {isStatic ? (
                   <Image

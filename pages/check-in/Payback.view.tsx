@@ -280,14 +280,13 @@ const RainItem = ({ type }: RainItemProps) => {
         position: "absolute",
         left,
         top: -size,
-        translateY: 0,
+        translateY: "-50px",
         width: size,
-        rotate: random(-360, 360),
         height: size,
         zIndex: 999999,
       }}
       animate={{
-        translateY: `${window.innerHeight + size}px`,
+        translateY: `${window.innerHeight + size + 50}px`,
         rotate: random(-360, 360),
         transitionEnd: {
           display: "none",

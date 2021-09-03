@@ -47,6 +47,14 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
     }
   }, [setValue, user]);
 
+  useEffect(() => {
+    if (isSubmitting) {
+      return () => {
+        setIsEditing(false);
+      };
+    }
+  }, [isSubmitting]);
+
   return (
     <div className="w-full mx-auto md:flex md:items-center md:justify-between md:space-x-5">
       <div className="flex items-center space-x-5">

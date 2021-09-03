@@ -29,6 +29,7 @@ export interface MonCardProps
   isClickDisabled?: boolean;
   isOwned?: boolean;
   user?: User;
+  customSize?: string;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -43,6 +44,7 @@ const MonCard: React.FC<MonCardProps> = ({
   isClickDisabled,
   isOwned,
   user,
+  customSize,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -106,8 +108,8 @@ const MonCard: React.FC<MonCardProps> = ({
   );
 
   const widthCLassName = useMemo(() => {
-    return isFullWidth ? "w-full" : MON_CARD_WIDTH;
-  }, [isFullWidth]);
+    return isFullWidth ? "w-full" : customSize || MON_CARD_WIDTH;
+  }, [customSize, isFullWidth]);
 
   return (
     <>

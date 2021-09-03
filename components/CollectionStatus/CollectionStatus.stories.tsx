@@ -31,6 +31,10 @@ export default {
         value: 2,
         max: 20,
       },
+      myth: {
+        value: 1,
+        max: 10,
+      },
     },
     colPointInfo: {
       value: 400,

@@ -15,7 +15,9 @@ const useUserProfileHeaderProps: () => UserProfileHeaderProps = () => {
 
   const { data: userProfile } = useUserProfileQuery(userId);
 
-  const { mutate: updateProfile, isLoading: isSubmitting } = useUserProfileMutation();
+  const { mutate: updateProfile, isLoading: isSubmitting } = useUserProfileMutation(
+    userId,
+  );
 
   const onSubmit = useCallback(
     (formValues: UserProfileFormValues) => {

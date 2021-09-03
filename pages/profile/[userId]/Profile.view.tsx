@@ -1,5 +1,8 @@
+import { useRef } from "react";
 import Skeleton from "react-loading-skeleton";
+import Button from "~/components/Button";
 import CollectionStatus, { CollectionStatusProps } from "~/components/CollectionStatus";
+import ContributionChart from "~/components/ContributionChart";
 import MonCard from "~/components/MonCard";
 import Typography from "~/components/Typography";
 import UserProfileHeaderContainer from "~/components/UserProfileHeader";
@@ -11,7 +14,7 @@ export interface ProfileProps {
   userProfile?: UserProfile;
   collectionStatus?: CollectionStatusProps;
   profileMon?: ProfileMon;
-  // paybacks: PaybackLog[];
+  paybacks?: PaybackLog[];
 }
 
 const Profile: React.FC<ProfileProps> = ({
@@ -19,26 +22,56 @@ const Profile: React.FC<ProfileProps> = ({
   userProfile,
   collectionStatus,
   profileMon,
-  // paybacks,
+  paybacks,
 }) => {
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
-      {/* <UserProfileHeaderContainer /> */}
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-5">
-        <div className="md:col-start-1 md:col-span-1 lg:col-span-3">
-          <Typography as="h1">
-            Collection Ranking:{" "}
-            <Typography color="primary" weight="bold">
-              {userProfile?.collectionRank.toLocaleString() || "-"}
+      <div className="mb-6 border-b pb-4">
+        <UserProfileHeaderContainer />
+      </div>
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-5">
+        <div className="xl:col-span-3">
+          <div className="flex flex-col">
+            <Typography as="h1">
+              Collection Ranking:{" "}
+              <Typography color="primary" weight="bold">
+                {userProfile?.collectionRank.toLocaleString() || "-"}
+              </Typography>
             </Typography>
-          </Typography>
-          {collectionStatus ? (
-            <CollectionStatus {...collectionStatus} customSize="grid-cols-2" />
-          ) : (
-            <Skeleton style={{ width: "100%", height: 300 }} />
-          )}
+            {collectionStatus ? (
+              <CollectionStatus {...collectionStatus} customSize="grid-cols-2" />
+            ) : (
+              <Skeleton style={{ width: "100%", height: 300 }} />
+            )}
+          </div>
+          <div className="flex flex-col mt-4">
+            <Typography as="h1">
+              Contributions Ranking:{" "}
+              <Typography color="primary" weight="bold">
+                {userProfile?.contributionsRank.toLocaleString() || "-"}
+              </Typography>
+            </Typography>
+            {paybacks ? (
+              <div className="flex flex-col border rounded m-1 h-60">
+                <div className="flex-shrink-0 flex justify-end p-2 border-b">
+                  <Button></Button>
+                </div>
+                <div ref={chartContainerRef} className="flex-1">
+                  <ContributionChart
+                    type="daily"
+                    paybackLogs={paybacks}
+                    containerRef={chartContainerRef}
+                  />
+                </div>
+              </div>
+            ) : (
+              <Skeleton style={{ width: "100%", height: 300 }} />
+            )}
+          </div>
         </div>
-        <div className="md:col-start-2 lg:col-span-2 lg:col-start-4">
+        <div className="xl:col-span-2 xl:col-start-4">
           <div className="flex flex-col">
             <div className="flex-1">
               <Typography as="h1">

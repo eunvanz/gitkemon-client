@@ -2,12 +2,12 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { MON_TIERS } from "~/constants/rules";
+import useActiveMonsQuery from "~/queries/useActiveMonsQuery";
 import useCollectionsQuery from "~/queries/useCollectionsQuery";
-import useMonsQuery from "~/queries/useMonsQuery";
+import usePaybackHistoryQuery from "~/queries/usePaybackHistoryQuery";
 import useProfileMonQuery from "~/queries/useProfileMonQuery";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
 import { userState } from "~/state/user";
-import { QUERY_KEY } from "~/types";
 import { ProfileProps } from "./Profile.view";
 
 const useProfileProps: () => ProfileProps = () => {
@@ -18,8 +18,9 @@ const useProfileProps: () => ProfileProps = () => {
 
   const { data: userProfile } = useUserProfileQuery(userId);
   const { data: profileMon } = useProfileMonQuery(userId);
-  const { data: mons } = useMonsQuery({ isWithImages: false });
+  const { data: mons } = useActiveMonsQuery();
   const { data: collections } = useCollectionsQuery(userId);
+  const { data: paybacks } = usePaybackHistoryQuery(userId);
 
   const colPointInfo = useMemo(() => {
     if (!collections || !mons) {
@@ -47,6 +48,9 @@ const useProfileProps: () => ProfileProps = () => {
   }, [collections, mons]);
 
   const collectionStatus = useMemo(() => {
+    if (!countInfo || !colPointInfo) {
+      return undefined;
+    }
     return {
       countInfo,
       colPointInfo,
@@ -58,6 +62,7 @@ const useProfileProps: () => ProfileProps = () => {
     userProfile,
     profileMon,
     collectionStatus,
+    paybacks,
   };
 };
 

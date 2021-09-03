@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Skeleton from "react-loading-skeleton";
+import ROUTES from "~/paths";
 import { User, UserProfile } from "~/types";
 import Button from "../Button";
 import ControlledInput from "../ControlledInput";
 import Input from "../Input";
+import TrainerClassBadge from "../TrainerClassBadge";
 
 export interface UserProfileFormValues {
   nickname: string;
@@ -54,6 +59,8 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
       };
     }
   }, [isSubmitting]);
+
+  const router = useRouter();
 
   return (
     <div className="w-full mx-auto md:flex md:items-center md:justify-between md:space-x-5">
@@ -121,8 +128,12 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
             </div>
           ) : userProfile ? (
             <>
-              <h1 className="text-2xl font-bold text-gray-900 mb-0">
-                {userProfile.nickname}
+              <h1 className="text-2xl font-bold text-gray-900 mb-0 items-center flex">
+                {userProfile.nickname}{" "}
+                <TrainerClassBadge
+                  className="ml-2"
+                  trainerClass={userProfile.trainerClass}
+                />
               </h1>
               <p className="text-sm font-medium text-gray-500 mb-0">
                 {userProfile.githubLogin}{" "}
@@ -157,10 +168,27 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
             </Button>
           </>
         )}
-        {!isEditing && user?.id === userProfile?.id && (
-          <Button color="white" onClick={() => setIsEditing(true)}>
-            Edit profile
-          </Button>
+        {userProfile && !isEditing && (
+          <>
+            {user?.id === userProfile?.id && (
+              <Button color="white" onClick={() => setIsEditing(true)}>
+                Edit profile
+              </Button>
+            )}
+            <Button
+              icon={<FontAwesomeIcon icon={faGithub} className="w-4 h-4 mr-2" />}
+              color="white"
+              onClick={() => window.open(userProfile.githubUrl)}
+            >
+              Github
+            </Button>
+            <Button
+              color="white"
+              onClick={() => router.push(`${ROUTES.COLLECTIONS}/${userProfile.id}`)}
+            >
+              Collection
+            </Button>
+          </>
         )}
       </div>
     </div>

@@ -58,7 +58,13 @@ const Profile: React.FC<ProfileProps> = ({
             </Typography>
             {paybacks ? (
               <div className="flex flex-col border rounded m-1 h-72">
-                <div className="flex-shrink-0 flex justify-end p-2 border-b">
+                <div className="flex-shrink-0 flex justify-between p-2 border-b items-center">
+                  <Typography className="pl-2">
+                    Total:{" "}
+                    <Typography color="primary" weight="bold">
+                      {userProfile?.lastContributions.toLocaleString() || "-"}
+                    </Typography>
+                  </Typography>
                   <SelectButton
                     items={[
                       {

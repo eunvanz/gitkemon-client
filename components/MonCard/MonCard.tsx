@@ -119,7 +119,7 @@ const MonCard: React.FC<MonCardProps> = ({
         </div>
       );
     },
-    [isClickDisabled, isOwned, mon, user],
+    [isClickDisabled, isOwned, isStatic, mon, user],
   );
 
   const widthCLassName = useMemo(() => {

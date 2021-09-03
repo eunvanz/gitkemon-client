@@ -3,6 +3,7 @@ import withContentContainer from "~/.storybook/decorators/withContentContainer";
 import withMockRouter from "~/.storybook/decorators/withMockRouter";
 import withTestProvider from "~/.storybook/decorators/withTestProvider";
 import mockCollections from "~/api/mocks/collection";
+import mockPayback from "~/api/mocks/payback";
 import mockUsers from "~/api/mocks/user";
 import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Profile from "./Profile.view";
@@ -50,6 +51,7 @@ export default {
       },
     },
     profileMon: mockCollections.profileMon,
+    paybacks: mockPayback.history,
   },
   decorators: [
     withTestProvider,
@@ -72,4 +74,12 @@ export const noPokemons = createStoryComponent(Template, {
     topMons: [],
     recentMons: [],
   },
+});
+
+export const loading = createStoryComponent(Template, {
+  user: undefined,
+  userProfile: undefined,
+  collectionStatus: undefined,
+  profileMon: undefined,
+  paybacks: undefined,
 });

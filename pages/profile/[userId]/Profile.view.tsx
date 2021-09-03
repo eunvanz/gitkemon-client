@@ -89,7 +89,7 @@ const Profile: React.FC<ProfileProps> = ({
                 </div>
               </div>
             ) : (
-              <Skeleton style={{ width: "100%", height: 300 }} />
+              <Skeleton style={{ width: "100%", height: 250 }} />
             )}
           </div>
         </div>
@@ -106,42 +106,46 @@ const Profile: React.FC<ProfileProps> = ({
                     : "-"}
                 </Typography>
               </Typography>
-              <div className="flex flex-wrap">
+              <div className="flex flex-col">
                 {!!profileMon?.topMons ? (
                   profileMon.topMons.length ? (
-                    profileMon.topMons.map((mon) => (
-                      <MonCard
-                        key={mon.id}
-                        mon={convertCollectionToCardMon(mon)}
-                        isOwned
-                        user={user}
-                        customSize="w-1/3"
-                      />
-                    ))
+                    <div className="flex">
+                      {profileMon.topMons.map((mon) => (
+                        <MonCard
+                          key={mon.id}
+                          mon={convertCollectionToCardMon(mon)}
+                          isOwned
+                          user={user}
+                          customSize="w-1/3"
+                        />
+                      ))}
+                    </div>
                   ) : (
                     <div className="w-full h-60 flex justify-center items-center border rounded m-1 p-4 border-dashed">
                       <Typography color="hint">No Pokemons</Typography>
                     </div>
                   )
                 ) : (
-                  <Skeleton style={{ width: "100%", height: 300 }} />
+                  <Skeleton style={{ width: "100%", height: 250 }} />
                 )}
               </div>
             </div>
             <div className="flex-1 mt-8">
-              <Typography as="h1">Recently updated Pokemons</Typography>
-              <div className="flex flex-wrap">
+              <Typography as="h1">New Pokemons</Typography>
+              <div className="flex flex-col">
                 {!!profileMon?.recentMons ? (
                   profileMon.recentMons.length ? (
-                    profileMon.recentMons.map((mon) => (
-                      <MonCard
-                        key={mon.id}
-                        mon={convertCollectionToCardMon(mon)}
-                        isOwned
-                        user={user}
-                        customSize="w-1/3"
-                      />
-                    ))
+                    <div className="flex">
+                      {profileMon.recentMons.map((mon) => (
+                        <MonCard
+                          key={mon.id}
+                          mon={convertCollectionToCardMon(mon)}
+                          isOwned
+                          user={user}
+                          customSize="w-1/3"
+                        />
+                      ))}
+                    </div>
                   ) : (
                     <div className="w-full h-60 flex justify-center items-center border rounded m-1 p-4 border-dashed">
                       <Typography color="hint">No Pokemons</Typography>

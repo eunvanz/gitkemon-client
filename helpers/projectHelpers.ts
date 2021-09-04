@@ -1,5 +1,7 @@
+import qs from "query-string";
 import { toast } from "react-toastify";
 import { TRAINER_CLASSES, TRAINER_CLASS_LIMIT_UNIT } from "~/constants/rules";
+import ROUTES from "~/paths";
 import { CardMon, Collection, HuntResult, ModalMon, Mon, Pageable, User } from "../types";
 import { capitalize } from "./commonHelpers";
 
@@ -236,5 +238,15 @@ export const checkIsCollectionMaxLevel = (user: User, mon: CardMon | ModalMon) =
   }
   return (
     getTrainerClassLimit(user.trainerClass) < mon.total - mon.baseTotal + mon.colPoint
+  );
+};
+
+export const signInWithGithub = () => {
+  const query = {
+    client_id: process.env.GITHUB_CLIENT_ID,
+    redirect_uri: `${window.origin}${ROUTES.EXCHANGE_CODE}`,
+  };
+  window.location.replace(
+    `https://github.com/login/oauth/authorize?${qs.stringify(query)}`,
   );
 };

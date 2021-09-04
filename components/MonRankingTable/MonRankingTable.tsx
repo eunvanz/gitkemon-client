@@ -93,35 +93,31 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
       },
     ];
 
-    if (!isPreview) {
-      result.push(
-        {
-          title: "stars",
-          dataIndex: "stars",
-          render: (data) => <MonStars stars={data.stars} />,
-        },
-        {
-          title: "tier",
-          dataIndex: "tier",
-          render: (data) => <MonTierBadge tier={data.tier} />,
-        },
-        {
-          title: "type",
-          dataIndex: "firstType",
-          render: (data) => (
-            <>
-              <MonTypeBadge type={data.firstType} />
-              {data.secondType && (
-                <MonTypeBadge className="ml-1" type={data.secondType} />
-              )}
-            </>
-          ),
-        },
-      );
-    }
+    result.push(
+      {
+        title: "stars",
+        dataIndex: "stars",
+        render: (data) => <MonStars stars={data.stars} />,
+      },
+      {
+        title: "tier",
+        dataIndex: "tier",
+        render: (data) => <MonTierBadge tier={data.tier} />,
+      },
+      {
+        title: "type",
+        dataIndex: "firstType",
+        render: (data) => (
+          <>
+            <MonTypeBadge type={data.firstType} />
+            {data.secondType && <MonTypeBadge className="ml-1" type={data.secondType} />}
+          </>
+        ),
+      },
+    );
 
     return result;
-  }, [handleOnOpenMonModal, isPreview]);
+  }, [handleOnOpenMonModal]);
 
   return (
     <>

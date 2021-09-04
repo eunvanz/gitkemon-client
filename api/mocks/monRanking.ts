@@ -52,6 +52,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -106,6 +107,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -160,6 +162,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -214,6 +217,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -268,6 +272,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -322,6 +327,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -376,6 +382,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -430,6 +437,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -484,6 +492,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -538,6 +547,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -592,6 +602,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -646,6 +657,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -700,6 +712,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -754,6 +767,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -808,6 +822,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -862,6 +877,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -916,6 +932,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -970,6 +987,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -1024,6 +1042,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
     {
@@ -1078,6 +1097,7 @@ const total = {
         colPoint: 881,
         githubLogin: "eunvanz",
         trainerClass: 3,
+        role: "user",
       },
     },
   ],

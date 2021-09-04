@@ -6,7 +6,7 @@ import { ExtendableHTMLProps } from "../../types";
 
 export interface ButtonProps
   extends Omit<ExtendableHTMLProps<HTMLButtonElement>, "size" | "type"> {
-  color?: "primary" | "secondary" | "white" | "transparent" | "danger";
+  color?: "primary" | "secondary" | "white" | "transparent" | "danger" | "black";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   isRound?: boolean;
   icon?: React.FC<any> | React.ReactNode;
@@ -75,6 +75,8 @@ const Button: React.FC<ButtonProps> = ({
         return "hover:bg-gray-100 hover:border-gray-100 text-gray-700";
       case "danger":
         return "bg-red-600 hover:bg-red-700 text-white border border-red-600 shadow-sm";
+      case "black":
+        return "bg-gray-900 hover:bg-gray-700 text-white border border-gray-900 shadow-sm";
     }
   }, [color, isDisabled]);
 

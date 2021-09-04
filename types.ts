@@ -7,14 +7,19 @@ export interface User {
   lastContributions: number;
   lastPaybackDate: string;
   contributionBaseDate: string;
-  accessToken: string;
   isActive: boolean;
   githubLogin: string;
   githubUser?: GithubUser;
   colPoint: number;
   trainerClass: number;
+  createdAt: string;
+  updatedAt: string;
+  pokeBallId: number;
+  role: Role;
   __pokeBall__?: PokeBall | null;
 }
+
+export type Role = "admin" | "user";
 
 export interface PokeBall {
   id: number;

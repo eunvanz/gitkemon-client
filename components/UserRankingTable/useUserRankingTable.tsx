@@ -18,6 +18,7 @@ const useUserRankingTable: (
     hasNextPage,
     onFetchNextPage,
     isPreview,
+    type,
   };
 };
 

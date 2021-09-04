@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "PORT=4000 next start",
     "lint": "next lint",
-    "storybook": "NEXT_PUBLIC_API_MOCKING=enabled start-storybook -p 6006",
+    "storybook": "NEXT_PUBLIC_API_MOCKING=enabled API_HOST=http://localhost:6006 start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest --watch"
   },

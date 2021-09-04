@@ -15,6 +15,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 config.autoAddCss = false;
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  import("../mocks");
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>

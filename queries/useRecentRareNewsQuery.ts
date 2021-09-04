@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery, UseQueryOptions } from "react-query";
 import { QUERY_KEY, RareNews } from "~/types";
 import api from "../api";
 

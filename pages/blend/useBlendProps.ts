@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { assertNotEmpty } from "../../helpers/commonHelpers";
 import ROUTES from "../../paths";
 import useBlendMutation from "../../queries/useBlendMutation";
 import { blendMonState } from "../../state/blendMon";
@@ -13,9 +12,6 @@ const useBlendProps: () => BlendProps = () => {
 
   const user = useRecoilValue(userState);
 
-  assertNotEmpty(user);
-  assertNotEmpty(blendMons);
-
   const router = useRouter();
 
   const onNavigateToMyCollection = useCallback(() => {
@@ -23,7 +19,7 @@ const useBlendProps: () => BlendProps = () => {
   }, [router, user]);
 
   const { mutate: blend, data: result } = useBlendMutation(
-    blendMons.map((mon) => mon.id),
+    blendMons?.map((mon) => mon.id) || [],
   );
 
   const getBlendResult = useCallback(async () => {
@@ -38,7 +34,7 @@ const useBlendProps: () => BlendProps = () => {
   }, [getBlendResult, setBlendMons]);
 
   return {
-    blendMons: blendMons!,
+    blendMons,
     onNavigateToMyCollection,
     result,
     user,

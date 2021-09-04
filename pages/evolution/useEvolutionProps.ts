@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { assertNotEmpty } from "../../helpers/commonHelpers";
 import ROUTES from "../../paths";
 import useEvolveMutation from "../../queries/useEvolveMutation";
 import useNextMonsQuery from "../../queries/useNextMonsQuery";
@@ -16,14 +15,12 @@ const useEvolutionProps: () => EvolutionProps = () => {
 
   const router = useRouter();
 
-  assertNotEmpty(user);
-  assertNotEmpty(evolveMon);
-
   const { data: nextMons } = useNextMonsQuery(evolveMon!.monId);
 
   const { mutate: evolve, data: result } = useEvolveMutation();
 
   useEffect(() => {
+    if (!evolveMon) return;
     (async () => {
       if (nextMons && nextMons.length === 1) {
         evolve({
@@ -32,21 +29,23 @@ const useEvolutionProps: () => EvolutionProps = () => {
         });
       }
     })();
-  }, [evolve, evolveMon.id, nextMons]);
+  }, [evolve, evolveMon, nextMons]);
 
   const onSelectNextMon = useCallback(
     async (monId: number) => {
+      if (!evolveMon) return;
       evolve({
         collectionId: evolveMon.id,
         monId,
       });
     },
-    [evolve, evolveMon.id],
+    [evolve, evolveMon],
   );
 
   const onNavigateToMyCollection = useCallback(() => {
+    if (!user) return;
     router.replace(`${ROUTES.COLLECTIONS}/${user.id}`);
-  }, [router, user.id]);
+  }, [router, user]);
 
   useEffect(() => {
     return () => {

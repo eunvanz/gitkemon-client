@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import useWindowSize from "react-use/lib/useWindowSize";
+import { useRouter } from "next/router";
 import Button from "~/components/Button";
 import Confetti from "~/components/Confetti/Confetti";
 import EvolutionCard from "~/components/EvolutionCard";
@@ -16,15 +16,16 @@ import {
   convertMonToModalMon,
   showHuntResultMessages,
 } from "~/helpers/projectHelpers";
+import ROUTES from "~/paths";
 import { Collection, HuntResult, Mon, User } from "~/types";
 
 export interface EvolutionProps {
   result?: HuntResult;
-  evolveMon: Collection;
+  evolveMon?: Collection;
   nextMons?: Mon[];
   onSelectNextMon: (monId: number) => void;
   onNavigateToMyCollection: VoidFunction;
-  user: User;
+  user?: User;
 }
 
 const Evolution: React.FC<EvolutionProps> = ({
@@ -70,7 +71,15 @@ const Evolution: React.FC<EvolutionProps> = ({
     }
   }, [nextMons]);
 
-  return nextMons ? (
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!evolveMon || !user) {
+      router.replace(ROUTES.HOME);
+    }
+  }, [evolveMon, router, user]);
+
+  return nextMons && evolveMon && user ? (
     <div
       className={cx(
         isMonSelectVisible && nextMons.length > 6 ? "block md:flex" : "flex",

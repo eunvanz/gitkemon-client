@@ -37,6 +37,10 @@ export const 컴포넌트 = () => {
     console.log("onNavigateToList");
   }, []);
 
+  const onSelectMon = useCallback((monId: number) => {
+    console.log("onSelectMon", monId);
+  }, []);
+
   return (
     <MonImage
       mons={mons}
@@ -47,6 +51,7 @@ export const 컴포넌트 = () => {
       onSubmit={onSubmit}
       onNavigateToList={onNavigateToList}
       isLoading={false}
+      onSelectMon={onSelectMon}
     />
   );
 };

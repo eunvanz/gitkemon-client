@@ -8,7 +8,7 @@ module.exports = (phase) => {
 
   const env = {
     GITHUB_CLIENT_ID: "4860581bd098afbf7956",
-    API_HOST: isDev ? "http://localhost:3000" : "",
+    API_HOST: isDev ? "http://localhost:3000" : "http://localhost:3000",
     ACCESS_TOKEN_HEADER_NAME: "gkmat",
   };
 
@@ -16,7 +16,6 @@ module.exports = (phase) => {
     env,
     reactStrictMode: true,
     images: {
-      // TODO: 나중에 정리
       domains: [
         "tailwindui.com",
         "images.unsplash.com",
@@ -25,6 +24,7 @@ module.exports = (phase) => {
         "via.placeholder.com",
       ],
     },
+    pageExtensions: ["page.tsx", "page.ts"],
   };
 
   return result;

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 import BlendCard from "~/components/BlendCard";
 import Button from "~/components/Button";
 import Confetti from "~/components/Confetti/Confetti";
@@ -7,13 +8,14 @@ import Loading from "~/components/Loading";
 import Typography from "~/components/Typography";
 import { delayPromise } from "~/helpers/commonHelpers";
 import { checkIsLuckyHuntResult, showHuntResultMessages } from "~/helpers/projectHelpers";
+import ROUTES from "~/paths";
 import { Collection, HuntResult, User } from "~/types";
 
 export interface BlendProps {
-  blendMons: Collection[];
+  blendMons?: Collection[];
   result?: HuntResult;
   onNavigateToMyCollection: VoidFunction;
-  user: User;
+  user?: User;
 }
 
 const Blend: React.FC<BlendProps> = ({
@@ -32,6 +34,8 @@ const Blend: React.FC<BlendProps> = ({
 
   const monCardRef = useRef<HTMLDivElement>(null);
 
+  const router = useRouter();
+
   const proceedResultAnim = useCallback(async () => {
     await delayPromise(500);
     if (checkIsLuckyHuntResult(result!)) {
@@ -46,7 +50,13 @@ const Blend: React.FC<BlendProps> = ({
     result && setIsCardVisible(true);
   }, [result]);
 
-  return result ? (
+  useEffect(() => {
+    if (!user || !blendMons) {
+      router.replace(ROUTES.HOME);
+    }
+  }, [blendMons, router, user]);
+
+  return result && blendMons && user ? (
     <div className="flex flex-col justify-center items-center content-container-no-footer">
       <Confetti isVisible={isConfettiVisible} />
       <AnimatePresence>

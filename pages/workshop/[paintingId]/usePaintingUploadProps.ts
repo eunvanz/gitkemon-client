@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { convertURLtoFile } from "~/helpers/commonHelpers";
 import ROUTES from "~/paths";
-import useUpdatePaintingMutation from "~/queries/useDeletePaintingMutation";
 import useMonsQuery from "~/queries/useMonsQuery";
 import usePaintingQuery from "~/queries/usePaintingQuery";
+import useUpdatePaintingMutation from "~/queries/useUpdatePaintingMutation";
 import useUploadPaintingMutation from "~/queries/useUploadPaintingMutation";
 import { userState } from "~/state/user";
-import { PaintingUploadPageProps } from ".";
 import { PaintingUploadFormValues, PaintingUploadProps } from "./PaintingUpload.view";
+import { PaintingUploadPageProps } from "./index.page";
 
 const usePaintingUploadProps: (props: PaintingUploadPageProps) => PaintingUploadProps = ({
   ssrMons,

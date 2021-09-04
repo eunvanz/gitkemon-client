@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { QUERY_KEY } from "~/types";
 import api from "../api";
 
-const useUpdatePaintingMutation = () => {
+const useDeletePaintingMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(api.deletePainting, {
@@ -12,4 +12,4 @@ const useUpdatePaintingMutation = () => {
   });
 };
 
-export default useUpdatePaintingMutation;
+export default useDeletePaintingMutation;

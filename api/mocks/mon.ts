@@ -10,6 +10,9 @@ const cardMon: CardMon = {
   potential: "SS",
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/hand-pokemon-2.appspot.com/o/monImages%2Fdandanji.png?alt=media&token=1289a5d8-e684-4b0f-abd9-80fd8d0bc971",
+  name: "이상해씨",
+  total: 200,
+  colPoint: 1,
 };
 
 const modalMon: ModalMon = {

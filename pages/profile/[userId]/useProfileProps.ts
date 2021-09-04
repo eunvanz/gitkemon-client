@@ -8,8 +8,8 @@ import usePaybackHistoryQuery from "~/queries/usePaybackHistoryQuery";
 import useProfileMonQuery from "~/queries/useProfileMonQuery";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
 import { userState } from "~/state/user";
-import { ProfilePageProps } from ".";
 import { ProfileProps } from "./Profile.view";
+import { ProfilePageProps } from "./index.page";
 
 const useProfileProps: (ssrProps: ProfilePageProps) => ProfileProps = ({
   ssrCollections,

@@ -2,7 +2,6 @@ import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
-import { CollectionsPageProps } from ".";
 import Dialog from "../../../components/Dialog";
 import Typography from "../../../components/Typography";
 import { capitalize } from "../../../helpers/commonHelpers";
@@ -14,6 +13,7 @@ import { blendMonState } from "../../../state/blendMon";
 import { userState } from "../../../state/user";
 import { Collection } from "../../../types";
 import { CollectionsProps } from "./Collections.view";
+import { CollectionsPageProps } from "./index.page";
 
 const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps = ({
   ssrMons,

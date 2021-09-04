@@ -197,7 +197,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
         </div>
       </div>
       <div className="flex flex-col w-0 flex-1 overflow-hidden">
-        <div className="relative z-10 flex-shrink-0 flex h-16 bg-gray-800 shadow">
+        <div className="relative z-20 flex-shrink-0 flex h-16 bg-gray-800 shadow">
           <button
             type="button"
             className="px-4 border-r border-gray-400 text-gray-200 focus:outline-none md:hidden"
@@ -221,7 +221,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                 </BadgeWrapper>
 
                 <DropDownMenu
-                  className="ml-3 relative"
+                  className="ml-3 relative z-50"
                   buttonLabel={
                     <>
                       <span className="sr-only">Open user menu</span>

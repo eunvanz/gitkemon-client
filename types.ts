@@ -216,6 +216,8 @@ export enum QUERY_KEY {
   USER_PROFILE = "USER_PROFILE",
   PROFILE_MON = "PROFILE_MON",
   PAYBACK_HISTORY = "PAYBACK_HISTORY",
+  RECENT_MONS = "RECENT_MONS",
+  RECENT_RARE_NEWS = "RECENT_RARE_NEWS",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";

@@ -207,12 +207,12 @@
   "useQuery Template": {
     "prefix": "uq",
     "body": [
-      "import { useQuery } from \"react-query\";",
+      "import { useQuery, UseQueryOptions } from \"react-query\";",
       "import api from \"../api\";",
       "import { QUERY_KEY } from \"~/types\";",
       "",
-      "const ${TM_FILENAME_BASE} = () => {",
-      "\tconst query = useQuery(QUERY_KEY.$1, $2);",
+      "const ${TM_FILENAME_BASE} = (queryOptions?: UseQueryOptions<$1>) => {",
+      "\tconst query = useQuery<$1>(QUERY_KEY.$2, $3, {$4...queryOptions});",
       "\treturn query;",
       "};",
       "",

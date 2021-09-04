@@ -8,19 +8,37 @@ import usePaybackHistoryQuery from "~/queries/usePaybackHistoryQuery";
 import useProfileMonQuery from "~/queries/useProfileMonQuery";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
 import { userState } from "~/state/user";
+import { ProfilePageProps } from ".";
 import { ProfileProps } from "./Profile.view";
 
-const useProfileProps: () => ProfileProps = () => {
+const useProfileProps: (ssrProps: ProfilePageProps) => ProfileProps = ({
+  ssrCollections,
+  ssrMons,
+  ssrPaybacks,
+  ssrProfileMon,
+  ssrUserProfile,
+}) => {
   const user = useRecoilValue(userState);
   const router = useRouter();
 
   const { userId } = router.query as { userId: string };
 
-  const { data: userProfile } = useUserProfileQuery(userId);
-  const { data: profileMon } = useProfileMonQuery(userId);
-  const { data: mons } = useActiveMonsQuery();
-  const { data: collections } = useCollectionsQuery(userId);
-  const { data: paybacks } = usePaybackHistoryQuery(userId);
+  const { data: userProfile } = useUserProfileQuery(userId, {
+    initialData: ssrUserProfile,
+  });
+  const { data: profileMon } = useProfileMonQuery(userId, {
+    initialData: ssrProfileMon,
+  });
+  const { data: mons } = useActiveMonsQuery({
+    initialData: ssrMons,
+  });
+  const { data: collections } = useCollectionsQuery(userId, {
+    initialData: ssrCollections,
+    enabled: !ssrCollections,
+  });
+  const { data: paybacks } = usePaybackHistoryQuery(userId, {
+    initialData: ssrPaybacks,
+  });
 
   const colPointInfo = useMemo(() => {
     if (!collections || !mons) {

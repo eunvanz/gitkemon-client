@@ -20,10 +20,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = (
   return <Collections {...props} />;
 };
 
-export const getServerSideProps = withAuthServerSideProps<{
-  ssrMons: Mon[];
-  ssrCollections: Collection[];
-}>({
+export const getServerSideProps = withAuthServerSideProps<CollectionsPageProps>({
   isAuthRequired: false,
 })(async (ctx) => {
   const { userId } = ctx.params as { userId: string };

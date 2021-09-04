@@ -20,11 +20,13 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
   ssrCollections,
   ssrCollectionUser,
 }) => {
+  console.log("===== ssrMons", ssrMons);
   const router = useRouter();
   const { userId } = router.query as { userId: string };
   const { data: mons } = useActiveMonsQuery({ initialData: ssrMons });
   const { data: collections } = useCollectionsQuery(userId, {
     initialData: ssrCollections,
+    enabled: !ssrCollections,
   });
   const { data: collectionUser } = useUserProfileQuery(userId, {
     initialData: ssrCollectionUser,

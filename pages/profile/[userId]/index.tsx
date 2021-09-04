@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import api from "~/api";
+import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
 import withBaseLayout from "~/hocs/withBaseLayout";
 import ROUTES from "~/paths";
 import { Collection, Mon, PaybackLog, ProfileMon, UserProfile } from "~/types";
@@ -14,13 +15,15 @@ export interface ProfilePageProps {
   ssrProfileMon: ProfileMon;
 }
 
-const ProfilePage: React.FC<void> = () => {
-  const props = useProfileProps();
+const ProfilePage: React.FC<ProfilePageProps> = (ssrProps: ProfilePageProps) => {
+  const props = useProfileProps(ssrProps);
 
   return <Profile {...props} />;
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps = withAuthServerSideProps<ProfilePageProps>({
+  isAuthRequired: false,
+})(async (ctx) => {
   const { userId } = ctx.params as { userId: string };
   if (!userId) {
     return {
@@ -52,6 +55,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       ssrProfileMon,
     },
   };
-};
+});
 
 export default withBaseLayout(ProfilePage);

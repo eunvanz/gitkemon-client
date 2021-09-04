@@ -34,7 +34,7 @@ const ContributionStatus: React.FC<ContributionStatusProps> = ({
   const router = useRouter();
 
   return user ? (
-    <div className="border rounded flex flex-col md:flex-row justify-between items-center p-4">
+    <div className="border rounded-md flex flex-col md:flex-row justify-between items-center p-4">
       <div className="flex flex-col mb-4 md:mb-0">
         <Typography as="div" className="mb-2">
           You&apos;ve checked in with total{" "}
@@ -85,7 +85,7 @@ const ContributionStatus: React.FC<ContributionStatusProps> = ({
       </Button>
     </div>
   ) : (
-    <div className="border rounded flex flex-col p-4 justify-center items-center">
+    <div className="border rounded-md flex flex-col p-4 justify-center items-center">
       <Typography as="h1" size="xl" weight="bold" className="text-center mt-4 mb-8">
         Make your Github <Typography color="green">contributions</Typography> more
         valuable💎

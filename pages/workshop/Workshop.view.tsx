@@ -3,17 +3,13 @@ import Button from "~/components/Button";
 import Intersection from "~/components/Intersection";
 import Loading from "~/components/Loading";
 import MonCardGrid from "~/components/MonCardGrid";
-import PaintingCard from "~/components/PaintingCard";
+import PaintingCardContainer from "~/components/PaintingCard";
 import Typography from "~/components/Typography";
 import { Painting, User } from "~/types";
 
 export interface WorkshopProps {
   paintings?: Painting[];
   onNavigateToUpload: (id: number | "new") => void;
-  user?: User;
-  onClickLike: (painting: Painting) => void;
-  onDelete: (painting: Painting) => void;
-  onEdit: (painting: Painting) => void;
   onFetchNextPage: VoidFunction;
   hasNextPage: boolean;
 }
@@ -21,10 +17,6 @@ export interface WorkshopProps {
 const Workshop: React.FC<WorkshopProps> = ({
   paintings,
   onNavigateToUpload,
-  user,
-  onClickLike,
-  onDelete,
-  onEdit,
   hasNextPage,
   onFetchNextPage,
 }) => {
@@ -49,16 +41,7 @@ const Workshop: React.FC<WorkshopProps> = ({
       </div>
       <MonCardGrid>
         {paintings.map((painting) => {
-          return (
-            <PaintingCard
-              key={painting.id}
-              painting={painting}
-              isManageable={painting.designerId === user?.id}
-              onClickLike={() => onClickLike(painting)}
-              onDelete={() => onDelete(painting)}
-              onEdit={() => onEdit(painting)}
-            />
-          );
+          return <PaintingCardContainer key={painting.id} painting={painting} />;
         })}
       </MonCardGrid>
       <Intersection onIntersect={() => hasNextPage && onFetchNextPage()} />

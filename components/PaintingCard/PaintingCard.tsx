@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import cx from "classnames";
 import { getLocaleProperty } from "~/helpers/projectHelpers";
 import { Painting } from "~/types";
 import Badge from "../Badge";
@@ -11,12 +12,14 @@ export interface PaintingCardProps
   extends Omit<PaintingModalProps, "isOpen" | "onClose"> {
   painting: Painting;
   onClickLike: () => void;
+  customSize?: string;
 }
 
 const PaintingCard: React.FC<PaintingCardProps> = ({
   painting,
   onClickLike,
   onDelete,
+  customSize,
   ...restProps
 }) => {
   const monName = useMemo(() => {
@@ -41,7 +44,10 @@ const PaintingCard: React.FC<PaintingCardProps> = ({
   return (
     <>
       <div
-        className="flex flex-col p-1 items-center w-1/2 sm:w-1/3 lg:w-1/4 xl:w-1/6 cursor-pointer"
+        className={cx(
+          "flex flex-col p-1 items-center cursor-pointer",
+          customSize || "w-1/2 sm:w-1/3 lg:w-1/4 xl:w-1/6",
+        )}
         onClick={() => setIsModalOpen(true)}
       >
         <div className="relative w-full h-ful transform hover:-translate-y-1 transition-transform">

@@ -122,7 +122,7 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
   return (
     <>
       <Table
-        dataSource={isPreview ? dataSource.slice(0, 5) : dataSource}
+        dataSource={isPreview ? dataSource.slice(0, 3) : dataSource}
         columns={columns}
         isLoading={!collections}
       />

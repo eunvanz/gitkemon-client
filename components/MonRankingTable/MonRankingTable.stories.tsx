@@ -18,4 +18,8 @@ const Template: ComponentStory<typeof MonRankingTable> = (args) => (
   <MonRankingTable {...args} />
 );
 
-export const 기본 = createStoryComponent(Template);
+export const Default = createStoryComponent(Template);
+
+export const Preview = createStoryComponent(Template, {
+  isPreview: true,
+});

@@ -1,8 +1,11 @@
 import useList from "~/hooks/useList";
 import useMonRankingListQuery from "~/queries/useMonRankingListQuery";
+import { MonRankingTableContainerProps } from ".";
 import { MonRankingTableProps } from "./MonRankingTable";
 
-const useMonRankingTable: () => MonRankingTableProps = () => {
+const useMonRankingTable: (
+  props: MonRankingTableContainerProps,
+) => MonRankingTableProps = ({ isPreview }) => {
   const { data: collections, hasNextPage, fetchNextPage } = useList(
     useMonRankingListQuery,
   );
@@ -11,6 +14,7 @@ const useMonRankingTable: () => MonRankingTableProps = () => {
     collections,
     hasNextPage,
     onFetchNextPage: fetchNextPage,
+    isPreview,
   };
 };
 

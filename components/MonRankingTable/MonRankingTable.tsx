@@ -23,12 +23,14 @@ export interface MonRankingTableProps {
   collections?: Collection[];
   hasNextPage?: boolean;
   onFetchNextPage?: VoidFunction;
+  isPreview?: boolean;
 }
 
 const MonRankingTable: React.FC<MonRankingTableProps> = ({
   collections,
   hasNextPage,
   onFetchNextPage,
+  isPreview,
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
   const [modalMonId, setModalMonId] = useState<number>(0);
@@ -53,7 +55,7 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
   }, [collections]);
 
   const columns: Column<RankingItem>[] = useMemo(() => {
-    return [
+    const result: Column<RankingItem>[] = [
       {
         title: "rank",
         dataIndex: "rank",
@@ -89,33 +91,46 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
         title: "stats",
         dataIndex: "total",
       },
-      {
-        title: "stars",
-        dataIndex: "stars",
-        render: (data) => <MonStars stars={data.stars} />,
-      },
-      {
-        title: "tier",
-        dataIndex: "tier",
-        render: (data) => <MonTierBadge tier={data.tier} />,
-      },
-      {
-        title: "type",
-        dataIndex: "firstType",
-        render: (data) => (
-          <>
-            <MonTypeBadge type={data.firstType} />
-            {data.secondType && <MonTypeBadge className="ml-1" type={data.secondType} />}
-          </>
-        ),
-      },
     ];
-  }, [handleOnOpenMonModal]);
+
+    if (!isPreview) {
+      result.push(
+        {
+          title: "stars",
+          dataIndex: "stars",
+          render: (data) => <MonStars stars={data.stars} />,
+        },
+        {
+          title: "tier",
+          dataIndex: "tier",
+          render: (data) => <MonTierBadge tier={data.tier} />,
+        },
+        {
+          title: "type",
+          dataIndex: "firstType",
+          render: (data) => (
+            <>
+              <MonTypeBadge type={data.firstType} />
+              {data.secondType && (
+                <MonTypeBadge className="ml-1" type={data.secondType} />
+              )}
+            </>
+          ),
+        },
+      );
+    }
+
+    return result;
+  }, [handleOnOpenMonModal, isPreview]);
 
   return (
     <>
-      <Table dataSource={dataSource} columns={columns} isLoading={!collections} />
-      {hasNextPage && <Intersection onIntersect={onFetchNextPage} />}
+      <Table
+        dataSource={isPreview ? dataSource.slice(0, 5) : dataSource}
+        columns={columns}
+        isLoading={!collections}
+      />
+      {hasNextPage && !isPreview && <Intersection onIntersect={onFetchNextPage} />}
       <MonModalContainer
         isOpen={isMonModalOpen}
         onClose={handleOnCloseMonModal}

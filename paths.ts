@@ -15,6 +15,7 @@ const ROUTES = {
   NOT_FOUND: "/not-found",
   EVOLUTION: "/evolution",
   BLEND: "/blend",
+  OOPS: "/oops",
 };
 
 export default ROUTES;

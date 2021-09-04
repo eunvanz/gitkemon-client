@@ -1,7 +1,6 @@
 import { ReactNode, useCallback } from "react";
-import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import api from "../../api";
+import useLogoutMutation from "~/queries/useLogoutMutation";
 import useAvailableContributionsQuery from "../../queries/useAvailableContributionsQuery";
 import { userState } from "../../state/user";
 import { User } from "../../types";
@@ -16,14 +15,15 @@ const useBaseLayoutProps: ({
 }) => BaseLayoutProps = ({ children, user: userProp }) => {
   const user = useRecoilValue(userState);
 
-  const { data: availableContributions } = useAvailableContributionsQuery();
+  const { data: availableContributions } = useAvailableContributionsQuery({
+    enabled: !!user,
+  });
 
-  const router = useRouter();
+  const { mutate: logout } = useLogoutMutation();
 
-  const onSignOut = useCallback(async () => {
-    await api.logout();
-    router.reload();
-  }, [router]);
+  const onSignOut = useCallback(() => {
+    logout();
+  }, [logout]);
 
   return {
     user: user || userProp,

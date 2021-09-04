@@ -12,7 +12,7 @@ const ROUTES = {
   ADMIN__MON_IMAGES: "/admin/mon-images",
   ADMIN__MONS: "/admin/mons",
   PAYBACK: "/check-in",
-  NOT_FOUND: "/not-found",
+  NOT_FOUND: "/404",
   EVOLUTION: "/evolution",
   BLEND: "/blend",
   OOPS: "/oops",

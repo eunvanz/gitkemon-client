@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import orderBy from "lodash/orderBy";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
@@ -8,6 +9,7 @@ import CollectionStatus from "~/components/CollectionStatus";
 import Loading from "~/components/Loading";
 import MonCard from "~/components/MonCard";
 import MonCardGrid from "~/components/MonCardGrid";
+import TrainerClassBadge from "~/components/TrainerClassBadge";
 import Typography from "~/components/Typography";
 import { MON_STARS, MON_TIERS, MON_TYPES } from "~/constants/rules";
 import { capitalize } from "~/helpers/commonHelpers";
@@ -135,12 +137,33 @@ const Collections: React.FC<CollectionsProps> = ({
 
   return !isLoading ? (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
-      <Typography as="h1" size="2xl">
-        <a onClick={() => router.push(`${ROUTES.PROFILE}/${collectionUser?.id}`)}>
-          {collectionUser?.nickname}
-        </a>
-        &apos;s collection
-      </Typography>
+      <div className="flex items-center mb-4">
+        <div className="relative mr-4">
+          <Image
+            className="rounded-full"
+            src={collectionUser!.avatarUrl}
+            alt="user image"
+            width={64}
+            height={64}
+          />
+          <span
+            className="absolute inset-0 shadow-inner rounded-full"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="flex flex-col justify-center">
+          <Typography className="mb-0" as="h1" size="2xl">
+            <a onClick={() => router.push(`${ROUTES.PROFILE}/${collectionUser?.id}`)}>
+              {collectionUser?.nickname}
+            </a>
+            &apos;s collection
+          </Typography>
+          <Typography color="hint">
+            {collectionUser?.githubLogin} ·{" "}
+            <TrainerClassBadge trainerClass={collectionUser!.trainerClass} />
+          </Typography>
+        </div>
+      </div>
       {!isBlendMode && colPointInfo && countInfo && (
         <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />
       )}

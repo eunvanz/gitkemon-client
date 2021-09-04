@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { TRAINER_CLASSES } from "~/constants/rules";
+import { TRAINER_CLASSES, TRAINER_CLASS_LIMIT_UNIT } from "~/constants/rules";
 import { CardMon, Collection, HuntResult, ModalMon, Mon, Pageable, User } from "../types";
 import { capitalize } from "./commonHelpers";
 
@@ -227,7 +227,7 @@ export const getMergedPageData = <T>(data: Pageable<T>[]) => {
 };
 
 export const getTrainerClassLimit = (trainerClass: number) => {
-  return trainerClass * 60;
+  return trainerClass * TRAINER_CLASS_LIMIT_UNIT;
 };
 
 export const checkIsCollectionMaxLevel = (user: User, mon: CardMon | ModalMon) => {

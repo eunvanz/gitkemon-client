@@ -55,3 +55,5 @@ export const TRAINER_CLASSES = [
   "god",
   "the one",
 ];
+
+export const TRAINER_CLASS_LIMIT_UNIT = 30;

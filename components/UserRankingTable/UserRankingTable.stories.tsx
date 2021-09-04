@@ -15,4 +15,14 @@ const Template: ComponentStory<typeof UserRankingTable> = (args) => (
   <UserRankingTable {...args} />
 );
 
-export const 기본 = createStoryComponent(Template);
+export const Default = createStoryComponent(Template);
+
+export const PreviewCollection = createStoryComponent(Template, {
+  isPreview: true,
+  type: "collection",
+});
+
+export const PreviewContributions = createStoryComponent(Template, {
+  isPreview: true,
+  type: "contributions",
+});

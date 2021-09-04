@@ -19,12 +19,16 @@ export interface UserRankingTableProps {
   users?: User[];
   hasNextPage?: boolean;
   onFetchNextPage?: VoidFunction;
+  isPreview?: boolean;
+  type?: "collection" | "contributions";
 }
 
 const UserRankingTable: React.FC<UserRankingTableProps> = ({
   users,
   hasNextPage,
   onFetchNextPage,
+  isPreview,
+  type,
 }) => {
   const dataSource: RankingItem[] = useMemo(() => {
     return users
@@ -37,7 +41,8 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
   }, [users]);
 
   const columns: Column<RankingItem>[] = useMemo(() => {
-    return [
+    const result: Column<RankingItem>[] = [];
+    result.push(
       {
         title: "rank",
         dataIndex: "rank",
@@ -47,33 +52,44 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
         dataIndex: "nickname",
         render: (data) => <UserItem user={data} />,
       },
-      {
+    );
+    if (!isPreview || (isPreview && type === "collection")) {
+      result.push({
         title: "collection point",
         dataIndex: "colPoint",
         render: (data) => data.colPoint.toLocaleString(),
-      },
-      {
+      });
+    }
+    if (!isPreview || (isPreview && type === "contributions")) {
+      result.push({
         title: "contributions",
         dataIndex: "lastContributions",
         render: (data) => data.lastContributions.toLocaleString(),
-      },
-      {
-        title: "trainer class",
-        dataIndex: "trainerClass",
-        render: (data) => <TrainerClassBadge trainerClass={data.trainerClass} />,
-      },
-      {
+      });
+    }
+    result.push({
+      title: "trainer class",
+      dataIndex: "trainerClass",
+      render: (data) => <TrainerClassBadge trainerClass={data.trainerClass} />,
+    });
+    if (!isPreview) {
+      result.push({
         title: "last check-in",
         dataIndex: "lastPaybackDate",
         render: (data) => dayjs(data.lastPaybackDate).fromNow(),
-      },
-    ];
-  }, []);
+      });
+    }
+    return result;
+  }, [isPreview, type]);
 
   return (
     <>
-      <Table dataSource={dataSource} columns={columns} isLoading={!users} />
-      {hasNextPage && <Intersection onIntersect={onFetchNextPage} />}
+      <Table
+        dataSource={isPreview ? dataSource.slice(0, 5) : dataSource}
+        columns={columns}
+        isLoading={!users}
+      />
+      {!isPreview && hasNextPage && <Intersection onIntersect={onFetchNextPage} />}
     </>
   );
 };

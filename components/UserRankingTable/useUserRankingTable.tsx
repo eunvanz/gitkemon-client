@@ -6,7 +6,7 @@ import { UserRankingTableProps } from "./UserRankingTable";
 
 const useUserRankingTable: (
   props: UserRankingTableContainerProps,
-) => UserRankingTableProps = ({ type }) => {
+) => UserRankingTableProps = ({ type, isPreview }) => {
   const { data: users, hasNextPage, fetchNextPage: onFetchNextPage } = useList(
     type === "collection"
       ? useUserCollectionRankingListQuery
@@ -17,6 +17,7 @@ const useUserRankingTable: (
     users,
     hasNextPage,
     onFetchNextPage,
+    isPreview,
   };
 };
 

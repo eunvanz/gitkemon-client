@@ -3,10 +3,14 @@ import useUserRankingTable from "./useUserRankingTable";
 
 export interface UserRankingTableContainerProps {
   type: "collection" | "contributions";
+  isPreview?: boolean;
 }
 
-const UserRankingTableContainer = ({ type }: UserRankingTableContainerProps) => {
-  const props = useUserRankingTable({ type });
+const UserRankingTableContainer = ({
+  type,
+  isPreview,
+}: UserRankingTableContainerProps) => {
+  const props = useUserRankingTable({ type, isPreview });
 
   return <UserRankingTable {...props} />;
 };

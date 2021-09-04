@@ -1,6 +1,7 @@
 import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
+import useUserProfileQuery from "~/queries/useUserProfileQuery";
 import { CollectionsPageProps } from ".";
 import Dialog from "../../../components/Dialog";
 import Typography from "../../../components/Typography";
@@ -17,6 +18,7 @@ import { CollectionsProps } from "./Collections.view";
 const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps = ({
   ssrMons,
   ssrCollections,
+  ssrCollectionUser,
 }) => {
   const router = useRouter();
   const { userId } = router.query as { userId: string };
@@ -24,20 +26,15 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
   const { data: collections } = useCollectionsQuery(userId, {
     initialData: ssrCollections,
   });
+  const { data: collectionUser } = useUserProfileQuery(userId, {
+    initialData: ssrCollectionUser,
+  });
   const user = useRecoilValue(userState);
   const [blendMon, setBlendMon] = useRecoilState(blendMonState);
 
   const isBlendMode = useMemo(() => {
     return !!blendMon && blendMon.length === 1;
   }, [blendMon]);
-
-  const isMyCollection = useMemo(() => {
-    return user && userId === user.id;
-  }, [user, userId]);
-
-  const collectionUser = useMemo(() => {
-    return isMyCollection ? user : user;
-  }, [isMyCollection, user]);
 
   useEffect(() => {
     return () => {
@@ -87,11 +84,12 @@ const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps 
   return {
     collections,
     mons,
-    user: collectionUser!,
+    user,
     isBlendMode,
     monToBlend: blendMon?.[0],
     onSelectItem,
     onCancelBlendMode,
+    collectionUser,
   };
 };
 

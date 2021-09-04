@@ -18,16 +18,17 @@ import {
   getLocaleProperty,
 } from "~/helpers/projectHelpers";
 import ROUTES from "~/paths";
-import { Collection, Mon, User } from "~/types";
+import { Collection, Mon, User, UserProfile } from "~/types";
 
 export interface CollectionsProps {
   collections?: Collection[];
   mons?: Mon[];
-  user: User;
+  user?: User;
   isBlendMode?: boolean;
   monToBlend?: Collection;
   onSelectItem?: (collection: Collection) => void;
   onCancelBlendMode: VoidFunction;
+  collectionUser?: UserProfile;
 }
 
 const Collections: React.FC<CollectionsProps> = ({
@@ -38,6 +39,7 @@ const Collections: React.FC<CollectionsProps> = ({
   monToBlend,
   onSelectItem,
   onCancelBlendMode,
+  collectionUser,
 }) => {
   const [filterState, setFilterState] = useState<CollectionFilterState>({
     has: [true, false],
@@ -134,8 +136,8 @@ const Collections: React.FC<CollectionsProps> = ({
   return !isLoading ? (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
       <Typography as="h1" size="2xl">
-        <a onClick={() => router.push(`${ROUTES.PROFILE}/${user.id}`)}>
-          {user?.nickname}
+        <a onClick={() => router.push(`${ROUTES.PROFILE}/${collectionUser?.id}`)}>
+          {collectionUser?.nickname}
         </a>
         &apos;s collection
       </Typography>
@@ -180,7 +182,7 @@ const Collections: React.FC<CollectionsProps> = ({
               onSelect={
                 isBlendMode ? () => onSelectItem?.(collection as Collection) : undefined
               }
-              isOwned
+              isOwned={collectionUser?.id === user?.id}
               user={user}
               isStatic
             />

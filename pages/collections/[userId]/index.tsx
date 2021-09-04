@@ -2,13 +2,14 @@ import api from "../../../api";
 import withAuthServerSideProps from "../../../hocs/withAuthServerSideProps";
 import withBaseLayout from "../../../hocs/withBaseLayout";
 import ROUTES from "../../../paths";
-import { Collection, Mon } from "../../../types";
+import { Collection, Mon, UserProfile } from "../../../types";
 import Collections from "./Collections.view";
 import useCollectionsProps from "./useCollectionsProps";
 
 export interface CollectionsPageProps {
   ssrMons: Mon[];
   ssrCollections: Collection[];
+  ssrCollectionUser: UserProfile;
 }
 
 const CollectionsPage: React.FC<CollectionsPageProps> = (
@@ -34,12 +35,16 @@ export const getServerSideProps = withAuthServerSideProps<{
       },
     };
   }
-  const ssrMons = await api.getActiveMons();
-  const ssrCollections = await api.getUserCollections(userId);
+  const [ssrMons, ssrCollections, ssrCollectionUser] = await Promise.all([
+    api.getActiveMons(),
+    api.getUserCollections(userId),
+    api.getUserProfile(userId),
+  ]);
   return {
     props: {
       ssrMons,
       ssrCollections,
+      ssrCollectionUser,
     },
   };
 });

@@ -87,7 +87,7 @@ const MonCard: React.FC<MonCardProps> = ({
                 {isStatic ? (
                   <Image
                     src={mon.imageUrl || "https://via.placeholder.com/250"}
-                    alt={mon.name}
+                    alt="mon image"
                     draggable={false}
                     layout="fill"
                     objectFit="contain"
@@ -96,7 +96,7 @@ const MonCard: React.FC<MonCardProps> = ({
                   // eslint-disable-next-line
                   <img
                     src={mon.imageUrl || "https://via.placeholder.com/250"}
-                    alt={mon.name}
+                    alt="mon image"
                     draggable={false}
                   />
                 )}

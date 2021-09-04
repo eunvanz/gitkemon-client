@@ -168,7 +168,7 @@
       "  <${TM_FILENAME_BASE/\\.stories//} {...args} />",
       ");",
       "",
-      "export const 기본 = createStoryComponent(Template);",
+      "export const Default = createStoryComponent(Template);",
       ""
     ],
     "description": "Storybook Template"
@@ -189,7 +189,7 @@
       "  <${TM_FILENAME_BASE/\\.stories//} {...args} />",
       ");",
       "",
-      "export const 기본 = createStoryComponent(Template);",
+      "export const Default = createStoryComponent(Template);",
       ""
     ],
     "description": "Storybook Template"

@@ -19,6 +19,7 @@ import {
   UserProfile,
   ProfileMon,
   PaybackLog,
+  RareNews,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -389,6 +390,16 @@ const getPaybackHistory = async (userId: string) => {
   return data;
 };
 
+const getRecentMons = async () => {
+  const { data } = await requester.get<Mon[]>(API_URL.MONS__RECENT);
+  return data;
+};
+
+const getRecentRareNews = async () => {
+  const { data } = await requester.get<RareNews[]>(API_URL.RARE_NEWS__RECENT);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -428,6 +439,8 @@ const api = {
   patchUserProfile,
   getProfileMons,
   getPaybackHistory,
+  getRecentMons,
+  getRecentRareNews,
 };
 
 export default api;

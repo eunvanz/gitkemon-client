@@ -13,6 +13,7 @@ const API_URL = {
   MONS__ACTIVE: "mons/active",
   MONS__INACTIVE: "mons/inactive",
   MONS__NEXT: "mons/:monId/next",
+  MONS__RECENT: "mons/recent",
   DONATIONS: "paybacks",
   COLLECTIONS: "collections",
   COLLECTIONS__HUNT: "collections/hunt",
@@ -25,6 +26,7 @@ const API_URL = {
   LIKES: "likes",
   LIKES_UNLIKE: "likes/unlike",
   PAYBACKS__HISTORY: "paybacks/history",
+  RARE_NEWS__RECENT: "rare-news/recent",
 };
 
 export default API_URL;

@@ -379,3 +379,14 @@ export interface ProfileMon {
   topMonRanks: number[];
   recentMons: Collection[];
 }
+
+export interface RareNews {
+  id: number;
+  userId: string;
+  user: User;
+  collectionId: number;
+  collection: Collection;
+  method: HuntMethod;
+}
+
+export type HuntMethod = "hunt" | "evolve" | "blend";

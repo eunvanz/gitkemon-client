@@ -211,7 +211,7 @@ const getAvailableContributions = async (accessToken?: string) => {
  * 기부 실행
  */
 const postPaybacks = async () => {
-  const { data } = await requester.post<Payback>(API_URL.DONATIONS);
+  const { data } = await requester.post<Payback>(API_URL.PAYBACKS);
   return data;
 };
 
@@ -400,6 +400,11 @@ const getRecentRareNews = async () => {
   return data;
 };
 
+const getLastPayback = async () => {
+  const { data } = await requester.get<Payback>(API_URL.PAYBACKS__LAST);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -441,6 +446,7 @@ const api = {
   getPaybackHistory,
   getRecentMons,
   getRecentRareNews,
+  getLastPayback,
 };
 
 export default api;

@@ -218,6 +218,7 @@ export enum QUERY_KEY {
   PAYBACK_HISTORY = "PAYBACK_HISTORY",
   RECENT_MONS = "RECENT_MONS",
   RECENT_RARE_NEWS = "RECENT_RARE_NEWS",
+  LAST_PAYBACK = "LAST_PAYBACK",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";

@@ -14,7 +14,6 @@ const API_URL = {
   MONS__INACTIVE: "mons/inactive",
   MONS__NEXT: "mons/:monId/next",
   MONS__RECENT: "mons/recent",
-  DONATIONS: "paybacks",
   COLLECTIONS: "collections",
   COLLECTIONS__HUNT: "collections/hunt",
   COLLECTIONS__USER: "collections/user",
@@ -25,7 +24,9 @@ const API_URL = {
   PAINTINGS: "paintings",
   LIKES: "likes",
   LIKES_UNLIKE: "likes/unlike",
+  PAYBACKS: "paybacks",
   PAYBACKS__HISTORY: "paybacks/history",
+  PAYBACKS__LAST: "paybacks/last",
   RARE_NEWS__RECENT: "rare-news/recent",
 };
 

@@ -123,7 +123,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
   }, [onKeepHunting, triggerAnimation]);
 
   return (
-    <div className="flex flex-col justify-center items-center content-container">
+    <div className="flex flex-col justify-center items-center content-container-no-footer">
       {isConfettiVisible && <Confetti width={width} height={height} recycle={false} />}
       <div className="flex justify-center w-full">
         <AnimatePresence>

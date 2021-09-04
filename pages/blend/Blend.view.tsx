@@ -47,7 +47,7 @@ const Blend: React.FC<BlendProps> = ({
   }, [result]);
 
   return result ? (
-    <div className="flex flex-col justify-center items-center content-container">
+    <div className="flex flex-col justify-center items-center content-container-no-footer">
       <Confetti isVisible={isConfettiVisible} />
       <AnimatePresence>
         {isCardVisible && (

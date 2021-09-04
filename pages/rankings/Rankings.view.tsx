@@ -11,7 +11,7 @@ export interface RankingsProps {
 
 const Rankings: React.FC<RankingsProps> = ({ activeTabIndex, onChangeTab }) => {
   return (
-    <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4">
+    <div className="content-container-no-footer max-w-screen-xl m-auto p-1 sm:p-4">
       <Typography as="h1" size="2xl">
         Rankings
       </Typography>

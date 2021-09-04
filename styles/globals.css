@@ -6,3 +6,7 @@
 .content-container {
   min-height: calc(100vh - 184px);
 }
+
+.content-container-no-footer {
+  min-height: calc(100vh - 64px);
+}

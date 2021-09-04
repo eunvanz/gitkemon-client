@@ -74,7 +74,7 @@ const Evolution: React.FC<EvolutionProps> = ({
     <div
       className={cx(
         isMonSelectVisible && nextMons.length > 6 ? "block md:flex" : "flex",
-        "py-4 flex-col justify-center items-center content-container",
+        "py-4 flex-col justify-center items-center content-container-no-footer",
       )}
     >
       <Confetti isVisible={isConfettiVisible} />

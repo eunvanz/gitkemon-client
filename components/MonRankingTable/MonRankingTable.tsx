@@ -125,6 +125,7 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
         dataSource={isPreview ? dataSource.slice(0, 3) : dataSource}
         columns={columns}
         isLoading={!collections}
+        skeletonLength={isPreview ? 3 : 10}
       />
       {hasNextPage && !isPreview && <Intersection onIntersect={onFetchNextPage} />}
       <MonModalContainer

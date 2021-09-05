@@ -88,6 +88,7 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
         dataSource={isPreview ? dataSource.slice(0, 3) : dataSource}
         columns={columns}
         isLoading={!users}
+        skeletonLength={isPreview ? 3 : 10}
       />
       {!isPreview && hasNextPage && <Intersection onIntersect={onFetchNextPage} />}
     </>

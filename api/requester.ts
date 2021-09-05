@@ -24,7 +24,7 @@ instance.interceptors.response.use(
     return Promise.resolve(response);
   },
   async (error: AxiosError) => {
-    if (!window) return;
+    if (typeof window === "undefined") return;
     const { response } = error;
     if (response) {
       const {

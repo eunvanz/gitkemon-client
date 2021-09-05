@@ -14,9 +14,15 @@ export interface TableProps<T> {
   dataSource: T[];
   columns: Column<T>[];
   isLoading?: boolean;
+  skeletonLength?: number;
 }
 
-const Table = <T extends object>({ dataSource, columns, isLoading }: TableProps<T>) => {
+const Table = <T extends object>({
+  dataSource,
+  columns,
+  isLoading,
+  skeletonLength = 10,
+}: TableProps<T>) => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -42,7 +48,7 @@ const Table = <T extends object>({ dataSource, columns, isLoading }: TableProps<
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {(isLoading ? Array.from({ length: 10 }) : dataSource).map(
+                {(isLoading ? Array.from({ length: skeletonLength }) : dataSource).map(
                   (data, index) => (
                     <tr key={index}>
                       {columns.map((col) => (

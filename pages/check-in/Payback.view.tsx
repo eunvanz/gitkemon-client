@@ -125,6 +125,7 @@ const Payback: React.FC<PaybackProps> = ({
     });
     return result;
   }, [paybackResult]);
+  console.log("===== user", user);
 
   if (!paybackResult) {
     return (
@@ -158,7 +159,9 @@ const Payback: React.FC<PaybackProps> = ({
                 })}
               >
                 {!isLoading
-                  ? `Since ${dayjs(user!.lastPaybackDate).format("lll")}`
+                  ? `Since ${dayjs(
+                      user!.lastPaybackDate || user!.contributionBaseDate,
+                    ).format("lll")}`
                   : "Loading..."}
               </h3>
             </div>

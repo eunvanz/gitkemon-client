@@ -1,0 +1,8 @@
+.pattern {
+  background-repeat: repeat;
+  background-image: url("https://gitkemon.s3.ap-northeast-2.amazonaws.com/criss-cross.png");
+}
+
+.font {
+  font-family: "Roboto Mono", monospace;
+}

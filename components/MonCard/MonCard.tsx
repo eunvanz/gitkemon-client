@@ -6,6 +6,7 @@ import { MON_CARD_WIDTH } from "~/constants/styles";
 import { checkIsCollectionMaxLevel } from "~/helpers/projectHelpers";
 import { CardMon, ModalMon, User } from "../../types";
 import Button from "../Button";
+import CardBack from "../CardBack";
 import LevelBadge from "../LevelBadge";
 import MonModalContainer from "../MonModal";
 import MonModal from "../MonModal/MonModal";
@@ -85,20 +86,24 @@ const MonCard: React.FC<MonCardProps> = ({
               {/* TODO: 플레이스홀더 이미지 대체 */}
               <div className={cx("relative", { "h-36": isStatic })}>
                 {isStatic ? (
-                  <Image
-                    src={mon.imageUrl || "https://via.placeholder.com/250"}
-                    alt="mon image"
-                    draggable={false}
-                    layout="fill"
-                    objectFit="contain"
-                  />
-                ) : (
+                  mon.imageUrl ? (
+                    // @ts-ignore
+                    <Image
+                      src={mon.imageUrl}
+                      alt="mon image"
+                      draggable={false}
+                      layout="fill"
+                      objectFit="contain"
+                      quality={100}
+                    />
+                  ) : (
+                    <CardBack />
+                  )
+                ) : mon.imageUrl ? (
                   // eslint-disable-next-line
-                  <img
-                    src={mon.imageUrl || "https://via.placeholder.com/250"}
-                    alt="mon image"
-                    draggable={false}
-                  />
+                  <img src={mon.imageUrl} alt="mon image" draggable={false} />
+                ) : (
+                  <CardBack />
                 )}
               </div>
             </div>
@@ -158,8 +163,7 @@ const MonCard: React.FC<MonCardProps> = ({
           </div>
           <div className={cx(styles.surface, styles.back)}>
             <div className="border rounded h-full">
-              {/* TODO: 뒷면 디자인 */}
-              <div className="h-full w-full p-1 bg-gray-100" />
+              <CardBack />
             </div>
           </div>
         </div>

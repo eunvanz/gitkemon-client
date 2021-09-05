@@ -5,7 +5,7 @@ import Loading from "~/components/Loading";
 import MonCardGrid from "~/components/MonCardGrid";
 import PaintingCardContainer from "~/components/PaintingCard";
 import Typography from "~/components/Typography";
-import { Painting, User } from "~/types";
+import { Painting } from "~/types";
 
 export interface WorkshopProps {
   paintings?: Painting[];

@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext } from "next";
+import cookies from "next-cookies";
 import api from "../api";
 import ROUTES from "../paths";
 import { User } from "../types";
@@ -16,9 +17,8 @@ const withAuthServerSideProps = <T>({
   ) => Promise<{ props: T } | { redirect: { destination: string; permanent: boolean } }>,
 ) => {
   return async (ctx: GetServerSidePropsContext) => {
-    const user = await api.loginWithToken(
-      ctx.req.cookies[process.env.ACCESS_TOKEN_HEADER_NAME as string],
-    );
+    const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_HEADER_NAME as string];
+    const user = await api.loginWithToken(accessToken);
     if (!user && isAuthRequired) {
       return {
         redirect: {

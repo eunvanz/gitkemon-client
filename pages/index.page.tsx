@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
+import cookies from "next-cookies";
 import Head from "next/head";
 import api from "~/api";
 import { Mon, Pageable, Painting, Payback } from "~/types";
@@ -32,7 +33,7 @@ const HomePage: NextPage<HomePageProps> = (pageProps) => {
 export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps<{}>({
   isAuthRequired: false,
 })(async (ctx, user) => {
-  const accessToken = ctx.req.cookies[process.env.ACCESS_TOKEN_HEADER_NAME as string];
+  const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_HEADER_NAME as string];
   const [
     ssrNewMons,
     ssrNewPaintingList,

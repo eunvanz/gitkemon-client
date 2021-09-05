@@ -70,7 +70,7 @@ const Home: React.FC<HomeProps> = ({
           </div>
           <MonRankingTableContainer isPreview />
         </div>
-        <div className={`grid grid-cols-1 gap-6 xl:grid-cols-${!!user ? 2 : 1} mt-6`}>
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-2 mt-6">
           <div className="flex flex-col">
             <Typography weight="semibold" size="lg" className="mb-3">
               New Pokémons

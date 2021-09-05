@@ -21,7 +21,7 @@ const useHomeProps: (pageProps: HomePageProps) => HomeProps = ({
     enabled: !!user && !ssrAvailableContributions,
     initialData: ssrAvailableContributions,
   });
-  const { data: lastPayback } = useLastPaybackQuery({
+  const { data: lastPayback } = useLastPaybackQuery(undefined, {
     enabled: !!user && !ssrLastPayback,
     initialData: ssrLastPayback,
   });

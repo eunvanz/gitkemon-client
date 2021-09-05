@@ -82,6 +82,7 @@ const Home: React.FC<HomeProps> = ({
                   mon={convertMonToCardMon(mon)}
                   customSize="w-1/3"
                   modalMon={convertMonToModalMon(mon)}
+                  isStatic
                 />
               ))}
             </div>

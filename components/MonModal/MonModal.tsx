@@ -7,6 +7,7 @@ import { ModalMon } from "../../types";
 import Badge from "../Badge";
 import BaseModal, { BaseModalProps } from "../BaseModal";
 import Button from "../Button";
+import CardBack from "../CardBack";
 import LevelBadge from "../LevelBadge";
 import LineGauge from "../LineGauge";
 import MonStars from "../MonStars";
@@ -339,15 +340,18 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
       <div className="md:flex w-full">
         <div className="flex flex-col mb-4 md:mx-0 md:mb-0 md:mr-8">
           {mon ? (
-            <div className="w-48 border border-dotted mb-1 mx-auto flex-shrink-0">
-              <Image
-                // TODO: 플레이스홀더 교체
-                src={mon.image ? mon.image.imageUrl : "https://via.placeholder.com/250"}
-                alt={mon.name}
-                quality={100}
-                width={200}
-                height={200}
-              />
+            <div className="w-48 h-48 border border-dotted mb-1 mx-auto flex-shrink-0">
+              {mon.image ? (
+                <Image
+                  src={mon.image ? mon.image.imageUrl : "https://via.placeholder.com/250"}
+                  alt={mon.name}
+                  quality={100}
+                  width={200}
+                  height={200}
+                />
+              ) : (
+                <CardBack />
+              )}
             </div>
           ) : (
             <div className="w-48 mb-1 mx-auto flex-shrink-0">

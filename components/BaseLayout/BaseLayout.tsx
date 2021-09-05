@@ -15,11 +15,12 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ROUTES from "../../paths";
-import { User } from "../../types";
+import ROUTES from "~/paths";
+import { User } from "~/types";
 import DropDownMenu from "../DropDownMenu";
-import Footer from "../Footer";
+import Logo from "../Logo";
 import NewBadge from "../NewBadge";
+import logo from "~/public/images/logo-white.png";
 
 interface NavigationItem {
   name: string;
@@ -148,14 +149,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                 </div>
               </Transition.Child>
               <div className="flex-shrink-0 flex items-center px-4">
-                <Image
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                  width={143}
-                  height={32}
-                  alt="Workflow"
-                  priority
-                />
+                <Logo />
               </div>
               <div className="mt-5 flex-1 h-0 overflow-y-auto">
                 <nav className="px-2 space-y-1">
@@ -179,14 +173,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
             <div className="flex items-center flex-shrink-0 px-4">
-              <Image
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                width={143}
-                height={32}
-                alt="Workflow"
-                priority
-              />
+              <Logo />
             </div>
             <div className="mt-5 flex-1 flex flex-col">
               <nav className="flex-1 px-2 space-y-1">

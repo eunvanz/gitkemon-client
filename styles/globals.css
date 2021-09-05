@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "../node_modules/swiper/swiper.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
 .content-container {
   min-height: calc(100vh - 184px);

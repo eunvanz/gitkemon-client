@@ -37,7 +37,7 @@ const PokeBallStatus: React.FC<PokeBallStatusProps> = ({ pokeBall }) => {
         {["basic", "basicRare", "rare", "elite", "legend"].map((type) => (
           <div key={type} className="flex flex-col items-center justify-center">
             <PokeBallImage width={40} height={40} type={type as PokeBallType} />
-            <Typography weight="bold" color="primary">
+            <Typography weight="bold" color="primary" className="mt-1">
               {pokeBall[`${type}PokeBalls` as keyof PokeBall].toLocaleString()}
             </Typography>
           </div>

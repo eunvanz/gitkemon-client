@@ -12,7 +12,7 @@ const useCommonInfiniteQuery = <T>(
     {
       ...queryOptions,
       getNextPageParam: ({ meta: { totalPages, currentPage } }) =>
-        totalPages === currentPage ? undefined : currentPage + 1,
+        totalPages <= currentPage ? undefined : currentPage + 1,
     },
   );
   return query;

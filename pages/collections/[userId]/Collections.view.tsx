@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
 import CollectionStatus from "~/components/CollectionStatus";
+import Footer from "~/components/Footer";
 import Loading from "~/components/Loading";
 import MonCard from "~/components/MonCard";
 import MonCardGrid from "~/components/MonCardGrid";
@@ -136,87 +137,90 @@ const Collections: React.FC<CollectionsProps> = ({
   const router = useRouter();
 
   return !isLoading ? (
-    <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
-      <div className="flex items-center mb-4">
-        <div className="relative mr-4">
-          <Image
-            className="rounded-full"
-            src={collectionUser!.avatarUrl}
-            alt="user image"
-            width={64}
-            height={64}
-          />
-          <span
-            className="absolute inset-0 shadow-inner rounded-full"
-            aria-hidden="true"
-          />
-        </div>
-        <div className="flex flex-col justify-center">
-          <Typography className="mb-0" as="h1" size="2xl">
-            <a onClick={() => router.push(`${ROUTES.PROFILE}/${collectionUser?.id}`)}>
-              {collectionUser?.nickname}
-            </a>
-            &apos;s collection
-          </Typography>
-          <Typography color="hint">
-            {collectionUser?.githubLogin} ·{" "}
-            <TrainerClassBadge trainerClass={collectionUser!.trainerClass} />
-          </Typography>
-        </div>
-      </div>
-      {!isBlendMode && colPointInfo && countInfo && (
-        <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />
-      )}
-      {isBlendMode && (
-        <div className="sticky top-0 z-10 border-b mb-2">
-          <div className="flex justify-between items-center p-2 bg-white">
-            <Typography as="div">
-              Choose a Pokémon to blend with{" "}
-              <Typography color="primary">
-                {capitalize(getLocaleProperty(monToBlend!.__mon__!, "name"))}
-              </Typography>
+    <>
+      <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
+        <div className="flex items-center mb-4">
+          <div className="relative mr-4">
+            <Image
+              className="rounded-full"
+              src={collectionUser!.avatarUrl}
+              alt="user image"
+              width={64}
+              height={64}
+            />
+            <span
+              className="absolute inset-0 shadow-inner rounded-full"
+              aria-hidden="true"
+            />
+          </div>
+          <div className="flex flex-col justify-center">
+            <Typography className="mb-0" as="h1" size="2xl">
+              <a onClick={() => router.push(`${ROUTES.PROFILE}/${collectionUser?.id}`)}>
+                {collectionUser?.nickname}
+              </a>
+              &apos;s collection
             </Typography>
-            <Button
-              icon={XIcon}
-              className="ml-2"
-              size="xs"
-              color="white"
-              onClick={onCancelBlendMode}
-            >
-              Cancel
-            </Button>
+            <Typography color="hint">
+              {collectionUser?.githubLogin} ·{" "}
+              <TrainerClassBadge trainerClass={collectionUser!.trainerClass} />
+            </Typography>
           </div>
         </div>
-      )}
-      <MonCardGrid>
-        {orderedCollections!.map((collection) => {
-          const isCollection = (collection as Collection).monImageUrl;
-          return (
-            <MonCard
-              key={`${isCollection ? "col" : "mon"}-${collection.id}`}
-              mon={
-                isCollection
-                  ? convertCollectionToCardMon(collection as Collection)
-                  : convertMonToCardMon(collection as Mon)
-              }
-              modalMon={
-                isCollection ? undefined : convertMonToModalMon(collection as Mon)
-              }
-              onSelect={
-                isBlendMode ? () => onSelectItem?.(collection as Collection) : undefined
-              }
-              isOwned={collectionUser?.id === user?.id}
-              user={user}
-              isStatic
-            />
-          );
-        })}
-      </MonCardGrid>
-      <CollectionFilter
-        filterState={filterState}
-        onChangeFilter={(filter) => setFilterState(filter)}
-      />
-    </div>
+        {!isBlendMode && colPointInfo && countInfo && (
+          <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />
+        )}
+        {isBlendMode && (
+          <div className="sticky top-0 z-10 border-b mb-2">
+            <div className="flex justify-between items-center p-2 bg-white">
+              <Typography as="div">
+                Choose a Pokémon to blend with{" "}
+                <Typography color="primary">
+                  {capitalize(getLocaleProperty(monToBlend!.__mon__!, "name"))}
+                </Typography>
+              </Typography>
+              <Button
+                icon={XIcon}
+                className="ml-2"
+                size="xs"
+                color="white"
+                onClick={onCancelBlendMode}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        )}
+        <MonCardGrid>
+          {orderedCollections!.map((collection) => {
+            const isCollection = (collection as Collection).monImageUrl;
+            return (
+              <MonCard
+                key={`${isCollection ? "col" : "mon"}-${collection.id}`}
+                mon={
+                  isCollection
+                    ? convertCollectionToCardMon(collection as Collection)
+                    : convertMonToCardMon(collection as Mon)
+                }
+                modalMon={
+                  isCollection ? undefined : convertMonToModalMon(collection as Mon)
+                }
+                onSelect={
+                  isBlendMode ? () => onSelectItem?.(collection as Collection) : undefined
+                }
+                isOwned={collectionUser?.id === user?.id}
+                user={user}
+                isStatic
+              />
+            );
+          })}
+        </MonCardGrid>
+        <CollectionFilter
+          filterState={filterState}
+          onChangeFilter={(filter) => setFilterState(filter)}
+        />
+      </div>
+      <Footer />
+    </>
   ) : (
     <div className="h-full">
       <Loading isFullHeight />

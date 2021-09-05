@@ -33,7 +33,7 @@ const BaseModal = ({
         as="div"
         initialFocus={closeButtonRef}
         static
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="fixed z-30 inset-0 overflow-y-auto"
         open={isOpen}
         onClose={onClose}
         {...restProps}

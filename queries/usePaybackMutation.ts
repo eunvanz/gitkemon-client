@@ -9,6 +9,7 @@ const usePaybackMutation = () => {
     onSuccess: () => {
       queryClient.refetchQueries(QUERY_KEY.AVAILABLE_CONTRIBUTIONS);
       queryClient.refetchQueries(QUERY_KEY.USER);
+      queryClient.invalidateQueries(QUERY_KEY.LAST_PAYBACK);
     },
   });
 };

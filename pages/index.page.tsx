@@ -41,8 +41,8 @@ export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProp
   ] = await Promise.all([
     api.getRecentMons(),
     api.getPaintingList({ page: 1, limit: 3 }),
-    user ? api.getLastPayback(accessToken) : undefined,
-    user ? api.getAvailableContributions(accessToken) : undefined,
+    user ? api.getLastPayback(accessToken) : null,
+    user ? api.getAvailableContributions(accessToken) : null,
   ]);
   return {
     props: {

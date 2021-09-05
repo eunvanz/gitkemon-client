@@ -25,7 +25,7 @@ export interface PaybackProps {
   isLoading: boolean;
   paybackResult?: PaybackType;
   onRefresh: VoidFunction;
-  onGetPokemons: VoidFunction;
+  onGetPokémons: VoidFunction;
 }
 
 const Payback: React.FC<PaybackProps> = ({
@@ -36,7 +36,7 @@ const Payback: React.FC<PaybackProps> = ({
   isLoading,
   paybackResult,
   onRefresh,
-  onGetPokemons,
+  onGetPokémons,
 }) => {
   const renderRewardItems = useCallback(() => {
     if (!paybackResult) {
@@ -201,7 +201,7 @@ const Payback: React.FC<PaybackProps> = ({
               {renderRewardItems()}
             </div>
             <div className="mt-8 space-y-6">
-              <Button className="w-full" onClick={onGetPokemons}>
+              <Button className="w-full" onClick={onGetPokémons}>
                 Go to get Pokémons
               </Button>
             </div>

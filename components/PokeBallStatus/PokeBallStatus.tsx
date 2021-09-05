@@ -48,7 +48,7 @@ const PokeBallStatus: React.FC<PokeBallStatusProps> = ({ pokeBall }) => {
         onClick={() => router.push(ROUTES.HUNT)}
         className="w-full md:w-auto"
       >
-        Get Pokemons
+        Get Pokémons
       </Button>
     </div>
   );

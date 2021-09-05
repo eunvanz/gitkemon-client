@@ -98,7 +98,7 @@ const Profile: React.FC<ProfileProps> = ({
             <div className="flex flex-col">
               <div className="flex-1">
                 <Typography as="h1">
-                  Top 3 Pokemon Rankings:{" "}
+                  Top 3 Pokémon Rankings:{" "}
                   <Typography color="primary" weight="bold">
                     {!!profileMon?.topMonRanks.length
                       ? profileMon.topMonRanks
@@ -123,7 +123,7 @@ const Profile: React.FC<ProfileProps> = ({
                       </div>
                     ) : (
                       <div className="w-full h-60 flex justify-center items-center border rounded m-1 p-4 border-dashed">
-                        <Typography color="hint">No Pokemons</Typography>
+                        <Typography color="hint">No Pokémons</Typography>
                       </div>
                     )
                   ) : (
@@ -132,7 +132,7 @@ const Profile: React.FC<ProfileProps> = ({
                 </div>
               </div>
               <div className="flex-1 mt-8">
-                <Typography as="h1">New Pokemons</Typography>
+                <Typography as="h1">New Pokémons</Typography>
                 <div className="flex flex-col">
                   {!!profileMon?.recentMons ? (
                     profileMon.recentMons.length ? (
@@ -149,7 +149,7 @@ const Profile: React.FC<ProfileProps> = ({
                       </div>
                     ) : (
                       <div className="w-full h-60 flex justify-center items-center border rounded m-1 p-4 border-dashed">
-                        <Typography color="hint">No Pokemons</Typography>
+                        <Typography color="hint">No Pokémons</Typography>
                       </div>
                     )
                   ) : (

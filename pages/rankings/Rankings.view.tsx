@@ -24,7 +24,7 @@ const Rankings: React.FC<RankingsProps> = ({ activeTabIndex, onChangeTab }) => {
             name: "Contribution",
           },
           {
-            name: "Pokemon",
+            name: "Pokémon",
           },
         ]}
         activeIndex={activeTabIndex}

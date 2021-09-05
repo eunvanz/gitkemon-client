@@ -62,7 +62,7 @@ const Home: React.FC<HomeProps> = ({
         <div className="mt-6">
           <div className="flex items-center mb-3">
             <Typography weight="semibold" size="lg">
-              Top 3 Pokemons
+              Top 3 Pokémons
             </Typography>
             <Typography className="ml-3" as="a" size="sm">
               More
@@ -73,7 +73,7 @@ const Home: React.FC<HomeProps> = ({
         <div className={`grid grid-cols-1 gap-6 xl:grid-cols-${!!user ? 2 : 1} mt-6`}>
           <div className="flex flex-col">
             <Typography weight="semibold" size="lg" className="mb-3">
-              New Pokemons
+              New Pokémons
             </Typography>
             <div className="flex">
               {newMons?.map((mon) => (

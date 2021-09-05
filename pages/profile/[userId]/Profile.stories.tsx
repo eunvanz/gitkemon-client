@@ -68,7 +68,7 @@ const Template: ComponentStory<typeof Profile> = (args) => <Profile {...args} />
 
 export const 기본 = createStoryComponent(Template);
 
-export const noPokemons = createStoryComponent(Template, {
+export const noPokémons = createStoryComponent(Template, {
   profileMon: {
     topMonRanks: [],
     topMons: [],

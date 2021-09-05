@@ -23,7 +23,7 @@ const Workshop: React.FC<WorkshopProps> = ({
   return paintings ? (
     <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
       <Typography as="h1" size="2xl">
-        Pokemon workshop
+        Pokémon workshop
       </Typography>
       <div className="sticky top-0 z-10 border-b mb-2">
         <div className="flex justify-between items-center p-2 bg-white">

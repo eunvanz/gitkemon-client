@@ -57,7 +57,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
     return [
       { name: "Home", href: ROUTES.HOME, icon: HomeIcon },
       {
-        name: "Pokemon Hunt",
+        name: "Pokémon Hunt",
         href: ROUTES.HUNT,
         icon: GlobeIcon,
       },
@@ -74,13 +74,13 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
             href: `${ROUTES.RANKINGS}?tab=contribution`,
           },
           {
-            name: "Pokemon Ranking",
+            name: "Pokémon Ranking",
             href: `${ROUTES.RANKINGS}?tab=pokemon`,
           },
         ],
       },
       {
-        name: "Pokemon Workshop",
+        name: "Pokémon Workshop",
         href: ROUTES.WORKSHOP,
         icon: PhotographIcon,
       },

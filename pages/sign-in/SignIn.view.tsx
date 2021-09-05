@@ -16,7 +16,7 @@ const SignIn = ({ onSignIn }: SignInProps) => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="text-center text-3xl text-gray-600">
-            Get <span className="text-blue-500 font-extrabold">Pokemons</span>
+            Get <span className="text-blue-500 font-extrabold">Pokémons</span>
             <br />
             as payback for{" "}
             <span className="text-green-600 font-extrabold">Contributions</span>

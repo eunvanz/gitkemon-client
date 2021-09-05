@@ -400,8 +400,17 @@ const getRecentRareNews = async () => {
   return data;
 };
 
-const getLastPayback = async () => {
-  const { data } = await requester.get<Payback>(API_URL.PAYBACKS__LAST);
+const getLastPayback = async (accessToken?: string) => {
+  const { data } = await requester.get<Payback>(
+    API_URL.PAYBACKS__LAST,
+    accessToken
+      ? {
+          headers: {
+            "x-gkm-access-token": accessToken,
+          },
+        }
+      : undefined,
+  );
   return data;
 };
 

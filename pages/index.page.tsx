@@ -31,7 +31,8 @@ const HomePage: NextPage<HomePageProps> = (pageProps) => {
 
 export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps<{}>({
   isAuthRequired: false,
-})(async (_, user) => {
+})(async (ctx, user) => {
+  const accessToken = ctx.req.cookies[process.env.ACCESS_TOKEN_HEADER_NAME as string];
   const [
     ssrNewMons,
     ssrNewPaintingList,
@@ -40,8 +41,8 @@ export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProp
   ] = await Promise.all([
     api.getRecentMons(),
     api.getPaintingList({ page: 1, limit: 3 }),
-    user ? api.getLastPayback() : undefined,
-    user ? api.getAvailableContributions() : undefined,
+    user ? api.getLastPayback(accessToken) : undefined,
+    user ? api.getAvailableContributions(accessToken) : undefined,
   ]);
   return {
     props: {

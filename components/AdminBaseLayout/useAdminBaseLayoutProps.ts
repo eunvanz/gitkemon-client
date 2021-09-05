@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import api from "../../api";
@@ -39,6 +39,12 @@ const useAdminBaseLayoutProps: ({
   const user = useMemo(() => {
     return stateUser || userProp;
   }, [stateUser, userProp]);
+
+  useEffect(() => {
+    if (user?.role !== "admin") {
+      router.replace(ROUTES.HOME);
+    }
+  }, [router, user?.role]);
 
   return {
     user,

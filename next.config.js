@@ -8,9 +8,7 @@ module.exports = (phase) => {
 
   const env = {
     GITHUB_CLIENT_ID: isDev ? "461b3104c569d1f66e6d" : "4860581bd098afbf7956",
-    API_HOST: isDev
-      ? "http://localhost:3000"
-      : "http://gitkemon.ap-northeast-2.elasticbeanstalk.com",
+    API_HOST: isDev ? "http://localhost:3000" : "https://api.gitkemon.com",
     ACCESS_TOKEN_HEADER_NAME: "gkmat",
   };
 

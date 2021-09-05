@@ -125,7 +125,6 @@ const Payback: React.FC<PaybackProps> = ({
     });
     return result;
   }, [paybackResult]);
-  console.log("===== user", user);
 
   if (!paybackResult) {
     return (

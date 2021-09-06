@@ -7,15 +7,17 @@ import MonCard from "~/components/MonCard";
 import MonRankingTableContainer from "~/components/MonRankingTable";
 import PaintingCardContainer from "~/components/PaintingCard";
 import PokeBallStatus from "~/components/PokeBallStatus";
+import RareNewsCard from "~/components/RareNewsCard";
 import Typography from "~/components/Typography";
 import UserRankingTableContainer from "~/components/UserRankingTable";
 import { convertMonToCardMon, convertMonToModalMon } from "~/helpers/projectHelpers";
 import ROUTES from "~/paths";
-import { Mon, Painting } from "~/types";
+import { Mon, Painting, RareNews } from "~/types";
 
 export interface HomeProps extends ContributionStatusProps {
   newMons?: Mon[];
   newPaintings?: Painting[];
+  rareNews?: RareNews[];
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -24,6 +26,7 @@ const Home: React.FC<HomeProps> = ({
   user,
   newMons,
   newPaintings,
+  rareNews,
 }) => {
   const router = useRouter();
 
@@ -104,31 +107,37 @@ const Home: React.FC<HomeProps> = ({
                 />
               ))}
             </div>
+            <div className="flex items-center mt-6 mb-3">
+              <Typography weight="semibold" size="lg">
+                New Paintings
+              </Typography>
+              <Typography
+                className="ml-3"
+                as="a"
+                size="sm"
+                onClick={() => router.push(ROUTES.WORKSHOP)}
+              >
+                More
+              </Typography>
+            </div>
+            <div className="flex">
+              {newPaintings?.map((painting) => (
+                <PaintingCardContainer
+                  key={painting.id}
+                  painting={painting}
+                  customSize="w-1/3"
+                />
+              ))}
+            </div>
           </div>
           <div className="flex">
-            <div className="flex flex-col">
-              <div className="flex items-center mb-3">
-                <Typography weight="semibold" size="lg">
-                  New Paintings
-                </Typography>
-                <Typography
-                  className="ml-3"
-                  as="a"
-                  size="sm"
-                  onClick={() => router.push(ROUTES.WORKSHOP)}
-                >
-                  More
-                </Typography>
-              </div>
-              <div className="flex">
-                {newPaintings?.map((painting) => (
-                  <PaintingCardContainer
-                    key={painting.id}
-                    painting={painting}
-                    customSize="w-1/3"
-                  />
-                ))}
-              </div>
+            <div className="flex flex-col w-full">
+              <Typography className="mb-3" weight="semibold" size="lg">
+                Bad News
+              </Typography>
+              {rareNews?.map((item) => (
+                <RareNewsCard className="mb-2" key={item.id} item={item} />
+              ))}
             </div>
           </div>
         </div>

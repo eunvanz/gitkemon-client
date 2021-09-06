@@ -2,6 +2,7 @@ import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import withMockRouter from "~/.storybook/decorators/withMockRouter";
 import withTestProvider from "~/.storybook/decorators/withTestProvider";
 import mockPayback from "~/api/mocks/payback";
+import mockRareNews from "~/api/mocks/rareNews";
 import mockUsers from "~/api/mocks/user";
 import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Home from "./Home.view";
@@ -13,6 +14,7 @@ export default {
     user: mockUsers.user,
     availableContributions: 24,
     lastPayback: mockPayback.payback,
+    rareNews: mockRareNews.rareNewsItems,
   },
   decorators: [withTestProvider, withMockRouter()],
 } as ComponentMeta<typeof Home>;

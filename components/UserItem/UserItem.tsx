@@ -1,5 +1,5 @@
-import { Image } from "antd";
 import cx from "classnames";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import ROUTES from "~/paths";
 import { User } from "~/types";

@@ -79,7 +79,7 @@ const ContributionStatus: React.FC<ContributionStatusProps> = ({
         icon={CheckIcon}
         disabled={!availableContributions}
         onClick={() => router.push(ROUTES.PAYBACK)}
-        className="w-full md:w-auto"
+        className="w-full md:w-36"
       >
         Check in
       </Button>

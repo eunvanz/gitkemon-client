@@ -1,5 +1,4 @@
 import { GetServerSidePropsContext } from "next";
-import cookies from "next-cookies";
 import api from "../api";
 import ROUTES from "../paths";
 import { User } from "../types";
@@ -18,15 +17,10 @@ const withAuthServerSideProps = <T>({
 ) => {
   return async (ctx: GetServerSidePropsContext) => {
     const accessToken = ctx.req.cookies[process.env.ACCESS_TOKEN_COOKIE_NAME as string];
-    console.log(
-      "===== accessToken",
-      ctx.req.cookies[process.env.ACCESS_TOKEN_COOKIE_NAME as string],
-    );
-    console.log(
-      "===== accessToken2",
-      cookies(ctx)[process.env.ACCESS_TOKEN_COOKIE_NAME as string],
-    );
-    const user = await api.loginWithToken(accessToken);
+    let user = null;
+    if (accessToken) {
+      user = await api.loginWithToken(accessToken);
+    }
     if (!user && isAuthRequired) {
       return {
         redirect: {

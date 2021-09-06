@@ -3,6 +3,7 @@ import useAvailableContributionsQuery from "~/queries/useAvailableContributionsQ
 import useLastPaybackQuery from "~/queries/useLastPaybackQuery";
 import usePaintingListQuery from "~/queries/usePaintingListQuery";
 import useRecentMonsQuery from "~/queries/useRecentMonsQuery";
+import useRecentRareNewsQuery from "~/queries/useRecentRareNewsQuery";
 import useUserQuery from "~/queries/useUserQuery";
 import { userState } from "~/state/user";
 import { HomeProps } from "./Home.view";
@@ -13,6 +14,7 @@ const useHomeProps: (pageProps: HomePageProps) => HomeProps = ({
   ssrNewPaintingList,
   ssrLastPayback,
   ssrAvailableContributions,
+  ssrRareNews,
 }) => {
   const user = useRecoilValue(userState);
 
@@ -32,6 +34,7 @@ const useHomeProps: (pageProps: HomePageProps) => HomeProps = ({
   const { data: newPaintingList } = usePaintingListQuery({
     enabled: !ssrNewPaintingList,
   });
+  const { data: rareNews } = useRecentRareNewsQuery({ enabled: !ssrRareNews });
 
   return {
     availableContributions,
@@ -39,6 +42,7 @@ const useHomeProps: (pageProps: HomePageProps) => HomeProps = ({
     user,
     newMons,
     newPaintings: newPaintingList?.pages[0].items.slice(0, 3) || ssrNewPaintingList.items,
+    rareNews,
   };
 };
 

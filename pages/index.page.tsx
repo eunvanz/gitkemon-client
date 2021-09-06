@@ -2,7 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import cookies from "next-cookies";
 import Head from "next/head";
 import api from "~/api";
-import { Mon, Pageable, Painting, Payback } from "~/types";
+import { Mon, Pageable, Painting, Payback, RareNews } from "~/types";
 import withAuthServerSideProps from "../hocs/withAuthServerSideProps";
 import withBaseLayout from "../hocs/withBaseLayout";
 import Home from "./Home.view";
@@ -13,6 +13,7 @@ export interface HomePageProps {
   ssrNewPaintingList: Pageable<Painting>;
   ssrLastPayback?: Payback;
   ssrAvailableContributions?: number;
+  ssrRareNews: RareNews[];
 }
 
 const HomePage: NextPage<HomePageProps> = (pageProps) => {
@@ -37,11 +38,13 @@ export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProp
   const [
     ssrNewMons,
     ssrNewPaintingList,
+    ssrRareNews,
     ssrLastPayback,
     ssrAvailableContributions,
   ] = await Promise.all([
     api.getRecentMons(),
     api.getPaintingList({ page: 1, limit: 3 }),
+    api.getRecentRareNews(),
     user ? api.getLastPayback(accessToken) : null,
     user ? api.getAvailableContributions(accessToken) : null,
   ]);
@@ -51,6 +54,7 @@ export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProp
       ssrNewPaintingList,
       ssrLastPayback,
       ssrAvailableContributions,
+      ssrRareNews,
     },
   };
 });

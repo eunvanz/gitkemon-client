@@ -33,7 +33,7 @@ const HomePage: NextPage<HomePageProps> = (pageProps) => {
 export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps<{}>({
   isAuthRequired: false,
 })(async (ctx, user) => {
-  const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_HEADER_NAME as string];
+  const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_COOKIE_NAME as string];
   const [
     ssrNewMons,
     ssrNewPaintingList,

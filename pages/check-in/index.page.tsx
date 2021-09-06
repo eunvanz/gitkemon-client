@@ -20,7 +20,7 @@ const PaybackPage: React.FC<PaybackPageProps> = (pageProps) => {
 export const getServerSideProps = withAuthServerSideProps({
   isAuthRequired: true,
 })(async (ctx, ssrUser) => {
-  const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_HEADER_NAME as string];
+  const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_COOKIE_NAME as string];
   const ssrAvailableContributions = await api.getAvailableContributions(accessToken);
   return {
     props: {

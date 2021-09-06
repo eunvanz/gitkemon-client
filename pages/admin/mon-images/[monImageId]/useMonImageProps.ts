@@ -120,7 +120,6 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
           router.push(ROUTES.ADMIN__MON_IMAGES);
           message.success("Mon image has been created.");
         } catch (error) {
-          // TODO:
           setIsSubmitting(false);
         }
       } else {
@@ -136,7 +135,6 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
           router.push(ROUTES.ADMIN__MON_IMAGES);
           message.success("Mon image has been modified");
         } catch (error) {
-          // TODO:
           setIsSubmitting(false);
         }
       }

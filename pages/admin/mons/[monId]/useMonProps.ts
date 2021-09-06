@@ -36,7 +36,6 @@ const useMonProps: () => MonProps = () => {
           await api.postMon(values);
         }
       } catch (error) {
-        // TODO:
       } finally {
         message.success("Mon has been saved.");
         setIsSubmitting(false);

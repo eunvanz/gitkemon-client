@@ -83,7 +83,6 @@ const MonCard: React.FC<MonCardProps> = ({
                   <PotentialBadge potential={mon.potential} />
                 </div>
               )}
-              {/* TODO: 플레이스홀더 이미지 대체 */}
               <div className={cx("relative", { "h-36": isStatic })}>
                 {isStatic ? (
                   mon.imageUrl ? (

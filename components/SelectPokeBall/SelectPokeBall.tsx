@@ -2,8 +2,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ROUTES from "~/paths";
 import { PokeBallType } from "../../types";
 import Button from "../Button";
 import PokeBallImage from "../PokeBallImage";
@@ -86,6 +88,8 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
     };
   }, [handleOnKeyDown]);
 
+  const router = useRouter();
+
   return activePokeBall ? (
     <div className={cx("flex flex-col items-center justify-center", styles.container)}>
       <div className="mb-10">
@@ -162,7 +166,7 @@ const SelectPokeBall: React.FC<SelectPokeBallProps> = ({ pokeBalls, onNext }) =>
         <Typography as="h2" size="2xl">
           Yon have no Pokéball 😢
         </Typography>
-        <Button color="white" size="xs">
+        <Button color="white" size="xs" onClick={() => router.push(ROUTES.PAYBACK)}>
           Check out available payback
         </Button>
       </div>

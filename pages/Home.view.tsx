@@ -1,4 +1,4 @@
-import Button from "~/components/Button";
+import { useRouter } from "next/router";
 import ContributionStatus, {
   ContributionStatusProps,
 } from "~/components/ContributionStatus";
@@ -10,6 +10,7 @@ import PokeBallStatus from "~/components/PokeBallStatus";
 import Typography from "~/components/Typography";
 import UserRankingTableContainer from "~/components/UserRankingTable";
 import { convertMonToCardMon, convertMonToModalMon } from "~/helpers/projectHelpers";
+import ROUTES from "~/paths";
 import { Mon, Painting } from "~/types";
 
 export interface HomeProps extends ContributionStatusProps {
@@ -24,6 +25,8 @@ const Home: React.FC<HomeProps> = ({
   newMons,
   newPaintings,
 }) => {
+  const router = useRouter();
+
   return (
     <>
       <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4 flex flex-col">
@@ -41,7 +44,12 @@ const Home: React.FC<HomeProps> = ({
               <Typography weight="semibold" size="lg">
                 Top 3 Collection Point
               </Typography>
-              <Typography className="ml-3" as="a" size="sm">
+              <Typography
+                className="ml-3"
+                as="a"
+                size="sm"
+                onClick={() => router.push(`${ROUTES.RANKINGS}?tab=collection`)}
+              >
                 More
               </Typography>
             </div>
@@ -52,7 +60,12 @@ const Home: React.FC<HomeProps> = ({
               <Typography weight="semibold" size="lg">
                 Top 3 Contributions
               </Typography>
-              <Typography className="ml-3" as="a" size="sm">
+              <Typography
+                className="ml-3"
+                as="a"
+                size="sm"
+                onClick={() => router.push(`${ROUTES.RANKINGS}?tab=contribution`)}
+              >
                 More
               </Typography>
             </div>
@@ -64,7 +77,12 @@ const Home: React.FC<HomeProps> = ({
             <Typography weight="semibold" size="lg">
               Top 3 Pokémons
             </Typography>
-            <Typography className="ml-3" as="a" size="sm">
+            <Typography
+              className="ml-3"
+              as="a"
+              size="sm"
+              onClick={() => router.push(`${ROUTES.RANKINGS}?tab=pokemon`)}
+            >
               More
             </Typography>
           </div>
@@ -93,7 +111,12 @@ const Home: React.FC<HomeProps> = ({
                 <Typography weight="semibold" size="lg">
                   New Paintings
                 </Typography>
-                <Typography className="ml-3" as="a" size="sm">
+                <Typography
+                  className="ml-3"
+                  as="a"
+                  size="sm"
+                  onClick={() => router.push(ROUTES.WORKSHOP)}
+                >
                   More
                 </Typography>
               </div>

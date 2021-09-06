@@ -379,7 +379,7 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
                   Blend
                 </Button>
               )}
-              {mon.evolutionLevel && mon.evolutionLevel <= mon.level! && (
+              {!!mon.evolutionLevel && mon.evolutionLevel <= mon.level! && (
                 <Button className="ml-2" size="xs" color="white" onClick={onEvolve}>
                   Evolve
                 </Button>

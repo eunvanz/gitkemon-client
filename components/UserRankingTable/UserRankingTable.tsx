@@ -55,7 +55,7 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
     );
     if (!isPreview || (isPreview && type === "collection")) {
       result.push({
-        title: "collection point",
+        title: "c.p",
         dataIndex: "colPoint",
         render: (data) => data.colPoint.toLocaleString(),
       });

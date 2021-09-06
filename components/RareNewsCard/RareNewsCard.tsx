@@ -19,12 +19,15 @@ const RareNewsCard: React.FC<RareNewsCardProps> = ({ item, className, ...restPro
   const router = useRouter();
 
   const decoratorText = useMemo(() => {
+    let text = "a ";
     if (["SS", "S"].includes(item.collection.potential)) {
-      return "a superior ";
-    } else {
-      return "";
+      text = `${text}superior `;
     }
-  }, [item.collection.potential]);
+    if (["legend", "elite", "myth"].includes(item.collection.tier)) {
+      text = `${text}${item.collection.tier} pokémon `;
+    }
+    return text;
+  }, [item.collection.potential, item.collection.tier]);
 
   const methodText = useMemo(() => {
     if (item.method === "blend") {

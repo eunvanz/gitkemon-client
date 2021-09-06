@@ -395,6 +395,7 @@ export interface RareNews {
   collectionId: number;
   collection: Collection;
   method: HuntMethod;
+  createdAt: string;
 }
 
 export type HuntMethod = "hunt" | "evolve" | "blend";

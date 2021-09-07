@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import cx from "classnames";
+import { isMobile } from "react-device-detect";
 import { convertCollectionToCardMon } from "~/helpers/projectHelpers";
 import { Collection, HuntResult, User } from "~/types";
 import HuntResultItem from "../HuntResultItem";
+import LineGauge from "../LineGauge";
 import MonCard from "../MonCard";
 import Shakeable from "../Shakeable";
 import Typography from "../Typography";
@@ -105,11 +107,22 @@ const BlendCard: React.FC<BlendCardProps> = ({ blendMons, result, onFinish, user
           color="hint"
           weight="light"
           as="div"
-          className={cx("w-full text-center animate-pulse mt-2", styles.nudge)}
+          className={cx(
+            "w-full text-center animate-pulse mt-2",
+            isMobile ? undefined : styles.nudge,
+          )}
         >
-          <ChevronDoubleLeftIcon className="w-4 h-4 inline-block" /> Shake it!{" "}
+          <ChevronDoubleLeftIcon className="w-4 h-4 inline-block" />{" "}
+          {isMobile ? "Tap it!" : "Shake it!"}{" "}
           <ChevronDoubleRightIcon className="w-4 h-4 inline-block" />
         </Typography>
+      )}
+      {isMobile && progress > 0 && !isProgressComplete && (
+        <div className="w-36 mx-auto mt-4">
+          <LineGauge
+            values={[{ color: "blue-500", value: (progress * 100) / MAX_SHAKE_COUNT }]}
+          />
+        </div>
       )}
     </>
   );

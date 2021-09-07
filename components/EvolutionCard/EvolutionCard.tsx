@@ -105,12 +105,12 @@ const EvolutionCard: React.FC<EvolutionCardProps> = ({
           )}
         >
           <ChevronDoubleLeftIcon className="w-4 h-4 inline-block" />{" "}
-          {isMobile ? "Tab it!" : "Shake it!"}{" "}
+          {isMobile ? "Tap it!" : "Shake it!"}{" "}
           <ChevronDoubleRightIcon className="w-4 h-4 inline-block" />
         </Typography>
       )}
       {isMobile && progress > 0 && !isProgressComplete && (
-        <div className="w-36 mx-auto mt-2">
+        <div className="w-36 mx-auto mt-4">
           <LineGauge
             values={[{ color: "blue-500", value: (progress * 100) / MAX_SHAKE_COUNT }]}
           />

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import ROUTES from "~/paths";
 import { User } from "~/types";
-import DropDownMenu, { DropDownMenuProps } from "../DropDownMenu";
+import DropDownMenu from "../DropDownMenu";
 import Typography from "../Typography";
 
 export interface UserItemProps {
@@ -16,7 +16,7 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden, isInline }) =
   const router = useRouter();
 
   return isInline ? (
-    <div className="inline">
+    <span className="inline">
       <DropDownMenu
         buttonLabel={
           <Typography as="a" weight="bold">
@@ -37,9 +37,9 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden, isInline }) =
         ]}
         width={32}
         origin="left"
-        className="relative"
+        className="inline"
       />
-    </div>
+    </span>
   ) : (
     <div className={cx("flex items-center")}>
       {!isAvatarHidden && !!user.githubUser && (
@@ -74,7 +74,6 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden, isInline }) =
           ]}
           width={32}
           origin="left"
-          className="relative"
         />
 
         <div className="text-sm text-gray-500">{user.githubLogin}</div>

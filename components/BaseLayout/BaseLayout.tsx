@@ -208,7 +208,7 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                 </BadgeWrapper>
 
                 <DropDownMenu
-                  className="ml-3 relative z-50"
+                  className="ml-3 z-50"
                   buttonLabel={
                     <>
                       <span className="sr-only">Open user menu</span>

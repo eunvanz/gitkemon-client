@@ -2,12 +2,11 @@ import { useCallback, useMemo, useState } from "react";
 import cx from "classnames";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useRouter } from "next/router";
 import { getLocaleProperty } from "~/helpers/projectHelpers";
-import ROUTES from "~/paths";
 import { ExtendableHTMLProps, RareNews } from "~/types";
 import MonModalContainer from "../MonModal";
 import Typography from "../Typography";
+import UserItem from "../UserItem";
 
 dayjs.extend(relativeTime);
 
@@ -16,8 +15,6 @@ export interface RareNewsCardProps extends ExtendableHTMLProps<HTMLDivElement> {
 }
 
 const RareNewsCard: React.FC<RareNewsCardProps> = ({ item, className, ...restProps }) => {
-  const router = useRouter();
-
   const decoratorText = useMemo(() => {
     let text = "a ";
     if (["SS", "S"].includes(item.collection.potential)) {
@@ -48,13 +45,7 @@ const RareNewsCard: React.FC<RareNewsCardProps> = ({ item, className, ...restPro
   return (
     <div className={cx("border rounded-md p-4 flex flex-col", className)} {...restProps}>
       <Typography as="div">
-        <Typography
-          as="a"
-          weight="bold"
-          onClick={() => router.push(`${ROUTES.COLLECTIONS}/${item.userId}`)}
-        >
-          {item.user.nickname}
-        </Typography>
+        <UserItem user={item.user} isInline />
         &apos;s got {decoratorText}
         <Typography as="a" weight="bold" onClick={openMonModal}>
           {getLocaleProperty(item.collection, "name")}

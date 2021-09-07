@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import cx from "classnames";
 import random from "lodash/random";
+import { isMobile } from "react-device-detect";
 import { colorHashes } from "~/constants/styles";
 import { ExtendableHTMLProps } from "~/types";
 
@@ -101,9 +102,7 @@ const Shakeable = ({
     containerRef.current!.style.transform = "translate(0, 0)";
     directionChangeCountRef.current = 0;
     document.removeEventListener("mousemove", handleOnDrag);
-    document.removeEventListener("touchmove", handleOnDrag);
     document.removeEventListener("mouseup", handleOnDragEnd);
-    document.removeEventListener("touchend", handleOnDragEnd);
     onDragEnd?.();
   }, [handleOnDrag, onDragEnd]);
 
@@ -115,30 +114,33 @@ const Shakeable = ({
       };
       containerRef.current!.style.transitionDuration = "0s";
       document.addEventListener("mousemove", handleOnDrag);
-      document.addEventListener("touchmove", handleOnDrag);
       document.addEventListener("mouseup", handleOnDragEnd);
-      document.addEventListener("touchend", handleOnDragEnd);
     },
     [handleOnDrag, handleOnDragEnd],
   );
 
+  const handleOnClick = useCallback(() => {
+    onChangeDirection(++directionChangeCountRef.current);
+    burstPowder();
+    onDrag?.();
+  }, [burstPowder, onChangeDirection, onDrag]);
+
   useEffect(() => {
     if (isActive) {
-      containerRef.current?.addEventListener("mousedown", handleDragStart);
-      containerRef.current?.addEventListener("touchstart", handleDragStart);
+      !isMobile && containerRef.current?.addEventListener("mousedown", handleDragStart);
+      isMobile && containerRef.current?.addEventListener("click", handleOnClick);
     } else {
-      containerRef.current?.removeEventListener("mousedown", handleDragStart);
-      containerRef.current?.removeEventListener("touchstart", handleDragStart);
+      !isMobile &&
+        containerRef.current?.removeEventListener("mousedown", handleDragStart);
+      isMobile && containerRef.current?.removeEventListener("click", handleOnClick);
       handleOnDragEnd();
     }
-  }, [handleDragStart, handleOnDragEnd, isActive]);
+  }, [handleDragStart, handleOnClick, handleOnDragEnd, isActive]);
 
   useEffect(() => {
     return () => {
       document.removeEventListener("mousemove", handleOnDrag);
-      document.removeEventListener("touchmove", handleOnDrag);
       document.removeEventListener("mouseup", handleOnDragEnd);
-      document.removeEventListener("touchend", handleOnDragEnd);
     };
     // eslint-disable-next-line
   }, []);

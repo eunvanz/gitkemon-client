@@ -27,7 +27,7 @@ const Table = <T extends object>({
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto overflow-y-visible sm:overflow-x-visible sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="border border-gray-200 sm:rounded-lg">
+          <div className="border border-gray-200">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>

@@ -76,7 +76,8 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
       result.push({
         title: "last check-in",
         dataIndex: "lastPaybackDate",
-        render: (data) => dayjs(data.lastPaybackDate).fromNow(),
+        render: (data) =>
+          data.lastPaybackDate ? dayjs(data.lastPaybackDate).fromNow() : "-",
       });
     }
     return result;

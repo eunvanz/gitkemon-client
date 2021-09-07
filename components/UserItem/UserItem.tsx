@@ -3,18 +3,45 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import ROUTES from "~/paths";
 import { User } from "~/types";
+import DropDownMenu, { DropDownMenuProps } from "../DropDownMenu";
 import Typography from "../Typography";
 
 export interface UserItemProps {
   user: User;
   isAvatarHidden?: boolean;
+  isInline?: boolean;
 }
 
-const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden }) => {
+const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden, isInline }) => {
   const router = useRouter();
 
-  return (
-    <div className="flex items-center">
+  return isInline ? (
+    <div className="inline">
+      <DropDownMenu
+        buttonLabel={
+          <Typography as="a" weight="bold">
+            {user.nickname}
+          </Typography>
+        }
+        menuItems={[
+          [
+            {
+              title: "Profile",
+              onClick: () => router.push(`${ROUTES.PROFILE}/${user.id}`),
+            },
+            {
+              title: "Collection",
+              onClick: () => router.push(`${ROUTES.COLLECTIONS}/${user.id}`),
+            },
+          ],
+        ]}
+        width={32}
+        origin="left"
+        className="relative"
+      />
+    </div>
+  ) : (
+    <div className={cx("flex items-center")}>
       {!isAvatarHidden && !!user.githubUser && (
         <div className="flex-shrink-0 h-10 w-10">
           <Image
@@ -27,13 +54,29 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden }) => {
         </div>
       )}
       <div className={cx(isAvatarHidden ? undefined : "ml-4")}>
-        <Typography
-          as="a"
-          weight="bold"
-          onClick={() => router.push(`${ROUTES.PROFILE}/${user.id}`)}
-        >
-          {user.nickname}
-        </Typography>
+        <DropDownMenu
+          buttonLabel={
+            <Typography as="a" weight="bold">
+              {user.nickname}
+            </Typography>
+          }
+          menuItems={[
+            [
+              {
+                title: "Profile",
+                onClick: () => router.push(`${ROUTES.PROFILE}/${user.id}`),
+              },
+              {
+                title: "Collection",
+                onClick: () => router.push(`${ROUTES.COLLECTIONS}/${user.id}`),
+              },
+            ],
+          ]}
+          width={32}
+          origin="left"
+          className="relative"
+        />
+
         <div className="text-sm text-gray-500">{user.githubLogin}</div>
       </div>
     </div>

@@ -51,7 +51,7 @@ const DropDownMenu = ({
               className={classNames(
                 `origin-top-${origin} origin-to absolute ${
                   origin.endsWith("right") ? "right" : "left"
-                }-0 mt-2 w-${width} rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`,
+                }-0 mt-2 w-${width} rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50`,
                 { "divide-y divide-gray": hasGroup || header },
               )}
             >

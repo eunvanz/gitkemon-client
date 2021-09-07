@@ -32,7 +32,7 @@ const useHomeProps: (pageProps: HomePageProps) => HomeProps = ({
     initialData: ssrNewMons,
   });
   const { data: newPaintingList } = usePaintingListQuery({
-    enabled: !ssrNewPaintingList,
+    enabled: true,
   });
   const { data: rareNews } = useRecentRareNewsQuery({
     enabled: !ssrRareNews,

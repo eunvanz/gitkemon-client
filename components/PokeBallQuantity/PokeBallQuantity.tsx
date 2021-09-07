@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from "@heroicons/react/solid";
 import cx from "classnames";
+import { isMobile } from "react-device-detect";
 import { PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
 import Slider from "../Slider/Slider";
@@ -64,9 +65,9 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
   }, []);
 
   const handleOnDragEnd = useCallback(
-    (e) => {
-      const moveY = e.y || e.changedTouches[0].clientY;
-      if (moveY - startY > VALID_PULL_LENGTH) {
+    (e?) => {
+      const moveY = e?.y || e?.changedTouches[0].clientY;
+      if (!e || moveY - startY > VALID_PULL_LENGTH) {
         // 던져지는 애니메이션
         setIsReleasable(false);
         pokeBallContainerRef.current!.style.transitionTimingFunction = "ease-out";
@@ -124,26 +125,42 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
     setTimeout(goToNextAnimStep, 1000);
   }, [goToNextAnimStep]);
 
-  useEffect(() => {
-    pokeBallRef.current?.addEventListener("mousedown", handleOnDragStart);
-    pokeBallRef.current?.addEventListener("touchstart", handleOnDragStart);
-
-    return () => {
-      document.removeEventListener("mousemove", handleOnDrag);
-      document.removeEventListener("touchmove", handleOnDrag);
-      document.removeEventListener("mouseup", handleOnDragEnd);
-      document.removeEventListener("touchend", handleOnDragEnd);
-      pokeBallRef.current?.removeEventListener("mousedown", handleOnDragStart);
-      // eslint-disable-next-line
-      pokeBallRef.current?.removeEventListener("touchstart", handleOnDragStart);
-    };
-  }, [handleOnDrag, handleOnDragEnd, handleOnDragStart]);
+  const handleOnClick = useCallback(() => {
+    pokeBallContainerRef.current!.style.transitionTimingFunction = "ease-out";
+    pokeBallContainerRef.current!.style.transitionDuration = "0.2s";
+    pokeBallContainerRef.current!.style.transform = "translateY(+300px)";
+    titleRef.current!.style.transitionDuration = "0.2s";
+    pullToReadyRef.current!.style.transitionDuration = "0.2s";
+    quantityRef.current!.style.transitionDuration = "0.2s";
+    titleRef.current!.style.opacity = "0";
+    quantityRef.current!.style.opacity = "0";
+    pullToReadyRef.current!.style.opacity = "0";
+    setTimeout(handleOnDragEnd, 300);
+  }, [handleOnDragEnd]);
 
   useEffect(() => {
-    window.addEventListener("keydown", handleOnKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleOnKeyDown);
-    };
+    if (!isMobile) {
+      pokeBallRef.current?.addEventListener("mousedown", handleOnDragStart);
+
+      return () => {
+        document.removeEventListener("mousemove", handleOnDrag);
+        document.removeEventListener("mouseup", handleOnDragEnd);
+        pokeBallRef.current?.removeEventListener("mousedown", handleOnDragStart);
+        // eslint-disable-next-line
+        pokeBallRef.current?.removeEventListener("touchstart", handleOnDragStart);
+      };
+    } else {
+      pokeBallRef.current?.addEventListener("click", handleOnClick);
+    }
+  }, [handleOnClick, handleOnDrag, handleOnDragEnd, handleOnDragStart]);
+
+  useEffect(() => {
+    if (!isMobile) {
+      window.addEventListener("keydown", handleOnKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleOnKeyDown);
+      };
+    }
   }, [handleOnKeyDown]);
 
   const isLastPokeBall = useMemo(() => {
@@ -238,7 +255,7 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
             })}
           >
             <Typography color="primary">
-              <p className="mb-1">Pull to ready</p>
+              <p className="mb-1">{isMobile ? "Tap to throw" : "Pull to ready"}</p>
               <ChevronDoubleDownIcon className="w-4 h-4 mx-auto animate-bounce" />
             </Typography>
           </div>

@@ -79,6 +79,14 @@ const Evolution: React.FC<EvolutionProps> = ({
     }
   }, [evolveMon, router, user]);
 
+  useEffect(() => {
+    setIsMonSelectVisible(false);
+    setIsCardVisible(false);
+    setIsGotchaVisible(false);
+    setIsButtonVisible(false);
+    setIsConfettiVisible(false);
+  }, [evolveMon]);
+
   return nextMons && evolveMon && user ? (
     <div
       className={cx(

@@ -137,6 +137,7 @@ const useMonImageProps: (params: UseMonImagePropsParams) => MonImageProps = ({
         } catch (error) {
           setIsSubmitting(false);
         }
+        queryClient.resetQueries(QUERY_KEY.MONS);
       }
       refetchMons();
     },

@@ -1,6 +1,6 @@
 import { Fragment, HTMLAttributes, ReactNode, useMemo } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import classNames from "classnames";
+import cx from "classnames";
 
 export interface MenuItem {
   title: string;
@@ -23,6 +23,7 @@ const DropDownMenu = ({
   menuItems,
   origin,
   width,
+  className,
   ...restProps
 }: DropDownMenuProps) => {
   const hasGroup = useMemo(() => {
@@ -30,10 +31,10 @@ const DropDownMenu = ({
   }, [menuItems]);
 
   return (
-    <Menu as="div" {...restProps}>
+    <Menu as="div" className={cx("relative", className)} {...restProps}>
       {({ open }) => (
         <>
-          <div>
+          <div className="inline">
             <Menu.Button className={buttonClassName}>{buttonLabel}</Menu.Button>
           </div>
           <Transition
@@ -48,10 +49,10 @@ const DropDownMenu = ({
           >
             <Menu.Items
               static
-              className={classNames(
+              className={cx(
                 `origin-top-${origin} origin-to absolute ${
                   origin.endsWith("right") ? "right" : "left"
-                }-0 mt-2 w-${width} rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`,
+                }-0 mt-2 w-${width} rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50`,
                 { "divide-y divide-gray": hasGroup || header },
               )}
             >
@@ -63,7 +64,7 @@ const DropDownMenu = ({
                       <Menu.Item key={item.title}>
                         {({ active }) => (
                           <a
-                            className={classNames(
+                            className={cx(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-800 cursor-pointer",
                             )}

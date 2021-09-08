@@ -29,7 +29,7 @@ const LineGauge: React.FC<LineGaugeProps> = ({
           return (
             <div
               key={index}
-              className={cx(`h-${height} bg-${color}`, {
+              className={cx(`h-${height} bg-${color} transition-all`, {
                 ["rounded-l-md"]: index === 0,
                 ["rounded-r-md"]: (index === 0 && value === 100) || restValue === 0,
               })}

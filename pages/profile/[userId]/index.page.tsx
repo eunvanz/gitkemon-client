@@ -1,26 +1,16 @@
-import api from "~/api";
 import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
 import withBaseLayout from "~/hocs/withBaseLayout";
 import ROUTES from "~/paths";
-import { Collection, Mon, PaybackLog, ProfileMon, UserProfile } from "~/types";
 import Profile from "./Profile.view";
 import useProfileProps from "./useProfileProps";
 
-export interface ProfilePageProps {
-  ssrUserProfile: UserProfile;
-  ssrPaybacks: PaybackLog[];
-  ssrCollections: Collection[];
-  ssrMons: Mon[];
-  ssrProfileMon: ProfileMon;
-}
-
-const ProfilePage: React.FC<ProfilePageProps> = (ssrProps: ProfilePageProps) => {
-  const props = useProfileProps(ssrProps);
+const ProfilePage: React.FC<void> = () => {
+  const props = useProfileProps();
 
   return <Profile {...props} />;
 };
 
-export const getServerSideProps = withAuthServerSideProps<ProfilePageProps>({
+export const getServerSideProps = withAuthServerSideProps({
   isAuthRequired: false,
 })(async (ctx) => {
   const { userId } = ctx.params as { userId: string };
@@ -32,28 +22,6 @@ export const getServerSideProps = withAuthServerSideProps<ProfilePageProps>({
       },
     };
   }
-  const [
-    ssrUserProfile,
-    ssrPaybacks,
-    ssrCollections,
-    ssrMons,
-    ssrProfileMon,
-  ] = await Promise.all([
-    api.getUserProfile(userId),
-    api.getPaybackHistory(userId),
-    api.getUserCollections(userId),
-    api.getActiveMons(),
-    api.getProfileMons(userId),
-  ]);
-  return {
-    props: {
-      ssrUserProfile,
-      ssrPaybacks,
-      ssrCollections,
-      ssrMons,
-      ssrProfileMon,
-    },
-  };
 });
 
 export default withBaseLayout(ProfilePage);

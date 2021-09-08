@@ -1,7 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import cookies from "next-cookies";
 import Head from "next/head";
-import api from "~/api";
 import { Mon, Pageable, Painting, Payback, RareNews } from "~/types";
 import withAuthServerSideProps from "../hocs/withAuthServerSideProps";
 import withBaseLayout from "../hocs/withBaseLayout";
@@ -16,8 +14,8 @@ export interface HomePageProps {
   ssrRareNews: RareNews[];
 }
 
-const HomePage: NextPage<HomePageProps> = (pageProps) => {
-  const props = useHomeProps(pageProps);
+const HomePage: NextPage<HomePageProps> = () => {
+  const props = useHomeProps();
 
   return (
     <>
@@ -31,32 +29,8 @@ const HomePage: NextPage<HomePageProps> = (pageProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps<{}>({
+export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps({
   isAuthRequired: false,
-})(async (ctx, user) => {
-  const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_COOKIE_NAME as string];
-  const [
-    ssrNewMons,
-    ssrNewPaintingList,
-    ssrRareNews,
-    ssrLastPayback,
-    ssrAvailableContributions,
-  ] = await Promise.all([
-    api.getRecentMons(),
-    api.getPaintingList({ page: 1, limit: 3 }),
-    api.getRecentRareNews(),
-    user ? api.getLastPayback(accessToken) : null,
-    user ? api.getAvailableContributions(accessToken) : null,
-  ]);
-  return {
-    props: {
-      ssrNewMons,
-      ssrNewPaintingList,
-      ssrLastPayback,
-      ssrAvailableContributions,
-      ssrRareNews,
-    },
-  };
-});
+})();
 
 export default withBaseLayout(HomePage);

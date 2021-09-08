@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
+import { CollectionStatusProps } from "~/components/CollectionStatus";
 import { MON_TIERS } from "~/constants/rules";
 import useActiveMonsQuery from "~/queries/useActiveMonsQuery";
 import useCollectionsQuery from "~/queries/useCollectionsQuery";
@@ -9,36 +10,18 @@ import useProfileMonQuery from "~/queries/useProfileMonQuery";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
 import { userState } from "~/state/user";
 import { ProfileProps } from "./Profile.view";
-import { ProfilePageProps } from "./index.page";
 
-const useProfileProps: (ssrProps: ProfilePageProps) => ProfileProps = ({
-  ssrCollections,
-  ssrMons,
-  ssrPaybacks,
-  ssrProfileMon,
-  ssrUserProfile,
-}) => {
+const useProfileProps: () => ProfileProps = () => {
   const user = useRecoilValue(userState);
   const router = useRouter();
 
   const { userId } = router.query as { userId: string };
 
-  const { data: userProfile } = useUserProfileQuery(userId, {
-    initialData: ssrUserProfile,
-  });
-  const { data: profileMon } = useProfileMonQuery(userId, {
-    initialData: ssrProfileMon,
-  });
-  const { data: mons } = useActiveMonsQuery({
-    initialData: ssrMons,
-  });
-  const { data: collections } = useCollectionsQuery(userId, {
-    initialData: ssrCollections,
-    enabled: !ssrCollections,
-  });
-  const { data: paybacks } = usePaybackHistoryQuery(userId, {
-    initialData: ssrPaybacks,
-  });
+  const { data: userProfile } = useUserProfileQuery(userId);
+  const { data: profileMon } = useProfileMonQuery(userId);
+  const { data: mons } = useActiveMonsQuery();
+  const { data: collections } = useCollectionsQuery(userId);
+  const { data: paybacks } = usePaybackHistoryQuery(userId);
 
   const colPointInfo = useMemo(() => {
     if (!collections || !mons) {
@@ -65,7 +48,7 @@ const useProfileProps: (ssrProps: ProfilePageProps) => ProfileProps = ({
     return result;
   }, [collections, mons]);
 
-  const collectionStatus = useMemo(() => {
+  const collectionStatus: CollectionStatusProps | undefined = useMemo(() => {
     if (!countInfo || !colPointInfo) {
       return undefined;
     }

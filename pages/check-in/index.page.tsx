@@ -1,5 +1,3 @@
-import cookies from "next-cookies";
-import api from "~/api";
 import { User } from "~/types";
 import withAuthServerSideProps from "../../hocs/withAuthServerSideProps";
 import withBaseLayout from "../../hocs/withBaseLayout";
@@ -19,15 +17,6 @@ const PaybackPage: React.FC<PaybackPageProps> = (pageProps) => {
 
 export const getServerSideProps = withAuthServerSideProps({
   isAuthRequired: true,
-})(async (ctx, ssrUser) => {
-  const accessToken = cookies(ctx)[process.env.ACCESS_TOKEN_COOKIE_NAME as string];
-  const ssrAvailableContributions = await api.getAvailableContributions(accessToken);
-  return {
-    props: {
-      ssrUser,
-      ssrAvailableContributions,
-    },
-  };
-});
+})();
 
 export default withBaseLayout(PaybackPage);

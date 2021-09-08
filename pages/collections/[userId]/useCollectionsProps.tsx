@@ -13,23 +13,13 @@ import { blendMonState } from "../../../state/blendMon";
 import { userState } from "../../../state/user";
 import { Collection } from "../../../types";
 import { CollectionsProps } from "./Collections.view";
-import { CollectionsPageProps } from "./index.page";
 
-const useCollectionsProps: (ssrProps: CollectionsPageProps) => CollectionsProps = ({
-  ssrMons,
-  ssrCollections,
-  ssrCollectionUser,
-}) => {
+const useCollectionsProps: () => CollectionsProps = () => {
   const router = useRouter();
   const { userId } = router.query as { userId: string };
-  const { data: mons } = useActiveMonsQuery({ initialData: ssrMons });
-  const { data: collections } = useCollectionsQuery(userId, {
-    initialData: ssrCollections,
-    enabled: !ssrCollections,
-  });
-  const { data: collectionUser } = useUserProfileQuery(userId, {
-    initialData: ssrCollectionUser,
-  });
+  const { data: mons } = useActiveMonsQuery();
+  const { data: collections } = useCollectionsQuery(userId);
+  const { data: collectionUser } = useUserProfileQuery(userId);
   const user = useRecoilValue(userState);
   const [blendMon, setBlendMon] = useRecoilState(blendMonState);
 

@@ -3,6 +3,7 @@ import { XIcon } from "@heroicons/react/outline";
 import orderBy from "lodash/orderBy";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Skeleton from "react-loading-skeleton";
 import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
 import CollectionStatus from "~/components/CollectionStatus";
@@ -52,8 +53,8 @@ const Collections: React.FC<CollectionsProps> = ({
   });
 
   const isLoading = useMemo(() => {
-    return !collections || !mons;
-  }, [collections, mons]);
+    return !collections || !mons || !collectionUser;
+  }, [collectionUser, collections, mons]);
 
   const filteredMons = useMemo(() => {
     if (!filterState.has.includes(false) || isBlendMode) {

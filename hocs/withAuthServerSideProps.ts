@@ -13,7 +13,9 @@ const withAuthServerSideProps = <T>({
   getServerSidePropsFunc?: (
     ctx: GetServerSidePropsContext,
     user: User | null,
-  ) => Promise<{ props: T } | { redirect: { destination: string; permanent: boolean } }>,
+  ) => Promise<
+    { props?: T } | { redirect: { destination: string; permanent: boolean } } | undefined
+  >,
 ) => {
   return async (ctx: GetServerSidePropsContext) => {
     const accessToken = ctx.req.cookies[process.env.ACCESS_TOKEN_COOKIE_NAME as string];

@@ -54,8 +54,8 @@ const RareNewsCard: React.FC<RareNewsCardProps> = ({ item, className, ...restPro
           onClick={() => router.push(`${ROUTES.COLLECTIONS}/${item.userId}`)}
         >
           {item.user.nickname}
-        </Typography>
-        &apos;s got {decoratorText}
+        </Typography>{" "}
+        got {decoratorText}
         <Typography as="a" weight="bold" onClick={openMonModal}>
           {getLocaleProperty(item.collection, "name")}
         </Typography>{" "}

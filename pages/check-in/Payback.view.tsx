@@ -199,7 +199,7 @@ const Payback: React.FC<PaybackProps> = ({
                 </Typography>
               )}
               <h2 className="mb-1 text-center text-3xl text-green-600">🎉 Hooray!!</h2>
-              <h2 className="text-center text-2xl text-gray-600">You&apos;ve got</h2>
+              <h2 className="text-center text-2xl text-gray-600">You got</h2>
               {renderRewardItems()}
             </div>
             <div className="mt-8 space-y-6">

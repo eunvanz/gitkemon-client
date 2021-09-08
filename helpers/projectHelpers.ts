@@ -171,9 +171,7 @@ export const checkIsLuckyHuntResult = (resultItem: HuntResult) => {
 };
 
 export const getUpdatedColPointMessage = (updatedColPoint: number) => {
-  return `You've got ${
-    updatedColPoint > 0 ? "+" : ""
-  }${updatedColPoint} collection points`;
+  return `You got ${updatedColPoint > 0 ? "+" : ""}${updatedColPoint} collection points`;
 };
 
 export const getMessagesFromHuntResult = (result: HuntResult[] | HuntResult) => {
@@ -194,8 +192,8 @@ export const getMessagesFromHuntResult = (result: HuntResult[] | HuntResult) => 
   });
   const messages = [];
   updatedColPoints && messages.push(getUpdatedColPointMessage(updatedColPoints));
-  hasSuperior && messages.push("You've got a superior Pokémon!");
-  hasMyth && messages.push("You've got a mythical Pokémon!");
+  hasSuperior && messages.push("You got a superior Pokémon!");
+  hasMyth && messages.push("You got a mythical Pokémon!");
   hasPromoted &&
     messages.push(`You've become a ${capitalize(TRAINER_CLASSES[trainerClass - 1])}`);
   return messages;

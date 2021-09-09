@@ -9,6 +9,6 @@ const BlendPage: React.FC<void> = () => {
   return <Blend {...props} />;
 };
 
-// export const getServerSideProps = withAuthServerSideProps({ isAuthRequired: true })();
+export const getServerSideProps = withAuthServerSideProps({ isAuthRequired: true })();
 
 export default withBaseLayout(BlendPage);

@@ -9,8 +9,8 @@ const HuntPage: React.FC<void> = () => {
   return <Hunt {...props} />;
 };
 
-// export const getServerSideProps = withAuthServerSideProps({
-//   isAuthRequired: true,
-// })();
+export const getServerSideProps = withAuthServerSideProps({
+  isAuthRequired: true,
+})();
 
 export default withBaseLayout(HuntPage);

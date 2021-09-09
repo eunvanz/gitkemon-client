@@ -1,7 +1,7 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { Mon, Pageable, Painting, Payback, RareNews } from "~/types";
-// import withAuthServerSideProps from "../hocs/withAuthServerSideProps";
+import withAuthServerSideProps from "../hocs/withAuthServerSideProps";
 import withBaseLayout from "../hocs/withBaseLayout";
 import Home from "./Home.view";
 import useHomeProps from "./useHomeProps";
@@ -29,8 +29,8 @@ const HomePage: NextPage<HomePageProps> = () => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps({
-//   isAuthRequired: false,
-// })();
+export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps({
+  isAuthRequired: false,
+})();
 
 export default withBaseLayout(HomePage);

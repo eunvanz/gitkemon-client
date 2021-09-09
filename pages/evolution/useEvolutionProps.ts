@@ -51,7 +51,7 @@ const useEvolutionProps: () => EvolutionProps = () => {
     return () => {
       setEvolveMon(undefined);
     };
-  }, [evolveMon, setEvolveMon]);
+  }, [setEvolveMon]);
 
   return {
     evolveMon,

@@ -4,8 +4,8 @@ import { MonTier } from "../../types";
 import CollectionStatusItem from "../CollectionStatusItem";
 
 export interface CollectionStatusProps {
-  countInfo: Record<MonTier, { value: number; max: number }>;
-  colPointInfo: { value: number; max: number };
+  countInfo?: Record<MonTier, { value: number; max: number }>;
+  colPointInfo?: { value: number; max: number };
   customSize?: string;
 }
 
@@ -22,11 +22,11 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({
             <CollectionStatusItem
               key={monTier}
               tier={monTier}
-              value={countInfo[monTier].value}
-              max={countInfo[monTier].max}
+              value={countInfo?.[monTier].value}
+              max={countInfo?.[monTier].max}
             />
           ))}
-          <CollectionStatusItem value={colPointInfo.value} max={colPointInfo.max} />
+          <CollectionStatusItem value={colPointInfo?.value} max={colPointInfo?.max} />
         </div>
       </div>
     </div>

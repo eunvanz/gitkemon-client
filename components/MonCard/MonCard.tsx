@@ -4,7 +4,7 @@ import cx from "classnames";
 import Image from "next/image";
 import { MON_CARD_WIDTH } from "~/constants/styles";
 import { checkIsCollectionMaxLevel } from "~/helpers/projectHelpers";
-import { CardMon, ModalMon, User } from "../../types";
+import { CardMon, ExtendableHTMLProps, ModalMon, User } from "../../types";
 import Button from "../Button";
 import CardBack from "../CardBack";
 import LevelBadge from "../LevelBadge";
@@ -16,8 +16,7 @@ import MonTypeBadge from "../MonTypeBadge";
 import PotentialBadge from "../PotentialBadge";
 import styles from "./MonCard.module.css";
 
-export interface MonCardProps
-  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface MonCardProps extends ExtendableHTMLProps<HTMLDivElement> {
   mon: CardMon;
   /** 레벨업을 했을 때 비교하기 위해 사용하는 필드 */
   oldMon?: ModalMon;

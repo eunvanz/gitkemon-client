@@ -137,34 +137,51 @@ const Collections: React.FC<CollectionsProps> = ({
 
   const router = useRouter();
 
-  return !isLoading ? (
+  return (
     <>
       <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
         <div className="flex items-center mb-4">
           <div className="relative mr-4">
-            <Image
-              className="rounded-full"
-              src={collectionUser!.avatarUrl}
-              alt="user image"
-              width={64}
-              height={64}
-            />
-            <span
-              className="absolute inset-0 shadow-inner rounded-full"
-              aria-hidden="true"
-            />
+            {collectionUser ? (
+              <>
+                <Image
+                  className="rounded-full"
+                  src={collectionUser.avatarUrl}
+                  alt="user image"
+                  width={64}
+                  height={64}
+                />
+                <span
+                  className="absolute inset-0 shadow-inner rounded-full"
+                  aria-hidden="true"
+                />
+              </>
+            ) : (
+              <Skeleton style={{ width: "4rem", height: "4rem", borderRadius: "50%" }} />
+            )}
           </div>
           <div className="flex flex-col justify-center">
-            <Typography className="mb-0" as="h1" size="2xl">
-              <a onClick={() => router.push(`${ROUTES.PROFILE}/${collectionUser?.id}`)}>
-                {collectionUser?.nickname}
-              </a>
-              &apos;s collection
-            </Typography>
-            <Typography color="hint">
-              {collectionUser?.githubLogin} ·{" "}
-              <TrainerClassBadge trainerClass={collectionUser!.trainerClass} />
-            </Typography>
+            {collectionUser ? (
+              <>
+                <Typography className="mb-0" as="h1" size="2xl">
+                  <a
+                    onClick={() => router.push(`${ROUTES.PROFILE}/${collectionUser?.id}`)}
+                  >
+                    {collectionUser?.nickname}
+                  </a>
+                  &apos;s collection
+                </Typography>
+                <Typography color="hint">
+                  {collectionUser?.githubLogin} ·{" "}
+                  <TrainerClassBadge trainerClass={collectionUser!.trainerClass} />
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Skeleton style={{ display: "block", width: 300, height: 30 }} />
+                <Skeleton style={{ display: "block", width: 100, marginTop: 4 }} />
+              </>
+            )}
           </div>
         </div>
         {!isBlendMode && colPointInfo && countInfo && (
@@ -192,7 +209,7 @@ const Collections: React.FC<CollectionsProps> = ({
           </div>
         )}
         <MonCardGrid>
-          {orderedCollections!.map((collection) => {
+          {orderedCollections?.map((collection) => {
             const isCollection = (collection as Collection).monImageUrl;
             return (
               <MonCard
@@ -222,10 +239,6 @@ const Collections: React.FC<CollectionsProps> = ({
       </div>
       <Footer />
     </>
-  ) : (
-    <div className="h-full">
-      <Loading isFullHeight />
-    </div>
   );
 };
 

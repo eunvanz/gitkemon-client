@@ -47,4 +47,9 @@ const Template: ComponentStory<typeof CollectionStatus> = (args) => (
   <CollectionStatus {...args} />
 );
 
-export const 기본 = createStoryComponent(Template);
+export const Default = createStoryComponent(Template);
+
+export const Loading = createStoryComponent(Template, {
+  colPointInfo: undefined,
+  countInfo: undefined,
+});

@@ -152,6 +152,11 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
       };
     } else {
       pokeBallRef.current?.addEventListener("click", handleOnClick);
+
+      return () => {
+        // eslint-disable-next-line
+        pokeBallRef.current?.removeEventListener("click", handleOnClick);
+      };
     }
   }, [handleOnClick, handleOnDrag, handleOnDragEnd, handleOnDragStart]);
 

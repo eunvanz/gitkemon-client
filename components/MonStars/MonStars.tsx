@@ -22,7 +22,11 @@ const MonStars: React.FC<MonStarsProps> = ({ stars, className, ...restProps }) =
         <FontAwesomeIcon
           key={index}
           className={cx(
-            stars % 5 === 0 || (stars % 5) - index - 1 >= 0 ? fillColor : emptyColor,
+            stars === 0
+              ? emptyColor
+              : stars % 5 === 0 || (stars % 5) - index - 1 >= 0
+              ? fillColor
+              : emptyColor,
             className,
           )}
           icon={faStar}

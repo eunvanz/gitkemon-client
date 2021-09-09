@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { ArrowNarrowUpIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import Image from "next/image";
+import Skeleton from "react-loading-skeleton";
 import { MON_CARD_WIDTH } from "~/constants/styles";
 import { checkIsCollectionMaxLevel } from "~/helpers/projectHelpers";
 import { CardMon, ExtendableHTMLProps, ModalMon, User } from "../../types";
@@ -17,7 +18,7 @@ import PotentialBadge from "../PotentialBadge";
 import styles from "./MonCard.module.css";
 
 export interface MonCardProps extends ExtendableHTMLProps<HTMLDivElement> {
-  mon: CardMon;
+  mon?: CardMon;
   /** 레벨업을 했을 때 비교하기 위해 사용하는 필드 */
   oldMon?: ModalMon;
   /** 레벨업을 했을 때 비교하기 위해 사용하는 필드 */
@@ -53,8 +54,8 @@ const MonCard: React.FC<MonCardProps> = ({
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
 
   const isHidden = useMemo(() => {
-    return !mon.imageUrl;
-  }, [mon.imageUrl]);
+    return !mon?.imageUrl;
+  }, [mon?.imageUrl]);
 
   const Front = useCallback(
     ({ isPlaceholder }: { isPlaceholder?: boolean }) => {
@@ -62,62 +63,83 @@ const MonCard: React.FC<MonCardProps> = ({
         <div className={cx(isPlaceholder ? undefined : styles.surface)}>
           <div
             className={cx("border rounded shadow", {
-              "transition-shadow hover:shadow-lg": !isClickDisabled,
+              "transition-shadow hover:shadow-lg": !isClickDisabled || !mon,
             })}
           >
             <div className="flex-1 p-1 bg-white rounded">
-              {mon.level && (
-                <div className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5 z-10")}>
-                  <LevelBadge
-                    level={mon.level}
-                    evolvableLevel={mon.evolutionLevel}
-                    isMax={user && isOwned ? checkIsCollectionMaxLevel(user, mon) : false}
-                  />
-                </div>
-              )}
-              {mon.potential && (
-                <div
-                  className={cx("absolute right-1 top-0.5 sm:right-2 sm:top-1.5 z-10")}
-                >
-                  <PotentialBadge potential={mon.potential} />
-                </div>
-              )}
-              <div className={cx("relative", { "h-36": isStatic })}>
-                {isStatic ? (
-                  mon.imageUrl ? (
-                    // @ts-ignore
-                    <Image
-                      src={mon.imageUrl}
-                      alt="mon image"
-                      draggable={false}
-                      layout="fill"
-                      objectFit="contain"
-                      quality={100}
-                    />
-                  ) : (
-                    <CardBack />
-                  )
-                ) : mon.imageUrl ? (
-                  // eslint-disable-next-line
-                  <img src={mon.imageUrl} alt="mon image" draggable={false} />
-                ) : (
-                  <div className="relative h-36">
-                    <CardBack />
+              {mon ? (
+                <>
+                  {mon.level && (
+                    <div
+                      className={cx("absolute left-1 top-0.5 sm:left-2 sm:top-1.5 z-10")}
+                    >
+                      <LevelBadge
+                        level={mon.level}
+                        evolvableLevel={mon.evolutionLevel}
+                        isMax={
+                          user && isOwned ? checkIsCollectionMaxLevel(user, mon) : false
+                        }
+                      />
+                    </div>
+                  )}
+                  {mon.potential && (
+                    <div
+                      className={cx(
+                        "absolute right-1 top-0.5 sm:right-2 sm:top-1.5 z-10",
+                      )}
+                    >
+                      <PotentialBadge potential={mon.potential} />
+                    </div>
+                  )}
+                  <div className={cx("relative", { "h-36": isStatic })}>
+                    {isStatic ? (
+                      mon.imageUrl ? (
+                        // @ts-ignore
+                        <Image
+                          src={mon.imageUrl}
+                          alt="mon image"
+                          draggable={false}
+                          layout="fill"
+                          objectFit="contain"
+                          quality={100}
+                        />
+                      ) : (
+                        <CardBack />
+                      )
+                    ) : mon.imageUrl ? (
+                      // eslint-disable-next-line
+                      <img src={mon.imageUrl} alt="mon image" draggable={false} />
+                    ) : (
+                      <div className="relative h-36">
+                        <CardBack />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </>
+              ) : (
+                <Skeleton style={{ display: "block", width: "100%", height: "9rem" }} />
+              )}
             </div>
             <div className="flex-col bg-gray-50 py-1 w-full rounded-b">
               <div className="flex flex-row flex-1 my-1.5 justify-center">
-                <MonStars stars={mon.stars} />
+                <MonStars stars={mon?.stars || 0} />
               </div>
               <div className="flex flex-row flex-1 my-1 justify-center">
-                <MonTierBadge tier={mon.tier} className="mr-0.5" />
-                <MonTypeBadge
-                  type={mon.firstType}
-                  className={mon.secondType ? "mr-0.5" : undefined}
-                />
-                {mon.secondType && <MonTypeBadge type={mon.secondType} />}
+                {mon ? (
+                  <>
+                    <MonTierBadge tier={mon.tier} className="mr-0.5" />
+                    <MonTypeBadge
+                      type={mon.firstType}
+                      className={mon.secondType ? "mr-0.5" : undefined}
+                    />
+                    {mon.secondType && <MonTypeBadge type={mon.secondType} />}
+                  </>
+                ) : (
+                  <>
+                    <Skeleton style={{ width: 40, height: 20, marginRight: 2 }} />
+                    <Skeleton style={{ width: 40, height: 20 }} />
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -184,7 +206,7 @@ const MonCard: React.FC<MonCardProps> = ({
         />
       ) : (
         <MonModalContainer
-          collectionId={mon.id}
+          collectionId={mon!.id}
           oldMon={oldMon}
           newMon={newMon}
           isOpen={isMonModalOpen}

@@ -27,6 +27,10 @@ export const 선택가능 = createStoryComponent(Template, {
   onSelect: () => {},
 });
 
+export const 스켈레톤 = createStoryComponent(Template, {
+  mon: undefined,
+});
+
 export const 그리드 = () => (
   <MonCardGrid>
     <MonCard mon={mockMons.cardMon} />

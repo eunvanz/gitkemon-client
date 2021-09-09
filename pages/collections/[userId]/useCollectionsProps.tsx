@@ -17,9 +17,12 @@ import { CollectionsProps } from "./Collections.view";
 const useCollectionsProps: () => CollectionsProps = () => {
   const router = useRouter();
   const { userId } = router.query as { userId: string };
+
   const { data: mons } = useActiveMonsQuery();
-  const { data: collections } = useCollectionsQuery(userId);
-  const { data: collectionUser } = useUserProfileQuery(userId);
+  const { data: collections } = useCollectionsQuery(userId, { enabled: router.isReady });
+  const { data: collectionUser } = useUserProfileQuery(userId, {
+    enabled: router.isReady,
+  });
   const user = useRecoilValue(userState);
   const [blendMon, setBlendMon] = useRecoilState(blendMonState);
 

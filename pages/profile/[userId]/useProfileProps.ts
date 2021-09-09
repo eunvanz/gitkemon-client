@@ -17,11 +17,11 @@ const useProfileProps: () => ProfileProps = () => {
 
   const { userId } = router.query as { userId: string };
 
-  const { data: userProfile } = useUserProfileQuery(userId, { enabled: router.isReady });
-  const { data: profileMon } = useProfileMonQuery(userId, { enabled: router.isReady });
+  const { data: userProfile } = useUserProfileQuery(userId);
+  const { data: profileMon } = useProfileMonQuery(userId);
   const { data: mons } = useActiveMonsQuery();
-  const { data: collections } = useCollectionsQuery(userId, { enabled: router.isReady });
-  const { data: paybacks } = usePaybackHistoryQuery(userId, { enabled: router.isReady });
+  const { data: collections } = useCollectionsQuery(userId);
+  const { data: paybacks } = usePaybackHistoryQuery(userId);
 
   const colPointInfo = useMemo(() => {
     if (!collections || !mons) {

@@ -209,28 +209,32 @@ const Collections: React.FC<CollectionsProps> = ({
           </div>
         )}
         <MonCardGrid>
-          {orderedCollections?.map((collection) => {
-            const isCollection = (collection as Collection).monImageUrl;
-            return (
-              <MonCard
-                key={`${isCollection ? "col" : "mon"}-${collection.id}`}
-                mon={
-                  isCollection
-                    ? convertCollectionToCardMon(collection as Collection)
-                    : convertMonToCardMon(collection as Mon)
-                }
-                modalMon={
-                  isCollection ? undefined : convertMonToModalMon(collection as Mon)
-                }
-                onSelect={
-                  isBlendMode ? () => onSelectItem?.(collection as Collection) : undefined
-                }
-                isOwned={collectionUser?.id === user?.id}
-                user={user}
-                isStatic
-              />
-            );
-          })}
+          {orderedCollections
+            ? orderedCollections.map((collection) => {
+                const isCollection = (collection as Collection).monImageUrl;
+                return (
+                  <MonCard
+                    key={`${isCollection ? "col" : "mon"}-${collection.id}`}
+                    mon={
+                      isCollection
+                        ? convertCollectionToCardMon(collection as Collection)
+                        : convertMonToCardMon(collection as Mon)
+                    }
+                    modalMon={
+                      isCollection ? undefined : convertMonToModalMon(collection as Mon)
+                    }
+                    onSelect={
+                      isBlendMode
+                        ? () => onSelectItem?.(collection as Collection)
+                        : undefined
+                    }
+                    isOwned={collectionUser?.id === user?.id}
+                    user={user}
+                    isStatic
+                  />
+                );
+              })
+            : Array.from({ length: 16 }).map((_, index) => <MonCard key={index} />)}
         </MonCardGrid>
         <CollectionFilter
           filterState={filterState}

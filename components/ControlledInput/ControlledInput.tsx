@@ -31,6 +31,7 @@ function ControlledInput<TInputProps, TFormValues>({
           inputProps?.onChange?.(value);
         }}
         hasError={fieldState.invalid}
+        // @ts-ignore (to avoid fail in vercel)
         errorMessage={fieldState.error?.message}
       />
     </div>

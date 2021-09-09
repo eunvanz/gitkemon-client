@@ -80,12 +80,12 @@ const Evolution: React.FC<EvolutionProps> = ({
   }, [evolveMon, router, user]);
 
   useEffect(() => {
-    setIsMonSelectVisible(false);
+    setIsMonSelectVisible(!!nextMons && nextMons.length > 1);
     setIsCardVisible(false);
     setIsGotchaVisible(false);
     setIsButtonVisible(false);
     setIsConfettiVisible(false);
-  }, [evolveMon]);
+  }, [evolveMon, nextMons]);
 
   return nextMons && evolveMon && user ? (
     <div
@@ -98,7 +98,7 @@ const Evolution: React.FC<EvolutionProps> = ({
       <AnimatePresence>
         {isMonSelectVisible && (
           <motion.div
-            className="w-full"
+            className="w-full max-w-screen-xl"
             initial={{
               opacity: 0,
             }}

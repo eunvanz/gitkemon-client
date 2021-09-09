@@ -184,7 +184,7 @@ const Collections: React.FC<CollectionsProps> = ({
             )}
           </div>
         </div>
-        {!isBlendMode && colPointInfo && countInfo && (
+        {!isBlendMode && (
           <CollectionStatus colPointInfo={colPointInfo} countInfo={countInfo} />
         )}
         {isBlendMode && (

@@ -101,7 +101,9 @@ const MonCard: React.FC<MonCardProps> = ({
                   // eslint-disable-next-line
                   <img src={mon.imageUrl} alt="mon image" draggable={false} />
                 ) : (
-                  <CardBack />
+                  <div className="relative h-36">
+                    <CardBack />
+                  </div>
                 )}
               </div>
             </div>

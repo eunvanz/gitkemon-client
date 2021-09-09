@@ -3,6 +3,7 @@ import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Confetti from "react-confetti";
+import { isMobile } from "react-device-detect";
 import useWindowSize from "react-use/lib/useWindowSize";
 import { colorHashes } from "../../constants/styles";
 import { delayPromise } from "../../helpers/commonHelpers";
@@ -152,7 +153,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
           {!isCardVisible && (
             <motion.div
               initial={{
-                transform: "scale(20%)",
+                transform: `scale(${isMobile ? 100 : 20}%)`,
               }}
               animate={{
                 transform: "scale(100%)",

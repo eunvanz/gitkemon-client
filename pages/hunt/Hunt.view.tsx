@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { isMobile } from "react-device-detect";
 import PokeBallDrop, { PokeBallDropProps } from "../../components/PokeBallDrop";
 import PokeBallQuantity, {
   PokeBallQuantityProps,
@@ -34,9 +35,13 @@ const Hunt: React.FC<HuntProps> = ({ pokeBalls, onSubmit, onFinish }) => {
   const handleOnSubmit = useCallback(
     (type: PokeBallType, amount: number) => {
       onSubmit(type, amount);
-      setStep(2);
+      if (isMobile) {
+        onFinish();
+      } else {
+        setStep(2);
+      }
     },
-    [onSubmit],
+    [onFinish, onSubmit],
   );
 
   return (

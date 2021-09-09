@@ -3,6 +3,7 @@ import { ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from "@heroicons/react/solid";
 import cx from "classnames";
 import { isMobile } from "react-device-detect";
+import { HEADER_HEIGHT } from "~/constants/styles";
 import { PokeBallType } from "../../types";
 import PokeBallImage from "../PokeBallImage";
 import Slider from "../Slider/Slider";
@@ -128,15 +129,15 @@ const PokeBallQuantity: React.FC<PokeBallQuantityProps> = ({ pokeBall, onSubmit 
   const handleOnClick = useCallback(() => {
     pokeBallContainerRef.current!.style.transitionTimingFunction = "ease-out";
     pokeBallContainerRef.current!.style.transitionDuration = "0.2s";
-    pokeBallContainerRef.current!.style.transform = "translateY(+300px)";
+    pokeBallContainerRef.current!.style.transform = `translateY(${HEADER_HEIGHT}px)`;
     titleRef.current!.style.transitionDuration = "0.2s";
     pullToReadyRef.current!.style.transitionDuration = "0.2s";
     quantityRef.current!.style.transitionDuration = "0.2s";
     titleRef.current!.style.opacity = "0";
     quantityRef.current!.style.opacity = "0";
     pullToReadyRef.current!.style.opacity = "0";
-    setTimeout(handleOnDragEnd, 300);
-  }, [handleOnDragEnd]);
+    setTimeout(() => onSubmit(pokeBall.type, amount), 200);
+  }, [amount, onSubmit, pokeBall.type]);
 
   useEffect(() => {
     if (!isMobile) {

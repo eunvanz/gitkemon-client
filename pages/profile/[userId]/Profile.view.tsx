@@ -44,11 +44,7 @@ const Profile: React.FC<ProfileProps> = ({
                   {userProfile?.collectionRank.toLocaleString() || "-"}
                 </Typography>
               </Typography>
-              {collectionStatus ? (
-                <CollectionStatus {...collectionStatus} customSize="grid-cols-2" />
-              ) : (
-                <Skeleton style={{ width: "100%", height: 300 }} />
-              )}
+              <CollectionStatus {...collectionStatus} customSize="grid-cols-2" />
             </div>
             <div className="flex flex-col mt-4">
               <Typography as="h1">

@@ -23,7 +23,7 @@ const withAuthServerSideProps = <T>({
     if (accessToken) {
       user = await api.loginWithToken(accessToken);
     }
-    if (!user && isAuthRequired) {
+    if (!accessToken && isAuthRequired) {
       return {
         redirect: {
           destination: ROUTES.SIGN_IN,

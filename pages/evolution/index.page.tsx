@@ -9,6 +9,6 @@ const EvolutionPage: React.FC<void> = () => {
   return <Evolution {...props} />;
 };
 
-export const getServerSideProps = withAuthServerSideProps({ isAuthRequired: true })();
+// export const getServerSideProps = withAuthServerSideProps({ isAuthRequired: true })();
 
 export default withBaseLayout(EvolutionPage);

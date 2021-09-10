@@ -53,10 +53,6 @@ const Collections: React.FC<CollectionsProps> = ({
     type: MON_TYPES,
   });
 
-  const isLoading = useMemo(() => {
-    return !collections || !mons || !collectionUser;
-  }, [collectionUser, collections, mons]);
-
   const filteredMons = useMemo(() => {
     if (!filterState.has.includes(false) || isBlendMode) {
       return [];

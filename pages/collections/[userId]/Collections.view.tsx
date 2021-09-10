@@ -3,6 +3,7 @@ import { XIcon } from "@heroicons/react/outline";
 import orderBy from "lodash/orderBy";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { isMobile } from "react-device-detect";
 import Skeleton from "react-loading-skeleton";
 import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
@@ -234,7 +235,9 @@ const Collections: React.FC<CollectionsProps> = ({
                   />
                 );
               })
-            : Array.from({ length: 16 }).map((_, index) => <MonCard key={index} />)}
+            : Array.from({ length: isMobile ? 6 : 8 }).map((_, index) => (
+                <MonCard key={index} />
+              ))}
         </MonCardGrid>
         <CollectionFilter
           filterState={filterState}

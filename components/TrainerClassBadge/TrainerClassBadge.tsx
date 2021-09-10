@@ -21,7 +21,7 @@ const TrainerClassBadge: React.FC<TrainerClassBadgeProps> = ({
       "bg-yellow-300 text-black",
       "bg-red-300 text-black",
       "bg-blue-300 text-black",
-      "bg-red-300 text-black",
+      "bg-blueGray-300 text-black",
       "bg-indigo-300 text-black",
       "bg-pink-300 text-black",
       "bg-gray-300 text-black",

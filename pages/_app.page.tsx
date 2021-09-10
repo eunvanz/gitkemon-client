@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ToastContainer } from "react-toastify";
@@ -23,29 +21,6 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    const handleStart = () => {
-      setIsLoading(true);
-    };
-    const handleStop = () => {
-      setIsLoading(false);
-    };
-
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleStop);
-    router.events.on("routeChangeError", handleStop);
-
-    return () => {
-      router.events.off("routeChangeStart", handleStart);
-      router.events.off("routeChangeComplete", handleStop);
-      router.events.off("routeChangeError", handleStop);
-    };
-  }, [router, setIsLoading]);
-
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
@@ -54,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           newestOnTop
           progressStyle={{ backgroundColor: colorHashes.WATER }}
         />
-        <TopProgressBarContainer isAnimating={isLoading} />
+        <TopProgressBarContainer />
         <Component {...pageProps} />
       </RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />

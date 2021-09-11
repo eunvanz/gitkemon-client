@@ -28,6 +28,7 @@ const API_URL = {
   PAYBACKS__HISTORY: "paybacks/history",
   PAYBACKS__LAST: "paybacks/last",
   RARE_NEWS__RECENT: "rare-news/recent",
+  CONTENTS: "contents",
   CONTENTS__FILE: "contents/file",
 };
 

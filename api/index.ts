@@ -430,6 +430,14 @@ const uploadFile = async (file: File) => {
   return data;
 };
 
+export interface CreateContentDto {
+  type: ContentType;
+  body: string;
+}
+const postContent = async (content: CreateContentDto) => {
+  await requester.post(API_URL.CONTENTS, content);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -473,6 +481,7 @@ const api = {
   getRecentRareNews,
   getLastPayback,
   uploadFile,
+  postContent,
 };
 
 export default api;

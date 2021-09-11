@@ -11,6 +11,7 @@ const ROUTES = {
   ADMIN: "/admin",
   ADMIN__MON_IMAGES: "/admin/mon-images",
   ADMIN__MONS: "/admin/mons",
+  ADMIN__CONTENTS: "/admin/contents",
   PAYBACK: "/check-in",
   NOT_FOUND: "/404",
   EVOLUTION: "/evolution",

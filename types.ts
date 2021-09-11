@@ -360,7 +360,7 @@ export interface PageRequestOptions {
   limit?: number;
 }
 
-export type ContentType = "painting";
+export type ContentType = "painting" | "notice";
 
 export interface PaybackLog {
   date: string;

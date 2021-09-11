@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
-import { Input } from "antd";
+import { Input, Select } from "antd";
 import MarkdownEditor from "~/components/MarkdownEditor";
-import Select from "~/components/Select";
 import { Content as ContentAsType, ContentType } from "~/types";
 
 export interface ContentFormValues {
@@ -39,17 +38,18 @@ const Content: React.FC<ContentProps> = ({
   return (
     <div className="content-container">
       <div className="mb-2">
-        <Select
-          label="Content type"
-          items={[
+        <Select value={type} onChange={onChangeType}>
+          {[
             {
               value: "notice",
-              displayValue: "Notice",
+              name: "Notice",
             },
-          ]}
-          onChange={onChangeType}
-          value={type}
-        />
+          ].map(({ value, name }) => (
+            <Select.Option key={value} value={value}>
+              {name}
+            </Select.Option>
+          ))}
+        </Select>
       </div>
       <div className="mb-2">
         <Input value={title} onChange={(e) => setTitle(e.target.value)} />

@@ -8,7 +8,6 @@ export interface ContentPageProps {
 }
 
 const ContentPage: React.FC<ContentPageProps> = (pageProps) => {
-  console.log("===== pageProps", pageProps);
   const props = useContentProps(pageProps);
 
   return <Content {...props} />;
@@ -17,7 +16,6 @@ const ContentPage: React.FC<ContentPageProps> = (pageProps) => {
 export const getServerSideProps = withAuthServerSideProps({ isAuthRequired: true })(
   async (ctx) => {
     const { contentId } = ctx.params as { contentId: string };
-    console.log("===== ctx.params", ctx.params);
     return {
       props: {
         contentId,

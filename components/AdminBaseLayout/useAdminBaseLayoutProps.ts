@@ -33,6 +33,10 @@ const useAdminBaseLayoutProps: ({
         name: "Mons",
         onClick: () => router.push(ROUTES.ADMIN__MONS),
       },
+      {
+        name: "Contents",
+        onClick: () => router.push(ROUTES.ADMIN__CONTENTS),
+      },
     ];
   }, [router]);
 

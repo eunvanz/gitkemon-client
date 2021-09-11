@@ -225,6 +225,7 @@ export enum QUERY_KEY {
   RECENT_RARE_NEWS = "RECENT_RARE_NEWS",
   LAST_PAYBACK = "LAST_PAYBACK",
   CONTENT_LIST = "CONTENT_LIST",
+  CONTENT = "CONTENT",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";

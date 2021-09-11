@@ -8,7 +8,7 @@ const useContentListQuery = (
   queryOptions?: UseInfiniteQueryOptions<Pageable<Content>>,
 ) => {
   const query = useCommonInfiniteQuery<Content>(
-    [QUERY_KEY.CONTENT_LIST, options.type, options.size || 20],
+    [QUERY_KEY.CONTENT_LIST, options.type],
     (pageOptions) =>
       api.getContents(options.type, { ...pageOptions, limit: options.size }),
     queryOptions,

@@ -452,6 +452,13 @@ const getContent = async (id: number) => {
   return data;
 };
 
+export interface UpdateContentDto extends Partial<CreateContentDto> {
+  id: number;
+}
+const patchContent = async (content: UpdateContentDto) => {
+  await requester.patch(`${API_URL.CONTENTS}/${content.id}`, content);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -498,6 +505,7 @@ const api = {
   postContent,
   getContents,
   getContent,
+  patchContent,
 };
 
 export default api;

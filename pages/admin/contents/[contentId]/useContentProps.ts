@@ -1,35 +1,58 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import ROUTES from "~/paths";
-import useContentMutation from "~/queries/useContentMutation";
+import useContentQuery from "~/queries/useContentQuery";
+import usePatchContentMutation from "~/queries/usePatchContentMutation";
+import usePostContentMutation from "~/queries/usePostContentMutation";
+import { ContentType } from "~/types";
 import { ContentFormValues, ContentProps } from "./Content.view";
+import { ContentPageProps } from "./index.page";
 
-const useContentProps: () => ContentProps = () => {
-  const { mutateAsync: postContent, isLoading: isSubmitting } = useContentMutation();
+const useContentProps: (pageProps: ContentPageProps) => ContentProps = ({
+  contentId,
+}) => {
+  const [type, setType] = useState<ContentType>("notice");
+
+  const { mutateAsync: postContent, isLoading: isPosting } = usePostContentMutation(type);
+  const { mutateAsync: patchContent, isLoading: isPatching } = usePatchContentMutation(
+    type,
+  );
+
+  const { data: content } = useContentQuery(Number(contentId), {
+    enabled: contentId !== "new",
+  });
 
   const router = useRouter();
 
   const onSubmit = useCallback(
     async (formValues: ContentFormValues) => {
-      await postContent(formValues);
+      if (contentId === "new") {
+        await postContent(formValues);
+      } else {
+        await patchContent({ id: Number(contentId), ...formValues });
+      }
       router.push(ROUTES.ADMIN__CONTENTS);
     },
-    [postContent, router],
+    [contentId, patchContent, postContent, router],
   );
 
   const onCancel = useCallback(() => {
     router.push(ROUTES.ADMIN__CONTENTS);
   }, [router]);
 
-  const defaultValue = useMemo(() => {
-    return "";
-  }, []);
+  useEffect(() => {
+    if (content) {
+      setType(content.type);
+    }
+  }, [content]);
 
   return {
     onSubmit,
-    isSubmitting,
+    isSubmitting: isPosting || isPatching,
     onCancel,
-    defaultValue,
+    content,
+    type,
+    onChangeType: setType,
   };
 };
 

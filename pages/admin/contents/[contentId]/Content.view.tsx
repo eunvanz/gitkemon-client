@@ -15,6 +15,8 @@ export interface ContentProps {
   isSubmitting: boolean;
   onCancel: VoidFunction;
   content?: ContentAsType;
+  type: ContentType;
+  onChangeType: (type: ContentType) => void;
 }
 
 const Content: React.FC<ContentProps> = ({
@@ -22,9 +24,9 @@ const Content: React.FC<ContentProps> = ({
   isSubmitting,
   onCancel,
   content,
+  type,
+  onChangeType,
 }) => {
-  const [type, setType] = useState<ContentType>("notice");
-
   const [title, setTitle] = useState<string>(content?.title || "");
 
   const handleOnSubmit = useCallback(
@@ -45,7 +47,7 @@ const Content: React.FC<ContentProps> = ({
               displayValue: "Notice",
             },
           ]}
-          onChange={setType}
+          onChange={onChangeType}
           value={type}
         />
       </div>

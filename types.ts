@@ -224,6 +224,7 @@ export enum QUERY_KEY {
   RECENT_MONS = "RECENT_MONS",
   RECENT_RARE_NEWS = "RECENT_RARE_NEWS",
   LAST_PAYBACK = "LAST_PAYBACK",
+  CONTENT_LIST = "CONTENT_LIST",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";
@@ -399,3 +400,15 @@ export interface RareNews {
 }
 
 export type HuntMethod = "hunt" | "evolve" | "blend";
+
+export interface Content {
+  id: number;
+  type: ContentType;
+  title: string;
+  userId: string;
+  user: User;
+  body: string;
+  commentsCnt: number;
+  likesCnt: number;
+  isVisible: boolean;
+}

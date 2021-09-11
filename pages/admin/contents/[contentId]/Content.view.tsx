@@ -1,28 +1,37 @@
 import { useCallback, useState } from "react";
+import { Input } from "antd";
 import MarkdownEditor from "~/components/MarkdownEditor";
 import Select from "~/components/Select";
-import { ContentType } from "~/types";
+import { Content as ContentAsType, ContentType } from "~/types";
+
+export interface ContentFormValues {
+  type: ContentType;
+  body: string;
+  title: string;
+}
 
 export interface ContentProps {
-  onSubmit: (type: ContentType, value: string) => void;
+  onSubmit: (formValues: { type: ContentType; body: string; title: string }) => void;
   isSubmitting: boolean;
   onCancel: VoidFunction;
-  defaultValue?: string;
+  content?: ContentAsType;
 }
 
 const Content: React.FC<ContentProps> = ({
   onSubmit,
   isSubmitting,
   onCancel,
-  defaultValue,
+  content,
 }) => {
   const [type, setType] = useState<ContentType>("notice");
 
+  const [title, setTitle] = useState<string>(content?.title || "");
+
   const handleOnSubmit = useCallback(
-    (value: string) => {
-      onSubmit(type, value);
+    (body: string) => {
+      onSubmit({ type, body, title });
     },
-    [onSubmit, type],
+    [onSubmit, title, type],
   );
 
   return (
@@ -40,12 +49,15 @@ const Content: React.FC<ContentProps> = ({
           value={type}
         />
       </div>
+      <div className="mb-2">
+        <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+      </div>
       <MarkdownEditor
         height={500}
         onSubmit={handleOnSubmit}
         isSubmitting={isSubmitting}
         onCancel={onCancel}
-        defaultValue={defaultValue}
+        defaultValue={content?.body}
       />
     </div>
   );

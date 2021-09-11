@@ -20,6 +20,7 @@ import {
   ProfileMon,
   PaybackLog,
   RareNews,
+  Content,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -433,9 +434,22 @@ const uploadFile = async (file: File) => {
 export interface CreateContentDto {
   type: ContentType;
   body: string;
+  title: string;
 }
 const postContent = async (content: CreateContentDto) => {
   await requester.post(API_URL.CONTENTS, content);
+};
+
+const getContents = async (type: ContentType, pageOptions: PageRequestOptions) => {
+  const { data } = await requester.get<Pageable<Content>>(API_URL.CONTENTS, {
+    params: { type, ...pageOptions },
+  });
+  return data;
+};
+
+const getContent = async (id: number) => {
+  const { data } = await requester.get<Content>(`${API_URL.CONTENTS}/${id}`);
+  return data;
 };
 
 const api = {
@@ -482,6 +496,8 @@ const api = {
   getLastPayback,
   uploadFile,
   postContent,
+  getContents,
+  getContent,
 };
 
 export default api;

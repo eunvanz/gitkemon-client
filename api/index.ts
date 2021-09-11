@@ -459,6 +459,10 @@ const patchContent = async (content: UpdateContentDto) => {
   await requester.patch(`${API_URL.CONTENTS}/${content.id}`, content);
 };
 
+const deleteContent = async (id: number) => {
+  await requester.delete(`${API_URL.CONTENTS}/${id}`);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -506,6 +510,7 @@ const api = {
   getContents,
   getContent,
   patchContent,
+  deleteContent,
 };
 
 export default api;

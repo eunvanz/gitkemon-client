@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Select, Button, Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { Content, ContentType } from "~/types";
@@ -8,6 +8,7 @@ export interface ContentsProps {
   onChangeContentType: (type: ContentType) => void;
   contents?: Content[];
   onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
 const Contents: React.FC<ContentsProps> = ({
@@ -15,7 +16,17 @@ const Contents: React.FC<ContentsProps> = ({
   onChangeContentType,
   contents,
   onEdit,
+  onDelete,
 }) => {
+  const handleOnDelete = useCallback(
+    (id: number) => {
+      if (confirm("Are you sure to delete?")) {
+        onDelete(id);
+      }
+    },
+    [onDelete],
+  );
+
   const columns: ColumnsType<Content> = useMemo(() => {
     return [
       {
@@ -38,8 +49,18 @@ const Contents: React.FC<ContentsProps> = ({
           </Button>
         ),
       },
+      {
+        title: "Delete",
+        dataIndex: "id",
+        key: "Delete",
+        render: (id: number) => (
+          <Button type="link" danger onClick={() => handleOnDelete(id)}>
+            Delete
+          </Button>
+        ),
+      },
     ];
-  }, []);
+  }, [handleOnDelete, onEdit]);
 
   return (
     <div className="content-container bg-white p-4">

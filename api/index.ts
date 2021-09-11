@@ -414,6 +414,22 @@ const getLastPayback = async (accessToken?: string) => {
   return data;
 };
 
+/**
+ * upload file and return uploaded url
+ * @param file file to upload
+ * @returns uploaded url
+ */
+const uploadFile = async (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const { data } = await requester.post<string>(API_URL.CONTENTS__FILE, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -456,6 +472,7 @@ const api = {
   getRecentMons,
   getRecentRareNews,
   getLastPayback,
+  uploadFile,
 };
 
 export default api;

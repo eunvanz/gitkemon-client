@@ -13,10 +13,12 @@ import { blendMonState } from "../../../state/blendMon";
 import { userState } from "../../../state/user";
 import { Collection } from "../../../types";
 import { CollectionsProps } from "./Collections.view";
+import { CollectionPageProps } from "./index.page";
 
-const useCollectionsProps: () => CollectionsProps = () => {
+const useCollectionsProps: (pageProps: CollectionPageProps) => CollectionsProps = ({
+  userId,
+}) => {
   const router = useRouter();
-  const { userId } = router.query as { userId: string };
 
   const { data: mons } = useActiveMonsQuery();
   const { data: collections } = useCollectionsQuery(userId);

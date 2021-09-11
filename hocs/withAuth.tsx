@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import useUserQuery from "../queries/useUserQuery";
 import { userState } from "../state/user";
-import { User } from "../types";
 
 /**
  * user를 전달 받아서 전역 상태에 세팅
@@ -12,7 +11,7 @@ import { User } from "../types";
  * @returns
  */
 const withAuth = (WrappedComponent: React.FC<any>) => {
-  const Wrapper = ({ user: userProp, data }: { user: User; data: any }) => {
+  const Wrapper = ({ user: userProp, ...restProps }: any) => {
     const setUser = useSetRecoilState(userState);
 
     useUserQuery({
@@ -26,7 +25,7 @@ const withAuth = (WrappedComponent: React.FC<any>) => {
       }
     }, [setUser, userProp]);
 
-    return <WrappedComponent {...data?.props} />;
+    return <WrappedComponent user={userProp} {...restProps} />;
   };
 
   return Wrapper;

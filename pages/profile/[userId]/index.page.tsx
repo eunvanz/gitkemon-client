@@ -3,8 +3,12 @@ import withBaseLayout from "~/hocs/withBaseLayout";
 import Profile from "./Profile.view";
 import useProfileProps from "./useProfileProps";
 
-const ProfilePage: React.FC<void> = () => {
-  const props = useProfileProps();
+export interface ProfilePageProps {
+  userId: string;
+}
+
+const ProfilePage: React.FC<ProfilePageProps> = (pageProps) => {
+  const props = useProfileProps(pageProps);
 
   return <Profile {...props} />;
 };

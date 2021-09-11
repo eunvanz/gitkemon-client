@@ -9,7 +9,6 @@ import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
 import CollectionStatus from "~/components/CollectionStatus";
 import Footer from "~/components/Footer";
-import Loading from "~/components/Loading";
 import MonCard from "~/components/MonCard";
 import MonCardGrid from "~/components/MonCardGrid";
 import TrainerClassBadge from "~/components/TrainerClassBadge";

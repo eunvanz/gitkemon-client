@@ -35,11 +35,11 @@ const withAuthServerSideProps = <T>({
       return {
         props: {
           user,
-          data: { user, ...(await getServerSidePropsFunc(ctx, user)) },
+          ...(await getServerSidePropsFunc(ctx, user)),
         },
       };
     }
-    return { props: { user, data: { props: { user } } } };
+    return { props: { user } };
   };
 };
 

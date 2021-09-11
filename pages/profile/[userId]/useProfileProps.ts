@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { CollectionStatusProps } from "~/components/CollectionStatus";
 import { MON_TIERS } from "~/constants/rules";
@@ -10,12 +9,10 @@ import useProfileMonQuery from "~/queries/useProfileMonQuery";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
 import { userState } from "~/state/user";
 import { ProfileProps } from "./Profile.view";
+import { ProfilePageProps } from "./index.page";
 
-const useProfileProps: () => ProfileProps = () => {
+const useProfileProps: (pageProps: ProfilePageProps) => ProfileProps = ({ userId }) => {
   const user = useRecoilValue(userState);
-  const router = useRouter();
-
-  const { userId } = router.query as { userId: string };
 
   const { data: userProfile } = useUserProfileQuery(userId);
   const { data: profileMon } = useProfileMonQuery(userId);

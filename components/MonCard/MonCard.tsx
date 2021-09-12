@@ -65,7 +65,7 @@ const MonCard: React.FC<MonCardProps> = ({
         <div className={cx(isPlaceholder || !isFlippable ? undefined : styles.surface)}>
           <div
             className={cx("border rounded shadow", {
-              "transition-shadow hover:shadow-lg": !isClickDisabled || !mon,
+              "transition-shadow hover:shadow-lg": !isClickDisabled && !!mon,
             })}
           >
             <div className="flex-1 p-1 bg-white rounded">

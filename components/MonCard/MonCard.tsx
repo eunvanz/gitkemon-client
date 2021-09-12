@@ -120,8 +120,12 @@ const MonCard: React.FC<MonCardProps> = ({
                         draggable={false}
                       />
                     ) : (
-                      <div className="relative h-36">
-                        <CardBack />
+                      <div className="relative">
+                        {/* eslint-disable-next-line */}
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6CAQAAAAi5ZK2AAABjklEQVR42u3RAQ0AAAzCsOPf9G2Q0ElYc5orFkAXdEEXdEEXdEEXdEEXdEEXdEEXdEEXdEGHLuiCLuiCLuiCLuiCLuiCLuiCLuiCLuiCDl3QBV3QBV3QBV3QBV3QBV3QBV3QBV3QBR26oAu6oAu6oAu6oAu6oAu6oAu6oAu6oAs6dEEXdEEXdEEXdEEXdEEXdEEXdEEXdEEXdOgWQBd0QRd0QRd0QRd0QRd0QRd0QRd0QRd0QYcu6IIu6IIu6IIu6IIu6IIu6IIu6IIu6IIOXdAFXdAFXdAFXdAFXdAFXdAFXdAFXdAFHbqgC7qgC7qgC7qgC7qgC7qgC7qgC7qgCzp0QRd0QRd0QRd0QRd0QRd0QRd0QRd0QRd06BZAF3RBF3RBF3RBF3RBF3RBF3RBF3RBF3RBhy7ogi7ogi7ogi7ogi7ogi7ogi7ogi7ogg5d0AVd0AVd0AVd0AVd0AVd0AVd0AVd0AUduqALuqALuqALuqALuqALuqALuqALuqALOnRBF3RBF3RBF3RBV0cP0TwA+xgYeJcAAAAASUVORK5CYII=" />
+                        <div className="absolute top-0 w-full h-full">
+                          <CardBack />
+                        </div>
                       </div>
                     )}
                   </div>

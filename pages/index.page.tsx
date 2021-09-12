@@ -1,21 +1,17 @@
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { Mon, Pageable, Painting, Payback, RareNews } from "~/types";
+import { User } from "~/types";
 import withAuthServerSideProps from "../hocs/withAuthServerSideProps";
 import withBaseLayout from "../hocs/withBaseLayout";
 import Home from "./Home.view";
 import useHomeProps from "./useHomeProps";
 
 export interface HomePageProps {
-  ssrNewMons: Mon[];
-  ssrNewPaintingList: Pageable<Painting>;
-  ssrLastPayback?: Payback;
-  ssrAvailableContributions?: number;
-  ssrRareNews: RareNews[];
+  user?: User;
 }
 
-const HomePage: NextPage<HomePageProps> = () => {
-  const props = useHomeProps();
+const HomePage: NextPage<HomePageProps> = (pageProps: HomePageProps) => {
+  const props = useHomeProps(pageProps);
 
   return (
     <>
@@ -31,6 +27,12 @@ const HomePage: NextPage<HomePageProps> = () => {
 
 export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps({
   isAuthRequired: false,
-})();
+})(async (_ctx, user) => {
+  return {
+    props: {
+      user,
+    },
+  };
+});
 
 export default withBaseLayout(HomePage);

@@ -101,6 +101,16 @@ const MonImage: React.FC<MonImageProps> = ({
     }
   }, [setValue, tier]);
 
+  useEffect(() => {
+    if (evolveFromMon) {
+      if (["basic", "special"].includes(evolveFromMon.tier)) {
+        setValue("tier", "special");
+      } else if (["rare", "s.rare"].includes(evolveFromMon.tier)) {
+        setValue("tier", "s.rare");
+      }
+    }
+  }, [evolveFromMon, setValue]);
+
   return !isLoading ? (
     <div className="w-full p-8 bg-white">
       <div className="border-gray-200 border-b sm:px-0">

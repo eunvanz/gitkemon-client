@@ -16,7 +16,10 @@ export default {
 
 const Template: ComponentStory<typeof MonCard> = (args) => <MonCard {...args} />;
 
-export const 기본 = createStoryComponent(Template);
+export const 기본 = createStoryComponent(Template, {
+  // @ts-ignore
+  onSelect: null,
+});
 
 export const 히든 = createStoryComponent(Template, {
   mon: { ...mockMons.cardMon, imageUrl: undefined },

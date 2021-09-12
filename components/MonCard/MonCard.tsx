@@ -33,6 +33,7 @@ export interface MonCardProps extends ExtendableHTMLProps<HTMLDivElement> {
   user?: User;
   customSize?: string;
   isStatic?: boolean;
+  isFlippable?: boolean;
 }
 
 const MonCard: React.FC<MonCardProps> = ({
@@ -49,6 +50,7 @@ const MonCard: React.FC<MonCardProps> = ({
   user,
   customSize,
   isStatic,
+  isFlippable,
   ...restProps
 }) => {
   const [isMonModalOpen, setIsMonModalOpen] = useState(false);
@@ -60,7 +62,7 @@ const MonCard: React.FC<MonCardProps> = ({
   const Front = useCallback(
     ({ isPlaceholder }: { isPlaceholder?: boolean }) => {
       return (
-        <div className={cx(isPlaceholder ? undefined : styles.surface)}>
+        <div className={cx(isPlaceholder || !isFlippable ? undefined : styles.surface)}>
           <div
             className={cx("border rounded shadow", {
               "transition-shadow hover:shadow-lg": !isClickDisabled || !mon,
@@ -101,7 +103,6 @@ const MonCard: React.FC<MonCardProps> = ({
                           draggable={false}
                           layout="fill"
                           objectFit="contain"
-                          priority
                         />
                       ) : (
                         <CardBack />
@@ -146,7 +147,7 @@ const MonCard: React.FC<MonCardProps> = ({
         </div>
       );
     },
-    [isClickDisabled, isOwned, isStatic, mon, user],
+    [isClickDisabled, isFlippable, isOwned, isStatic, mon, user],
   );
 
   const widthCLassName = useMemo(() => {
@@ -177,17 +178,21 @@ const MonCard: React.FC<MonCardProps> = ({
           )}
           onClick={isClickDisabled ? undefined : () => setIsMonModalOpen(true)}
         >
-          <div className={cx(styles.hiddenBackface)}>
+          <div className={cx(isFlippable ? styles.hiddenBackface : undefined)}>
             <Front />
           </div>
-          <div className="invisible">
-            <Front isPlaceholder />
-          </div>
-          <div className={cx(styles.surface, styles.back)}>
-            <div className="border rounded h-full">
-              <CardBack />
-            </div>
-          </div>
+          {isFlippable && (
+            <>
+              <div className="invisible">
+                <Front isPlaceholder />
+              </div>
+              <div className={cx(styles.surface, styles.back)}>
+                <div className="border rounded h-full">
+                  <CardBack />
+                </div>
+              </div>
+            </>
+          )}
         </div>
         {onSelect && (
           <div className="text-center mt-2 w-full">

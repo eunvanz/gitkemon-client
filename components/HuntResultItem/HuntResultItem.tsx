@@ -71,6 +71,7 @@ const HuntResultItem: React.FC<HuntResultItemProps> = ({
         isClickDisabled={isClickDisabled}
         isOwned
         user={user}
+        isFlippable
       />
       {!isDiffHidden && (
         <div

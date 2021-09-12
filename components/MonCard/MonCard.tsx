@@ -101,7 +101,7 @@ const MonCard: React.FC<MonCardProps> = ({
                           draggable={false}
                           layout="fill"
                           objectFit="contain"
-                          quality={100}
+                          priority
                         />
                       ) : (
                         <CardBack />

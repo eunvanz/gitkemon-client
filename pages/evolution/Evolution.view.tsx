@@ -26,6 +26,7 @@ export interface EvolutionProps {
   onSelectNextMon: (monId: number) => void;
   onNavigateToMyCollection: VoidFunction;
   user?: User;
+  onKeepEvolution: VoidFunction;
 }
 
 const Evolution: React.FC<EvolutionProps> = ({
@@ -35,6 +36,7 @@ const Evolution: React.FC<EvolutionProps> = ({
   onNavigateToMyCollection,
   onSelectNextMon,
   user,
+  onKeepEvolution,
 }) => {
   const resultRef = useRef<HTMLDivElement>(null);
 
@@ -182,9 +184,15 @@ const Evolution: React.FC<EvolutionProps> = ({
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                 >
-                  <Button color="primary" onClick={onNavigateToMyCollection}>
+                  <Button color="white" onClick={onNavigateToMyCollection}>
                     My collection
                   </Button>
+                  {evolveMon.evolutionLevel! <=
+                    evolveMon.level - evolveMon.evolutionLevel! && (
+                    <Button className="ml-2" color="primary" onClick={onKeepEvolution}>
+                      Keep evolution
+                    </Button>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>

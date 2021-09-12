@@ -1,6 +1,8 @@
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { assertNotEmpty } from "~/helpers/commonHelpers";
+import { showEvolutionConfirm } from "~/helpers/tsxHelpers";
 import ROUTES from "../../paths";
 import useEvolveMutation from "../../queries/useEvolveMutation";
 import useNextMonsQuery from "../../queries/useNextMonsQuery";
@@ -53,6 +55,18 @@ const useEvolutionProps: () => EvolutionProps = () => {
     };
   }, [setEvolveMon]);
 
+  const onKeepEvolution = useCallback(async () => {
+    assertNotEmpty(evolveMon);
+    const newEvolveMon = {
+      ...evolveMon,
+      level: evolveMon.level - evolveMon?.evolutionLevel!,
+    };
+    const isConfirmed = await showEvolutionConfirm(newEvolveMon);
+    if (isConfirmed) {
+      setEvolveMon(newEvolveMon);
+    }
+  }, [evolveMon, setEvolveMon]);
+
   return {
     evolveMon,
     nextMons,
@@ -60,6 +74,7 @@ const useEvolutionProps: () => EvolutionProps = () => {
     onSelectNextMon,
     onNavigateToMyCollection,
     user,
+    onKeepEvolution,
   };
 };
 

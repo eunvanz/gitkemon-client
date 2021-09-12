@@ -412,4 +412,6 @@ export interface Content {
   commentsCnt: number;
   likesCnt: number;
   isVisible: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

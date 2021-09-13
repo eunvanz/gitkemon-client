@@ -14,7 +14,14 @@ const CardBack: React.FC<CardBackProps> = ({}) => {
       )}
     >
       <div className="rounded-full p-2 bg-gray-300 w-14 h-14">
-        <Image className="opacity-80" src={logo} width={40} height={40} alt="logo" />
+        <Image
+          className="opacity-80"
+          src={logo}
+          width={40}
+          height={40}
+          alt="logo"
+          priority
+        />
       </div>
     </div>
   );

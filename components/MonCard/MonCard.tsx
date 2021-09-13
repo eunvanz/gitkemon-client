@@ -4,7 +4,7 @@ import cx from "classnames";
 import Image from "next/image";
 import { Img } from "react-image";
 import Skeleton from "react-loading-skeleton";
-import { MON_CARD_WIDTH } from "~/constants/styles";
+import { EMPTY_SQUARE_IMAGE_DATA, MON_CARD_WIDTH } from "~/constants/styles";
 import { checkIsCollectionMaxLevel } from "~/helpers/projectHelpers";
 import { CardMon, ExtendableHTMLProps, ModalMon, User } from "../../types";
 import Button from "../Button";
@@ -114,7 +114,7 @@ const MonCard: React.FC<MonCardProps> = ({
                         src={mon.imageUrl}
                         loader={
                           // eslint-disable-next-line
-                          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6CAQAAAAi5ZK2AAABjklEQVR42u3RAQ0AAAzCsOPf9G2Q0ElYc5orFkAXdEEXdEEXdEEXdEEXdEEXdEEXdEEXdEGHLuiCLuiCLuiCLuiCLuiCLuiCLuiCLuiCDl3QBV3QBV3QBV3QBV3QBV3QBV3QBV3QBR26oAu6oAu6oAu6oAu6oAu6oAu6oAu6oAs6dEEXdEEXdEEXdEEXdEEXdEEXdEEXdEEXdOgWQBd0QRd0QRd0QRd0QRd0QRd0QRd0QRd0QYcu6IIu6IIu6IIu6IIu6IIu6IIu6IIu6IIOXdAFXdAFXdAFXdAFXdAFXdAFXdAFXdAFHbqgC7qgC7qgC7qgC7qgC7qgC7qgC7qgCzp0QRd0QRd0QRd0QRd0QRd0QRd0QRd0QRd06BZAF3RBF3RBF3RBF3RBF3RBF3RBF3RBF3RBhy7ogi7ogi7ogi7ogi7ogi7ogi7ogi7ogg5d0AVd0AVd0AVd0AVd0AVd0AVd0AVd0AUduqALuqALuqALuqALuqALuqALuqALuqALOnRBF3RBF3RBF3RBV0cP0TwA+xgYeJcAAAAASUVORK5CYII=" />
+                          <img src={EMPTY_SQUARE_IMAGE_DATA} />
                         }
                         alt="mon image"
                         draggable={false}
@@ -122,7 +122,7 @@ const MonCard: React.FC<MonCardProps> = ({
                     ) : (
                       <div className="relative">
                         {/* eslint-disable-next-line */}
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6CAQAAAAi5ZK2AAABjklEQVR42u3RAQ0AAAzCsOPf9G2Q0ElYc5orFkAXdEEXdEEXdEEXdEEXdEEXdEEXdEEXdEGHLuiCLuiCLuiCLuiCLuiCLuiCLuiCLuiCDl3QBV3QBV3QBV3QBV3QBV3QBV3QBV3QBR26oAu6oAu6oAu6oAu6oAu6oAu6oAu6oAs6dEEXdEEXdEEXdEEXdEEXdEEXdEEXdEEXdOgWQBd0QRd0QRd0QRd0QRd0QRd0QRd0QRd0QYcu6IIu6IIu6IIu6IIu6IIu6IIu6IIu6IIOXdAFXdAFXdAFXdAFXdAFXdAFXdAFXdAFHbqgC7qgC7qgC7qgC7qgC7qgC7qgC7qgCzp0QRd0QRd0QRd0QRd0QRd0QRd0QRd0QRd06BZAF3RBF3RBF3RBF3RBF3RBF3RBF3RBF3RBhy7ogi7ogi7ogi7ogi7ogi7ogi7ogi7ogg5d0AVd0AVd0AVd0AVd0AVd0AVd0AVd0AUduqALuqALuqALuqALuqALuqALuqALuqALOnRBF3RBF3RBF3RBV0cP0TwA+xgYeJcAAAAASUVORK5CYII=" />
+                        <img src={EMPTY_SQUARE_IMAGE_DATA} />
                         <div className="absolute top-0 w-full h-full">
                           <CardBack />
                         </div>

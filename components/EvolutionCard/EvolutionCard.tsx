@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/outline";
 import cx from "classnames";
-import { random } from "lodash";
 import { isMobile } from "react-device-detect";
-import { colorHashes, MON_CARD_WIDTH } from "~/constants/styles";
+import { MON_CARD_WIDTH } from "~/constants/styles";
 import { convertCollectionToCardMon } from "~/helpers/projectHelpers";
 import { Collection, HuntResult, User } from "~/types";
 import HuntResultItem from "../HuntResultItem";

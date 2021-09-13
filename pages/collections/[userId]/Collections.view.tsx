@@ -10,6 +10,7 @@ import CollectionFilter, { CollectionFilterState } from "~/components/Collection
 import CollectionStatus from "~/components/CollectionStatus";
 import Footer from "~/components/Footer";
 import Intersection from "~/components/Intersection";
+import Loading from "~/components/Loading";
 import MonCard from "~/components/MonCard";
 import MonCardGrid from "~/components/MonCardGrid";
 import TrainerClassBadge from "~/components/TrainerClassBadge";
@@ -244,6 +245,7 @@ const Collections: React.FC<CollectionsProps> = ({
             <div className="absolute" style={{ top: "-30vh" }}>
               <Intersection onIntersect={() => setIsAllVisible(true)} threshold={0.01} />
             </div>
+            <Loading />
           </div>
         )}
         <CollectionFilter

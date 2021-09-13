@@ -97,6 +97,12 @@ const Shakeable = ({
     [burstPowder, onChangeDirection, onDrag, threshold],
   );
 
+  const clearParticles = useCallback(() => {
+    document
+      .querySelectorAll("[data-name='mojs-shape']")
+      .forEach((element) => element.remove());
+  }, []);
+
   const handleOnDragEnd = useCallback(() => {
     containerRef.current!.style.transitionDuration = "0.5s";
     containerRef.current!.style.transform = "translate(0, 0)";
@@ -104,7 +110,8 @@ const Shakeable = ({
     document.removeEventListener("mousemove", handleOnDrag);
     document.removeEventListener("mouseup", handleOnDragEnd);
     onDragEnd?.();
-  }, [handleOnDrag, onDragEnd]);
+    setTimeout(clearParticles, 500);
+  }, [clearParticles, handleOnDrag, onDragEnd]);
 
   const handleDragStart = useCallback(
     (e: TouchEvent | MouseEvent) => {
@@ -141,6 +148,7 @@ const Shakeable = ({
     return () => {
       document.removeEventListener("mousemove", handleOnDrag);
       document.removeEventListener("mouseup", handleOnDragEnd);
+      clearParticles();
     };
     // eslint-disable-next-line
   }, []);

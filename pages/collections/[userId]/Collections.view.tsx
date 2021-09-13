@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import orderBy from "lodash/orderBy";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
 import CollectionStatus from "~/components/CollectionStatus";
 import Footer from "~/components/Footer";
+import Intersection from "~/components/Intersection";
 import MonCard from "~/components/MonCard";
 import MonCardGrid from "~/components/MonCardGrid";
 import TrainerClassBadge from "~/components/TrainerClassBadge";
@@ -23,6 +24,8 @@ import {
 } from "~/helpers/projectHelpers";
 import ROUTES from "~/paths";
 import { Collection, Mon, User, UserProfile } from "~/types";
+
+const PER_PAGE = 24;
 
 export interface CollectionsProps {
   collections?: Collection[];
@@ -45,6 +48,8 @@ const Collections: React.FC<CollectionsProps> = ({
   onCancelBlendMode,
   collectionUser,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [filterState, setFilterState] = useState<CollectionFilterState>({
     has: [true, false],
     stars: MON_STARS,
@@ -133,6 +138,16 @@ const Collections: React.FC<CollectionsProps> = ({
 
   const router = useRouter();
 
+  const hasNextItem = useMemo(() => {
+    return orderedCollections
+      ? orderedCollections.length > PER_PAGE * currentPage
+      : false;
+  }, [currentPage, orderedCollections]);
+
+  const showNextItems = useCallback(() => {
+    setCurrentPage((currentPage) => currentPage + 1);
+  }, []);
+
   return (
     <>
       <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
@@ -206,7 +221,7 @@ const Collections: React.FC<CollectionsProps> = ({
         )}
         <MonCardGrid>
           {orderedCollections
-            ? orderedCollections.map((collection) => {
+            ? orderedCollections.slice(0, PER_PAGE * currentPage).map((collection) => {
                 const isCollection = (collection as Collection).monImageUrl;
                 return (
                   <MonCard
@@ -234,6 +249,13 @@ const Collections: React.FC<CollectionsProps> = ({
                 <MonCard key={index} />
               ))}
         </MonCardGrid>
+        {hasNextItem && (
+          <div className="relative">
+            <div className="absolute" style={{ top: "-50vh" }}>
+              <Intersection onIntersect={showNextItems} threshold={0.01} />
+            </div>
+          </div>
+        )}
         <CollectionFilter
           filterState={filterState}
           onChangeFilter={(filter) => setFilterState(filter)}

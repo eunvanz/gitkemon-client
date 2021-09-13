@@ -127,7 +127,13 @@ const MonRankingTable: React.FC<MonRankingTableProps> = ({
         isLoading={!collections}
         skeletonLength={isPreview ? 3 : 10}
       />
-      {hasNextPage && !isPreview && <Intersection onIntersect={onFetchNextPage} />}
+      {hasNextPage && !isPreview && (
+        <div className="relative">
+          <div className="absolute w-full" style={{ top: "-50vh" }}>
+            <Intersection onIntersect={onFetchNextPage} />
+          </div>
+        </div>
+      )}
       <MonModalContainer
         isOpen={isMonModalOpen}
         onClose={handleOnCloseMonModal}

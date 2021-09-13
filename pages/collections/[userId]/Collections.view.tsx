@@ -25,8 +25,6 @@ import {
 import ROUTES from "~/paths";
 import { Collection, Mon, User, UserProfile } from "~/types";
 
-const PER_PAGE = 24;
-
 export interface CollectionsProps {
   collections?: Collection[];
   mons?: Mon[];
@@ -48,7 +46,7 @@ const Collections: React.FC<CollectionsProps> = ({
   onCancelBlendMode,
   collectionUser,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [isAllVisible, setIsAllVisible] = useState(false);
 
   const [filterState, setFilterState] = useState<CollectionFilterState>({
     has: [true, false],
@@ -138,16 +136,6 @@ const Collections: React.FC<CollectionsProps> = ({
 
   const router = useRouter();
 
-  const hasNextItem = useMemo(() => {
-    return orderedCollections
-      ? orderedCollections.length > PER_PAGE * currentPage
-      : false;
-  }, [currentPage, orderedCollections]);
-
-  const showNextItems = useCallback(() => {
-    setCurrentPage((currentPage) => currentPage + 1);
-  }, []);
-
   return (
     <>
       <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
@@ -221,38 +209,40 @@ const Collections: React.FC<CollectionsProps> = ({
         )}
         <MonCardGrid>
           {orderedCollections
-            ? orderedCollections.slice(0, PER_PAGE * currentPage).map((collection) => {
-                const isCollection = (collection as Collection).monImageUrl;
-                return (
-                  <MonCard
-                    key={`${isCollection ? "col" : "mon"}-${collection.id}`}
-                    mon={
-                      isCollection
-                        ? convertCollectionToCardMon(collection as Collection)
-                        : convertMonToCardMon(collection as Mon)
-                    }
-                    modalMon={
-                      isCollection ? undefined : convertMonToModalMon(collection as Mon)
-                    }
-                    onSelect={
-                      isBlendMode
-                        ? () => onSelectItem?.(collection as Collection)
-                        : undefined
-                    }
-                    isOwned={collectionUser?.id === user?.id}
-                    user={user}
-                    isStatic
-                  />
-                );
-              })
+            ? (isAllVisible ? orderedCollections : orderedCollections.slice(0, 48)).map(
+                (collection) => {
+                  const isCollection = (collection as Collection).monImageUrl;
+                  return (
+                    <MonCard
+                      key={`${isCollection ? "col" : "mon"}-${collection.id}`}
+                      mon={
+                        isCollection
+                          ? convertCollectionToCardMon(collection as Collection)
+                          : convertMonToCardMon(collection as Mon)
+                      }
+                      modalMon={
+                        isCollection ? undefined : convertMonToModalMon(collection as Mon)
+                      }
+                      onSelect={
+                        isBlendMode
+                          ? () => onSelectItem?.(collection as Collection)
+                          : undefined
+                      }
+                      isOwned={collectionUser?.id === user?.id}
+                      user={user}
+                      isStatic
+                    />
+                  );
+                },
+              )
             : Array.from({ length: isMobile ? 6 : 8 }).map((_, index) => (
                 <MonCard key={index} />
               ))}
         </MonCardGrid>
-        {hasNextItem && (
+        {!isAllVisible && orderedCollections && (
           <div className="relative">
-            <div className="absolute" style={{ top: "-50vh" }}>
-              <Intersection onIntersect={showNextItems} threshold={0.01} />
+            <div className="absolute" style={{ top: "-30vh" }}>
+              <Intersection onIntersect={() => setIsAllVisible(true)} threshold={0.01} />
             </div>
           </div>
         )}

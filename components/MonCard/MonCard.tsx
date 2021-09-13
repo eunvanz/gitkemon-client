@@ -98,13 +98,12 @@ const MonCard: React.FC<MonCardProps> = ({
                     {isStatic ? (
                       mon.imageUrl ? (
                         // @ts-ignore
-                        // eslint-disable-next-line
-                        <img
+                        <Image
                           src={mon.imageUrl}
                           alt="mon image"
                           draggable={false}
-                          // layout="fill"
-                          // objectFit="contain"
+                          layout="fill"
+                          objectFit="contain"
                         />
                       ) : (
                         <CardBack />

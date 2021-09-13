@@ -1,5 +1,4 @@
 import { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
 import { User } from "~/types";
 import withAuthServerSideProps from "../hocs/withAuthServerSideProps";
 import withBaseLayout from "../hocs/withBaseLayout";
@@ -13,19 +12,7 @@ export interface HomePageProps {
 const HomePage: NextPage<HomePageProps> = (pageProps: HomePageProps) => {
   const props = useHomeProps(pageProps);
 
-  return (
-    <>
-      <Head>
-        <title>Gitkémon</title>
-        <meta
-          name="description"
-          content="Get Pokémons as payback for Github contributions"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Home {...props} />
-    </>
-  );
+  return <Home {...props} />;
 };
 
 export const getServerSideProps: GetServerSideProps<{}> = withAuthServerSideProps({

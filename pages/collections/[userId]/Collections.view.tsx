@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import orderBy from "lodash/orderBy";
 import Image from "next/image";
@@ -10,7 +10,6 @@ import CollectionFilter, { CollectionFilterState } from "~/components/Collection
 import CollectionStatus from "~/components/CollectionStatus";
 import Footer from "~/components/Footer";
 import Intersection from "~/components/Intersection";
-import Loading from "~/components/Loading";
 import MonCard from "~/components/MonCard";
 import MonCardGrid from "~/components/MonCardGrid";
 import TrainerClassBadge from "~/components/TrainerClassBadge";
@@ -239,15 +238,22 @@ const Collections: React.FC<CollectionsProps> = ({
             : Array.from({ length: isMobile ? 6 : 8 }).map((_, index) => (
                 <MonCard key={index} />
               ))}
-        </MonCardGrid>
-        {!isAllVisible && orderedCollections && (
-          <div className="relative">
-            <div className="absolute" style={{ top: "-30vh" }}>
-              <Intersection onIntersect={() => setIsAllVisible(true)} threshold={0.01} />
+          {!isAllVisible && orderedCollections && (
+            <div className="relative">
+              <div className="absolute" style={{ top: "-30vh" }}>
+                <Intersection
+                  onIntersect={() => setIsAllVisible(true)}
+                  threshold={0.01}
+                />
+              </div>
             </div>
-            <Loading />
-          </div>
-        )}
+          )}
+          {!isAllVisible &&
+            orderedCollections &&
+            Array.from({ length: isMobile ? 6 : 8 }).map((_, index) => (
+              <MonCard key={index} />
+            ))}
+        </MonCardGrid>
         <CollectionFilter
           filterState={filterState}
           onChangeFilter={(filter) => setFilterState(filter)}

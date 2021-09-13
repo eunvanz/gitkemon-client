@@ -29,7 +29,7 @@ const PotentialBadge: React.FC<PotentialBadgeProps> = ({
       case "E":
         return "green";
       case "F":
-        return "cyan";
+        return "sky";
     }
   }, [potential]);
 

@@ -2,7 +2,36 @@ const colors = require("tailwindcss/colors");
 const defaultConfig = require("tailwindcss/defaultConfig");
 
 module.exports = {
-  purge: [],
+  purge: {
+    content: ["./**/*.tsx"],
+    safelist: [
+      "text-blue-500",
+      "text-gray-500",
+      "text-red-500",
+      "text-green-500",
+      "text-xxs",
+      "text-xs",
+      "text-sm",
+      "text-base",
+      "text-lg",
+      "text-xl",
+      "text-2xl",
+      "text-3xl",
+      "text-4xl",
+      "text-5xl",
+      "font-thin",
+      "font-extralight",
+      "font-light",
+      "font-normal",
+      "font-medium",
+      "font-semibold",
+      "font-bold",
+      "font-extrabold",
+      "font-black",
+      "hover:bg-blue-500",
+      "hover:bg-blue-400",
+    ],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontSize: {

@@ -109,7 +109,7 @@ const MonImage: React.FC<MonImageProps> = ({
         setValue("tier", "s.rare");
       }
     }
-  }, [evolveFromMon, setValue]);
+  }, [evolveFromMon, selectedMon?.tier, setValue]);
 
   return !isLoading ? (
     <div className="w-full p-8 bg-white">

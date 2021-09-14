@@ -44,7 +44,8 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden, isInline }) =
     <div className={cx("flex items-center")}>
       {!isAvatarHidden && !!user.githubUser && (
         <div className="flex-shrink-0 h-10 w-10">
-          <Image
+          {/* eslint-disable-next-line */}
+          <img
             className="h-10 w-10 rounded-full"
             width={40}
             height={40}

@@ -70,7 +70,8 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
           <div className="relative">
             {userProfile ? (
               <>
-                <Image
+                {/* eslint-disable-next-line */}
+                <img
                   className="rounded-full"
                   src={userProfile.avatarUrl}
                   alt="user image"

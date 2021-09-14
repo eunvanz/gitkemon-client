@@ -143,7 +143,8 @@ const Collections: React.FC<CollectionsProps> = ({
           <div className="relative mr-4">
             {collectionUser ? (
               <>
-                <Image
+                {/* eslint-disable-next-line */}
+                <img
                   className="rounded-full"
                   src={collectionUser.avatarUrl}
                   alt="user image"

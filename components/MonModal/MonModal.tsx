@@ -342,10 +342,11 @@ const BaseMonModal: React.FC<BaseMonModalProps> = ({
           {mon ? (
             <div className="w-48 h-48 border border-dotted mb-1 mx-auto flex-shrink-0">
               {mon.image ? (
-                <Image
+                // eslint-disable-next-line
+                <img
                   src={mon.image ? mon.image.imageUrl : "https://via.placeholder.com/250"}
                   alt={mon.name}
-                  quality={100}
+                  // quality={100}
                   width={200}
                   height={200}
                 />

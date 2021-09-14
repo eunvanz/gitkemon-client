@@ -25,7 +25,8 @@ const MonImages: React.FC<MonImagesProps> = ({
 }) => {
   const onViewImage = useCallback((imageUrl: string) => {
     Modal.info({
-      content: <Image src={imageUrl} alt="Mon image" width={200} height={200} />,
+      // eslint-disable-next-line
+      content: <img src={imageUrl} alt="Mon image" width={200} height={200} />,
     });
   }, []);
 

@@ -212,13 +212,14 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
                   buttonLabel={
                     <>
                       <span className="sr-only">Open user menu</span>
-                      <Image
+                      {/* eslint-disable-next-line */}
+                      <img
                         className="h-8 w-8 rounded-full"
                         width={32}
                         height={32}
                         src={user.githubUser!.avatar_url}
                         alt={user.nickname}
-                        priority
+                        // priority
                       />
                     </>
                   }

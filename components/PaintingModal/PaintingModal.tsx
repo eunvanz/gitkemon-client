@@ -52,10 +52,11 @@ const PaintingModal: React.FC<PaintingModalProps> = ({
     >
       <div className="flex flex-col items-center">
         <div className="mb-1 mx-auto flex-shrink-0">
-          <Image
+          {/* eslint-disable-next-line */}
+          <img
             src={painting.imageUrl}
             alt={painting.mon.name}
-            quality={100}
+            // quality={100}
             width={250}
             height={250}
           />

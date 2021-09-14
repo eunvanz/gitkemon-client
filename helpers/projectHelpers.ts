@@ -245,6 +245,6 @@ export const signInWithGithub = () => {
     redirect_uri: `${window.origin}${ROUTES.EXCHANGE_CODE}`,
   };
   window.location.replace(
-    `https://github.com/login/oauth/authorize?${qs.stringify(query)}`,
+    `${process.env.GITHUB_HOST}/login/oauth/authorize?${qs.stringify(query)}`,
   );
 };

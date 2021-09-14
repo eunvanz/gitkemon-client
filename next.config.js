@@ -9,7 +9,7 @@ module.exports = (phase) => {
 
   const env = {
     GITHUB_CLIENT_ID: isDev ? "1b594b7d4b0134060136" : "1b594b7d4b0134060136",
-    API_HOST: isDev ? "http://localhost:3000" : "http://benjamin.ay1.krane.9rum.cc",
+    API_HOST: isDev ? "http://localhost:3000" : "http://benjamin.ay1.krane.9rum.cc:8080",
     ACCESS_TOKEN_COOKIE_NAME: "gkmat",
   };
 

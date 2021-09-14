@@ -68,7 +68,10 @@ const ContributionStatus: React.FC<ContributionStatusProps> = ({
         )}
         {availableContributions ? (
           <Typography as="div">
-            You have <Typography color="primary">{availableContributions}</Typography>{" "}
+            You have{" "}
+            <Typography color="primary">
+              {availableContributions.toLocaleString()}
+            </Typography>{" "}
             available contributions to check-in!👉👉
           </Typography>
         ) : (

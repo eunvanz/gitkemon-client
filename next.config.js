@@ -11,6 +11,7 @@ module.exports = (phase) => {
     GITHUB_CLIENT_ID: isDev ? "461b3104c569d1f66e6d" : "4860581bd098afbf7956",
     API_HOST: isDev ? "http://localhost:3000" : "https://api.gitkemon.com",
     ACCESS_TOKEN_COOKIE_NAME: "gkmat",
+    GITHUB_REPO: "https://github.com/eunvanz/gitkemon-client",
   };
 
   const result = {

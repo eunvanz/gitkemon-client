@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { AnimatePresence, motion } from "framer-motion";
 import random from "lodash/random";
+import Image from "next/image";
 import CountUp from "react-countup";
 import Footer from "~/components/Footer";
 import Button from "../../components/Button";
@@ -14,6 +15,7 @@ import PokeBallImage from "../../components/PokeBallImage";
 import Typography from "../../components/Typography";
 import { getMultiplesCountBetween } from "../../helpers/commonHelpers";
 import { Payback as PaybackType, PokeBallType, User } from "../../types";
+import contributionsImage from "~/public/images/contributions-check.png";
 
 dayjs.extend(localizedFormat);
 
@@ -126,6 +128,8 @@ const Payback: React.FC<PaybackProps> = ({
     return result;
   }, [paybackResult]);
 
+  const [isHelpVisible, setIsHelpVisible] = useState(false);
+
   if (!paybackResult) {
     return (
       <>
@@ -178,6 +182,36 @@ const Payback: React.FC<PaybackProps> = ({
             </div>
             <div className="text-center">
               <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
+            </div>
+            <div className="text-center">
+              {isHelpVisible ? (
+                <>
+                  <Typography>
+                    Visit{" "}
+                    <a href={`${process.env.GITHUB_URL}/settings/profile`}>
+                      your github settings
+                    </a>{" "}
+                    and check
+                    <br />
+                    <Typography weight="extrabold">
+                      Include private contributions on my profile
+                    </Typography>{" "}
+                    like below.
+                  </Typography>
+                  <div className="text-center mt-4">
+                    <Image src={contributionsImage} width={400} height={90} alt="" />
+                  </div>
+                </>
+              ) : (
+                <a
+                  onClick={() => setIsHelpVisible(true)}
+                  className={cx(
+                    "h-3 w-3 font-light inline mr-1 text-gray-400 hover:text-gray-600",
+                  )}
+                >
+                  Can&apos;t you see private contributions?
+                </a>
+              )}
             </div>
           </div>
         </div>

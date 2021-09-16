@@ -1,4 +1,3 @@
-import { useCallback, useState } from "react";
 import MonRankingTableContainer from "~/components/MonRankingTable";
 import Tabs from "~/components/Tabs";
 import Typography from "~/components/Typography";

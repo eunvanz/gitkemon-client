@@ -188,7 +188,11 @@ const Payback: React.FC<PaybackProps> = ({
                 <>
                   <Typography>
                     Visit{" "}
-                    <a href={`${process.env.GITHUB_URL}/settings/profile`}>
+                    <a
+                      href={`${process.env.GITHUB_URL}/settings/profile`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       your github settings
                     </a>{" "}
                     and check

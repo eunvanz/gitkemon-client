@@ -10,7 +10,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en-US">
         <Head>
-          <title>Gitkémon</title>
           <meta
             name="viewport"
             content="width=device-width,initial-scale=1,user-scalable=no"

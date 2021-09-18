@@ -3,7 +3,7 @@ import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Button from "~/components/Button";
-import Confetti from "~/components/Confetti/Confetti";
+import Confetti from "~/components/Confetti";
 import EvolutionCard from "~/components/EvolutionCard";
 import Loading from "~/components/Loading";
 import MonCard from "~/components/MonCard";

@@ -47,29 +47,33 @@ const ContentsTable: React.FC<ContentsTableProps> = ({
         dataIndex: "userId",
         render: (data) => <UserItem user={data.user} />,
       },
-      {
-        title: "views",
-        dataIndex: "viewsCnt",
-        render: (data) => data.viewsCnt.toLocaleString(),
-      },
-      {
-        title: "likes",
-        dataIndex: "likesCnt",
-        render: (data) => data.likesCnt.toLocaleString(),
-      },
-      {
-        title: "views",
-        dataIndex: "commentsCnt",
-        render: (data) => data.commentsCnt.toLocaleString(),
-      },
-      {
-        title: "updated",
-        dataIndex: "updatedAt",
-        render: (data) => dayjs(data.updatedAt).fromNow(),
-      },
     );
+    if (!isPreview) {
+      result.push(
+        {
+          title: "views",
+          dataIndex: "viewsCnt",
+          render: (data) => data.viewsCnt.toLocaleString(),
+        },
+        {
+          title: "likes",
+          dataIndex: "likesCnt",
+          render: (data) => data.likesCnt.toLocaleString(),
+        },
+        {
+          title: "views",
+          dataIndex: "commentsCnt",
+          render: (data) => data.commentsCnt.toLocaleString(),
+        },
+      );
+    }
+    result.push({
+      title: "updated",
+      dataIndex: "updatedAt",
+      render: (data) => dayjs(data.updatedAt).fromNow(),
+    });
     return result;
-  }, []);
+  }, [isPreview]);
 
   return (
     <>

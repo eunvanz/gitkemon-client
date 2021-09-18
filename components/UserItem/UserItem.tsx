@@ -10,9 +10,15 @@ export interface UserItemProps {
   user: User;
   isAvatarHidden?: boolean;
   isInline?: boolean;
+  suffix?: React.ReactNode;
 }
 
-const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden, isInline }) => {
+const UserItem: React.FC<UserItemProps> = ({
+  user,
+  isAvatarHidden,
+  isInline,
+  suffix,
+}) => {
   const router = useRouter();
 
   return isInline ? (
@@ -56,9 +62,12 @@ const UserItem: React.FC<UserItemProps> = ({ user, isAvatarHidden, isInline }) =
       <div className={cx(isAvatarHidden ? undefined : "ml-4")}>
         <DropDownMenu
           buttonLabel={
-            <Typography as="a" weight="bold">
-              {user.nickname}
-            </Typography>
+            <>
+              <Typography as="a" weight="bold">
+                {user.nickname}
+              </Typography>
+              {suffix}
+            </>
           }
           menuItems={[
             [

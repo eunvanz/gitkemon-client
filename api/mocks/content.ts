@@ -13,6 +13,7 @@ const content: Content = {
   viewsCnt: 0,
   isVisible: false,
   title: "Test title",
+  isLiked: false,
   user: {
     createdAt: "2021-09-05T21:14:24.119Z",
     updatedAt: "2021-09-17T08:41:09.000Z",

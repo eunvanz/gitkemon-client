@@ -13,4 +13,8 @@ export default {
 
 const Template: ComponentStory<typeof UserItem> = (args) => <UserItem {...args} />;
 
-export const 기본 = createStoryComponent(Template);
+export const Default = createStoryComponent(Template);
+
+export const HasSuffix = createStoryComponent(Template, {
+  suffix: " · 2h",
+});

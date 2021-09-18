@@ -325,11 +325,11 @@ export interface Painting {
 export interface Comment<T> {
   id: number;
   userId: string;
-  __user__?: User | null;
+  user: User;
   body: string;
   parentId?: number | null;
   __parent__?: Comment<T> | null;
-  contentType: string;
+  contentType: ContentType;
   __content__?: T | null;
   createdAt: string;
   updatedAt: string;

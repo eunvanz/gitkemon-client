@@ -4,7 +4,7 @@ import CommentItem from "../CommentItem";
 export interface CommentListProps {
   comments: Comment<Content>[];
   user?: User;
-  onSubmitComment: (comment?: Comment<Content>) => void;
+  onSubmitComment: (value: string, comment: Comment<Content>) => void;
   onDeleteComment: (comment: Comment<Content>) => void;
   isSubmittingComment: boolean;
 }
@@ -23,7 +23,7 @@ const CommentList: React.FC<CommentListProps> = ({
           key={comment.id}
           comment={comment}
           user={user}
-          onSubmitComment={() => onSubmitComment(comment)}
+          onSubmitComment={(value: string) => onSubmitComment(value, comment)}
           isSubmitting={isSubmittingComment}
           onDeleteComment={() => onDeleteComment(comment)}
         />

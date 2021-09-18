@@ -19,7 +19,8 @@ export interface MarkdownEditorProps
   height?: number;
   onSubmit: (value: string) => void;
   isSubmitting: boolean;
-  onCancel: VoidFunction;
+  onCancel?: VoidFunction;
+  isCancelHidden?: boolean;
 }
 
 const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
@@ -28,6 +29,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
   onSubmit,
   isSubmitting,
   onCancel,
+  isCancelHidden,
   ...restProps
 }) => {
   const [value, setValue] = useState<string | undefined>(defaultValue);
@@ -43,14 +45,14 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 
   const handleOnCancel = useCallback(async () => {
     if (!value) {
-      onCancel();
+      onCancel?.();
     } else {
       const isConfirmed = await Dialog.confirm({
         title: "Cancel",
         content: "Are you sure to cancel?",
       });
       if (isConfirmed) {
-        onCancel();
+        onCancel?.();
       }
     }
   }, [onCancel, value]);
@@ -77,9 +79,11 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
         readOnly={isSubmitting}
       />
       <div className="flex justify-end mt-2">
-        <Button color="white" className="mr-2" onClick={handleOnCancel}>
-          Cancel
-        </Button>
+        {!isCancelHidden && (
+          <Button color="white" className="mr-2" onClick={handleOnCancel}>
+            Cancel
+          </Button>
+        )}
         <Button onClick={handleOnSubmit} disabled={!value}>
           Submit
         </Button>

@@ -4,8 +4,9 @@ import MarkdownEditor from "../MarkdownEditor";
 export interface CommentEditorProps {
   comment?: Comment<Content>;
   isSubmitting: boolean;
-  onCancel: VoidFunction;
-  onSubmit: VoidFunction;
+  onCancel?: VoidFunction;
+  onSubmit: (value: string) => void;
+  isCancelHidden?: boolean;
 }
 
 const CommentEditor: React.FC<CommentEditorProps> = ({
@@ -13,6 +14,7 @@ const CommentEditor: React.FC<CommentEditorProps> = ({
   isSubmitting,
   onCancel,
   onSubmit,
+  isCancelHidden,
 }) => {
   return (
     <MarkdownEditor
@@ -21,6 +23,7 @@ const CommentEditor: React.FC<CommentEditorProps> = ({
       onSubmit={onSubmit}
       defaultValue={comment?.body}
       height={200}
+      isCancelHidden={isCancelHidden}
     />
   );
 };

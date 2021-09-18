@@ -165,6 +165,7 @@ export const convertMonToModalMon: (mon: Mon) => ModalMon = (mon) => {
 export const checkIsLuckyHuntResult = (resultItem: HuntResult) => {
   return (
     resultItem.newCollection.tier === "myth" ||
+    resultItem.newCollection.tier === "legend" ||
     (resultItem.newCollection.potential.includes("S") &&
       resultItem.newCollection.level === 1)
   );

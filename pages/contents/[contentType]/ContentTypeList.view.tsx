@@ -11,7 +11,7 @@ const ContentTypeList: React.FC<ContentTypeListProps> = ({ contentType }) => {
   const title = useMemo(() => {
     switch (contentType) {
       case "notice":
-        return "Notices";
+        return "Notifications";
     }
   }, [contentType]);
 

@@ -6,8 +6,11 @@ const usePatchContentMutation = (type: ContentType) => {
   const queryClient = useQueryClient();
 
   return useMutation(api.patchContent, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.CONTENT_LIST, type]);
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries([
+        [QUERY_KEY.CONTENT_LIST, type],
+        [QUERY_KEY.CONTENT, id],
+      ]);
     },
   });
 };

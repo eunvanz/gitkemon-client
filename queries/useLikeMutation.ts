@@ -56,6 +56,16 @@ const useLikeMutation = () => {
                 });
               },
             );
+            queryClient.setQueryData<Content>(
+              [QUERY_KEY.CONTENT, contentId],
+              (oldData) => {
+                assertNotEmpty(oldData);
+                return produce(oldData, (draft) => {
+                  draft.isLiked = !oldData.isLiked;
+                  draft.likesCnt = draft.likesCnt + (oldData.isLiked ? -1 : 1);
+                });
+              },
+            );
         }
       },
     },

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { UploadIcon } from "@heroicons/react/outline";
+import { PencilIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import Button from "~/components/Button";
 import ContentsTableContainer from "~/components/ContentsTable";
@@ -52,7 +52,7 @@ const ContentTypeList: React.FC<ContentTypeListProps> = ({ contentType, user }) 
           <div className="flex justify-between items-center p-2 bg-white">
             <Typography as="div">{promotionMessage}</Typography>
             <Button
-              icon={UploadIcon}
+              icon={PencilIcon}
               className="ml-2"
               size="xs"
               color="primary"

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import {
   BellIcon,
+  ChatIcon,
   GlobeIcon,
   HomeIcon,
   MenuAlt2Icon,
@@ -20,7 +21,6 @@ import { User } from "~/types";
 import DropDownMenu from "../DropDownMenu";
 import Logo from "../Logo";
 import NewBadge from "../NewBadge";
-import logo from "~/public/images/logo-white.png";
 
 interface NavigationItem {
   name: string;
@@ -83,6 +83,20 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
         name: "Pokémon Workshop",
         href: ROUTES.WORKSHOP,
         icon: PhotographIcon,
+      },
+      {
+        name: "Communities",
+        icon: ChatIcon,
+        children: [
+          {
+            name: "Notices",
+            href: `${ROUTES.CONTENTS}/notice`,
+          },
+          {
+            name: "Tips",
+            href: `${ROUTES.CONTENTS}/tip`,
+          },
+        ],
       },
     ];
   }, []);

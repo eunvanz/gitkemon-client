@@ -363,7 +363,7 @@ export interface PageRequestOptions {
   limit?: number;
 }
 
-export type ContentType = "painting" | "notice";
+export type ContentType = "painting" | "notice" | "tip";
 
 export interface PaybackLog {
   date: string;

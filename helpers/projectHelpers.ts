@@ -249,3 +249,7 @@ export const signInWithGithub = () => {
     `https://github.com/login/oauth/authorize?${qs.stringify(query)}`,
   );
 };
+
+export const checkIsAdminUser = (user: User) => {
+  return user.role === "admin";
+};

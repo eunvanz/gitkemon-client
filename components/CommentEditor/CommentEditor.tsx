@@ -5,7 +5,7 @@ export interface CommentEditorProps {
   comment?: Comment<Content>;
   isSubmitting: boolean;
   onCancel?: VoidFunction;
-  onSubmit: (value: string) => void;
+  onSubmit: (value: string) => Promise<void>;
   isCancelHidden?: boolean;
 }
 

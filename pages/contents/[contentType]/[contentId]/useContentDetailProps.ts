@@ -125,12 +125,14 @@ const useContentDetailProps: (
           body: value,
           commentId: comment!.id,
         });
+        toast.dark("Comment has been updated.");
       } else {
         await postComment({
           body: value,
           contentType,
           contentId: Number(contentId),
         });
+        toast.dark("Comment has been created.");
       }
     },
     [contentId, contentType, patchComment, postComment],

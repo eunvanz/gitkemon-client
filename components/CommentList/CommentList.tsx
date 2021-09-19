@@ -4,7 +4,7 @@ import CommentItem from "../CommentItem";
 export interface CommentListProps {
   comments?: Comment<Content>[];
   user?: User;
-  onSubmitComment: (value: string, comment: Comment<Content>) => void;
+  onSubmitComment: (value: string, comment: Comment<Content>) => Promise<void>;
   onDeleteComment: (comment: Comment<Content>) => void;
   isSubmittingComment: boolean;
 }

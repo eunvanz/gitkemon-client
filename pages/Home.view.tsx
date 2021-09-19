@@ -140,6 +140,14 @@ const Home: React.FC<HomeProps> = ({
               ))}
               <Typography className="mb-3 mt-6" weight="semibold" size="lg">
                 Notifications
+                <Typography
+                  className="ml-3"
+                  as="a"
+                  size="sm"
+                  onClick={() => router.push(`${ROUTES.CONTENTS}/notice`)}
+                >
+                  More
+                </Typography>
               </Typography>
               <ContentsTableContainer contentType="notice" isPreview />
             </div>

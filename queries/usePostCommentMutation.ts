@@ -7,7 +7,7 @@ const usePostCommentMutation = () => {
 
   return useMutation(api.postComment, {
     onSuccess: (_, { contentId }) => {
-      queryClient.invalidateQueries([
+      queryClient.refetchQueries([
         [QUERY_KEY.COMMENTS, contentId],
         [QUERY_KEY.CONTENT, contentId],
       ]);

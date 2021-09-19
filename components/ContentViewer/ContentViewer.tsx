@@ -15,7 +15,7 @@ export interface ContentViewerProps
   extends Omit<CommentListProps, "isSubmittingComment"> {
   content: Content;
   onClickLike: (content: Content) => void;
-  onSubmitComment: (value: string, comment?: Comment<Content>) => void;
+  onSubmitComment: (value: string, comment?: Comment<Content>) => Promise<void>;
   isSubmittingNewComment: boolean;
   user?: User;
   isSubmittingExistingComment: boolean;

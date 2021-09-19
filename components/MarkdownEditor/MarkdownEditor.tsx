@@ -17,7 +17,7 @@ export interface MarkdownEditorProps
   extends Omit<ExtendableHTMLProps<HTMLDivElement>, "onSubmit"> {
   defaultValue?: string;
   height?: number;
-  onSubmit: (value: string) => void;
+  onSubmit: (value: string) => Promise<void>;
   isSubmitting: boolean;
   onCancel?: VoidFunction;
   isCancelHidden?: boolean;
@@ -57,8 +57,9 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
     }
   }, [onCancel, value]);
 
-  const handleOnSubmit = useCallback(() => {
-    onSubmit(value!);
+  const handleOnSubmit = useCallback(async () => {
+    await onSubmit(value!);
+    setValue("");
   }, [onSubmit, value]);
 
   return (
@@ -80,11 +81,16 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
       />
       <div className="flex justify-end mt-2">
         {!isCancelHidden && (
-          <Button color="white" className="mr-2" onClick={handleOnCancel}>
+          <Button
+            color="white"
+            className="mr-2"
+            disabled={isSubmitting}
+            onClick={handleOnCancel}
+          >
             Cancel
           </Button>
         )}
-        <Button onClick={handleOnSubmit} disabled={!value}>
+        <Button onClick={handleOnSubmit} isLoading={isSubmitting} disabled={!value}>
           Submit
         </Button>
       </div>

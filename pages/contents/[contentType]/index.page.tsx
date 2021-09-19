@@ -1,3 +1,4 @@
+import withBaseLayout from "~/hocs/withBaseLayout";
 import ContentTypeList from "./ContentTypeList.view";
 import useContentTypeListProps from "./useContentTypeListProps";
 
@@ -7,4 +8,4 @@ const ContentTypeListPage: React.FC<void> = () => {
   return <ContentTypeList {...props} />;
 };
 
-export default ContentTypeListPage;
+export default withBaseLayout(ContentTypeListPage);

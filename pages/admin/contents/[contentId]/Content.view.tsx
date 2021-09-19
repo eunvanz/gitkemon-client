@@ -10,7 +10,11 @@ export interface ContentFormValues {
 }
 
 export interface ContentProps {
-  onSubmit: (formValues: { type: ContentType; body: string; title: string }) => void;
+  onSubmit: (formValues: {
+    type: ContentType;
+    body: string;
+    title: string;
+  }) => Promise<void>;
   isSubmitting: boolean;
   onCancel: VoidFunction;
   content?: ContentAsType;
@@ -29,8 +33,8 @@ const Content: React.FC<ContentProps> = ({
   const [title, setTitle] = useState<string>(content?.title || "");
 
   const handleOnSubmit = useCallback(
-    (body: string) => {
-      onSubmit({ type, body, title });
+    async (body: string) => {
+      await onSubmit({ type, body, title });
     },
     [onSubmit, title, type],
   );

@@ -11,7 +11,7 @@ export interface ContentDetailProps extends Omit<ContentViewerProps, "content"> 
     type: ContentType;
     body: string;
     title: string;
-  }) => void;
+  }) => Promise<void>;
   isSubmittingContent: boolean;
   onCancelEdit: VoidFunction;
 }

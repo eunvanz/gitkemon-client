@@ -14,7 +14,7 @@ dayjs.extend(relativeTime);
 export interface CommentItemProps {
   comment: Comment<Content>;
   user?: User;
-  onSubmitComment: (value: string) => void;
+  onSubmitComment: (value: string) => Promise<void>;
   isSubmitting: boolean;
   onDeleteComment: VoidFunction;
 }

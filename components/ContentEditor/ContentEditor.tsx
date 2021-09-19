@@ -6,7 +6,11 @@ import { Content, ContentType } from "~/types";
 export interface ContentEditorProps {
   type: ContentType;
   content?: Content;
-  onSubmit: (formValues: { type: ContentType; body: string; title: string }) => void;
+  onSubmit: (formValues: {
+    type: ContentType;
+    body: string;
+    title: string;
+  }) => Promise<void>;
   isSubmitting: boolean;
   onCancel: VoidFunction;
 }
@@ -21,8 +25,8 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
   const [title, setTitle] = useState<string>(content?.title || "");
 
   const handleOnSubmit = useCallback(
-    (body: string) => {
-      onSubmit({ type, body, title });
+    async (body: string) => {
+      await onSubmit({ type, body, title });
     },
     [onSubmit, title, type],
   );

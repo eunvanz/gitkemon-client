@@ -20,13 +20,14 @@ import { ContentDetailPageProps } from "./index.page";
 
 const useContentDetailProps: (
   pageProps: ContentDetailPageProps,
-) => ContentDetailProps = ({ contentId, contentType }) => {
+) => ContentDetailProps = ({ contentId, contentType, content: ssrContent }) => {
   const router = useRouter();
 
   const isNew = isNaN(Number(contentId));
 
   const { data: content } = useContentQuery(Number(contentId), {
-    enabled: !isNew,
+    enabled: false,
+    initialData: ssrContent,
   });
 
   const { data: comments } = useCommentsQuery(Number(contentId), {

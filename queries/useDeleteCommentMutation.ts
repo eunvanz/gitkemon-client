@@ -17,10 +17,8 @@ const useDeleteCommentMutation = (contentId: number) => {
       );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([
-        [QUERY_KEY.COMMENTS, contentId],
-        [QUERY_KEY.CONTENT, contentId],
-      ]);
+      queryClient.refetchQueries([QUERY_KEY.COMMENTS, contentId]);
+      queryClient.refetchQueries([QUERY_KEY.CONTENT, contentId]);
     },
   });
 };

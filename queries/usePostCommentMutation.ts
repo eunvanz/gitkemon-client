@@ -7,10 +7,8 @@ const usePostCommentMutation = () => {
 
   return useMutation(api.postComment, {
     onSuccess: (_, { contentId }) => {
-      queryClient.refetchQueries([
-        [QUERY_KEY.COMMENTS, contentId],
-        [QUERY_KEY.CONTENT, contentId],
-      ]);
+      queryClient.refetchQueries([QUERY_KEY.COMMENTS, contentId]);
+      queryClient.refetchQueries([QUERY_KEY.CONTENT, contentId]);
     },
   });
 };

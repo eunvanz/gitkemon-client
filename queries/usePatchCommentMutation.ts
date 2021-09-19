@@ -7,10 +7,8 @@ const usePatchCommentMutation = (contentId: number) => {
 
   return useMutation(api.patchComment, {
     onSuccess: () => {
-      queryClient.invalidateQueries([
-        [QUERY_KEY.COMMENTS, contentId],
-        [QUERY_KEY.CONTENT, contentId],
-      ]);
+      queryClient.refetchQueries([QUERY_KEY.COMMENTS, contentId]);
+      queryClient.refetchQueries([QUERY_KEY.CONTENT, contentId]);
     },
   });
 };

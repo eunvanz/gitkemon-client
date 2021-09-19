@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
@@ -152,6 +152,12 @@ const useContentDetailProps: (
       setIsEditMode(false);
     }
   }, [isNew, router]);
+
+  useEffect(() => {
+    if (isNew && !user) {
+      router.push(ROUTES.SIGN_IN);
+    }
+  }, [isNew, router, user]);
 
   return {
     comments,

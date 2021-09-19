@@ -7,7 +7,7 @@ const usePatchContentMutation = (type: ContentType) => {
 
   return useMutation(api.patchContent, {
     onSuccess: (_, { id }) => {
-      queryClient.invalidateQueries([
+      queryClient.refetchQueries([
         [QUERY_KEY.CONTENT_LIST, type],
         [QUERY_KEY.CONTENT, id],
       ]);

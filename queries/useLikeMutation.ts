@@ -2,7 +2,7 @@ import produce from "immer";
 import { InfiniteData, useMutation, useQueryClient } from "react-query";
 import api from "~/api";
 import { assertNotEmpty } from "~/helpers/commonHelpers";
-import { ContentType, Pageable, Painting, QUERY_KEY } from "~/types";
+import { Content, ContentType, Pageable, Painting, QUERY_KEY } from "~/types";
 
 export interface LikeMutationParam {
   contentId: number;
@@ -39,6 +39,23 @@ const useLikeMutation = () => {
               },
             );
             break;
+          default:
+            queryClient.setQueriesData<InfiniteData<Pageable<Content>>>(
+              [QUERY_KEY.CONTENT_LIST, contentType],
+              (oldData) => {
+                assertNotEmpty(oldData);
+                return produce(oldData, (draft) => {
+                  draft.pages.forEach((page) => {
+                    const index = page.items.findIndex((item) => item.id === contentId);
+                    if (index > -1) {
+                      const item = page.items[index];
+                      page.items[index].likesCnt = item.likesCnt + (isLike ? 1 : -1);
+                      page.items[index].isLiked = isLike;
+                    }
+                  });
+                });
+              },
+            );
         }
       },
     },

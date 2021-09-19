@@ -30,6 +30,7 @@ const API_URL = {
   RARE_NEWS__RECENT: "rare-news/recent",
   CONTENTS: "contents",
   CONTENTS__FILE: "contents/file",
+  COMMENTS: "comments",
 };
 
 export default API_URL;

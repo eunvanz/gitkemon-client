@@ -11,16 +11,17 @@ import UserItem from "../UserItem";
 
 dayjs.extend(relativeTime);
 
-export interface ContentViewerProps extends Omit<CommentListProps, "isSubmitting"> {
+export interface ContentViewerProps
+  extends Omit<CommentListProps, "isSubmittingComment"> {
   content: Content;
-  onClickLike: VoidFunction;
+  onClickLike: (content: Content) => void;
   onSubmitComment: (value: string, comment?: Comment<Content>) => void;
   isSubmittingNewComment: boolean;
   user?: User;
-  comments: Comment<Content>[];
   isSubmittingExistingComment: boolean;
-  onDeleteContent: VoidFunction;
-  onEditContent: VoidFunction;
+  onDeleteContent: (content: Content) => void;
+  onEditContent: (content: Content) => void;
+  isDeletingContent: boolean;
 }
 
 const ContentViewer: React.FC<ContentViewerProps> = ({
@@ -34,6 +35,7 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   onDeleteComment,
   onDeleteContent,
   onEditContent,
+  isDeletingContent,
 }) => {
   return (
     <>
@@ -45,10 +47,21 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         <UserItem isInline user={content.user} /> {dayjs(content.createdAt).fromNow()} ·{" "}
         {content.viewsCnt} views · {content.likesCnt} likes · {content.commentsCnt}{" "}
         comments
-        <Button color="white" size="xs" className="mx-2" onClick={onEditContent}>
+        <Button
+          color="white"
+          size="xs"
+          className="mx-2"
+          onClick={() => onEditContent(content)}
+          disabled={isDeletingContent}
+        >
           Edit
         </Button>
-        <Button color="white" size="xs" onClick={onDeleteContent}>
+        <Button
+          color="white"
+          size="xs"
+          onClick={() => onDeleteContent(content)}
+          isLoading={isDeletingContent}
+        >
           Delete
         </Button>
       </Typography>
@@ -61,7 +74,7 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
           size="sm"
           likesCnt={content.likesCnt}
           isLiked={content.isLiked}
-          onClick={onClickLike}
+          onClick={() => onClickLike(content)}
         />{" "}
         {content.likesCnt === 0 ? "Be the first liker." : "users like this post."}
       </Typography>

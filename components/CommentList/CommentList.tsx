@@ -2,7 +2,7 @@ import { Comment, Content, User } from "~/types";
 import CommentItem from "../CommentItem";
 
 export interface CommentListProps {
-  comments: Comment<Content>[];
+  comments?: Comment<Content>[];
   user?: User;
   onSubmitComment: (value: string, comment: Comment<Content>) => void;
   onDeleteComment: (comment: Comment<Content>) => void;
@@ -18,16 +18,19 @@ const CommentList: React.FC<CommentListProps> = ({
 }) => {
   return (
     <div>
-      {comments.map((comment) => (
-        <CommentItem
-          key={comment.id}
-          comment={comment}
-          user={user}
-          onSubmitComment={(value: string) => onSubmitComment(value, comment)}
-          isSubmitting={isSubmittingComment}
-          onDeleteComment={() => onDeleteComment(comment)}
-        />
-      ))}
+      {comments
+        ? comments.map((comment) => (
+            <CommentItem
+              key={comment.id}
+              comment={comment}
+              user={user}
+              onSubmitComment={(value: string) => onSubmitComment(value, comment)}
+              isSubmitting={isSubmittingComment}
+              onDeleteComment={() => onDeleteComment(comment)}
+            />
+          ))
+        : // TODO: skeleton
+          null}
     </div>
   );
 };

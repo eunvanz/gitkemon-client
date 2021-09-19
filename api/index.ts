@@ -21,6 +21,7 @@ import {
   PaybackLog,
   RareNews,
   Content,
+  Comment,
 } from "../types";
 import requester from "./requester";
 import API_URL from "./urls";
@@ -463,6 +464,38 @@ const deleteContent = async (id: number) => {
   await requester.delete(`${API_URL.CONTENTS}/${id}`);
 };
 
+const getCommentsByContentId = async (contentId: number) => {
+  const { data } = await requester.get<Comment<Content>[]>(
+    `${API_URL.COMMENTS}/content/${contentId}`,
+  );
+  return data;
+};
+
+export interface CreateCommentDto {
+  body: string;
+  parentId?: number;
+  contentType: ContentType;
+  contentId: number;
+}
+const postComment = async (createCommentDto: CreateCommentDto) => {
+  await requester.post(API_URL.COMMENTS, createCommentDto);
+};
+
+export interface UpdateCommentDto {
+  body: string;
+  commentId: number;
+}
+const patchComment = async (updateCommentDto: UpdateCommentDto) => {
+  await requester.patch(
+    `${API_URL.COMMENTS}/${updateCommentDto.commentId}`,
+    updateCommentDto,
+  );
+};
+
+const deleteComment = async (commentId: number) => {
+  await requester.delete(`${API_URL.COMMENTS}/${commentId}`);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -511,6 +544,10 @@ const api = {
   getContent,
   patchContent,
   deleteContent,
+  getCommentsByContentId,
+  postComment,
+  patchComment,
+  deleteComment,
 };
 
 export default api;

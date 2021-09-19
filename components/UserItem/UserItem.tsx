@@ -25,9 +25,12 @@ const UserItem: React.FC<UserItemProps> = ({
     <span className="inline">
       <DropDownMenu
         buttonLabel={
-          <Typography as="a" weight="bold">
-            {user.nickname}
-          </Typography>
+          <>
+            <Typography as="a" weight="bold">
+              {user.nickname}
+            </Typography>
+            <Typography color="hint">({user.githubLogin})</Typography>
+          </>
         }
         menuItems={[
           [
@@ -59,7 +62,7 @@ const UserItem: React.FC<UserItemProps> = ({
           />
         </div>
       )}
-      <div className={cx(isAvatarHidden ? undefined : "ml-4")}>
+      <div className={cx(isAvatarHidden || !user.githubUser ? undefined : "ml-4")}>
         <DropDownMenu
           buttonLabel={
             <>

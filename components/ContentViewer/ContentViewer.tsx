@@ -39,36 +39,38 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
 }) => {
   return (
     <>
-      <Typography as="h1" size="2xl" weight="bold">
-        {content.title}
-      </Typography>
-      <Typography as="p" color="hint">
-        Posted by <UserItem isInline user={content.user} />{" "}
-        {dayjs(content.createdAt).fromNow()} · {content.viewsCnt} views ·{" "}
-        {content.likesCnt} likes · {content.commentsCnt} comments
-        {user && user.id === content.userId && (
-          <>
-            <Button
-              color="white"
-              size="xs"
-              className="mx-2"
-              onClick={() => onEditContent(content)}
-              disabled={isDeletingContent}
-            >
-              Edit
-            </Button>
-            <Button
-              color="white"
-              size="xs"
-              onClick={() => onDeleteContent(content)}
-              isLoading={isDeletingContent}
-            >
-              Delete
-            </Button>
-          </>
-        )}
-      </Typography>
-      <div>
+      <div className="border-b mb-4">
+        <Typography as="h1" size="2xl" weight="bold">
+          {content.title}
+        </Typography>
+        <Typography as="p" color="hint">
+          Posted by <UserItem isInline user={content.user} />{" "}
+          {dayjs(content.createdAt).fromNow()} · {content.viewsCnt} views ·{" "}
+          {content.likesCnt} likes · {content.commentsCnt} comments
+          {user && user.id === content.userId && (
+            <>
+              <Button
+                color="white"
+                size="xs"
+                className="mx-2"
+                onClick={() => onEditContent(content)}
+                disabled={isDeletingContent}
+              >
+                Edit
+              </Button>
+              <Button
+                color="white"
+                size="xs"
+                onClick={() => onDeleteContent(content)}
+                isLoading={isDeletingContent}
+              >
+                Delete
+              </Button>
+            </>
+          )}
+        </Typography>
+      </div>
+      <div className="border-b mb-4">
         <MarkdownViewer text={content.body} />
       </div>
       <Typography className="flex items-center" color="hint" as="p">
@@ -83,8 +85,15 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
           ? "Make the first like."
           : `${content.likesCnt} users like this post.`}
       </Typography>
+      <CommentList
+        comments={comments}
+        user={user}
+        isSubmittingComment={isSubmittingExistingComment}
+        onDeleteComment={onDeleteComment}
+        onSubmitComment={onSubmitComment}
+      />
       {user && (
-        <div>
+        <div className="mt-4">
           <Typography color="hint">
             Comment as <Typography weight="bold">{user.nickname}</Typography>
           </Typography>
@@ -95,13 +104,6 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
           />
         </div>
       )}
-      <CommentList
-        comments={comments}
-        user={user}
-        isSubmittingComment={isSubmittingExistingComment}
-        onDeleteComment={onDeleteComment}
-        onSubmitComment={onSubmitComment}
-      />
     </>
   );
 };

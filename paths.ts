@@ -17,6 +17,7 @@ const ROUTES = {
   EVOLUTION: "/evolution",
   BLEND: "/blend",
   OOPS: "/oops",
+  CONTENTS: "/contents",
 };
 
 export default ROUTES;

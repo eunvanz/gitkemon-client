@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import ContentsTableContainer from "~/components/ContentsTable";
 import ContributionStatus, {
   ContributionStatusProps,
 } from "~/components/ContributionStatus";
@@ -137,6 +138,10 @@ const Home: React.FC<HomeProps> = ({
               {rareNews?.map((item) => (
                 <RareNewsCard className="mb-2" key={item.id} item={item} />
               ))}
+              <Typography className="mb-3 mt-6" weight="semibold" size="lg">
+                Notices
+              </Typography>
+              <ContentsTableContainer contentType="notice" isPreview />
             </div>
           </div>
         </div>

@@ -16,13 +16,12 @@ import usePostContentMutation from "~/queries/usePostContentMutation";
 import { userState } from "~/state/user";
 import { Comment, Content, ContentType } from "~/types";
 import { ContentDetailProps } from "./ContentDetail.view";
+import { ContentDetailPageProps } from "./index.page";
 
-const useContentDetailProps: () => ContentDetailProps = () => {
+const useContentDetailProps: (
+  pageProps: ContentDetailPageProps,
+) => ContentDetailProps = ({ contentId, contentType }) => {
   const router = useRouter();
-  const { contentId, contentType } = router.query as {
-    contentId: string;
-    contentType: ContentType;
-  };
 
   const isNew = isNaN(Number(contentId));
 
@@ -99,15 +98,20 @@ const useContentDetailProps: () => ContentDetailProps = () => {
         await patchContent({ id: Number(contentId), ...values });
         toast.dark("Posting has been updated.");
       }
-      router.back();
+      setIsEditMode(false);
     },
-    [contentId, isNew, patchContent, postContent, router],
+    [contentId, isNew, patchContent, postContent],
   );
 
   const onDeleteContent = useCallback(async () => {
-    await deleteContent(Number(contentId));
-    toast.dark("Posting has been deleted.");
-    router.back();
+    const isConfirmed = await Dialog.confirm({
+      content: "Are you sure to delete posting?",
+    });
+    if (isConfirmed) {
+      await deleteContent(Number(contentId));
+      toast.dark("Posting has been deleted.");
+      router.back();
+    }
   }, [contentId, deleteContent, router]);
 
   const onNavigateBack = useCallback(() => {
@@ -146,6 +150,7 @@ const useContentDetailProps: () => ContentDetailProps = () => {
     isSubmittingExistingComment,
     isSubmittingNewComment,
     isSubmittingContent: isSubmittingExistingContent || isSubmittingNewContent,
+    onCancelEdit: () => setIsEditMode(false),
     onClickLike,
     onDeleteComment,
     onDeleteContent,

@@ -47,23 +47,27 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         <UserItem isInline user={content.user} /> {dayjs(content.createdAt).fromNow()} ·{" "}
         {content.viewsCnt} views · {content.likesCnt} likes · {content.commentsCnt}{" "}
         comments
-        <Button
-          color="white"
-          size="xs"
-          className="mx-2"
-          onClick={() => onEditContent(content)}
-          disabled={isDeletingContent}
-        >
-          Edit
-        </Button>
-        <Button
-          color="white"
-          size="xs"
-          onClick={() => onDeleteContent(content)}
-          isLoading={isDeletingContent}
-        >
-          Delete
-        </Button>
+        {user && user.id === content.userId && (
+          <>
+            <Button
+              color="white"
+              size="xs"
+              className="mx-2"
+              onClick={() => onEditContent(content)}
+              disabled={isDeletingContent}
+            >
+              Edit
+            </Button>
+            <Button
+              color="white"
+              size="xs"
+              onClick={() => onDeleteContent(content)}
+              isLoading={isDeletingContent}
+            >
+              Delete
+            </Button>
+          </>
+        )}
       </Typography>
       <div>
         <MarkdownViewer text={content.body} />
@@ -76,7 +80,9 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
           isLiked={content.isLiked}
           onClick={() => onClickLike(content)}
         />{" "}
-        {content.likesCnt === 0 ? "Be the first liker." : "users like this post."}
+        {content.likesCnt === 0
+          ? "Make the first like."
+          : `${content.likesCnt} users like this post.`}
       </Typography>
       {user && (
         <div>

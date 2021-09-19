@@ -1,10 +1,13 @@
-import { useMemo } from "@storybook/addons";
+import { useMemo } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { useRouter } from "next/router";
 import Table from "~/components/Table";
+import ROUTES from "~/paths";
 import { Content } from "~/types";
 import Intersection from "../Intersection";
 import { Column } from "../Table/Table";
+import Typography from "../Typography";
 import UserItem from "../UserItem";
 
 dayjs.extend(relativeTime);
@@ -22,9 +25,11 @@ const ContentsTable: React.FC<ContentsTableProps> = ({
   hasNextPage,
   onFetchNextPage,
 }) => {
+  const router = useRouter();
+
   const dataSource: Content[] = useMemo(() => {
     return contents
-      ? contents.map((content, index) => ({
+      ? contents.map((content) => ({
           ...content,
           key: content.id,
         }))
@@ -33,14 +38,25 @@ const ContentsTable: React.FC<ContentsTableProps> = ({
 
   const columns: Column<Content>[] = useMemo(() => {
     const result: Column<Content>[] = [];
-    result.push(
-      {
+    if (!isPreview) {
+      result.push({
         title: "id",
         dataIndex: "id",
-      },
+      });
+    }
+    result.push(
       {
         title: "title",
         dataIndex: "title",
+        render: (data) => (
+          <Typography
+            as="a"
+            weight="bold"
+            onClick={() => router.push(`${ROUTES.CONTENTS}/${data.type}/${data.id}`)}
+          >
+            {data.title}
+          </Typography>
+        ),
       },
       {
         title: "author",
@@ -73,7 +89,7 @@ const ContentsTable: React.FC<ContentsTableProps> = ({
       render: (data) => dayjs(data.updatedAt).fromNow(),
     });
     return result;
-  }, [isPreview]);
+  }, [isPreview, router]);
 
   return (
     <>

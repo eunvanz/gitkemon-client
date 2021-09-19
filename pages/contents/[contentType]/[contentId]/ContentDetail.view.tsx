@@ -13,7 +13,7 @@ export interface ContentDetailProps extends Omit<ContentViewerProps, "content"> 
     title: string;
   }) => void;
   isSubmittingContent: boolean;
-  onNavigateBack: VoidFunction;
+  onCancelEdit: VoidFunction;
 }
 
 const ContentDetail: React.FC<ContentDetailProps> = ({
@@ -22,7 +22,7 @@ const ContentDetail: React.FC<ContentDetailProps> = ({
   isEditMode,
   onSubmitContent,
   isSubmittingContent,
-  onNavigateBack,
+  onCancelEdit,
   ...restProps
 }) => {
   return (
@@ -36,7 +36,7 @@ const ContentDetail: React.FC<ContentDetailProps> = ({
             content={content}
             onSubmit={onSubmitContent}
             isSubmitting={isSubmittingContent}
-            onCancel={onNavigateBack}
+            onCancel={onCancelEdit}
           />
         </div>
       )}

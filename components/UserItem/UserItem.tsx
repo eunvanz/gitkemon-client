@@ -62,7 +62,7 @@ const UserItem: React.FC<UserItemProps> = ({
           />
         </div>
       )}
-      <div className={cx(isAvatarHidden || !user.githubUser ? undefined : "ml-4")}>
+      <div className={cx(isAvatarHidden || !user.githubUser ? undefined : "ml-2")}>
         <DropDownMenu
           buttonLabel={
             <>

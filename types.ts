@@ -16,6 +16,7 @@ export interface User {
   updatedAt: string;
   pokeBallId: number;
   role: Role;
+  referrerCode: string;
   __pokeBall__?: PokeBall | null;
 }
 

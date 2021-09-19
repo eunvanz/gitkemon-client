@@ -139,7 +139,7 @@ const Home: React.FC<HomeProps> = ({
                 <RareNewsCard className="mb-2" key={item.id} item={item} />
               ))}
               <Typography className="mb-3 mt-6" weight="semibold" size="lg">
-                Notifications
+                Notices
                 <Typography
                   className="ml-3"
                   as="a"

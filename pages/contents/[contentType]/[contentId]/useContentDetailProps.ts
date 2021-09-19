@@ -145,6 +145,14 @@ const useContentDetailProps: (
     [deleteComment],
   );
 
+  const onCancelEdit = useCallback(() => {
+    if (isNew) {
+      router.back();
+    } else {
+      setIsEditMode(false);
+    }
+  }, [isNew, router]);
+
   return {
     comments,
     contentType,
@@ -152,7 +160,7 @@ const useContentDetailProps: (
     isSubmittingExistingComment,
     isSubmittingNewComment,
     isSubmittingContent: isSubmittingExistingContent || isSubmittingNewContent,
-    onCancelEdit: () => setIsEditMode(false),
+    onCancelEdit,
     onClickLike,
     onDeleteComment,
     onDeleteContent,

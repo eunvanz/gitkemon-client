@@ -37,6 +37,14 @@ const CommentItem: React.FC<CommentItemProps> = ({
     }
   }, [onDeleteComment]);
 
+  const handleOnSubmitComment = useCallback(
+    async (value: string) => {
+      await onSubmitComment(value);
+      setIsEditMode(false);
+    },
+    [onSubmitComment],
+  );
+
   return (
     <div className="flex flex-col my-2">
       <UserItem
@@ -50,7 +58,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
           <CommentEditor
             comment={comment}
             onCancel={() => setIsEditMode(false)}
-            onSubmit={onSubmitComment}
+            onSubmit={handleOnSubmitComment}
             isSubmitting={isSubmitting}
           />
         ) : (

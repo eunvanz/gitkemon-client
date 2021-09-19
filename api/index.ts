@@ -483,13 +483,10 @@ const postComment = async (createCommentDto: CreateCommentDto) => {
 
 export interface UpdateCommentDto {
   body: string;
-  commentId: number;
+  id: number;
 }
 const patchComment = async (updateCommentDto: UpdateCommentDto) => {
-  await requester.patch(
-    `${API_URL.COMMENTS}/${updateCommentDto.commentId}`,
-    updateCommentDto,
-  );
+  await requester.patch(`${API_URL.COMMENTS}/${updateCommentDto.id}`, updateCommentDto);
 };
 
 const deleteComment = async (commentId: number) => {

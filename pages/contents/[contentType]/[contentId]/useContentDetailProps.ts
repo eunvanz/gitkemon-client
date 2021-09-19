@@ -123,7 +123,7 @@ const useContentDetailProps: (
       if (comment) {
         await patchComment({
           body: value,
-          commentId: comment!.id,
+          id: comment!.id,
         });
         toast.dark("Comment has been updated.");
       } else {

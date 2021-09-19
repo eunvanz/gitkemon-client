@@ -12,6 +12,7 @@ import "../styles/react-easy-crop.css";
 import "../styles/slider.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "antd/dist/antd.css";
+import "react-markdown-editor-lite/lib/index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 config.autoAddCss = false;

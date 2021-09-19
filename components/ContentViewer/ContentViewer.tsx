@@ -43,10 +43,9 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         {content.title}
       </Typography>
       <Typography as="p" color="hint">
-        {content.createdAt === content.updatedAt ? "Posted" : "Updated"} by{" "}
-        <UserItem isInline user={content.user} /> {dayjs(content.createdAt).fromNow()} ·{" "}
-        {content.viewsCnt} views · {content.likesCnt} likes · {content.commentsCnt}{" "}
-        comments
+        Posted by <UserItem isInline user={content.user} />{" "}
+        {dayjs(content.createdAt).fromNow()} · {content.viewsCnt} views ·{" "}
+        {content.likesCnt} likes · {content.commentsCnt} comments
         {user && user.id === content.userId && (
           <>
             <Button

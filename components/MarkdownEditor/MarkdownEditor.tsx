@@ -5,7 +5,6 @@ import api from "~/api";
 import { ExtendableHTMLProps } from "~/types";
 import Button from "../Button";
 import Dialog from "../Dialog";
-import "react-markdown-editor-lite/lib/index.css";
 
 const mdParser = new MarkdownIt();
 

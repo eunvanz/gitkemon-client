@@ -84,9 +84,9 @@ const ContentsTable: React.FC<ContentsTableProps> = ({
       );
     }
     result.push({
-      title: "updated",
-      dataIndex: "updatedAt",
-      render: (data) => dayjs(data.updatedAt).fromNow(),
+      title: "posted",
+      dataIndex: "createdAt",
+      render: (data) => dayjs(data.createdAt).fromNow(),
     });
     return result;
   }, [isPreview, router]);

@@ -7,7 +7,12 @@ export interface MarkdownViewerProps {
 }
 
 const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ text }) => {
-  return <div dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}></div>;
+  return (
+    <div
+      className="custom-html-style"
+      dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
+    ></div>
+  );
 };
 
 export default MarkdownViewer;

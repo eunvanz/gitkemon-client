@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import api from "~/api";
 import withBaseLayout from "~/hocs/withBaseLayout";
 import { ContentType } from "~/types";
 import ContentDetail from "./ContentDetail.view";
@@ -20,6 +21,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     contentId: string;
     contentType: ContentType;
   };
+  if (!isNaN(Number(contentId))) {
+    await api.incrementContentView(Number(contentId));
+  }
   return {
     props: {
       contentId,

@@ -496,6 +496,10 @@ const deleteComment = async (commentId: number) => {
   await requester.delete(`${API_URL.COMMENTS}/${commentId}`);
 };
 
+const incrementContentView = async (contentId: number) => {
+  await requester.put(`${API_URL.CONTENTS__VIEW}/${contentId}`);
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -548,6 +552,7 @@ const api = {
   postComment,
   patchComment,
   deleteComment,
+  incrementContentView,
 };
 
 export default api;

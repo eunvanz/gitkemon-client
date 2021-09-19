@@ -40,7 +40,7 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   return (
     <>
       <div className="border-b mb-4">
-        <Typography as="h1" size="2xl" weight="bold">
+        <Typography as="h1" size="3xl" weight="bold">
           {content.title}
         </Typography>
         <Typography as="p" color="hint">

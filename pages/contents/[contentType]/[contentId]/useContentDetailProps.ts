@@ -26,7 +26,7 @@ const useContentDetailProps: (
   const isNew = isNaN(Number(contentId));
 
   const { data: content } = useContentQuery(Number(contentId), {
-    enabled: false,
+    enabled: !isNew,
     initialData: ssrContent,
   });
 

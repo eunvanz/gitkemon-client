@@ -70,7 +70,7 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
           )}
         </Typography>
       </div>
-      <div className="border-b mb-4">
+      <div className="border-b my-4">
         <MarkdownViewer text={content.body} />
       </div>
       <Typography className="flex items-center" color="hint" as="p">

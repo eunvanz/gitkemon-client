@@ -75,7 +75,7 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
       </div>
       <Typography className="flex items-center" color="hint" as="p">
         <Likes
-          className="inline-block mr-2"
+          className="mr-2"
           size="sm"
           likesCnt={content.likesCnt}
           isLiked={content.isLiked}

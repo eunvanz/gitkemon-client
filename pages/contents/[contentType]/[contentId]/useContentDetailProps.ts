@@ -94,13 +94,14 @@ const useContentDetailProps: (
       if (isNew) {
         await postContent(values);
         toast.dark("New posting has been created.");
+        router.back();
       } else {
         await patchContent({ id: Number(contentId), ...values });
         toast.dark("Posting has been updated.");
+        setIsEditMode(false);
       }
-      setIsEditMode(false);
     },
-    [contentId, isNew, patchContent, postContent],
+    [contentId, isNew, patchContent, postContent, router],
   );
 
   const onDeleteContent = useCallback(async () => {

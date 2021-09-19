@@ -30,9 +30,18 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
   return (
     <>
       <div className="mb-2">
-        {/* @ts-ignore */}
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <Input
+          label="Title"
+          value={title}
+          // @ts-ignore
+          onChange={(e) => setTitle(e.target.value)}
+          hasError={title.length > 200}
+          errorMessage={
+            title.length > 200 ? "Title should be less than 200 characters." : undefined
+          }
+        />
       </div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
       <MarkdownEditor
         height={500}
         onSubmit={handleOnSubmit}

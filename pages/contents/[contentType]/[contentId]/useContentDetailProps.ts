@@ -2,6 +2,8 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import Dialog from "~/components/Dialog";
+import ROUTES from "~/paths";
 import useCommentsQuery from "~/queries/useCommentsQuery";
 import useContentQuery from "~/queries/useContentQuery";
 import useDeleteCommentMutation from "~/queries/useDeleteCommentMutation";
@@ -69,13 +71,24 @@ const useContentDetailProps: () => ContentDetailProps = () => {
 
   const { mutate: like } = useLikeMutation();
 
-  const onClickLike = useCallback(() => {
-    like({
-      contentId: Number(contentId),
-      contentType,
-      isLike: !content?.isLiked,
-    });
-  }, [content?.isLiked, contentId, contentType, like]);
+  const onClickLike = useCallback(async () => {
+    if (!user) {
+      const isConfirmed = await Dialog.confirm({
+        content: "Sign in is required. Would you like to sign in?",
+        okText: "Yes",
+        cancelText: "No",
+      });
+      if (isConfirmed) {
+        router.push(ROUTES.SIGN_IN);
+      }
+    } else {
+      like({
+        contentId: Number(contentId),
+        contentType,
+        isLike: !content?.isLiked,
+      });
+    }
+  }, [content?.isLiked, contentId, contentType, like, router, user]);
 
   const onSubmitContent = useCallback(
     async (values: { type: ContentType; body: string; title: string }) => {

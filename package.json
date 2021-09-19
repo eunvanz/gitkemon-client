@@ -1,6 +1,6 @@
 {
   "name": "gitkemon-client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "PORT=4000 next dev",

@@ -77,6 +77,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
           },
         }}
         readOnly={isSubmitting}
+        placeholder="Write in Markdown. Attach images by dragging & dropping, or pasting."
       />
       <div className="flex justify-end mt-2">
         {!isCancelHidden && (

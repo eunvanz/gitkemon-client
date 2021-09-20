@@ -141,8 +141,9 @@ const useContentDetailProps: (
   );
 
   const onDeleteComment = useCallback(
-    (comment: Comment<Content>) => {
-      deleteComment(comment.id);
+    async (comment: Comment<Content>) => {
+      await deleteComment(comment.id);
+      toast.dark("Comment has been deleted.");
     },
     [deleteComment],
   );

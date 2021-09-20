@@ -13,6 +13,7 @@ module.exports = (phase) => {
     ACCESS_TOKEN_COOKIE_NAME: "gkmat",
     GITHUB_REPO: "https://github.com/eunvanz/gitkemon-client",
     GITHUB_URL: "https://github.com",
+    SERVICE_HOST: isDev ? "http://localhost:4000" : "https://gitkemon.com",
   };
 
   const result = {

@@ -32,7 +32,11 @@ import API_URL from "./urls";
  * @returns 유저객체
  */
 const exchangeGithubCode = async (code: string) => {
-  const { data } = await requester.post<User>(API_URL.USERS__LOGIN, { code });
+  const referrerCode = localStorage.getItem("referrerCode");
+  const { data } = await requester.post<User>(API_URL.USERS__LOGIN, {
+    code,
+    referrerCode,
+  });
   return data;
 };
 

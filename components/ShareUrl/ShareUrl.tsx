@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { User } from "@sentry/types";
 import Clipboard from "clipboard";
+import { toast } from "react-toastify";
 import Alert from "../Alert";
 import Button from "../Button";
 import Dialog from "../Dialog";
@@ -32,7 +33,10 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
         ),
       });
     });
-  }, [shareUrl]);
+    return () => {
+      clipboard.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     if (isDetailVisible) {
@@ -45,7 +49,7 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
       <div className="flex justify-between">
         <div>
           <Typography as="div" weight="bold">
-            Share URL and get more Pokéballs!
+            Share Gitkémon and get more Pokéballs!
           </Typography>
           <Typography as="a" onClick={() => setIsDetailVisible(!isDetailVisible)}>
             {isDetailVisible ? "Hide detail" : "Show detail"}
@@ -61,14 +65,24 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
             type="info"
             title="You'll get special Pokéballs for each new users through the URL you shared."
           >
-            <PokeBallImage type="rare" className="w-4 h-4 inline-block mr-2" />
-            Rare Pokéballs for each new users. (up to 50)
-            <br />
-            <PokeBallImage type="elite" className="w-4 h-4 inline-block mr-2" />
-            An elite Pokéball for total 25 new users.
-            <br />
-            <PokeBallImage type="legend" className="w-4 h-4 inline-block mr-2" /> A legend
-            Pokéball for total 50 new users.
+            <div className="flex items-center">
+              <div className="relative w-4 h-4 inline-block mr-2">
+                <PokeBallImage layout="fill" type="rare" />
+              </div>
+              Rare Pokéballs for each new users. (up to 50)
+            </div>
+            <div className="flex items-center">
+              <div className="relative w-4 h-4 inline-block mr-2">
+                <PokeBallImage layout="fill" type="elite" />
+              </div>
+              An elite Pokéball for 25 new users.
+            </div>
+            <div className="flex items-center">
+              <div className="relative w-4 h-4 inline-block mr-2">
+                <PokeBallImage layout="fill" type="legend" />
+              </div>
+              A legend Pokéball for 50 new users.
+            </div>
           </Alert>
           <div className="mt-4">
             <ReferralGauge count={count} />

@@ -15,8 +15,12 @@ const ReferralGauge: React.FC<ReferralGaugeProps> = ({ count }) => {
         <Typography>
           <Typography color="primary">{count || 0}</Typography> / {MAX}
         </Typography>
-        <PokeBallImage className="w-6 h-6 animate-bounce" type="elite" />
-        <PokeBallImage className="w-6 h-6 animate-bounce" type="legend" />
+        <div className="animate-bounce">
+          <PokeBallImage width={24} height={24} type="elite" />
+        </div>
+        <div className="animate-bounce">
+          <PokeBallImage width={24} height={24} type="legend" />
+        </div>
       </div>
       <div className="px-3 pt-2">
         <LineGauge

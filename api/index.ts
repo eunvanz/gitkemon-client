@@ -498,7 +498,7 @@ const incrementContentView = async (contentId: number) => {
 };
 
 const getReferredCount = async () => {
-  const { data } = await requester.get<number>(`${API_URL.USERS}`);
+  const { data } = await requester.get<number>(`${API_URL.USERS__REFERRED_COUNT}`);
   return data;
 };
 

@@ -9,6 +9,7 @@ import MonRankingTableContainer from "~/components/MonRankingTable";
 import PaintingCardContainer from "~/components/PaintingCard";
 import PokeBallStatus from "~/components/PokeBallStatus";
 import RareNewsCard from "~/components/RareNewsCard";
+import ShareUrlContainer from "~/components/ShareUrl";
 import Typography from "~/components/Typography";
 import UserRankingTableContainer from "~/components/UserRankingTable";
 import { convertMonToCardMon, convertMonToModalMon } from "~/helpers/projectHelpers";
@@ -34,6 +35,11 @@ const Home: React.FC<HomeProps> = ({
   return (
     <>
       <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4 flex flex-col">
+        {user && (
+          <div className="mb-4">
+            <ShareUrlContainer />
+          </div>
+        )}
         <div className={`grid grid-cols-1 gap-6 xl:grid-cols-${!!user ? 2 : 1}`}>
           <ContributionStatus
             availableContributions={availableContributions}

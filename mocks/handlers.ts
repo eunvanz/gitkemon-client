@@ -13,4 +13,7 @@ export const handlers = [
   rest.get(`/${API_URL.USERS__RANK__CONTRIBUTIONS}`, (_, res, ctx) => {
     return res(ctx.json(mockUserRanking.userRanking));
   }),
+  rest.get(`/${API_URL.USERS__REFERRED_COUNT}`, (_, res, ctx) => {
+    return res(ctx.json(20));
+  }),
 ];

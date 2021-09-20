@@ -1,7 +1,7 @@
 import ShareUrl from "./ShareUrl";
 import useShareUrlProps from "./useShareUrlProps";
 
-const ShareUrlContainer: React.FC<void> = () => {
+const ShareUrlContainer: React.FC<{}> = () => {
   const props = useShareUrlProps();
 
   return <ShareUrl {...props} />;

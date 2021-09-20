@@ -84,7 +84,9 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         />{" "}
         {content.likesCnt === 0
           ? "Make the first like."
-          : `${content.likesCnt} users like this post.`}
+          : `${content.likesCnt} user${content.likesCnt > 1 ? "s" : ""} like${
+              content.likesCnt > 1 ? "" : "s"
+            } this post.`}
       </Typography>
       <CommentList
         comments={comments}

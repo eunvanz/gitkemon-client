@@ -17,6 +17,7 @@ const userRanking: Pageable<User> = {
       githubLogin: "eunvanz",
       trainerClass: 4,
       role: "admin",
+      referrerCode: "mockReferrerCode",
       githubUser: {
         id: 17351661,
         login: "eunvanz",
@@ -67,6 +68,7 @@ const userRanking: Pageable<User> = {
       githubLogin: "eunvanz",
       trainerClass: 4,
       role: "admin",
+      referrerCode: "mockReferrerCode",
       githubUser: {
         id: 17351661,
         login: "eunvanz",
@@ -117,6 +119,7 @@ const userRanking: Pageable<User> = {
       githubLogin: "eunvanz",
       trainerClass: 4,
       role: "admin",
+      referrerCode: "mockReferrerCode",
       githubUser: {
         id: 17351661,
         login: "eunvanz",
@@ -167,6 +170,7 @@ const userRanking: Pageable<User> = {
       githubLogin: "eunvanz",
       trainerClass: 4,
       role: "admin",
+      referrerCode: "mockReferrerCode",
       githubUser: {
         id: 17351661,
         login: "eunvanz",
@@ -217,6 +221,7 @@ const userRanking: Pageable<User> = {
       githubLogin: "eunvanz",
       trainerClass: 4,
       role: "admin",
+      referrerCode: "mockReferrerCode",
       githubUser: {
         id: 17351661,
         login: "eunvanz",

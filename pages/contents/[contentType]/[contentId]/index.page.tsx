@@ -15,10 +15,14 @@ export interface ContentDetailPageProps {
 const ContentDetailPage: React.FC<ContentDetailPageProps> = (pageProps) => {
   const props = useContentDetailProps(pageProps);
 
+  const title = pageProps.content
+    ? `${pageProps.content.title} - by ${pageProps.content.user.nickname}`
+    : "Gitkémon";
+
   return (
     <>
       <Head>
-        <title>{pageProps.content?.title || "Gitkémon"}</title>
+        <title>{title}</title>
       </Head>
       <ContentDetail {...props} />
     </>

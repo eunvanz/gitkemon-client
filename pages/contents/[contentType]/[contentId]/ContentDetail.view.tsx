@@ -26,22 +26,24 @@ const ContentDetail: React.FC<ContentDetailProps> = ({
   ...restProps
 }) => {
   return (
-    <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4">
-      {content && !isEditMode ? (
-        <ContentViewer content={content} {...restProps} />
-      ) : (
-        <div>
-          <ContentEditor
-            type={contentType}
-            content={content}
-            onSubmit={onSubmitContent}
-            isSubmitting={isSubmittingContent}
-            onCancel={onCancelEdit}
-          />
-        </div>
-      )}
+    <>
+      <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4">
+        {content && !isEditMode ? (
+          <ContentViewer content={content} {...restProps} />
+        ) : (
+          <div>
+            <ContentEditor
+              type={contentType}
+              content={content}
+              onSubmit={onSubmitContent}
+              isSubmitting={isSubmittingContent}
+              onCancel={onCancelEdit}
+            />
+          </div>
+        )}
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

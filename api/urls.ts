@@ -7,6 +7,7 @@ const API_URL = {
   USERS__RANK__COLLECTION: "users/rank/collection",
   USERS__RANK__CONTRIBUTIONS: "users/rank/contributions",
   USERS__PROFILE: "users/profile",
+  USERS__REFERRED_COUNT: "users/referred-count",
   MON_IMAGES: "mon-images",
   MONS: "mons",
   MONS__WITH_IMAGES: "mons/with-images",

@@ -29,6 +29,7 @@ const content: Content = {
     githubLogin: "eunvanz",
     trainerClass: 4,
     role: "admin",
+    referrerCode: "",
     githubUser: {
       id: 17351661,
       login: "eunvanz",

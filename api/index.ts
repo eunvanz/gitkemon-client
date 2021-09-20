@@ -497,6 +497,11 @@ const incrementContentView = async (contentId: number) => {
   await requester.put(`${API_URL.CONTENTS__VIEW}/${contentId}`);
 };
 
+const getReferredCount = async () => {
+  const { data } = await requester.get<number>(`${API_URL.USERS}`);
+  return data;
+};
+
 const api = {
   exchangeGithubCode,
   loginWithToken,
@@ -550,6 +555,7 @@ const api = {
   patchComment,
   deleteComment,
   incrementContentView,
+  getReferredCount,
 };
 
 export default api;

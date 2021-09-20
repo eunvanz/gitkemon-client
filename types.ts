@@ -228,6 +228,7 @@ export enum QUERY_KEY {
   CONTENT_LIST = "CONTENT_LIST",
   CONTENT = "CONTENT",
   COMMENTS = "COMMENTS",
+  REFERRED_COUNT = "REFERRED_COUNT",
 }
 
 export type MonImageSearchCondition = "monName" | "designerName";

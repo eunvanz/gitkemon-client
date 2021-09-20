@@ -15,6 +15,7 @@ const user: User = {
   updatedAt: "2021-07-24T17:42:24Z",
   pokeBallId: 74,
   role: "user",
+  referrerCode: "mockReferrer",
   githubUser: {
     login: "eunvanz",
     id: 17351661,

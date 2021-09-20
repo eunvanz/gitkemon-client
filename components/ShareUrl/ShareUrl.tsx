@@ -75,13 +75,13 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
               <div className="relative w-4 h-4 inline-block mr-2">
                 <PokeBallImage layout="fill" type="elite" />
               </div>
-              An elite Pokéball for 25 new users.
+              An Elite Pokéball for 25 new users.
             </div>
             <div className="flex items-center">
               <div className="relative w-4 h-4 inline-block mr-2">
                 <PokeBallImage layout="fill" type="legend" />
               </div>
-              A legend Pokéball for 50 new users.
+              A Legend Pokéball for 50 new users.
             </div>
           </Alert>
           <div className="mt-4">

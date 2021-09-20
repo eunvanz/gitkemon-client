@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
+import { ClipboardCopyIcon } from "@heroicons/react/outline";
 import { User } from "@sentry/types";
 import Clipboard from "clipboard";
-import { toast } from "react-toastify";
 import Alert from "../Alert";
 import Button from "../Button";
 import Dialog from "../Dialog";
@@ -55,7 +55,12 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
             {isDetailVisible ? "Hide detail" : "Show detail"}
           </Typography>
         </div>
-        <Button id="copy-to-clipboard" data-clipboard-text={shareUrl} color="white">
+        <Button
+          icon={ClipboardCopyIcon}
+          id="copy-to-clipboard"
+          data-clipboard-text={shareUrl}
+          color="white"
+        >
           Copy URL to clipboard
         </Button>
       </div>

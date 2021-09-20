@@ -53,7 +53,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
           <Typography color="hint"> · {dayjs(comment.updatedAt).fromNow()}</Typography>
         }
       />
-      <div className="mt-2 ml-4 pt-1 pl-8 border-l-2 border-gray-200">
+      <div className="mt-2 ml-4 pl-7 border-l-2 border-gray-200">
         {isEditMode ? (
           <CommentEditor
             comment={comment}

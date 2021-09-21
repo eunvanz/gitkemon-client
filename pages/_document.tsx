@@ -23,15 +23,15 @@ class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://firebasestorage.googleapis.com/v0/b/hand-pokemon-2.appspot.com/o/monImages%2F%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%85%E1%85%B5.png?alt=media&amp;token=e719c144-0e45-4307-ab02-7fa64ff9edf9"
+            content="https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_4_밥밥이_1628354906313.png"
           />
           <meta
             property="og:image:url"
-            content="https://firebasestorage.googleapis.com/v0/b/hand-pokemon-2.appspot.com/o/monImages%2F%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%85%E1%85%B5.png?alt=media&amp;token=e719c144-0e45-4307-ab02-7fa64ff9edf9"
+            content="https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_4_밥밥이_1628354906313.png"
           />
           <meta
             property="og:image:secure_url"
-            content="https://firebasestorage.googleapis.com/v0/b/hand-pokemon-2.appspot.com/o/monImages%2F%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%85%E1%85%B5.png?alt=media&amp;token=e719c144-0e45-4307-ab02-7fa64ff9edf9"
+            content="https://storage.googleapis.com/gitkemon.appspot.com/mon-images/mon_4_밥밥이_1628354906313.png"
           />
           <meta property="og:image:type" content="image/png" />
           <meta property="og:image:width" content="250" />

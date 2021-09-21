@@ -10,6 +10,7 @@ import TopProgressBarContainer from "~/components/TopProgressBar";
 import { colorHashes } from "../constants/styles";
 import queryClient from "../helpers/queryClient";
 import "../styles/globals.css";
+import "../styles/markdown.css";
 import "../styles/react-easy-crop.css";
 import "../styles/slider.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";

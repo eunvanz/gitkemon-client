@@ -1,0 +1,15 @@
+.custom-html-style ul {
+  list-style-type: disc;
+}
+
+.custom-html-style ul ul {
+  list-style-type: circle;
+}
+
+.custom-html-style ul ul ul {
+  list-style-type: square;
+}
+
+.custom-html-style ol {
+  list-style-type: decimal;
+}

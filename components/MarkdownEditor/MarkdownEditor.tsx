@@ -1,12 +1,10 @@
 import { useCallback, useState } from "react";
-import MarkdownIt from "markdown-it";
 import dynamic from "next/dynamic";
 import api from "~/api";
+import mdParser from "~/helpers/mdParser";
 import { ExtendableHTMLProps } from "~/types";
 import Button from "../Button";
 import Dialog from "../Dialog";
-
-const mdParser = new MarkdownIt();
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
   ssr: false,

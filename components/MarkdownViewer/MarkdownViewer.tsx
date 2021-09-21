@@ -1,6 +1,4 @@
-import MarkdownIt from "markdown-it";
-
-const mdParser = new MarkdownIt();
+import mdParser from "~/helpers/mdParser";
 
 export interface MarkdownViewerProps {
   text: string;

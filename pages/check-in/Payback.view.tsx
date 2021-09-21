@@ -121,7 +121,7 @@ const Payback: React.FC<PaybackProps> = ({
       const amount = paybackResult[
         `${type}PokeBalls` as keyof typeof paybackResult
       ] as number;
-      return Array.from({ length: Math.min(amount, 500) }).map((_, index) => (
+      return Array.from({ length: Math.min(amount, 100) }).map((_, index) => (
         <RainItem key={index} type={type} />
       ));
     });

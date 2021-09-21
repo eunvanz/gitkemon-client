@@ -316,14 +316,7 @@ interface RainItemProps {
   type: PokeBallType;
 }
 
-const rotatableAngles = [6, 12, 45, 90, 180];
-
 const RainItem = ({ type }: RainItemProps) => {
-  const rotationClassName = useMemo(
-    () => `${random(0, 1) ? "-" : ""}rotate-${rotatableAngles[random(0, 4)]}`,
-    [],
-  );
-
   const size = useMemo(() => random(40, 80), []);
 
   const delay = useMemo(() => random(0, 3000), []);
@@ -350,12 +343,7 @@ const RainItem = ({ type }: RainItemProps) => {
       }}
       transition={{ ease: "easeIn", duration: 1, delay: delay / 1000 }}
     >
-      <PokeBallImage
-        className={rotationClassName}
-        type={type}
-        width="100%"
-        height="100%"
-      />
+      <PokeBallImage type={type} width="100%" height="100%" />
     </motion.div>,
     document.body,
   );

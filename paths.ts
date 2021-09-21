@@ -18,6 +18,7 @@ const ROUTES = {
   BLEND: "/blend",
   OOPS: "/oops",
   CONTENTS: "/contents",
+  LINK: "/link",
 };
 
 export default ROUTES;

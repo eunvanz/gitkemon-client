@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ClipboardCopyIcon } from "@heroicons/react/outline";
 import { User } from "@sentry/types";
 import Clipboard from "clipboard";
+import ROUTES from "~/paths";
 import Alert from "../Alert";
 import Button from "../Button";
 import Dialog from "../Dialog";
@@ -19,7 +20,7 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
   const [isDetailVisible, setIsDetailVisible] = useState(false);
 
   const shareUrl = useMemo(() => {
-    return `${process.env.SERVICE_HOST}/link/${user?.referrerCode}`;
+    return `${process.env.SERVICE_HOST}${ROUTES.LINK}/${user?.referrerCode}`;
   }, [user?.referrerCode]);
 
   useEffect(() => {

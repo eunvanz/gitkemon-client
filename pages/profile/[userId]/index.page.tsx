@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import withBaseLayout from "~/hocs/withBaseLayout";
 import Profile from "./Profile.view";
 import useProfileProps from "./useProfileProps";
@@ -10,7 +11,14 @@ export interface ProfilePageProps {
 const ProfilePage: React.FC<ProfilePageProps> = (pageProps) => {
   const props = useProfileProps(pageProps);
 
-  return <Profile {...props} />;
+  return (
+    <>
+      <Head>
+        <title>{props.userProfile?.nickname || "User"}&apos;s profile - Gitkémon</title>
+      </Head>
+      <Profile {...props} />
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {

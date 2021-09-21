@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { User } from "~/types";
 import withAuthServerSideProps from "../../hocs/withAuthServerSideProps";
 import withBaseLayout from "../../hocs/withBaseLayout";
@@ -12,7 +13,14 @@ export interface PaybackPageProps {
 const PaybackPage: React.FC<PaybackPageProps> = (pageProps) => {
   const props = usePaybackProps(pageProps);
 
-  return <Payback {...props} />;
+  return (
+    <>
+      <Head>
+        <title>Check-in - Gitkémon</title>
+      </Head>
+      <Payback {...props} />
+    </>
+  );
 };
 
 export const getServerSideProps = withAuthServerSideProps({

@@ -30,7 +30,7 @@ const ContentTypeList: React.FC<ContentTypeListProps> = ({ contentType, user }) 
       case "notice":
         return "If you are not administrator, you can't see this.";
       case "tip":
-        return "Upload postings if you have any idea to share.";
+        return "Post helpful contents to share.";
     }
   }, [contentType]);
 
@@ -58,7 +58,7 @@ const ContentTypeList: React.FC<ContentTypeListProps> = ({ contentType, user }) 
               color="primary"
               onClick={() => router.push(`${ROUTES.CONTENTS}/${contentType}/new`)}
             >
-              Upload
+              Post
             </Button>
           </div>
         </div>

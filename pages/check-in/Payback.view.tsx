@@ -184,38 +184,44 @@ const Payback: React.FC<PaybackProps> = ({
               <RefreshButton onRefresh={onRefresh} isRefreshing={isLoading} />
             </div>
             <div className="text-center">
-              {isHelpVisible ? (
-                <>
-                  <Typography>
-                    Visit{" "}
-                    <a
-                      href={`${process.env.GITHUB_URL}/settings/profile`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      your github settings
-                    </a>{" "}
-                    and check
-                    <br />
-                    <Typography weight="extrabold">
-                      Include private contributions on my profile
-                    </Typography>{" "}
-                    like below.
-                  </Typography>
-                  <div className="text-center mt-4">
-                    <Image src={contributionsImage} width={400} height={90} alt="" />
-                  </div>
-                </>
-              ) : (
-                <a
-                  onClick={() => setIsHelpVisible(true)}
-                  className={cx(
-                    "h-3 w-3 font-light inline mr-1 text-gray-400 hover:text-gray-600",
-                  )}
-                >
-                  Can&apos;t you see private contributions?
-                </a>
-              )}
+              <AnimatePresence>
+                {isHelpVisible ? (
+                  <motion.div
+                    initial={{ height: 0, overflow: "hidden" }}
+                    animate={{ height: "auto" }}
+                    exit={{ height: 0 }}
+                  >
+                    <Typography>
+                      Visit{" "}
+                      <a
+                        href={`${process.env.GITHUB_URL}/settings/profile`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        your github settings
+                      </a>{" "}
+                      and check
+                      <br />
+                      <Typography weight="extrabold">
+                        Include private contributions on my profile
+                      </Typography>{" "}
+                      like below.
+                    </Typography>
+                    <div className="text-center mt-4">
+                      <Image src={contributionsImage} width={400} height={90} alt="" />
+                    </div>
+                  </motion.div>
+                ) : (
+                  <a
+                    onClick={() => setIsHelpVisible(true)}
+                    className={cx(
+                      "h-3 w-3 font-light inline mr-1 text-gray-400 hover:text-gray-600",
+                    )}
+                  >
+                    Can&apos;t you see private contributions?
+                  </a>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>

@@ -72,7 +72,6 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
             initial={{ height: 0, overflow: "hidden" }}
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
-            transition={{ type: "linear" }}
           >
             <div className="mt-4">
               <Alert

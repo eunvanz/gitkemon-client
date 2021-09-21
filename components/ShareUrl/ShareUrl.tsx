@@ -19,7 +19,7 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
   const [isDetailVisible, setIsDetailVisible] = useState(false);
 
   const shareUrl = useMemo(() => {
-    return `${process.env.SERVICE_HOST}/ref/${user?.referrerCode}`;
+    return `${process.env.SERVICE_HOST}/link/${user?.referrerCode}`;
   }, [user?.referrerCode]);
 
   useEffect(() => {

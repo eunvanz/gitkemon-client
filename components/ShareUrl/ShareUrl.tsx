@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ClipboardCopyIcon } from "@heroicons/react/outline";
 import { User } from "@sentry/types";
 import Clipboard from "clipboard";
+import { AnimatePresence, motion } from "framer-motion";
 import ROUTES from "~/paths";
 import Alert from "../Alert";
 import Button from "../Button";
@@ -65,36 +66,45 @@ const ShareUrl: React.FC<ShareUrlProps> = ({ user, count, onFetchCount }) => {
           Copy URL to clipboard
         </Button>
       </div>
-      {isDetailVisible && (
-        <div className="mt-4">
-          <Alert
-            type="info"
-            title="You'll get special Pokéballs for each new users through the URL you shared."
+      <AnimatePresence>
+        {isDetailVisible && (
+          <motion.div
+            initial={{ height: 0, overflow: "hidden" }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
+            transition={{ type: "linear" }}
           >
-            <div className="flex items-center">
-              <div className="relative w-4 h-4 inline-block mr-2">
-                <PokeBallImage layout="fill" type="rare" />
+            <div className="mt-4">
+              <Alert
+                type="info"
+                title="You'll get special Pokéballs for each new users through the URL you shared."
+              >
+                <div className="flex items-center">
+                  <div className="relative w-4 h-4 inline-block mr-2">
+                    <PokeBallImage layout="fill" type="rare" />
+                  </div>
+                  Rare Pokéballs for each new users. (up to 50)
+                </div>
+                <div className="flex items-center">
+                  <div className="relative w-4 h-4 inline-block mr-2">
+                    <PokeBallImage layout="fill" type="elite" />
+                  </div>
+                  An Elite Pokéball for 25 new users.
+                </div>
+                <div className="flex items-center">
+                  <div className="relative w-4 h-4 inline-block mr-2">
+                    <PokeBallImage layout="fill" type="legend" />
+                  </div>
+                  A Legend Pokéball for 50 new users.
+                </div>
+              </Alert>
+              <div className="mt-4">
+                <ReferralGauge count={count} />
               </div>
-              Rare Pokéballs for each new users. (up to 50)
             </div>
-            <div className="flex items-center">
-              <div className="relative w-4 h-4 inline-block mr-2">
-                <PokeBallImage layout="fill" type="elite" />
-              </div>
-              An Elite Pokéball for 25 new users.
-            </div>
-            <div className="flex items-center">
-              <div className="relative w-4 h-4 inline-block mr-2">
-                <PokeBallImage layout="fill" type="legend" />
-              </div>
-              A Legend Pokéball for 50 new users.
-            </div>
-          </Alert>
-          <div className="mt-4">
-            <ReferralGauge count={count} />
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   ) : null;
 };

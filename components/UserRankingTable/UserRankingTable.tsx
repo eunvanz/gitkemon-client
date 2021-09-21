@@ -62,7 +62,7 @@ const UserRankingTable: React.FC<UserRankingTableProps> = ({
     }
     if (!isPreview || (isPreview && type === "contributions")) {
       result.push({
-        title: "contributions",
+        title: "contribs",
         dataIndex: "lastContributions",
         render: (data) => data.lastContributions.toLocaleString(),
       });

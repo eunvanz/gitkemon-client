@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     contentId: string;
     contentType: ContentType;
   };
-  let content;
+  let content = null;
   if (!isNaN(Number(contentId))) {
     await api.incrementContentView(Number(contentId));
     const [fetchedContent] = await Promise.all([

@@ -54,6 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:image:width" content="250" />
         <meta property="og:image:height" content="250" />
         <link rel="icon" href="/favicon.ico" />
+        <title>Gitkémon</title>
       </Head>
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>

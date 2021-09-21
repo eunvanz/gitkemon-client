@@ -1,3 +1,4 @@
+import Head from "next/head";
 import api from "~/api";
 import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
 import withBaseLayout from "~/hocs/withBaseLayout";
@@ -16,7 +17,14 @@ const PaintingUploadPage: React.FC<PaintingUploadPageProps> = (
 ) => {
   const props = usePaintingUploadProps(ssrProps);
 
-  return <PaintingUpload {...props} />;
+  return (
+    <>
+      <Head>
+        <title>Upload painting - Gitkémon</title>
+      </Head>
+      <PaintingUpload {...props} />
+    </>
+  );
 };
 
 export const getServerSideProps = withAuthServerSideProps<PaintingUploadPageProps>({

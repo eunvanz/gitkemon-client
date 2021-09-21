@@ -91,7 +91,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
           </Button>
         )}
         <Button onClick={handleOnSubmit} isLoading={isSubmitting} disabled={!value}>
-          Submit
+          {defaultValue ? "Update" : "Post"}
         </Button>
       </div>
     </div>

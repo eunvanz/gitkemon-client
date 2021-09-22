@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Button from "~/components/Button";
 import ContentsTableContainer from "~/components/ContentsTable";
 import ContributionStatus, {
   ContributionStatusProps,
@@ -35,6 +36,16 @@ const Home: React.FC<HomeProps> = ({
   return (
     <>
       <div className="content-container max-w-screen-xl m-auto p-2 sm:p-4 flex flex-col">
+        <div className="border rounded p-4 mb-6">
+          <div className="flex justify-between items-center">
+            <Typography as="div" weight="bold">
+              New here? Manual here 👉
+            </Typography>
+            <Button onClick={() => router.push(`${ROUTES.CONTENTS}/tip/4`)}>
+              Gitkémon fundamentals
+            </Button>
+          </div>
+        </div>
         {user && (
           <div className="mb-6">
             <ShareUrlContainer />

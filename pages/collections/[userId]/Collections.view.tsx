@@ -7,10 +7,7 @@ import { isMobile } from "react-device-detect";
 import Skeleton from "react-loading-skeleton";
 import Button from "~/components/Button";
 import CollectionFilterContainer from "~/components/CollectionFilter";
-import {
-  CollectionFilterState,
-  initialFilterState,
-} from "~/components/CollectionFilter/CollectionFilter";
+import { CollectionFilterState } from "~/components/CollectionFilter/CollectionFilter";
 import CollectionStatus from "~/components/CollectionStatus";
 import Footer from "~/components/Footer";
 import Intersection from "~/components/Intersection";
@@ -18,7 +15,7 @@ import MonCard from "~/components/MonCard";
 import MonCardGrid from "~/components/MonCardGrid";
 import TrainerClassBadge from "~/components/TrainerClassBadge";
 import Typography from "~/components/Typography";
-import { MON_STARS, MON_TIERS, MON_TYPES } from "~/constants/rules";
+import { MON_TIERS } from "~/constants/rules";
 import { capitalize } from "~/helpers/commonHelpers";
 import {
   convertCollectionToCardMon,
@@ -29,6 +26,7 @@ import {
 import ROUTES from "~/paths";
 import { Collection, Mon, User, UserProfile } from "~/types";
 
+const INITIAL_LENGTH_TO_SHOW = 48;
 export interface CollectionsProps {
   collections?: Collection[];
   mons?: Mon[];
@@ -208,47 +206,51 @@ const Collections: React.FC<CollectionsProps> = ({
         )}
         <MonCardGrid>
           {orderedCollections
-            ? (isAllVisible ? orderedCollections : orderedCollections.slice(0, 48)).map(
-                (collection) => {
-                  const isCollection = (collection as Collection).monImageUrl;
-                  return (
-                    <MonCard
-                      key={`${isCollection ? "col" : "mon"}-${collection.id}`}
-                      mon={
-                        isCollection
-                          ? convertCollectionToCardMon(collection as Collection)
-                          : convertMonToCardMon(collection as Mon)
-                      }
-                      modalMon={
-                        isCollection ? undefined : convertMonToModalMon(collection as Mon)
-                      }
-                      onSelect={
-                        isBlendMode
-                          ? () => onSelectItem?.(collection as Collection)
-                          : undefined
-                      }
-                      isOwned={collectionUser?.id === user?.id}
-                      user={user}
-                      isStatic
-                    />
-                  );
-                },
-              )
+            ? (isAllVisible
+                ? orderedCollections
+                : orderedCollections.slice(0, INITIAL_LENGTH_TO_SHOW)
+              ).map((collection) => {
+                const isCollection = (collection as Collection).monImageUrl;
+                return (
+                  <MonCard
+                    key={`${isCollection ? "col" : "mon"}-${collection.id}`}
+                    mon={
+                      isCollection
+                        ? convertCollectionToCardMon(collection as Collection)
+                        : convertMonToCardMon(collection as Mon)
+                    }
+                    modalMon={
+                      isCollection ? undefined : convertMonToModalMon(collection as Mon)
+                    }
+                    onSelect={
+                      isBlendMode
+                        ? () => onSelectItem?.(collection as Collection)
+                        : undefined
+                    }
+                    isOwned={collectionUser?.id === user?.id}
+                    user={user}
+                    isStatic
+                  />
+                );
+              })
             : Array.from({ length: isMobile ? 6 : 8 }).map((_, index) => (
                 <MonCard key={index} />
               ))}
-          {!isAllVisible && orderedCollections && (
-            <div className="relative">
-              <div className="absolute" style={{ top: "-30vh" }}>
-                <Intersection
-                  onIntersect={() => setIsAllVisible(true)}
-                  threshold={0.01}
-                />
-              </div>
-            </div>
-          )}
           {!isAllVisible &&
             orderedCollections &&
+            orderedCollections.length > INITIAL_LENGTH_TO_SHOW && (
+              <div className="relative">
+                <div className="absolute" style={{ top: "-30vh" }}>
+                  <Intersection
+                    onIntersect={() => setIsAllVisible(true)}
+                    threshold={0.01}
+                  />
+                </div>
+              </div>
+            )}
+          {!isAllVisible &&
+            orderedCollections &&
+            orderedCollections.length > INITIAL_LENGTH_TO_SHOW &&
             Array.from({ length: isMobile ? 6 : 8 }).map((_, index) => (
               <MonCard key={index} />
             ))}

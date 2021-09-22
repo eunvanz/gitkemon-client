@@ -84,7 +84,7 @@ const ContentsTable: React.FC<ContentsTableProps> = ({
       );
     }
     result.push({
-      title: "posted",
+      title: "posted at",
       dataIndex: "createdAt",
       render: (data) => dayjs(data.createdAt).fromNow(),
     });

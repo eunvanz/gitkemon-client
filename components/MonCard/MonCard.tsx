@@ -66,7 +66,7 @@ const MonCard: React.FC<MonCardProps> = ({
         <div className={cx(isPlaceholder || !isFlippable ? undefined : styles.surface)}>
           <div
             className={cx("border rounded shadow", {
-              "transition-shadow hover:shadow-lg": !isClickDisabled && !!mon,
+              "sm:transition-shadow sm:hover:shadow-lg": !isClickDisabled && !!mon,
             })}
           >
             <div className="flex-1 p-1 bg-white rounded">
@@ -104,6 +104,7 @@ const MonCard: React.FC<MonCardProps> = ({
                           draggable={false}
                           layout="fill"
                           objectFit="contain"
+                          priority
                         />
                       ) : (
                         <CardBack />
@@ -183,7 +184,7 @@ const MonCard: React.FC<MonCardProps> = ({
             "relative w-full h-full transform",
             styles.cardInner,
             {
-              "cursor-pointer hover:-translate-y-1 transition-transform": !isClickDisabled,
+              "cursor-pointer sm:hover:-translate-y-1 sm:transition-transform": !isClickDisabled,
             },
             {
               [styles.isFlipped]: isFlipped,

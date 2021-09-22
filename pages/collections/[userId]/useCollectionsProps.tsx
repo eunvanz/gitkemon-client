@@ -2,6 +2,7 @@ import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
+import { collectionFilterState } from "~/state/collectionFilter";
 import Dialog from "../../../components/Dialog";
 import Typography from "../../../components/Typography";
 import { capitalize } from "../../../helpers/commonHelpers";
@@ -75,6 +76,8 @@ const useCollectionsProps: (pageProps: CollectionPageProps) => CollectionsProps 
     setBlendMon(undefined);
   }, [setBlendMon]);
 
+  const filterState = useRecoilValue(collectionFilterState);
+
   return {
     collections,
     mons,
@@ -84,6 +87,7 @@ const useCollectionsProps: (pageProps: CollectionPageProps) => CollectionsProps 
     onSelectItem,
     onCancelBlendMode,
     collectionUser,
+    filterState,
   };
 };
 

@@ -63,7 +63,7 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
       onClick={() => setIsModalVisible(true)}
     >
       {isFilterActive ? (
-        <FilterIconSolid className="w-5 h-5 text-white" />
+        <FilterIconSolid className="w-5 h-5 text-white animate-pulse" />
       ) : (
         <FilterIcon className="w-5 h-5 text-white" />
       )}

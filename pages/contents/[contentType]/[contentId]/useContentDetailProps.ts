@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
 import Dialog from "~/components/Dialog";
 import ROUTES from "~/paths";

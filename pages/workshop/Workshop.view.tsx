@@ -21,7 +21,7 @@ const Workshop: React.FC<WorkshopProps> = ({
   onFetchNextPage,
 }) => {
   return paintings ? (
-    <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
+    <div className="flex flex-col justify-start max-w-screen-xl m-auto p-2 sm:p-4">
       <Typography as="h1" size="2xl">
         Pokémon workshop
       </Typography>

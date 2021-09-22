@@ -34,7 +34,7 @@ const Home: React.FC<HomeProps> = ({
 
   return (
     <>
-      <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4 flex flex-col">
+      <div className="content-container max-w-screen-xl m-auto p-2 sm:p-4 flex flex-col">
         {user && (
           <div className="mb-6">
             <ShareUrlContainer />

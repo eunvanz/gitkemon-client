@@ -139,7 +139,7 @@ const Collections: React.FC<CollectionsProps> = ({
   return (
     <>
       <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4">
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-4 p-1">
           <div className="relative mr-4">
             {collectionUser ? (
               <>

@@ -27,7 +27,7 @@ const ContentDetail: React.FC<ContentDetailProps> = ({
 }) => {
   return (
     <>
-      <div className="content-container max-w-screen-xl m-auto p-1 sm:p-4">
+      <div className="content-container max-w-screen-xl m-auto p-2 sm:p-4">
         {content && !isEditMode ? (
           <ContentViewer content={content} {...restProps} />
         ) : (

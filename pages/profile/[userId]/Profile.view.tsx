@@ -31,7 +31,7 @@ const Profile: React.FC<ProfileProps> = ({
 
   return (
     <>
-      <div className="flex flex-col justify-start max-w-screen-xl m-auto p-1 sm:p-4 content-container">
+      <div className="flex flex-col justify-start max-w-screen-xl m-auto p-2 sm:p-4 content-container">
         <div className="mb-6 border-b pb-4">
           <UserProfileHeaderContainer />
         </div>

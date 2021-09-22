@@ -74,6 +74,7 @@ export enum STATE_KEY {
   HUNT_RESULT = "HUNT_RESULT",
   EVOLVE_MON = "EVOLVE_MON",
   BLEND_MON = "BLEND_MON",
+  COLLECTION_FILTER = "COLLECTION_FILTER",
 }
 
 export interface Mon {

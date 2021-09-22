@@ -27,6 +27,7 @@ module.exports = (phase) => {
         "storage.googleapis.com",
         "via.placeholder.com",
       ],
+      minimumCacheTTL: 9999999999,
     },
     pageExtensions: ["page.tsx", "page.ts"],
   };

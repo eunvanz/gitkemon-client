@@ -3,6 +3,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import {
+  AcademicCapIcon,
   BellIcon,
   ChatIcon,
   GlobeIcon,
@@ -56,6 +57,11 @@ const BaseLayout: NextPage<BaseLayoutProps> = ({
   const navigation: NavigationItem[] = useMemo(() => {
     return [
       { name: "Home", href: ROUTES.HOME, icon: HomeIcon },
+      {
+        name: "Gitkémon Fundamentals",
+        href: `${ROUTES.CONTENTS}/tips/4`,
+        icon: AcademicCapIcon,
+      },
       {
         name: "Pokémon Hunt",
         href: ROUTES.HUNT,

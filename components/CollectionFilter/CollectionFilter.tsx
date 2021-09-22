@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FilterIcon } from "@heroicons/react/outline";
+import { FilterIcon as FilterIconSolid } from "@heroicons/react/solid";
+import isEqual from "lodash/isEqual";
 import union from "lodash/union";
 import without from "lodash/without";
 import { MON_STARS, MON_TIERS, MON_TYPES } from "../../constants/rules";
@@ -12,6 +14,13 @@ import Checkbox from "../Checkbox";
 import MonStars from "../MonStars";
 import MonTierBadge from "../MonTierBadge";
 import MonTypeBadge from "../MonTypeBadge";
+
+export const initialFilterState = {
+  has: [true, false],
+  stars: MON_STARS,
+  tier: MON_TIERS,
+  type: MON_TYPES,
+};
 
 export interface CollectionFilterState {
   has: boolean[];
@@ -29,6 +38,10 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
   onChangeFilter,
   filterState,
 }) => {
+  const isFilterActive = useMemo(() => {
+    return !isEqual(filterState, initialFilterState);
+  }, [filterState]);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [innerFilterState, setInnerFilterState] = useState(filterState);
@@ -49,7 +62,11 @@ const CollectionFilter: React.FC<CollectionFilterProps> = ({
       className="fixed bottom-5 right-5 rounded-full bg-blue-500 p-5 cursor-pointer shadow-md hover:bg-blue-400"
       onClick={() => setIsModalVisible(true)}
     >
-      <FilterIcon className="w-5 h-5 text-white" />
+      {isFilterActive ? (
+        <FilterIconSolid className="w-5 h-5 text-white" />
+      ) : (
+        <FilterIcon className="w-5 h-5 text-white" />
+      )}
       <BaseModal
         isCloseButtonVisible
         className="w-full sm:w-40"

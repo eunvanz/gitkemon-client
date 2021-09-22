@@ -7,6 +7,7 @@ import { isMobile } from "react-device-detect";
 import Skeleton from "react-loading-skeleton";
 import Button from "~/components/Button";
 import CollectionFilter, { CollectionFilterState } from "~/components/CollectionFilter";
+import { initialFilterState } from "~/components/CollectionFilter/CollectionFilter";
 import CollectionStatus from "~/components/CollectionStatus";
 import Footer from "~/components/Footer";
 import Intersection from "~/components/Intersection";
@@ -48,12 +49,9 @@ const Collections: React.FC<CollectionsProps> = ({
 }) => {
   const [isAllVisible, setIsAllVisible] = useState(false);
 
-  const [filterState, setFilterState] = useState<CollectionFilterState>({
-    has: [true, false],
-    stars: MON_STARS,
-    tier: MON_TIERS,
-    type: MON_TYPES,
-  });
+  const [filterState, setFilterState] = useState<CollectionFilterState>(
+    initialFilterState,
+  );
 
   const filteredMons = useMemo(() => {
     if (!filterState.has.includes(false) || isBlendMode) {

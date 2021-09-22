@@ -94,11 +94,9 @@ const useContentDetailProps: (
     async (values: { type: ContentType; body: string; title: string }) => {
       if (isNew) {
         await postContent(values);
-        toast.dark("New posting has been created.");
         router.back();
       } else {
         await patchContent({ id: Number(contentId), ...values });
-        toast.dark("Posting has been updated.");
         setIsEditMode(false);
       }
     },
@@ -111,7 +109,6 @@ const useContentDetailProps: (
     });
     if (isConfirmed) {
       await deleteContent(Number(contentId));
-      toast.dark("Posting has been deleted.");
       router.back();
     }
   }, [contentId, deleteContent, router]);
@@ -127,14 +124,12 @@ const useContentDetailProps: (
           body: value,
           id: comment!.id,
         });
-        toast.dark("Comment has been updated.");
       } else {
         await postComment({
           body: value,
           contentType,
           contentId: Number(contentId),
         });
-        toast.dark("Comment has been created.");
       }
     },
     [contentId, contentType, patchComment, postComment],
@@ -143,7 +138,6 @@ const useContentDetailProps: (
   const onDeleteComment = useCallback(
     async (comment: Comment<Content>) => {
       await deleteComment(comment.id);
-      toast.dark("Comment has been deleted.");
     },
     [deleteComment],
   );

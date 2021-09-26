@@ -179,6 +179,40 @@ const Mons: React.FC<MonsProps> = ({ mons, onEdit, onChangeMonFilter, monFilter 
           record.total >= value && record.total < value + 100,
       },
       {
+        title: "Evolve",
+        dataIndex: "evolutionLevel",
+        key: "evolveLevel",
+        filters: [
+          {
+            text: "0",
+            value: 0,
+          },
+          {
+            text: "all",
+            value: 1,
+          },
+        ],
+        onFilter: (value: number, record) =>
+          value === 0 ? record.evolutionLevel === value : true,
+      },
+      {
+        title: "CP",
+        dataIndex: "colPoint",
+        key: "collectionPoint",
+        filters: [
+          {
+            text: "0",
+            value: 0,
+          },
+          {
+            text: "all",
+            value: 1,
+          },
+        ],
+        onFilter: (value: number, record) =>
+          value === 0 ? record.colPoint === value : true,
+      },
+      {
         title: "Edit",
         dataIndex: "id",
         key: "Edit",

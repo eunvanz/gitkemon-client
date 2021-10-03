@@ -26,12 +26,15 @@ const ContributionStatus: React.FC<ContributionStatusProps> = ({
 }) => {
   const hasCheckedInToday = useMemo(() => {
     if (!lastPayback) return false;
-    return dayjs.utc(lastPayback?.paybackDateString).isSame(dayjs(), "day");
+    return dayjs.utc(lastPayback?.paybackDateString).isSame(dayjs.utc(), "day");
   }, [lastPayback]);
 
   const hasCheckedInYesterday = useMemo(() => {
     if (!lastPayback) return false;
-    return dayjs.utc(lastPayback?.paybackDateString).add(1, "day").isSame(dayjs(), "day");
+    return dayjs
+      .utc(lastPayback?.paybackDateString)
+      .add(1, "day")
+      .isSame(dayjs.utc(), "day");
   }, [lastPayback]);
 
   const router = useRouter();

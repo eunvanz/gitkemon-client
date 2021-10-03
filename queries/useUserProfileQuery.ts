@@ -6,7 +6,7 @@ const useUserProfileQuery = (
   userId: string,
   queryOptions?: UseQueryOptions<UserProfile>,
 ) => {
-  const query = useQuery(
+  const query = useQuery<UserProfile>(
     [QUERY_KEY.USER_PROFILE, userId],
     () => api.getUserProfile(userId),
     {

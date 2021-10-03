@@ -3,12 +3,15 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CheckIcon } from "@heroicons/react/outline";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { useRouter } from "next/router";
 import { signInWithGithub } from "~/helpers/projectHelpers";
 import ROUTES from "~/paths";
 import { Payback, User } from "~/types";
 import Button from "../Button";
 import Typography from "../Typography";
+
+dayjs.extend(utc);
 
 export interface ContributionStatusProps {
   lastPayback?: Payback;
@@ -23,12 +26,12 @@ const ContributionStatus: React.FC<ContributionStatusProps> = ({
 }) => {
   const hasCheckedInToday = useMemo(() => {
     if (!lastPayback) return false;
-    return dayjs(lastPayback?.paybackDateString).isSame(dayjs(), "day");
+    return dayjs.utc(lastPayback?.paybackDateString).isSame(dayjs(), "day");
   }, [lastPayback]);
 
   const hasCheckedInYesterday = useMemo(() => {
     if (!lastPayback) return false;
-    return dayjs(lastPayback?.paybackDateString).add(1, "day").isSame(dayjs(), "day");
+    return dayjs.utc(lastPayback?.paybackDateString).add(1, "day").isSame(dayjs(), "day");
   }, [lastPayback]);
 
   const router = useRouter();

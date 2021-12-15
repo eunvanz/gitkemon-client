@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import ROUTES from "~/paths";
 import { PokeBallType, User } from "~/types";
@@ -12,9 +13,11 @@ export interface HuntResultViewProps
 const HuntResult: React.FC<HuntResultViewProps> = (props) => {
   const router = useRouter();
 
-  if (!props.pokeBallType || !props.user) {
-    router.replace(ROUTES.HOME);
-  }
+  useEffect(() => {
+    if (!props.pokeBallType || !props.user) {
+      router.replace(ROUTES.HOME);
+    }
+  }, [props.pokeBallType, props.user, router]);
 
   if (props.pokeBallType && props.user) {
     return <HuntResultComponent {...(props as HuntResultProps)} />;

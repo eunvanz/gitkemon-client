@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../../../../components/Button";
-import ControlledInput from "../../../../components/ControlledInput";
-import FileInput from "../../../../components/FileInput";
-import Input from "../../../../components/Input";
-import SearchableSelect from "../../../../components/SearchableSelect";
-import Select from "../../../../components/Select";
-import Typography from "../../../../components/Typography";
-import { MON_TIERS } from "../../../../constants/rules";
-import { capitalize } from "../../../../helpers/commonHelpers";
-import { Mon, MonTier } from "../../../../types";
+import Button from "~/components/Button";
+import ControlledInput from "~/components/ControlledInput";
+import FileInput from "~/components/FileInput";
+import Input from "~/components/Input";
+import SearchableSelect from "~/components/SearchableSelect";
+import Select from "~/components/Select";
+import Typography from "~/components/Typography";
+import { MON_TIERS } from "~/constants/rules";
+import { capitalize } from "~/helpers/commonHelpers";
+import { Mon, MonTier } from "~/types";
 
 export interface MonImageFormValues {
   monId: number;

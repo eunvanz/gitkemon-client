@@ -1,7 +1,7 @@
 import Head from "next/head";
+import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
+import withBaseLayout from "~/hocs/withBaseLayout";
 import { User } from "~/types";
-import withAuthServerSideProps from "../../hocs/withAuthServerSideProps";
-import withBaseLayout from "../../hocs/withBaseLayout";
 import Payback from "./Payback.view";
 import usePaybackProps from "./usePaybackProps";
 

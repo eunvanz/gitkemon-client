@@ -1,9 +1,9 @@
 import { ReactNode, useCallback } from "react";
 import { useRecoilValue } from "recoil";
+import useAvailableContributionsQuery from "~/queries/useAvailableContributionsQuery";
 import useLogoutMutation from "~/queries/useLogoutMutation";
-import useAvailableContributionsQuery from "../../queries/useAvailableContributionsQuery";
-import { userState } from "../../state/user";
-import { User } from "../../types";
+import { userState } from "~/state/user";
+import { User } from "~/types";
 import { BaseLayoutProps } from "./BaseLayout";
 
 const useBaseLayoutProps: ({

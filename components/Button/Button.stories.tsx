@@ -1,6 +1,6 @@
 import { GiftIcon } from "@heroicons/react/outline";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Button from "./Button";
 
 export default {

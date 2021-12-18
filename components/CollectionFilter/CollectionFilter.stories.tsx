@@ -1,6 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { MON_STARS, MON_TIERS, MON_TYPES } from "../../constants/rules";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import { MON_STARS, MON_TIERS, MON_TYPES } from "~/constants/rules";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import CollectionFilter from "./CollectionFilter";
 
 export default {

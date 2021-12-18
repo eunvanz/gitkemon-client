@@ -1,4 +1,4 @@
-import TestProvider from "../../components/TestProvider";
+import TestProvider from "~/components/TestProvider";
 
 const withContentContainer = (Story: any) => {
   return (

@@ -1,4 +1,4 @@
-import { CardMon, ModalMon, Mon } from "../../types";
+import { CardMon, ModalMon, Mon } from "~/types";
 
 const cardMon: CardMon = {
   id: 1,

@@ -1,18 +1,18 @@
 import { useCallback, useState } from "react";
 import Cropper from "react-easy-crop";
 import { useForm } from "react-hook-form";
+import Button from "~/components/Button";
+import ControlledInput from "~/components/ControlledInput";
+import Dialog from "~/components/Dialog";
+import FileInput from "~/components/FileInput";
 import Footer from "~/components/Footer";
-import Button from "../../../components/Button";
-import ControlledInput from "../../../components/ControlledInput";
-import Dialog from "../../../components/Dialog";
-import FileInput from "../../../components/FileInput";
-import Input from "../../../components/Input";
-import Loading from "../../../components/Loading";
-import SearchableSelect from "../../../components/SearchableSelect";
-import Typography from "../../../components/Typography";
-import getCroppedImg, { convertFileToBase64 } from "../../../helpers/commonHelpers";
-import { getLocaleProperty } from "../../../helpers/projectHelpers";
-import { Mon } from "../../../types";
+import Input from "~/components/Input";
+import Loading from "~/components/Loading";
+import SearchableSelect from "~/components/SearchableSelect";
+import Typography from "~/components/Typography";
+import getCroppedImg, { convertFileToBase64 } from "~/helpers/commonHelpers";
+import { getLocaleProperty } from "~/helpers/projectHelpers";
+import { Mon } from "~/types";
 
 export interface PaintingUploadFormValues {
   designerName?: string;

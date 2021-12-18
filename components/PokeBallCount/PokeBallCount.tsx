@@ -1,7 +1,7 @@
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import CountUp from "react-countup";
-import { PokeBallType } from "../../types";
+import { PokeBallType } from "~/types";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";
 

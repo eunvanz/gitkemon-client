@@ -1,6 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import withMockRouter from "../../.storybook/decorators/withMockRouter";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import withMockRouter from "~/.storybook/decorators/withMockRouter";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import SignIn from "./SignIn.view";
 
 export default {

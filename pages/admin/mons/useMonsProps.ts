@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/router";
-import ROUTES from "../../../paths";
-import useActiveMonsQuery from "../../../queries/useActiveMonsQuery";
-import useInactiveMonsQuery from "../../../queries/useInactiveMonsQuery";
-import useMonsQuery from "../../../queries/useMonsQuery";
+import ROUTES from "~/paths";
+import useActiveMonsQuery from "~/queries/useActiveMonsQuery";
+import useInactiveMonsQuery from "~/queries/useInactiveMonsQuery";
+import useMonsQuery from "~/queries/useMonsQuery";
 import { MonFilter, MonsProps } from "./Mons.view";
 
 const useMonsProps: () => MonsProps = () => {

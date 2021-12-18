@@ -6,7 +6,7 @@ import { Img } from "react-image";
 import Skeleton from "react-loading-skeleton";
 import { EMPTY_SQUARE_IMAGE_DATA, MON_CARD_WIDTH } from "~/constants/styles";
 import { checkIsCollectionMaxLevel } from "~/helpers/projectHelpers";
-import { CardMon, ExtendableHTMLProps, ModalMon, User } from "../../types";
+import { CardMon, ExtendableHTMLProps, ModalMon, User } from "~/types";
 import Button from "../Button";
 import CardBack from "../CardBack";
 import LevelBadge from "../LevelBadge";

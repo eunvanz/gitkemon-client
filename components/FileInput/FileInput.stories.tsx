@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import FileInput from "./FileInput";
 
 export default {

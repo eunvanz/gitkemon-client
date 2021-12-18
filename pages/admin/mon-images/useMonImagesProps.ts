@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import api from "../../../api";
-import ROUTES from "../../../paths";
-import useMonImagesQuery, {
-  UseMonImageQueryOptions,
-} from "../../../queries/useMonImagesQuery";
-import { MonImageSearchCondition } from "../../../types";
+import api from "~/api";
+import ROUTES from "~/paths";
+import useMonImagesQuery, { UseMonImageQueryOptions } from "~/queries/useMonImagesQuery";
+import { MonImageSearchCondition } from "~/types";
 import { MonImagesProps } from "./MonImages.view";
 
 const useMonImagesProps: () => MonImagesProps = () => {

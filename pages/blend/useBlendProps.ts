@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
-import ROUTES from "../../paths";
-import useBlendMutation from "../../queries/useBlendMutation";
-import { blendMonState } from "../../state/blendMon";
-import { userState } from "../../state/user";
+import ROUTES from "~/paths";
+import useBlendMutation from "~/queries/useBlendMutation";
+import { blendMonState } from "~/state/blendMon";
+import { userState } from "~/state/user";
 import { BlendProps } from "./Blend.view";
 
 const useBlendProps: () => BlendProps = () => {

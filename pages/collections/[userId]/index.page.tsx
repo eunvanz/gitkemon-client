@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import withBaseLayout from "../../../hocs/withBaseLayout";
+import withBaseLayout from "~/hocs/withBaseLayout";
 import Collections from "./Collections.view";
 import useCollectionsProps from "./useCollectionsProps";
 

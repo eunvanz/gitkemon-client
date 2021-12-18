@@ -1,6 +1,6 @@
 import { Button, Form, Input, InputNumber, Select, Space } from "antd";
-import { MON_TIERS, MON_TYPES } from "../../../../constants/rules";
-import { Mon as MonType } from "../../../../types";
+import { MON_TIERS, MON_TYPES } from "~/constants/rules";
+import { Mon as MonType } from "~/types";
 
 export interface MonFormValues
   extends Omit<

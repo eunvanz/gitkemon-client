@@ -1,4 +1,4 @@
-import { User } from "../../types";
+import { User } from "~/types";
 import AdminBaseLayout from "./AdminBaseLayout";
 import useAdminBaseLayoutProps from "./useAdminBaseLayoutProps";
 

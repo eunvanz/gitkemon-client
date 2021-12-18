@@ -1,8 +1,8 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import withTestProvider from "../../.storybook/decorators/withTestProvider";
-import allMons from "../../api/mocks/allMons";
-import mockCollections from "../../api/mocks/collection";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import withTestProvider from "~/.storybook/decorators/withTestProvider";
+import allMons from "~/api/mocks/allMons";
+import mockCollections from "~/api/mocks/collection";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Evolution from "./Evolution.view";
 
 export default {

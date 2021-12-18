@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
+import useHunt from "~/hooks/useHunt";
+import ROUTES from "~/paths";
 import { userState } from "~/state/user";
-import useHunt from "../../hooks/useHunt";
-import ROUTES from "../../paths";
 import { HuntResultViewProps } from "./HuntResult.view";
 
 const useHuntResultProps: () => HuntResultViewProps = () => {

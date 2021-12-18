@@ -1,4 +1,4 @@
-import { Mon } from "../../types";
+import { Mon } from "~/types";
 
 const allMons: Mon[] = [
   {

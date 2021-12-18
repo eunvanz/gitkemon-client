@@ -1,4 +1,4 @@
-import { User, UserProfile } from "../../types";
+import { User, UserProfile } from "~/types";
 
 const user: User = {
   id: "mock-uuid",

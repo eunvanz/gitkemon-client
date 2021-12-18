@@ -1,7 +1,7 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import withTestProvider from "../../.storybook/decorators/withTestProvider";
-import mockCollections from "../../api/mocks/collection";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import withTestProvider from "~/.storybook/decorators/withTestProvider";
+import mockCollections from "~/api/mocks/collection";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Blend from "./Blend.view";
 
 export default {

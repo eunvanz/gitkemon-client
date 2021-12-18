@@ -4,7 +4,7 @@ import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from "@heroicons/react/sol
 import cx from "classnames";
 import { isMobile } from "react-device-detect";
 import { HEADER_HEIGHT } from "~/constants/styles";
-import { PokeBallType } from "../../types";
+import { PokeBallType } from "~/types";
 import PokeBallImage from "../PokeBallImage";
 import Slider from "../Slider/Slider";
 import Typography from "../Typography";

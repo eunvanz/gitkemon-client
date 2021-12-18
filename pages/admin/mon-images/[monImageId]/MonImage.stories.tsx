@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import allMons from "../../../../api/mocks/allMons";
-import { createStoryComponent } from "../../../../helpers/storybookHelpers";
+import allMons from "~/api/mocks/allMons";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import MonImage from "./MonImage.view";
 
 export default {

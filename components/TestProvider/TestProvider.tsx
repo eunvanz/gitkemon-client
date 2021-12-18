@@ -1,8 +1,8 @@
 import { QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import { RecoilRoot } from "recoil";
-import { colorHashes } from "../../constants/styles";
-import queryClient from "../../helpers/queryClient";
+import { colorHashes } from "~/constants/styles";
+import queryClient from "~/helpers/queryClient";
 
 export interface TestProviderProps {}
 

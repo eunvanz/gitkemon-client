@@ -1,4 +1,4 @@
-import { MonImage } from "../../types";
+import { MonImage } from "~/types";
 
 const monImages: MonImage[] = [
   {

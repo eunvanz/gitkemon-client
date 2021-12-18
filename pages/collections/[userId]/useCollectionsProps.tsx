@@ -1,18 +1,18 @@
 import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
+import Dialog from "~/components/Dialog";
+import Typography from "~/components/Typography";
+import { capitalize } from "~/helpers/commonHelpers";
+import { getLocaleProperty } from "~/helpers/projectHelpers";
+import ROUTES from "~/paths";
+import useActiveMonsQuery from "~/queries/useActiveMonsQuery";
+import useCollectionsQuery from "~/queries/useCollectionsQuery";
 import useUserProfileQuery from "~/queries/useUserProfileQuery";
+import { blendMonState } from "~/state/blendMon";
 import { collectionFilterState } from "~/state/collectionFilter";
-import Dialog from "../../../components/Dialog";
-import Typography from "../../../components/Typography";
-import { capitalize } from "../../../helpers/commonHelpers";
-import { getLocaleProperty } from "../../../helpers/projectHelpers";
-import ROUTES from "../../../paths";
-import useActiveMonsQuery from "../../../queries/useActiveMonsQuery";
-import useCollectionsQuery from "../../../queries/useCollectionsQuery";
-import { blendMonState } from "../../../state/blendMon";
-import { userState } from "../../../state/user";
-import { Collection } from "../../../types";
+import { userState } from "~/state/user";
+import { Collection } from "~/types";
 import { CollectionsProps } from "./Collections.view";
 import { CollectionPageProps } from "./index.page";
 

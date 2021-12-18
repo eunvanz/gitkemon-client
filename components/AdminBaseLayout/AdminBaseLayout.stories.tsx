@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import AdminBaseLayout from "./AdminBaseLayout";
 
 export default {

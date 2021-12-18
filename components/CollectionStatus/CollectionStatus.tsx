@@ -1,6 +1,6 @@
 import cx from "classnames";
-import { MON_TIERS } from "../../constants/rules";
-import { MonTier } from "../../types";
+import { MON_TIERS } from "~/constants/rules";
+import { MonTier } from "~/types";
 import CollectionStatusItem from "../CollectionStatusItem";
 
 export interface CollectionStatusProps {

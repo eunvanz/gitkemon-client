@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalMon } from "../../types";
+import { ModalMon } from "~/types";
 import MonModal from "./MonModal";
 import useMonModalProps from "./useMonModalProps";
 

@@ -1,8 +1,8 @@
 import { forwardRef, useMemo } from "react";
 import { XCircleIcon } from "@heroicons/react/solid";
 import cx from "classnames";
-import { colors } from "../../constants/styles";
-import { ExtendableHTMLProps } from "../../types";
+import { colors } from "~/constants/styles";
+import { ExtendableHTMLProps } from "~/types";
 
 export interface InputProps extends ExtendableHTMLProps<HTMLInputElement> {
   labe?: string;

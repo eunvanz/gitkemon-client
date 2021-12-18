@@ -1,6 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import mockMonImage from "../../../api/mocks/monImage";
-import { createStoryComponent } from "../../../helpers/storybookHelpers";
+import mockMonImage from "~/api/mocks/monImage";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import MonImages from "./MonImages.view";
 
 export default {

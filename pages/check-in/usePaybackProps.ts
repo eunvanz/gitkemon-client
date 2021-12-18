@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
+import ROUTES from "~/paths";
+import useAvailableContributionsQuery from "~/queries/useAvailableContributionsQuery";
 import usePaybackMutation from "~/queries/usePaybackMutation";
-import ROUTES from "../../paths";
-import useAvailableContributionsQuery from "../../queries/useAvailableContributionsQuery";
-import useUserQuery from "../../queries/useUserQuery";
-import { userState } from "../../state/user";
-import { Payback } from "../../types";
+import useUserQuery from "~/queries/useUserQuery";
+import { userState } from "~/state/user";
+import { Payback } from "~/types";
 import { PaybackProps } from "./Payback.view";
 import { PaybackPageProps } from "./index.page";
 

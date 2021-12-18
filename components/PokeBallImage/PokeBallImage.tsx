@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import cx from "classnames";
 import Image, { ImageProps } from "next/image";
-import { PokeBallType } from "../../types";
-import imgBasicRareBall from "../../public/images/pokeball-basic-rare.png";
-import imgBasicBall from "../../public/images/pokeball-basic.png";
-import imgEliteBall from "../../public/images/pokeball-elite.png";
-import imgLegendBall from "../../public/images/pokeball-legend.png";
-import imgRareBall from "../../public/images/pokeball-rare.png";
+import { PokeBallType } from "~/types";
+import imgBasicRareBall from "~/public/images/pokeball-basic-rare.png";
+import imgBasicBall from "~/public/images/pokeball-basic.png";
+import imgEliteBall from "~/public/images/pokeball-elite.png";
+import imgLegendBall from "~/public/images/pokeball-legend.png";
+import imgRareBall from "~/public/images/pokeball-rare.png";
 import styles from "./PokeBallImage.module.css";
 
 export type PokeBallImageProps = { type: PokeBallType } & Omit<

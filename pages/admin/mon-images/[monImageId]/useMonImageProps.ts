@@ -2,13 +2,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { message } from "antd";
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
-import api, { CreateMonImageDto, UpdateMonDto, UpdateMonImageDto } from "../../../../api";
-import { convertURLtoFile } from "../../../../helpers/commonHelpers";
-import ROUTES from "../../../../paths";
-import useMonImageQuery from "../../../../queries/useMonImageQuery";
-import useMonQuery from "../../../../queries/useMonQuery";
-import useMonsQuery from "../../../../queries/useMonsQuery";
-import { Mon, MonImage, QUERY_KEY } from "../../../../types";
+import api, { CreateMonImageDto, UpdateMonDto, UpdateMonImageDto } from "~/api";
+import { convertURLtoFile } from "~/helpers/commonHelpers";
+import ROUTES from "~/paths";
+import useMonImageQuery from "~/queries/useMonImageQuery";
+import useMonQuery from "~/queries/useMonQuery";
+import useMonsQuery from "~/queries/useMonsQuery";
+import { Mon, MonImage, QUERY_KEY } from "~/types";
 import { MonImageFormValues, MonImageProps } from "./MonImage.view";
 
 export interface UseMonImagePropsParams {

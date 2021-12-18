@@ -1,4 +1,4 @@
-import { Collection, HuntResponse, ProfileMon } from "../../types";
+import { Collection, HuntResponse, ProfileMon } from "~/types";
 
 const huntResultNew: HuntResponse = [
   {

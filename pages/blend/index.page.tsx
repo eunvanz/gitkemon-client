@@ -1,6 +1,6 @@
 import Head from "next/head";
 import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
-import withBaseLayout from "../../hocs/withBaseLayout";
+import withBaseLayout from "~/hocs/withBaseLayout";
 import Blend from "./Blend.view";
 import useBlendProps from "./useBlendProps";
 

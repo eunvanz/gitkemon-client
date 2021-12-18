@@ -5,8 +5,8 @@ import { MON_CARD_WIDTH } from "~/constants/styles";
 import {
   convertCollectionToCardMon,
   convertCollectionToModalMon,
-} from "../../helpers/projectHelpers";
-import { HuntResult, User } from "../../types";
+} from "~/helpers/projectHelpers";
+import { HuntResult, User } from "~/types";
 import Badge from "../Badge";
 import LevelBadge from "../LevelBadge";
 import MonCard from "../MonCard";

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ROUTES from "~/paths";
-import { PokeBallType } from "../../types";
+import { PokeBallType } from "~/types";
 import Button from "../Button";
 import PokeBallImage from "../PokeBallImage";
 import Typography from "../Typography";

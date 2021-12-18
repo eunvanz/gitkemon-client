@@ -1,6 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import mockPainting from "../../api/mocks/painting";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import mockPainting from "~/api/mocks/painting";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import PaintingCard from "./PaintingCard";
 
 export default {

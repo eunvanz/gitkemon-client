@@ -1,4 +1,4 @@
-import withAdminBaseLayout from "../../../../hocs/withAdminBaseLayout";
+import withAdminBaseLayout from "~/hocs/withAdminBaseLayout";
 import Mon from "./Mon.view";
 import useMonProps from "./useMonProps";
 

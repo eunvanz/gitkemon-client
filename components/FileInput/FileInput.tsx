@@ -2,9 +2,9 @@ import { useCallback, useMemo } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import { useDropzone } from "react-dropzone";
-import { colors } from "../../constants/styles";
-import { getCalculatedClassName } from "../../helpers/tailwindHelpers";
-import { ExtendableHTMLProps } from "../../types";
+import { colors } from "~/constants/styles";
+import { getCalculatedClassName } from "~/helpers/tailwindHelpers";
+import { ExtendableHTMLProps } from "~/types";
 
 export interface FileInputProps extends ExtendableHTMLProps<HTMLInputElement> {
   label?: string;

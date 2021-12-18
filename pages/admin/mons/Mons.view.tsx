@@ -3,8 +3,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Table, Input, Space, Button, Radio } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import Highlighter from "react-highlight-words";
-import { MON_TIERS, MON_TYPES } from "../../../constants/rules";
-import { Mon } from "../../../types";
+import { MON_TIERS, MON_TYPES } from "~/constants/rules";
+import { Mon } from "~/types";
 
 export type MonFilter = "all" | "active" | "inactive";
 

@@ -1,4 +1,4 @@
-import { User } from "../../types";
+import { User } from "~/types";
 import BaseLayout from "./BaseLayout";
 import useBaseLayoutProps from "./useBaseLayoutProps";
 

@@ -3,8 +3,8 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/outline";
 import cx from "classnames";
 import debounce from "lodash/debounce";
-import { colors } from "../../constants/styles";
-import { ExtendableHTMLProps } from "../../types";
+import { colors } from "~/constants/styles";
+import { ExtendableHTMLProps } from "~/types";
 import Input from "../Input";
 import { SelectItem } from "../Select";
 

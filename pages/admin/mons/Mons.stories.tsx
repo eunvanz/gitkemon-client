@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import allMons from "../../../api/mocks/allMons";
-import { createStoryComponent } from "../../../helpers/storybookHelpers";
+import allMons from "~/api/mocks/allMons";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Mons from "./Mons.view";
 
 export default {

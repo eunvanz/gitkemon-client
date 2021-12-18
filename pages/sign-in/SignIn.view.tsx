@@ -2,7 +2,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import ROUTES from "../../paths";
+import ROUTES from "~/paths";
 
 export interface SignInProps {
   onSignIn: VoidFunction;

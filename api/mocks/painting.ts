@@ -1,4 +1,4 @@
-import { Pageable, Painting } from "../../types";
+import { Pageable, Painting } from "~/types";
 
 const painting: Painting = {
   createdAt: "2021-08-28T12:17:34.770Z",

@@ -1,6 +1,6 @@
 import Head from "next/head";
-import withAuthServerSideProps from "../../hocs/withAuthServerSideProps";
-import withBaseLayout from "../../hocs/withBaseLayout";
+import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
+import withBaseLayout from "~/hocs/withBaseLayout";
 import Hunt from "./Hunt.view";
 import useHuntProps from "./useHuntProps";
 

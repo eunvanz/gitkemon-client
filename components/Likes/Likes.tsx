@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { HeartIcon } from "@heroicons/react/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/solid";
 import cx from "classnames";
-import { ExtendableHTMLProps } from "../../types";
+import { ExtendableHTMLProps } from "~/types";
 import Button, { ButtonProps } from "../Button";
 import styles from "./Likes.module.css";
 

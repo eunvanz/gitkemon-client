@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import HuntResultComponent, { HuntResultProps } from "~/components/HuntResult";
 import ROUTES from "~/paths";
 import { PokeBallType, User } from "~/types";
-import HuntResultComponent, { HuntResultProps } from "../../components/HuntResult";
 
 export interface HuntResultViewProps
   extends Omit<HuntResultProps, "pokeBallType" | "result" | "user"> {

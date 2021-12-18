@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import { message } from "antd";
 import { useRouter } from "next/router";
-import api from "../../../../api";
-import ROUTES from "../../../../paths";
-import useMonQuery from "../../../../queries/useMonQuery";
-import useMonsQuery from "../../../../queries/useMonsQuery";
+import api from "~/api";
+import ROUTES from "~/paths";
+import useMonQuery from "~/queries/useMonQuery";
+import useMonsQuery from "~/queries/useMonsQuery";
 import { MonFormValues, MonProps } from "./Mon.view";
 
 const useMonProps: () => MonProps = () => {

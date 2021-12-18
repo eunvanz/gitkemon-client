@@ -1,7 +1,7 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import withTestProvider from "../../.storybook/decorators/withTestProvider";
-import mockMons from "../../api/mocks/mon";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import withTestProvider from "~/.storybook/decorators/withTestProvider";
+import mockMons from "~/api/mocks/mon";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import MonCardGrid from "../MonCardGrid";
 import MonCard from "./MonCard";
 

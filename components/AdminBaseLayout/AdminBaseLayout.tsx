@@ -1,5 +1,5 @@
 import { Layout, Menu } from "antd";
-import { User } from "../../types";
+import { User } from "~/types";
 import styles from "./AdminBaseLayout.module.css";
 
 export interface AdminBaseLayoutProps {

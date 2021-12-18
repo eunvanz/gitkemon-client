@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import cx from "classnames";
-import { MonPotential } from "../../types";
+import { MonPotential } from "~/types";
 import Badge, { BadgeProps } from "../Badge";
 
 export interface PotentialBadgeProps extends Omit<BadgeProps, "label"> {

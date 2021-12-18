@@ -1,8 +1,8 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import mockCollections from "../../api/mocks/collection";
-import mockMons from "../../api/mocks/mon";
-import { convertCollectionToModalMon } from "../../helpers/projectHelpers";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import mockCollections from "~/api/mocks/collection";
+import mockMons from "~/api/mocks/mon";
+import { convertCollectionToModalMon } from "~/helpers/projectHelpers";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import MonModal from "./MonModal";
 
 export default {

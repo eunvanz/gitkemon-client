@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import cx from "classnames";
-import { colors } from "../../constants/styles";
-import { getCalculatedClassName } from "../../helpers/tailwindHelpers";
-import { ExtendableHTMLProps } from "../../types";
+import { colors } from "~/constants/styles";
+import { getCalculatedClassName } from "~/helpers/tailwindHelpers";
+import { ExtendableHTMLProps } from "~/types";
 
 export interface ButtonProps
   extends Omit<ExtendableHTMLProps<HTMLButtonElement>, "size" | "type"> {

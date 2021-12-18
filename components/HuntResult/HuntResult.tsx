@@ -5,13 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Confetti from "react-confetti";
 import { isMobile } from "react-device-detect";
 import useWindowSize from "react-use/lib/useWindowSize";
-import { colorHashes } from "../../constants/styles";
-import { delayPromise } from "../../helpers/commonHelpers";
-import {
-  checkIsLuckyHuntResult,
-  showHuntResultMessages,
-} from "../../helpers/projectHelpers";
-import { HuntResponse, PokeBallType, User } from "../../types";
+import { colorHashes } from "~/constants/styles";
+import { delayPromise } from "~/helpers/commonHelpers";
+import { checkIsLuckyHuntResult, showHuntResultMessages } from "~/helpers/projectHelpers";
+import { HuntResponse, PokeBallType, User } from "~/types";
 import Button from "../Button";
 import HuntResultItem from "../HuntResultItem";
 import MonCardGrid from "../MonCardGrid";
@@ -65,7 +62,7 @@ const HuntResult: React.FC<HuntResultProps> = ({
           return;
         }
         const { left, top } = pokeBallRef.current.getClientRects()[0];
-        const { burstStar } = await import("../../helpers/animations");
+        const { burstStar } = await import("~/helpers/animations");
         burstStar({
           top: top + 58,
           left: left + 58,

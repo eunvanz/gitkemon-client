@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { Button, Input, Modal, Select, Space, Table } from "antd";
 import Image from "next/image";
-import { MonImage, MonImageSearchCondition } from "../../../types";
+import { MonImage, MonImageSearchCondition } from "~/types";
 import styles from "./MonImages.module.css";
 
 export interface MonImagesProps {

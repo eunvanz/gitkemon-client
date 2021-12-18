@@ -2,7 +2,7 @@ import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import cx from "classnames";
-import { ExtendableHTMLProps } from "../../types";
+import { ExtendableHTMLProps } from "~/types";
 import styles from "./BaseModal.module.css";
 
 export interface BaseModalProps extends ExtendableHTMLProps<HTMLDivElement> {

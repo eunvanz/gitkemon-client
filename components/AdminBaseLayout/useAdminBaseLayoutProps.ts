@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import api from "../../api";
-import ROUTES from "../../paths";
-import { userState } from "../../state/user";
-import { User } from "../../types";
+import api from "~/api";
+import ROUTES from "~/paths";
+import { userState } from "~/state/user";
+import { User } from "~/types";
 import { AdminBaseLayoutProps } from "./AdminBaseLayout";
 
 const useAdminBaseLayoutProps: ({

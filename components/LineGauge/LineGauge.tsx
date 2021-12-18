@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { ExtendableHTMLProps } from "../../types";
+import { ExtendableHTMLProps } from "~/types";
 
 export interface LineGaugeProps extends ExtendableHTMLProps<HTMLDivElement> {
   values: {

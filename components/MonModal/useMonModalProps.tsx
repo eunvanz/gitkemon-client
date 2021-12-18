@@ -1,18 +1,18 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { showEvolutionConfirm } from "~/helpers/tsxHelpers";
-import { MonModalContainerProps } from ".";
-import { assertNotEmpty } from "../../helpers/commonHelpers";
+import { assertNotEmpty } from "~/helpers/commonHelpers";
 import {
   checkIsCollectionMaxLevel,
   convertCollectionToModalMon,
-} from "../../helpers/projectHelpers";
-import ROUTES from "../../paths";
-import useCollectionQuery from "../../queries/useCollectionQuery";
-import { blendMonState } from "../../state/blendMon";
-import { evolveMonState } from "../../state/evolveMon";
-import { userState } from "../../state/user";
+} from "~/helpers/projectHelpers";
+import { showEvolutionConfirm } from "~/helpers/tsxHelpers";
+import ROUTES from "~/paths";
+import useCollectionQuery from "~/queries/useCollectionQuery";
+import { blendMonState } from "~/state/blendMon";
+import { evolveMonState } from "~/state/evolveMon";
+import { userState } from "~/state/user";
+import { MonModalContainerProps } from ".";
 import { MonModalProps } from "./MonModal";
 
 const useMonModalProps: (options: MonModalContainerProps) => MonModalProps = ({

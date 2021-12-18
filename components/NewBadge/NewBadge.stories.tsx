@@ -1,5 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Button from "../Button";
 import NewBadge from "./NewBadge";
 

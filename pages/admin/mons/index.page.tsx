@@ -1,5 +1,5 @@
+import withAdminBaseLayout from "~/hocs/withAdminBaseLayout";
 import withAuthServerSideProps from "~/hocs/withAuthServerSideProps";
-import withAdminBaseLayout from "../../../hocs/withAdminBaseLayout";
 import Mons from "./Mons.view";
 import useMonsProps from "./useMonsProps";
 

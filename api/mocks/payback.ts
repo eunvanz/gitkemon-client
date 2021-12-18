@@ -1,4 +1,4 @@
-import { Payback, PaybackLog } from "../../types";
+import { Payback, PaybackLog } from "~/types";
 
 const payback: Payback = {
   id: 1,

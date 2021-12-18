@@ -1,7 +1,7 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import mockPayback from "../../api/mocks/payback";
-import mockUsers from "../../api/mocks/user";
-import { createStoryComponent } from "../../helpers/storybookHelpers";
+import mockPayback from "~/api/mocks/payback";
+import mockUsers from "~/api/mocks/user";
+import { createStoryComponent } from "~/helpers/storybookHelpers";
 import Payback from "./Payback.view";
 
 export default {

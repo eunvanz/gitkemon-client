@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { isMobile } from "react-device-detect";
-import PokeBallDrop, { PokeBallDropProps } from "../../components/PokeBallDrop";
+import PokeBallDrop, { PokeBallDropProps } from "~/components/PokeBallDrop";
 import PokeBallQuantity, {
   PokeBallQuantityProps,
-} from "../../components/PokeBallQuantity/PokeBallQuantity";
-import SelectPokeBall, { SelectPokeBallProps } from "../../components/SelectPokeBall";
-import { PokeBallType } from "../../types";
+} from "~/components/PokeBallQuantity/PokeBallQuantity";
+import SelectPokeBall, { SelectPokeBallProps } from "~/components/SelectPokeBall";
+import { PokeBallType } from "~/types";
 
 export interface HuntProps
   extends Pick<SelectPokeBallProps, "pokeBalls">,

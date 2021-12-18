@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import cx from "classnames";
 import Skeleton from "react-loading-skeleton";
-import { colorsByTier } from "../../constants/styles";
-import { MonTier } from "../../types";
+import { colorsByTier } from "~/constants/styles";
+import { MonTier } from "~/types";
 import LineGauge from "../LineGauge";
 import Typography from "../Typography";
 

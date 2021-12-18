@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { assertNotEmpty } from "~/helpers/commonHelpers";
 import { showEvolutionConfirm } from "~/helpers/tsxHelpers";
-import ROUTES from "../../paths";
-import useEvolveMutation from "../../queries/useEvolveMutation";
-import useNextMonsQuery from "../../queries/useNextMonsQuery";
-import { evolveMonState } from "../../state/evolveMon";
-import { userState } from "../../state/user";
+import ROUTES from "~/paths";
+import useEvolveMutation from "~/queries/useEvolveMutation";
+import useNextMonsQuery from "~/queries/useNextMonsQuery";
+import { evolveMonState } from "~/state/evolveMon";
+import { userState } from "~/state/user";
 import { EvolutionProps } from "./Evolution.view";
 
 const useEvolutionProps: () => EvolutionProps = () => {

@@ -3,7 +3,7 @@ import { RefreshIcon } from "@heroicons/react/outline";
 import random from "lodash/random";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
-import { ModalMon } from "../../types";
+import { ModalMon } from "~/types";
 import Badge from "../Badge";
 import BaseModal, { BaseModalProps } from "../BaseModal";
 import Button from "../Button";

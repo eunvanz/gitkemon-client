@@ -281,7 +281,7 @@ const Mon: React.FC<MonProps> = ({
                   const foundMons = mons!.filter(
                     (mon) => (mon.nameKo || mon.name).indexOf(input) >= 0,
                   );
-                  return foundMons.map((mon) => mon.id).includes(option?.value);
+                  return foundMons.map((mon) => mon.id).includes(option?.value as number);
                 }}
               >
                 {mons!.map((mon) => (

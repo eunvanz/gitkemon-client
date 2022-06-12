@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Table, Input, Space, Button, Radio } from "antd";
+import { Table, Input, Space, Button, Radio, InputRef } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import Highlighter from "react-highlight-words";
 import { MON_TIERS, MON_TYPES } from "~/constants/rules";
@@ -16,7 +16,7 @@ export interface MonsProps {
 }
 
 const Mons: React.FC<MonsProps> = ({ mons, onEdit, onChangeMonFilter, monFilter }) => {
-  const searchInputRef = useRef<Input>(null);
+  const searchInputRef = useRef<InputRef>(null);
 
   const [search, setSearch] = useState<{ searchText: string; searchedColumn?: string }>({
     searchText: "",

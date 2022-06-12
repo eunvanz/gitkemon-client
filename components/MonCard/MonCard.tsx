@@ -113,6 +113,7 @@ const MonCard: React.FC<MonCardProps> = ({
                     ) : mon.imageUrl ? (
                       // eslint-disable-next-line
                       <Img
+                        className="mx-auto"
                         src={mon.imageUrl}
                         loader={
                           // eslint-disable-next-line

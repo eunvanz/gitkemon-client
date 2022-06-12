@@ -94,7 +94,7 @@ const MonCard: React.FC<MonCardProps> = ({
                       <PotentialBadge potential={mon.potential} />
                     </div>
                   )}
-                  <div className={cx("relative", { "h-36": isStatic })}>
+                  <div className={cx("relative text-center", { "h-36": isStatic })}>
                     {isStatic ? (
                       mon.imageUrl ? (
                         // @ts-ignore
